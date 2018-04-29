@@ -1,0 +1,171 @@
+// main group
+Group						All
+
+// location groups
+Group						myhome																							                    (All)	
+Group						g_gf							    "Begane Grond"				                <groundfloor>						(myhome)
+Group						g_ff							    "Eerste verdieping"			                <firstfloor>						(myhome)	
+Group						g_sf							    "Zolder"					                <attic>								(myhome)
+Group						g_outdoor						    "Buiten"					                <garden>							(myhome)
+Group						gf_living						    "Woonkamer en keuken"		                <sofa>								(g_gf)	
+//Group						gf_kitchen						    "Keuken"					                <kitchen>							(g_gf)	
+Group						gf_bathroom						    "Toilet"					                <toilet>							(g_gf)	
+Group						gf_corridor						    "Gang"						                <corridor>							(g_gf)	
+Group						ff_office						    "Kantoor"					                <office>							(g_ff)	
+Group						ff_child						    "Sunny"						                <girl_2>							(g_ff)	
+Group						ff_bed							    "Slaapkamer"				                <bedroom>							(g_ff)	
+Group						ff_corridor						    "Corridor"					                <corridor>							(g_ff)	
+Group						ff_bathroom						    "Toilet"					                <toilet>							(g_ff)	
+Group						ff_shower						    "Badkamer"					                <bath>								(g_ff)	
+Group						sf_storage						    "Opslag"					                <wardrobe>							(g_sf)	
+Group						sf_spacecave					    "Spacecave"					                <party>							    (g_sf)
+Group						sf_corridor						    "Gang"						                <corridor>							(g_sf)
+Group						outdoor_shed					    "Schuur"					                <greenhouse>						(g_outdoor)	
+Group						outdoor_driveway				    "Voortuin"					                <terrace>							(g_outdoor)	
+Group						outdoor_backyard				    "Tuin"						                <garden>							(g_outdoor)	
+
+
+// functional groups
+Group						lights							    "Alle lichten"				                <slider>							(All)	
+Group						sensors							    "Alle sensoren"				                <sensor>							(All)	
+Group						sensors_security				    "Beveiliging"  				                <siren>							    (sensors)	
+Group						sensors_climate					    "Klimaat"   				                <temperature>						(sensors)	
+Group						sensors_power					    "Energie"   				                <energy>							(sensors)	
+//Group						numbers							    "Alle Nummers"				                <kitchen>							(All)	
+Group						devices							    "Alle apparaten"			                <text>		    					(All)	
+//Group						devices_roaming					    "Mobiel"					                <kitchen>							(devices)
+
+Group						g_state_on						    "Whats ON"					                <switch>							(All)
+Group						settings						    "Instellingen"				                <settings>							(All)
+Group						settings_all_off_selection		    "All off knop - Include/exclude"	        <settings>  						(settings)
+Group						settings_deurbel_action_selection   "Deurbel acties - Include/exclude" 	        <settings>  						(settings)
+Group						persistence						    "Persistence items"			                <switch-off>						(g_maintenance)
+Group						automation_presence				    "Presence items"			                <presence>							(sensors)
+Group						scenes							    "Scenes"					                <party>						        (All)
+Group:Switch:OR(ON,OFF)		scene_all_off					    "Alles uitschakelen [%d]"	                <switch-off>						(scenes)
+Group:Switch:AND(OFF,ON)	nightmode_downstairs			    "Nachtmodus [%s]"												(scenes)
+Group						g_maintenance					    "Maintenance"						        <settings>					(All)
+Group						g_monitoring					    "Monitoring"													(g_maintenance)
+Group						g_sonoff						    "Sonoff stuff"													(g_maintenance)
+Group:Switch:OR(ON, OFF)    g_sonoff_startup_states             "Sonoff startup state items"                                    (g_sonoff)
+Group                       g_sonoff_firmware                   "Sonoff local firmware version"                                 (g_sonoff)
+Group						g_maintenance_sonoff_upgrade	    "Upgrade status"												(g_sonoff)
+Group						g_maintenance_sonoff_status		    "Full device status"											(g_sonoff)
+Group						g_maintenance_sonoff_action		    "Actions"														(g_sonoff)
+Group						g_uninitialized					    "Alle nog niet geinitialiseerde items"							(g_maintenance)
+Group                       g_lastupdate_rule                   "Alle items die een lastupdate nodig"                           (g_maintenance)
+Group                       g_lastupdate                        "Alle lastupdate statussen"                                     (g_maintenance)
+
+
+// Persistence Groups
+Group						g_my_openhab					    "MyOpenhab"					                <computer>							(persistence)	// for Items that are exposed to IFTTT
+Group						g_chart							    "Charting"					                <chart>								(persistence)	// for Items to persist for charting (influxDB)
+Group						g_history						    "History"					                <meld_achtung>						(persistence)	// for Items to preserve their history (influxDB) / RRDjxx) // not used (yet)
+Group						g_restore						    "Restore on startup"		                <calendar>							(persistence)	// for Items to restore on startup
+Group						g_emoncms_mqtt   				    "EmonCMS to MQTT"		                    <calendar>							(persistence)	// for Items to expose to EmonCMS via MQTT
+
+// device groups (all devices from a specific group, non-formatted, for troubleshooting purposes)
+Group						g_sonoff_green_tl				    "Device: Sonoff Groene TL"										(devices)
+Group						g_sonoff_led_strip_tv			    "Device: Sonoff Led strip TV"									(devices)
+Group						g_sonoff_licht_washoek			    "Device: Sonoff Licht washoek"									(devices)
+Group						g_sonoff_meter_ventilator		    "Device: Sonoff Switch/Sensor ventilator"						(devices)
+Group						g_sonoff_meter_audiovideo		    "Device: Sonoff Switch/Sensor audiovideo"						(devices)
+Group						g_sonoff_meter_koelkast			    "Device: Sonoff Switch/Sensor koelkast"							(devices)
+Group						g_sonoff_kantoor_pc_monitors	    "Device: Sonoff Switch kantoor PC monitors"						(devices)
+Group						g_sonoff_ventilatie				    "Device: Sonoff Switch ventilatie"								(devices)
+Group						g_sonoff_monitor_versterker		    "Device: Sonoff Switch monitor & versterker"					(devices)
+Group						g_sonoff_samsung_speaker		    "Device: Sonoff Samsung speaker"					            (devices)
+Group						g_sonoff_toilet_bg		            "Device: Sonoff Touch Toilet bg"					            (devices)
+Group						g_sonoff_deurbel		            "Device: Sonoff Switch deurbel"					                (devices)
+
+Group                       g_sensor_miflora_spiderplant        "Device: Xiaomi Miflora spiderplant"                            (devices)
+
+Group                       g_meter_energy_gas                  "Device: Electriciteit- en Gasmeter"                            (devices)
+
+Group						g_rfxcom_temp_humid				    "Device: RFXCom Temp/humid sensor badkamer"						(devices)
+
+Group						g_zwave_plafond_vitrinekast		    "Device: Aeon labs smart dimmer: Vitrinekast"					(devices)
+Group						g_zwave_plafond_boekenkast		    "Device: Aeon labs smart dimmer: Boekenkast"					(devices)
+Group						g_zwave_plafond_keuken			    "Device: Zwave.me dimmer: keuken"								(devices)
+Group						g_zwave_gang_double				    "Device: Fibaro double switch: gang & buiten voor"				(devices)
+Group						g_zwave_doorsensor_keuken		    "Device: Everspring doorsensors: deur keuken"					(devices)
+Group						g_zwave_doorsensor_woonkamer	    "Device: Everspring doorsensors: deur woonkamer"				(devices)
+
+// xiaomi
+Group						g_mihome_doorsensor_voordeur	    "Device: Xiaomi MiHome doorsensor: voordeur"				<frontdoor>             (devices)
+Group						g_mihome_doorsensor_achterdeur	    "Device: Xiaomi MiHome doorsensor: Achterdeur"				<frontdoor>             (devices)
+Group						g_mihome_doorsensor_kantoor 	    "Device: Xiaomi MiHome doorsensor: Kantoor"				    <door>                  (devices)
+Group						g_mihome_doorsensor_spacecave 	    "Device: Xiaomi MiHome doorsensor: Spacecave"			    <door>                  (devices)
+Group						g_mihome_doorsensor_toilet_bg 	    "Device: Xiaomi MiHome doorsensor: Toilet bg"			    <door>                  (devices)
+Group						g_mihome_doorsensor_toilet_1v 	    "Device: Xiaomi MiHome doorsensor: Toilet 1v"			    <door>                  (devices)
+Group						g_mihome_doorsensor_badkamer	    "Device: Xiaomi MiHome doorsensor: Badkamer"			    <door>                  (devices)
+Group						g_mihome_doorsensor_sunny   	    "Device: Xiaomi MiHome doorsensor: Sunny"   			    <door>                  (devices)
+
+Group                       g_mihome_motionsensor_kantoor           "Device: Xiaomi MiHome motionsensor: kantoor"               <motion>                (devices)
+Group                       g_mihome_motionsensor_wasmachine        "Device: Xiaomi MiHome motionsensor: wasmachine"            <motion>                (devices)
+Group                       g_mihome_motionsensor_keuken            "Device: Xiaomi MiHome motionsensor: keuken"                <motion>                (devices)
+Group                       g_mihome_motionsensor_gang_voordeur     "Device: Xiaomi MiHome motionsensor: Gang-Voordeur"         <motion>                (devices)
+Group                       g_mihome_motionsensor_gang_woonkamer    "Device: Xiaomi MiHome motionsensor: Gang-Woonkamer"         <motion>                (devices)
+Group                       g_mihome_motionsensor_woonkamer_gang    "Device: Xiaomi MiHome motionsensor: Woonkamer-Gang"         <motion>                (devices)
+
+Group                       g_mihome_weathersensor_keuken       "Device: Xiaomi Aqara weathersensor: keuken"                <temperature>           (devices)
+Group                       g_mihome_weathersensor_slaapkamer   "Device: Xiaomi Aqara weathersensor: slaapkamer"            <temperature>           (devices)
+
+Group                       g_mihome_switch_kantoor             "Device: Xiaomi MiHome switch all off: kantoor"             <contact>               (devices)
+
+// anders
+Group                       g_lifx_lamp_eettafel                "Device: LIFX Color: Eettafel"                                  <colorlight>        (devices)
+
+Group 						g_hue_lamp_gang_1v 			        "Device: Hue Color v2: gang 1v"         						<colorlight>        (devices)
+Group 						g_hue_lamp_kantoor_links		    "Device: Hue Ambiance: plafond kantoor links"					<light>             (devices)
+Group 						g_hue_lamp_kantoor_midden 		    "Device: Hue Ambiance: plafond kantoor midden"			        <light>             (devices)
+Group 						g_hue_lamp_kantoor_rechts 		    "Device: Hue Ambiance: plafond kantoor rechts"				    <light>     	    (devices)
+Group 						g_hue_lamp_plafond_sunny 		    "Device: Hue Color v3: plafond Sunny"					        <colorlight>        (devices)
+Group 						g_hue_lamp_spacecave    		    "Device: Hue Color v3: Spacecave"   					        <colorlight>        (devices)
+
+Group						g_livolo_kitchen				    "Device: Livolo switch: Ventilatie"								(devices)
+
+Group						g_router_horizon				    "Device: Router: Horizon box"									(devices)
+Group						g_router_asus					    "Device: Router: Asus wifi router"								(devices)
+Group						g_server_openhab				    "Device: Server: Openhab on Odroid"								(devices)
+Group 						g_speaker_samsung_multiroom		    "Device: Speaker: Samsung Multiroom"							(devices)
+
+Group						g_arduino_mysensors_gateway 	    "Device: Arduino: Mysensors gateway"							(devices)
+
+Group						g_controller_emonhub			    "Device: Open Energy Monitor system"						    (devices)
+Group						g_controller_zwave			        "Device: Zwave controller (zstick)"						        (devices)
+Group						g_controller_harmony_hub		    "Device: Controller: Harmony Hub"							    (devices)
+Group						g_controller_echo_dot			    "Device: Controller: Amazon Echo Dot"						    (devices)
+Group						g_controller_hue_bridge			    "Device: Controller: Philips Hue Bridge"					    (devices)
+Group                       g_controller_mihome_gateway         "Device: Controller: Xiaomi Mi Home Gateway"                    (devices)
+Group                       g_chromecast                        "Device: Streaming: Chromecast"								    (devices)
+Group						g_evohome						    "Device: Heating: Evohome"  								    (devices)
+
+Group						g_receiver_onkyo				    "Device: Receiver: Onkyo 709"								    (devices)
+Group						g_tv_panasonic					    "Device: TV: Panasonic Plasma"								    (devices)
+Group						g_desktop_kantoor				    "Device: Destop: Kantoor"									    (devices)
+Group						g_desktop_mediacenter			    "Device: Destop: Mediacenter"								    (devices)
+Group						g_desktop_spacecave			        "Device: Destop: Spacecave"								        (devices)
+Group						g_camera_buiten_voor			    "Device: Camera: Buiten voor"								    (devices)
+Group						g_camera_buiten_achter  		    "Device: Camera: Buiten achter"								    (devices)
+
+Group						g_laptop_rick_werk				    "Device: Laptop: Rick werk"									    (devices)
+Group						g_laptop_rick_prive				    "Device: Laptop: Rick prive"								    (devices)
+Group						g_laptop_claudia_prive			    "Device: Laptop: Claudia"									    (devices)
+Group						g_laptop_sunny					    "Device: Laptop: Sunny"										    (devices)
+Group						g_telefoon_sunny			        "Device: Telefoon: Sunny"								        (devices)
+Group						g_telefoon_rick_werk			    "Device: Telefoon: Rick werk"								    (devices)
+Group						g_telefoon_rick_prive			    "Device: Telefoon: Rick prive"								    (devices)
+Group						g_telefoon_claudia_prive		    "Device: Telefoon: Claudia prive"							    (devices)
+Group						g_telefoon_extra				    "Device: Telefoon: extra"									    (devices)
+Group						g_e_reader_claudia				    "Device: E-Reader: Claudia"									    (devices)
+Group						g_tablet_rick					    "Device: Tablet: Rick"										    (devices)
+Group						g_tablet_sunny					    "Device: Tablet: Sunny"										    (devices)
+
+Group						g_auto_rick						    "Car: Audi A3 E-Tron Rick"							    	    (devices)
+
+// Other
+Group                       g_datetime                          "NTP: Date-time stuff"                                          (devices)
+Group                       g_weather                           "Weather: external source"                                      (devices)
+
+Group                       g_testing                           "Test/debug groep"                                              (All)

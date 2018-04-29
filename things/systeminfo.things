@@ -1,0 +1,2 @@
+// =============== SYSTEMINFO BINDING ====================
+systeminfo:computer:odroid64 "Systeminfo" @ "Openhab" [interval_high=3, interval_medium=60]

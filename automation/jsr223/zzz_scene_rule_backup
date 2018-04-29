@@ -1,0 +1,275 @@
+scriptExtension.importPreset("RuleSimple")
+scriptExtension.importPreset("RuleSupport")
+
+from openhab.log import logging
+from openhab.triggers import ItemStateUpdateTrigger, ItemStateChangeTrigger, ItemCommandTrigger, StartupTrigger
+from time import sleep
+from openhab.actions import Mqtt, Pushover
+import sys
+
+class rule_scene_lights_living (SimpleRule):
+    def __init__(self):
+        self.triggers = [ 
+                            StartupTrigger(), 
+                            
+                            ItemCommandTrigger("timer_rule_scene_woonkamer_new_init_hardware", command="OFF"),
+
+                            ItemStateChangeTrigger("light_woonkamer_dimmer_boekenkast"),
+                            ItemStateChangeTrigger("light_woonkamer_dimmer_vitrinekast"),
+                            ItemStateChangeTrigger("switch_led_strip_tv_toggle", state="ON",previousState="OFF"),
+                            ItemStateChangeTrigger("switch_groene_tl_toggle", state="ON",previousState="OFF"),
+                            ItemStateChangeTrigger("switch_led_strip_tv_toggle", state="OFF",previousState="ON"),
+                            ItemStateChangeTrigger("switch_groene_tl_toggle", state="OFF",previousState="ON"),
+
+                            ItemCommandTrigger("number_scene_lights_living"),
+                            ItemCommandTrigger("switch_scene_living_off"),
+                            ItemCommandTrigger("switch_scene_living_chill"),
+                            ItemCommandTrigger("switch_scene_living_full")                            
+                        ]
+
+    def detect_state(self, module, input, state):
+        logging.info("detect_state")
+
+    def state_1(self, module, input, number, output):
+        logging.info("state_1")
+
+    def state_2(self, module, input, number, output):
+        logging.info("state_2")
+
+    def state_3(self, module, input, number, output):
+        logging.info("state_3")
+
+    def state_3(self, module, input, number, output):
+        logging.info("state_4")
+
+
+    def execute(self, module, input):
+        logging.info("STARTED")
+        logging.info(input)
+        
+        # check if devices are null... 
+        if str(items.light_woonkamer_dimmer_boekenkast) == "NULL" or str(items.light_woonkamer_dimmer_vitrinekast) == "NULL" or str(items.switch_led_strip_tv_toggle) == "NULL" or str(items.switch_groene_tl_toggle) == "NULL":
+            if str(items.light_woonkamer_dimmer_boekenkast) == "NULL":
+                logging.info("Dimmer boekenkast is in unknown state, pending refresh")
+            if str(items.light_woonkamer_dimmer_vitrinekast) == "NULL":
+                logging.info("Dimmer vitrinekast is in unknown state, pending refresh")
+            if str(items.switch_led_strip_tv_toggle) == "NULL":
+                logging.info("Led strip TV is in unknown state, polling MQTT")
+                Mqtt.publish("mosquitto", "cmnd/" +" sonoff_switch_ledstrip_tv" + "/status", "0")
+            if str(items.switch_groene_tl_toggle) == "NULL":
+                logging.info("Groene TL is in unknown state, polling MQTT")
+                Mqtt.publish("mosquitto", "cmnd/" +" sonoff_green_tl" + "/status", "0")
+                        
+            # Reschedule in 30 seconds until the items are in a proper state, if timer is somehow not yet running
+            if items.timer_rule_scene_woonkamer_new_init_hardware != ON:
+                events.sendCommand("timer_rule_scene_woonkamer_new_init_hardware","ON")
+        else:
+            # initialize programmable items
+            if str(items.timer_rule_scene_woonkamer_new_init_hardware) == "NULL":
+                events.postUpdate("timer_rule_scene_woonkamer_new_init_hardware","OFF")    
+            if str(items.timer_rule_scene_woonkamer_new_gui_set_new_scene) == "NULL":
+                events.postUpdate("timer_rule_scene_woonkamer_new_gui_set_new_scene","OFF")  
+
+           
+            # set scene number to scene and execute commands
+            if "event" in input:
+                if "number_scene_lights_living" in str(input['event']):
+                    scene_number = input['command']
+                    logging.info("Recieved command from GUI(" + str(scene_number) + ")") 
+                    logging.info("1 timer_rule_scene_woonkamer_new_gui_set_new_scene: " + str(items.timer_rule_scene_woonkamer_new_gui_set_new_scene))
+                    events.sendCommand("timer_rule_scene_woonkamer_new_gui_set_new_scene", "ON")
+                   
+                else:
+                    logging.info("2 timer_rule_scene_woonkamer_new_gui_set_new_scene: " + str(items.timer_rule_scene_woonkamer_new_gui_set_new_scene))
+                    if items.timer_rule_scene_woonkamer_new_gui_set_new_scene == ON:
+                        logging.info("timer is running, quitting script")
+                        #skip_everything = true
+                    else:
+                        #$skip_everything = false
+                        scene_number = ""                     
+                        
+            else:
+                scene_number = ""
+
+            # # device states
+            # logging.info("**** input Device states:")
+            # logging.info("input light_woonkamer_dimmer_boekenkast: " + str(items.light_woonkamer_dimmer_boekenkast))
+            # logging.info("input light_woonkamer_dimmer_vitrinekast: " + str(items.light_woonkamer_dimmer_vitrinekast))
+            # logging.info("input switch_led_strip_tv_toggle: " + str(items.switch_led_strip_tv_toggle))
+            # logging.info("input switch_groene_tl_toggle: " + str(items.switch_groene_tl_toggle))
+
+            # # input variables
+            # logging.info("**** input scene states:")
+            # logging.info("input number_scene_lights_living: " + str(items.number_scene_lights_living))
+            # logging.info("input switch_scene_living_off: " + str(items.switch_scene_living_off))
+            # logging.info("input switch_scene_living_chill: " + str(items.switch_scene_living_chill))
+            # logging.info("input switch_scene_living_full: " + str(items.switch_scene_living_full))
+
+            
+            # skip processing if number_scene_lights_living received command
+            if scene_number == "":
+                if str(items.light_woonkamer_dimmer_boekenkast) == "0" and str(items.light_woonkamer_dimmer_vitrinekast) == "0" and items.switch_led_strip_tv_toggle == OFF and items.switch_groene_tl_toggle == OFF:
+                    logging.info("Detecting state 1")
+                    if str(items.number_scene_lights_living) != "1":
+                        events.postUpdate("number_scene_lights_living", "1")
+                    if items.switch_scene_living_off != ON:
+                        events.postUpdate("switch_scene_living_off",    "ON")
+                    if items.switch_scene_living_chill != OFF:
+                        events.postUpdate("switch_scene_living_chill",  "OFF")
+                    if items.switch_scene_living_full != OFF:    
+                        events.postUpdate("switch_scene_living_full",   "OFF")
+        
+                elif str(items.light_woonkamer_dimmer_boekenkast) == "30" and str(items.light_woonkamer_dimmer_vitrinekast) == "30" and items.switch_led_strip_tv_toggle == ON and items.switch_groene_tl_toggle == ON:
+                    logging.info("Detecting state 2")
+                    if str(items.number_scene_lights_living) != "2":
+                        events.postUpdate("number_scene_lights_living", "2")
+                    if items.switch_scene_living_off != OFF:
+                        events.postUpdate("switch_scene_living_off",    "OFF")
+                    if items.switch_scene_living_chill != ON:
+                        events.postUpdate("switch_scene_living_chill",  "ON")
+                    if items.switch_scene_living_full != OFF:
+                        events.postUpdate("switch_scene_living_full",   "OFF")
+                    
+                elif str(items.light_woonkamer_dimmer_boekenkast) == "100" and str(items.light_woonkamer_dimmer_vitrinekast) == "100" and items.switch_led_strip_tv_toggle == OFF and items.switch_groene_tl_toggle == OFF:
+                    logging.info("Detecting state 3")
+                    if str(items.number_scene_lights_living) != "3":
+                        events.postUpdate("number_scene_lights_living", "3")
+                    if items.switch_scene_living_off != OFF:
+                        events.postUpdate("switch_scene_living_off", "OFF")
+                    if items.switch_scene_living_chill != OFF:
+                        events.postUpdate("switch_scene_living_chill", "OFF")
+                    if items.switch_scene_living_full != ON:
+                        events.postUpdate("switch_scene_living_full", "ON")
+
+                else:
+                    logging.info("Detecting state 4")
+                    if str(items.number_scene_lights_living) != "4":
+                        events.postUpdate("number_scene_lights_living", "4")
+                    if items.switch_scene_living_off != OFF:
+                        events.postUpdate("switch_scene_living_off", "OFF")
+                    if items.switch_scene_living_chill != OFF:
+                        events.postUpdate("switch_scene_living_chill", "OFF")
+                    if items.switch_scene_living_full != OFF:
+                        events.postUpdate("switch_scene_living_full", "OFF")
+           
+            #detect which event has triggered the rule)
+            if "event" in input:                        
+                if "switch_scene_living_off" in str(input['event']) or str(scene_number) == "1":
+                    switch_scene_living_off = input['command']
+                    #logging.info("switch_scene_living_off command: " + str(switch_scene_living_off))
+                    if items.number_scene_lights_living != 1:
+                        events.postUpdate("number_scene_lights_living", "1")
+                    
+                    # uitvoeren switch acties
+                    if items.switch_scene_living_off != ON:
+                        events.postUpdate("switch_scene_living_off",    "ON")
+                    if items.switch_scene_living_chill != OFF:
+                        events.postUpdate("switch_scene_living_chill",  "OFF")
+                    if items.switch_scene_living_full != OFF:    
+                        events.postUpdate("switch_scene_living_full",   "OFF")
+
+                    # uitvoeren device acties
+                    if (str(items.light_woonkamer_dimmer_boekenkast) != "0"):
+                        events.sendCommand("light_woonkamer_dimmer_boekenkast", "OFF")
+                    if (str(items.light_woonkamer_dimmer_vitrinekast) != "0"):
+                        events.sendCommand("light_woonkamer_dimmer_vitrinekast", "OFF")
+                    if items.switch_led_strip_tv_toggle != OFF:
+                        events.sendCommand("switch_led_strip_tv_toggle", "OFF")
+                    if items.switch_groene_tl_toggle != OFF:
+                        events.sendCommand("switch_groene_tl_toggle", "OFF")
+
+                elif "switch_scene_living_chill" in str(input['event']) or str(scene_number) == "2":
+                    switch_scene_living_chill = input['command']
+                    #logging.info("switch_scene_living_chill command: " + str(switch_scene_living_chill)) 
+                    if items.number_scene_lights_living != 2:
+                        events.postUpdate("number_scene_lights_living", "2")
+                    
+                    # uitvoeren switch acties
+                    if items.switch_scene_living_off != OFF:
+                        events.postUpdate("switch_scene_living_off",    "OFF")
+                    if items.switch_scene_living_chill != ON:
+                        events.postUpdate("switch_scene_living_chill",  "ON")
+                    if items.switch_scene_living_full != OFF:
+                        events.postUpdate("switch_scene_living_full",   "OFF")
+                    
+                    # uitvoeren device acties
+                    if (str(items.light_woonkamer_dimmer_boekenkast) != "30"):
+                        events.sendCommand("light_woonkamer_dimmer_boekenkast", "30")
+                    if (str(items.light_woonkamer_dimmer_vitrinekast) != "30"):
+                        events.sendCommand("light_woonkamer_dimmer_vitrinekast", "30")
+                    if items.switch_led_strip_tv_toggle != ON:
+                        events.sendCommand("switch_led_strip_tv_toggle", "ON")
+                    if items.switch_groene_tl_toggle != ON:
+                        events.sendCommand("switch_groene_tl_toggle", "ON")
+
+                elif "switch_scene_living_full" in str(input['event']) or str(scene_number) == "3":
+                    switch_scene_living_full = input['command']
+                    #logging.info("switch_scene_living_full command: " + str(switch_scene_living_full))
+                    if items.number_scene_lights_living != 3:
+                        events.postUpdate("number_scene_lights_living", "3")
+
+                    # uitvoeren switch acties
+                    if str(items.number_scene_lights_living) != "3":
+                        events.postUpdate("number_scene_lights_living", "3")
+                    if items.switch_scene_living_off != OFF:
+                        events.postUpdate("switch_scene_living_off", "OFF")
+                    if items.switch_scene_living_chill != OFF:
+                        events.postUpdate("switch_scene_living_chill", "OFF")
+                    if items.switch_scene_living_full != ON:
+                        events.postUpdate("switch_scene_living_full", "ON")
+
+                    # uitvoeren device acties
+                    if str(items.light_woonkamer_dimmer_boekenkast) != "100":
+                        events.sendCommand("light_woonkamer_dimmer_boekenkast", "100")
+                    if str(items.light_woonkamer_dimmer_vitrinekast) != "100":
+                        events.sendCommand("light_woonkamer_dimmer_vitrinekast", "100")
+                    if items.switch_led_strip_tv_toggle != OFF:
+                        events.sendCommand("switch_led_strip_tv_toggle", "OFF")
+                    if items.switch_groene_tl_toggle != OFF:
+                        events.sendCommand("switch_groene_tl_toggle", "OFF")
+                # output variables
+                logging.info("**** output scene states:")
+                logging.info("output number_scene_lights_living: " + str(items.number_scene_lights_living))
+                logging.info("output switch_scene_living_off: " + str(items.switch_scene_living_off))
+                logging.info("output switch_scene_living_chill: " + str(items.switch_scene_living_chill))
+                logging.info("output switch_scene_living_full: " + str(items.switch_scene_living_full))
+
+automationManager.addRule(rule_scene_lights_living())
+
+
+# rule "bed_time_turn_on"
+# when
+# 	Time cron "0 30 21 1/1 * ? *" 
+# then
+# 	postUpdate(bed_time, ON)
+# end
+
+# rule "bed_time_turn_off"
+# when
+# 	Time cron "0 0 5 1/1 * ? *"
+# then
+# 	postUpdate(bed_time, OFF)
+# end
+	
+# // rule to turn lights off if all devices in group are turned off (can be finetuned later)
+# // todo:
+# // 	- can only be done after 21:30 and before 05:00 - switch need to be created with timer rule or something, or better, check in this rule
+# //			fixed by introducing switch bed_time
+# //  - think of something smart to turn off the lights when i go upstairs
+# // 	- think of something to turn on the lights from 05:00 to daytime, when claudia or i wake up.
+
+# rule "nightmode_downstairs_turn_lights_on"
+# when 
+# 	Item door_woonkamer_sensor changed from CLOSED to OPEN
+# then
+# 	// set lights to 25% dimming
+# 	if (bed_time == ON)// && nightmode_downstairs == OFF)
+# 	//if (nightmode_downstairs == OFF)
+# 	{
+# 		sendCommand (light_woonkamer_dimmer_boekenkast,	25)
+# 		sendCommand (light_woonkamer_dimmer_vitrinekast,25)		
+# 	}
+# end
+	
+
+

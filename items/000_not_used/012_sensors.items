@@ -1,0 +1,76 @@
+// if ok, move to devices.
+// emonhub 
+// mqtt
+//       names = power1, power2, power3, power4, vrms, temp1, pulse
+      
+      // scales = 1,1,1,1,0.01,0.1,1
+       //units =W,W,W,W,V,C,p
+
+
+//Number 	Door_Office_Sensor     					"Deursensor Kantoor [%s]"			(ff_office,Sensors)		{mqtt="<[mosquitto:mygateway1-out/2/3/1/0/16:state:default]"}
+//Number 	Door_Spacecave_Sensor					"Deursensor Spacecave [%s]"			(FF_Spacecave,Sensors)	{mqtt="<[mosquitto:mygateway1-out/2/3/1/0/16:state:default]"}
+//Number 	Door_Opslagkamer_Sensor 				"Deursensor Opslagkamer [%s]"		(ff_Roomtink,Sensors)	{mqtt="<[mosquitto:mygateway1-out/2/3/1/0/16:state:default]"}
+
+//Number sensor_washingmachine_power				"Wasmachine - Power [%.1f W]"          (sensors,g_restore)    { mqtt="<[mosquitto:tele/sonoff-wasmachine/ENERGY:state:JSONPATH($.Power)]" }
+
+
+// Deur - Nog niet in place - 1e verdieping
+//Number 	Door_Slaapkamer_Sensor
+//Number	Door_Toilet_Boven_Sensor
+//Number	Door_Badkamer_Sensor
+
+// Deur - Nog niet in place - begane grond
+//Number 	Door_Voordeur_Sensor
+//Number	Door_Achterdeur_Sensor
+//Number 	Door_Schuifpui_Sensor
+
+// Deur - Schuur
+//Number	Door_Schuur_Sensor
+
+// Raam - Nog niet in place - zolder
+//Number 	Window_Spacecave_Links_Sensor
+//Number 	Window_Spacecave_Rechts_Sensor
+//Number 	Window_Opslagkamer_Sensor
+//Number 	Window_Opslagkamer_Dakraam_Sensor
+
+// Raam - Nog niet in place - 1e verdieping
+//Number 	Window_Slaapkamer_Sensor
+//Number 	Window_Sunny_Sensor
+//Number 	Window_Kantoor_Sensor
+
+// Ventilatie  - Nog niet in place - zolder
+//Number 	Vent_Window_Spacecave_Links_Sensor
+//Number 	Vent_Windows_Spacecave_Rechts_Sensor
+//Number 	Vent_Window_Opslagkamer_Sensor
+
+// Ventilatie - Nog niet in place - 1e verdieping
+//Number 	Vent_Window_Slaapkamer_Sensor
+//Number 	Vent_Window_Sunny_Sensor
+//Number 	Vent_Window_Kantoor_Sensor
+
+// Ventilatie - Nog niet in place - 1e verdieping
+//Number 	Vent_Schuifpui_Sensor
+//Number 	Vent_Window_Keuken_Sensor
+//mber 	Vent_Window_Kantoor_Sensor
+
+// Temperatuur - Nog niet in place - Zolder
+//Number 	Temp_Gang_Sensor
+//Number	Temp_Spacecave_Sensor
+//Number 	Temp_Opslagkamer_Sensor
+
+// Temperatuur - Nog niet in place - 1e verdieping
+//mber 	Temp_Gang_Sensor
+//Number	Temp_Slaapkamer_Sensor
+//Number 	Temp_Sunny_Sensor
+//Number 	Temp_Toilet_Sensor
+//Number 	Temp_Kantoor_Sensor
+
+// Temperatuur - Nog niet in place - Begane grond
+//mber 	Temp_Gang_Sensor
+//Number 	Temp_Meterkast_Sensor
+//mber	Temp_Toilet_Sensor
+//Number 	Temp_Woonkamer_Sensor
+//Number 	Temp_Keuken_Sensor
+
+// Temperatuur - Nog niet in place - Schuur
+//Number	Temp_Schuur_Sensor

@@ -1,0 +1,427 @@
+sitemap myhome label="Ons huis"
+{
+	Frame 
+	{
+		Group item=g_gf 
+		{			
+			Group item=gf_living 
+			{
+				Frame label="Verlichting 1"
+				{
+					Text item=number_scene_lights_living		label="Woonkamer (Instellingen laden...)"		icon="status"				visibility=[number_scene_lights_living=="NULL"]
+					Switch item=number_scene_lights_living		label="Woonkamer" 		mappings=[1="Uit", 2="Chill", 3="Aan"]				visibility=[number_scene_lights_living==1, number_scene_lights_living==2, number_scene_lights_living==3]
+					Switch item=number_scene_lights_living		label="Woonkamer" 		mappings=[1="Uit", 2="Chill", 3="Aan",4="Anders"] 	visibility=[number_scene_lights_living==4]
+					Switch item=number_scene_lights_kitchen		label="Keuken" 			mappings=[1="Uit", 2="Eten", 3="Koken"]
+				}
+								
+				Frame label="Verlichting 2" 
+				{
+					Switch item=switch_led_strip_tv_toggle							label="Led strip TV []"
+					Switch item=switch_groene_tl_toggle								label="Groene TL []"
+					Switch item=switch_kerstboom_toggle								label="Kerstboom []"
+					Slider item=light_woonkamer_dimmer_boekenkast switchSupport
+					Slider item=light_woonkamer_dimmer_vitrinekast switchSupport
+					Slider item=light_keuken_dimmer_plafond switchSupport			label="Keuken"
+				}
+				
+				Frame label="Verlichting 3"		
+				{
+					Switch item=light_eettafel_toggle								label="Eettafel"
+					Slider item=light_eettafel_dimmer								label="Dimmer"					visibility=[light_eettafel_toggle=="ON"]
+					Colorpicker item=light_eettafel_color							label="Color"					visibility=[light_eettafel_toggle=="ON"]
+					Slider item=light_eettafel_colortemp							label="Colortemp"				visibility=[light_eettafel_toggle=="ON"]
+				}
+
+				Frame label="Ventilatie"
+				{
+					Switch item=number_ventilator_level_set_manual 		label="Centrale afzuiging (★) []" 		mappings=['1'="1", '2'="2", '3'="3"] 																					visibility=[switch_ventilator_level_toggle_auto==ON]
+					Switch item=number_ventilator_level_set_manual 		label="Centrale afzuiging []" 			mappings=['1'="1", '2'="2", '3'="3", '4'="☆"]																			visibility=[switch_ventilator_level_toggle_auto==OFF]
+				}
+				
+				Frame label="Verwarming"
+				{
+					Text item=evohome_woonkamer_setpoint
+					Text item=evohome_woonkamer_setpoint_status
+					Text item=evohome_woonkamer_temp
+					Text item=evohome_evotouch_systemmode
+				}
+
+				Frame label="Multimedia"
+				{	
+					Switch item=logitech_harmony_hub_current_activity				label="Multimedia mode"			icon="cinema"				mappings=[PowerOff="Uitzetten"]																visibility=[logitech_harmony_hub_current_activity!="PowerOff"]
+					Switch item=logitech_harmony_hub_current_activity				label="Multimedia mode [%s]" 	icon="cinema"				mappings=['Watch TV'="TV",'Listen to Music'="Muziek",'Listen to Spotify'="Spotify"] 		visibility=[logitech_harmony_hub_current_activity=="PowerOff"]
+
+					Switch item=onkyo_receiver_harmony_hub_button_press		 		label="Versterker"				icon="reciever"				mappings=[PowerOff="Uitzetten"] 															visibility=[logitech_harmony_hub_current_activity!="PowerOff"]					
+					Switch item=upc_horizon_box_harmony_hub_button_press	 		label="Ziggo box"				icon="player"				mappings=[PowerToggle="Uitzetten"] 															visibility=[logitech_harmony_hub_current_activity!="PowerOff"]
+					Switch item=panasonic_tv_harmony_hub_button_press		 		label="TV"						icon="receiver"				mappings=[PowerOff="Uitzetten"] 															visibility=[logitech_harmony_hub_current_activity!="PowerOff"]
+				}
+			}			
+			Group item=gf_corridor	
+			{
+				Frame label="Deuren"
+				{
+					Text item=sensor_voordeur_switch_status 				label="Voordeur"	
+					Text item=sensor_toilet_bg_switch_status 				label="Toilet bg"
+					Text item=door_woonkamer_sensor 						label="Woonkamer-gang"
+				}
+				Frame label="Lichten"
+				{
+					Switch item=light_buiten_voor_toggle
+					Switch item=light_gang_plafond_toggle
+				}
+				Frame label="Meterkast"
+				{
+					Text item=open_energy_meter_emontx3_temp1 				label="Temperatuur"
+
+				}
+
+
+			}		
+			Group item=gf_bathroom
+			{
+				Frame label="Ventilatie"
+				{
+					Switch item=number_ventilator_level_set_manual 		label="Centrale afzuiging (★) []" 		mappings=['1'="1", '2'="2", '3'="3"] 																					visibility=[switch_ventilator_level_toggle_auto==ON]
+					Switch item=number_ventilator_level_set_manual 		label="Centrale afzuiging []" 			mappings=['1'="1", '2'="2", '3'="3", '4'="☆"]																			visibility=[switch_ventilator_level_toggle_auto==OFF]
+				}
+				Frame label="Anders"
+				{
+					Text item=sensor_toilet_bg_switch_status 				label="Deursensor"
+				}
+			}
+		}		
+		Group item=g_ff
+		{
+			Group item=ff_office
+			{
+				Text item=sensor_kantoor_switch_status 					label="Kantoor"
+			}	
+	
+			Group item=ff_child 
+			{
+				Text item=sensor_sunny_switch_status 					label="Deursensor"
+				Switch item=light_plafond_sunny_toggle					label="Licht"
+				Slider item=light_plafond_sunny_dimmer					label="Dimmer"					visibility=[light_plafond_sunny_toggle=="ON"]
+				Colorpicker item=light_plafond_sunny_color				label="Color"					visibility=[light_plafond_sunny_toggle=="ON"]
+				Slider item=light_plafond_sunny_colortemp				label="Colortemp"				visibility=[light_plafond_sunny_toggle=="ON"]
+				Switch item=light_plafond_sunny_effect					label="Effect"					visibility=[light_plafond_sunny_toggle=="ON"]
+
+			}
+			Group item=FF_Bed label="Slaapkamer" icon="bedroom"
+			Group item=FF_Corridor label="Gang" icon="corridor"	
+			{
+				Text item=sensor_badkamer_switch_status 				label="Deursensor"
+				Text item=sensor_kantoor_switch_status 					label="Kantoor"
+				Text item=sensor_sunny_switch_status 					label="Sunny"
+				Text item=sensor_toilet_1v_switch_status 				label="Toilet 1v"
+			}		
+			Group item=FF_Bathroom label="Toilet"
+			{
+
+				Frame label="Ventilatie"
+				{
+					Switch item=number_ventilator_level_set_manual 		label="Centrale afzuiging (★) []" 		mappings=['1'="1", '2'="2", '3'="3"] 																					visibility=[switch_ventilator_level_toggle_auto==ON]
+					Switch item=number_ventilator_level_set_manual 		label="Centrale afzuiging []" 			mappings=['1'="1", '2'="2", '3'="3", '4'="☆"]																			visibility=[switch_ventilator_level_toggle_auto==OFF]
+				}
+				Frame label="Anders"
+				{
+					Text item=sensor_toilet_1v_switch_status 				label="Deursensor"
+				}
+			}			
+			Group item=FF_Shower label="Badkamer" icon="bath"			
+			{
+				Frame label="Ventilatie"
+				{
+					Switch item=number_ventilator_level_set_manual 		label="Centrale afzuiging (★) []" 		mappings=['1'="1", '2'="2", '3'="3"] 																					visibility=[switch_ventilator_level_toggle_auto==ON]
+					Switch item=number_ventilator_level_set_manual 		label="Centrale afzuiging []" 			mappings=['1'="1", '2'="2", '3'="3", '4'="☆"]																			visibility=[switch_ventilator_level_toggle_auto==OFF]
+				}
+
+				Frame label="Anders"
+				{
+					Text item=sensor_badkamer_switch_status 				label="Deursensor"
+					Text item=humid_badkamer_sensor
+					Text item=humid_status_badkamer_sensor
+					Text item=temp_badkamer_sensor_cali
+				}
+
+			}
+			
+		}		
+	
+		Group item=g_sf 
+		{
+			Group item=sf_spacecave			
+			{
+				Switch item=spacecave_pc_turn_off	mappings=[OFF="Uitzetten"]	visibility=[spacecave_pc_fixed_net_online=="ON"]
+				Switch item=spacecave_pc_turn_on	mappings=[ON="Aanzetten"]	visibility=[spacecave_pc_fixed_net_online=="OFF"]
+				Switch item=spacecave_pc_fixed_net_online
+				Text item=spacecave_pc_fixed_net_time
+			}
+			Group item=sf_storage			
+			Group item=sf_corridor
+			{
+				Frame label="Washoek"
+				{
+					//Switch item=switch_licht_wasmachine_button_toggle 		label="Licht washoek(★) []" 	mappings=[TOGGLE="Aan"] 					visibility=[switch_licht_wasmachine_led_power==OFF]
+					//Switch item=switch_licht_wasmachine_button_toggle 		label="Licht washoek []" 		mappings=[TOGGLE="Aan"]		 				visibility=[switch_licht_wasmachine_led_power==ON && switch_licht_wasmachine_toggle==OFF]
+					//Switch item=switch_licht_wasmachine_button_toggle 		label="Licht washoek(★) []" 	mappings=[TOGGLE="Uit"] 					visibility=[switch_licht_wasmachine_led_power==OFF && switch_licht_wasmachine_toggle==ON]
+					//Switch item=switch_licht_wasmachine_button_toggle 		label="Licht washoek []" 		mappings=[TOGGLE="Uit"]		 				visibility=[switch_licht_wasmachine_led_power==ON]
+					Text item=sensor_motion_wasmachine_last_motion
+				}
+			}
+		}		
+	
+		Group item=g_outdoor
+//		{
+//				Group item=Outdoor_Driveway label="Voortuin" icon="terrace"			
+//				Group item=Outdoor_Backyard label="Achtertuin" icon="garden"			
+//				Group item=Outdoor_Shed label="Schuur" icon="house"
+//				Text item=Humidity
+//				Text item=Temperature
+//				Text item=Sunrise_Time
+//				Text item=Sunset_Time
+//			}
+	}
+	Frame label="Sensoren"			
+	{
+		Group item=sensors_security
+		{
+			Frame label="Deursensoren" 
+			{
+				Text item=door_keuken_sensor 							label="Keukendeur"
+				Text item=sensor_voordeur_switch_status 				label="Voordeur"
+				Text item=sensor_achterdeur_switch_status 				label="Achterdeur"
+				Text item=door_woonkamer_sensor 						label="Woonkamer-gang"
+				Text item=sensor_toilet_bg_switch_status 				label="Toilet bg"
+				Text item=sensor_badkamer_switch_status 				label="Badkamer"
+				Text item=sensor_kantoor_switch_status 					label="Kantoor"
+				Text item=sensor_sunny_switch_status 					label="Sunny"
+				Text item=sensor_toilet_1v_switch_status 				label="Toilet 1v"
+				Text item=sensor_spacecave_switch_status 				label="Spacecave"
+			}
+			Frame label="Beweging" 
+			{
+				Text item=sensor_motion_keuken_last_motion				label="Keuken"
+				Text item=sensor_motion_gang_voordeur_last_motion 		label="Gang-voordeur"
+				Text item=sensor_motion_gang_woonkamer_last_motion 		label="Gang-tussendeur"
+				Text item=sensor_motion_woonkamer_gang_last_motion 		label="Woonkamer-tussendeur"
+				Text item=sensor_motion_office_last_motion				label="Kantoor"
+				Text item=sensor_motion_wasmachine_last_motion 			label="Wasmachine"		
+			}
+			Frame label="Cameras"
+			{
+			//	Webview item=<itemname> [label="<labelname>"] [icon="<iconname>"] url="<url>" [height=<heightvalue>]
+			//	Webview item=<itemname> [label="<labelname>"] [icon="<iconname>"] url="<url>" [height=<heightvalue>]
+				//Webview  label="Voortuin" 		icon="<iconname>" 	url="http://192.168.1.25:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=rick&pwd=eY8aQArrk9QU"  height=10
+				//Webview  label="Achtertuin" 	icon="<iconname>" 	url="http://192.168.1.26:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=rick&pwd=eY8aQArrk9QU"  height=10
+				//Image url="http://192.168.1.25:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=rick&pwd=eY8aQArrk9QU" 	refresh=60
+				//Image url="http://192.168.1.26:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=rick&pwd=eY8aQArrk9QU"   	refresh=60
+				
+				Image url="http://192.168.1.25:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=rick&pwd=eY8aQArrk9QU" label="Voortuin" 		refresh=60
+				Image url="http://192.168.1.26:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=rick&pwd=eY8aQArrk9QU" label="Achtertuin"  	refresh=60
+			}
+		}
+		Group item=sensors_climate
+		{
+			Frame label="Temperatuur" 
+			{
+				Text item=temperature_outdoor							label="Buiten"
+				Text item=sensor_miflora_spiderplant_temperature 		label="Spiderplant"
+				Text item=evohome_woonkamer_temp 						label="Woonkamer (Evohome)"
+				Text item=sensor_weather_keuken_temperature 			label="Keuken (Afzuigkap)"
+						// emonlcd
+				Text item=open_energy_meter_emontx3_temp1 				label="Meterkast"
+				Text item=temp_badkamer_sensor_cali 					label="Badkamer"
+				Text item=sensor_weather_slaapkamer_temperature			label="Slaapkamer"
+			}
+			Frame label="Luchtvochtigheid"
+			{
+				Text item=humidity_outdoor								label="Buiten"
+				Text item=sensor_weather_keuken_humidity 				label="Keuken (Afzuigkap)"
+				Text item=humid_badkamer_sensor							label="Badkamer"
+				Text item=sensor_weather_slaapkamer_humidity			label="Slaapkamer"
+			}
+			Frame label="Luchtdruk" 
+			{
+				Text item=sensor_weather_keuken_pressure 				label="Keuken (Afzuigkap)"
+				Text item=sensor_weather_slaapkamer_pressure			label="Slaapkamer"
+			}
+		}
+		Group item=sensors_power
+		{
+			Frame label="Huidig gebruik" 
+			{
+				Text item=open_energy_meter_emontx3_power1				label="Stroom (EmonTX)"
+				//Text item=p1_electricity_actual_delivery				label="Stroom (P1)"
+			}
+		 	//Frame label="Totaal"
+			//{
+				//Text item=p1_electricity_delivery_tariff_low			label="Stroom (tarief laag)"
+				//Text item=p1_electricity_delivery_tariff_low			label="Stroom (tarief hoog)"
+				//Text item=p1_gas_total_value							label="Gas"
+			//}
+			Frame label="Items" 
+			{
+				Text item=meter_koelkast_power							label="Koelkast"
+				Text item=meter_ventilator_power						label="Ventilatie"
+				Text item=meter_audiovideo_power						label="Audio/Video"		
+			}
+		}
+		
+		Group item=automation_presence label="Aanwezigheid"
+		{
+			Frame label="Presence algemeen"
+			{
+				Text item=someone_is_present	
+			}
+			Frame label="Presence begane grond"
+			{
+				Text item=someone_is_present
+			}
+			Frame label="Presence eerste verdieping"
+			{
+				Text item=someone_is_present
+			}
+			Frame label="Presence zolder"
+			{
+				Text item=someone_is_present
+			}
+		}
+	}
+	Frame label="Groepen" 
+	{
+		Group item=g_state_on
+		Group item=lights //is niet nodig aangezien ik een frame definieer, lights groep is dus ook niet nodig voor deze weergave
+		// {
+		// 	Frame label="Begane grond"
+		// 	{
+		// 		Slider item=light_woonkamer_dimmer_boekenkast switchSupport		
+		// 		Slider item=light_woonkamer_dimmer_vitrinekast switchSupport
+		// 		Slider item=light_keuken_dimmer_plafond switchSupport
+		// 		Switch item=light_eettafel_toggle
+		// 		Slider item=light_eettafel_dimmer						visibility=[light_eettafel_toggle=="ON"]
+		// 		Colorpicker item=light_eettafel_color					visibility=[light_eettafel_toggle=="ON"]
+		// 		Slider item=light_eettafel_colortemp					visibility=[light_eettafel_toggle=="ON"]
+		// 		Switch item=switch_led_strip_tv_toggle		
+		// 		Switch item=switch_groene_tl_toggle
+		// 		Switch item=light_gang_plafond
+		// 	}
+		// 	Frame label="Eerste verdieping"
+		// 	{
+		// 		Switch item=light_plafond_kantoor_toggle
+		// 		Slider item=light_plafond_kantoor_dimmer
+		// 		Slider item=light_plafond_kantoor_colortemp
+		// 		Switch item=light_plafond_slaapkamer_toggle
+		// 		Slider item=light_plafond_slaapkamer_dimmer
+		// 		Slider item=light_plafond_slaapkamer_colortemp
+		// 	}
+		// 	Frame label="Zolder"
+		// 	{
+		// 		Switch item=switch_licht_wasmachine_toggle
+		// 	}
+		// 	Frame label="Buiten"
+		// 	{
+		// 		Switch item=light_buiten_voor
+		// 	}
+		// }		
+		Group item=devices
+	}
+
+	Frame label="Maintenance" 
+	{
+	  	Group item=settings
+		Group item=g_maintenance
+	  	{
+	  		
+			Group item=g_uninitialized
+	  		Group item=g_monitoring
+			Group item=g_lastupdate
+	  		Group item=g_sonoff
+	  		{
+	  			Group item=g_maintenance_sonoff_status
+				Group item=g_sonoff_startup_states
+	  			Group item=g_maintenance_sonoff_action
+	  			{
+					Frame label="Actions"
+					{
+						Switch item=switch_sonoff_maintenance_action 							mappings=[restart="Restart", query_fw="Query FW", upgrade="Upgrade FW"]
+						Switch item=switch_groene_tl_action__sonoff_green_tl					mappings=[restart="Restart", query_fw="Query FW", upgrade="Upgrade FW"]	  				
+		  				Switch item=switch_led_strip_tv_action__sonoff_switch_ledstrip_tv		mappings=[restart="Restart", query_fw="Query FW", upgrade="Upgrade FW"]
+		  				Switch item=switch_kantoor_pc_monitors_action__sonoff_monitors_beast	mappings=[restart="Restart", query_fw="Query FW", upgrade="Upgrade FW"]
+		  				Switch item=switch_licht_wasmachine_action__sonoff_licht_washoek		mappings=[restart="Restart", query_fw="Query FW", upgrade="Upgrade FW"]
+		  				Switch item=switch_ventilator_action__sonoff_switch_ventilatie			mappings=[restart="Restart", query_fw="Query FW", upgrade="Upgrade FW"]
+		  				Switch item=switch_monitor_versterker_action__sonoff_versterker_monitor	mappings=[restart="Restart", query_fw="Query FW", upgrade="Upgrade FW"]
+		  				Switch item=switch_samsung_speaker_action__sonoff_samsung_speaker		mappings=[restart="Restart", query_fw="Query FW", upgrade="Upgrade FW"]
+						Switch item=meter_koelkast_action__sonoff_meter_koelkast 				mappings=[restart="Restart", query_fw="Query FW", upgrade="Upgrade FW"]
+						Switch item=meter_audiovideo_action__sonoff_meter_audiovideo			mappings=[restart="Restart", query_fw="Query FW", upgrade="Upgrade FW"]
+						Switch item=meter_ventilator_action__sonoff_meter_ventilatie 			mappings=[restart="Restart", query_fw="Query FW", upgrade="Upgrade FW"]
+		  			}
+		  			Frame label="Report"
+		  			{
+		  				Text item=switch_groene_tl_fw_version
+		  				Text item=switch_led_strip_tv_fw_version
+		  				Text item=switch_kantoor_pc_monitors_fw_version
+		  				Text item=switch_licht_wasmachine_fw_version
+		  				Text item=switch_ventilator_fw_version 			
+		  				Text item=switch_monitor_versterker_fw_version
+		  				Text item=switch_samsung_speaker_fw_version				
+						Text item=meter_koelkast_fw_version				
+						Text item=meter_audiovideo_fw_version				
+						Text item=meter_ventilator_fw_version				
+		  			}
+	  			}
+	  		}
+	  	}
+	}
+
+	Frame label="Scenes" 
+	{
+		Group item=scenes 
+		{					
+			Text item=scene_all_off_status 									visibility=[scene_all_off_status==OFF]
+			Switch item=scene_all_off_switch 	mappings=[OFF="Uitzetten"] 	visibility=[scene_all_off_status==ON]
+			Group item=scene_all_off
+			Group item=nightmode_downstairs
+			
+			Switch item=switch_scene_living_chill
+			Switch item=switch_scene_living_full
+			Switch item=switch_scene_kitchen_cooking
+			Switch item=switch_scene_kitchen_dining
+		}
+	}
+	Frame label="Testing" 
+	{
+		Group item=g_testing
+	}
+	Frame label="Alexa_test" {
+		Group item=g_controller_echo_dot
+		{
+			Default item=amazon_echo_dot_player
+			Slider  item=amazon_echo_dot_volume
+			Switch  item=amazon_echo_dot_shuffle
+			Text    item=amazon_echo_dot_image_url
+			Text    item=amazon_echo_dot_title     
+			Text    item=amazon_echo_dot_subtitle1     
+			Text    item=amazon_echo_dot_subtitle2
+			Text    item=amazon_echo_dot_provider_displayname
+			Text    item=amazon_echo_dot_bluetooth_id
+			Text    item=amazon_echo_dot_bluetooth_id_selection
+			Switch  item=amazon_echo_dot_bluetooth
+			Text    item=amazon_echo_dot_bluetooth_device_name
+			Text    item=amazon_echo_dot_radio_station_id
+			Switch  item=amazon_echo_dot_radio      
+			// Text    item=amazon_echo_dot_amazon_music_track_id
+			// Text    item=amazon_echo_dot_amazon_music_play_list_id
+			// Text    item=amazon_echo_dot_amazon_music_play_list_id_last_used
+			// Switch  item=amazon_echo_dot_amazon_music
+			Text    item=amazon_echo_dot_remind
+			Text    item=amazon_echo_dot_play_alarm_sound
+			Switch  item=amazon_echo_dot_play_flash_briefing
+			Switch  item=amazon_echo_dot_play_weather_report
+			Switch  item=amazon_echo_dot_play_traffic_news
+			Text    item=amazon_echo_dot_flash_briefing_technical_save
+			Text    item=amazon_echo_dot_flash_briefing_technical_active
+			Text    item=amazon_echo_dot_flash_briefing_technical_play
+		}
+	}
+}

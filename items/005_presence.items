@@ -1,0 +1,9 @@
+Switch someone_is_present			"Iemand is aanwezig [%s]"			<presence>	(automation_presence)	// master presence switch
+
+Group:Switch:AND(OFF,ON)		    g_present 						    <presence>			(All) // all presence sensors belong to this group
+Switch present_timer                                                                                                                                                    { expire="5m,command=OFF" }
+
+//Switch Sensor1Person1 (g_present)
+//Switch Sensor2Person1 (g_present)
+//Switch Sensor1Person2 (g_present)
+

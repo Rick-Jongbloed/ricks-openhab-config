@@ -1,0 +1,415 @@
+// ================ SONOFF UPGRADE ALL ================
+rule "Sonoff Maintenance all"
+when
+    Item switch_sonoff_maintenance_action received command
+then 
+	logInfo("sonoff.rules", "Sonoff Maintenance on all devices: " + receivedCommand)
+	//logInfo("sonoff.rules", "Sonoff Maintenance on all devices: " + sonoff_device_ids.state.toString )
+	
+    g_maintenance_sonoff_action?.members.forEach(device_id | 
+		switch (receivedCommand) {
+            case "restart" :
+                publish("broker", "cmnd/" + device_id + "/restart", "1") 
+            case "query_fw" :
+                publish("broker", "cmnd/" + device_id + "/status", "2")
+            case "upgrade" : {
+				publish("broker", "cmnd/" + device_id + "/otaurl", "http://sonoff.maddox.co.uk/tasmota/sonoff.bin")
+                publish("broker", "cmnd/" + device_id + "/upgrade", "1")
+				logInfo("sonoff.rules", "Sonoff Maintenance on device: '"+ device_id + "' command: '" + receivedCommand + "' executed")    
+            }
+        }
+    )
+    switch_sonoff_maintenance_action.postUpdate(NULL)
+end
+
+// ================ SENSOR KOELKAST ================
+rule "Sonoff Maintenance meter_koelkast_action"
+when
+    Item meter_koelkast_action received command
+then 
+  	var device_id = "sonoff-meter-koelkast"
+
+    switch (receivedCommand) {
+        case "restart" :
+            publish("mosquitto", "cmnd/" + device_id + "/restart", "1") 
+        case "query_fw" :
+            publish("mosquitto", "cmnd/" + device_id + "/status", "2")
+        case "upgrade" : {
+            publish("mosquitto", "cmnd/" + device_id + "/otaurl", "http://sonoff.maddox.co.uk/tasmota/sonoff.bin")
+            publish("mosquitto", "cmnd/" + device_id + "/upgrade", "1")
+        }
+    }
+	meter_koelkast_action.postUpdate(NULL)
+end
+
+rule "sonoff-firmware_sonoff-meter-koelkast"
+when
+	Item sonoff_current_firmware_version received update or
+	Item meter_koelkast_local_fw_version received update
+then
+	val v_local = meter_koelkast_local_fw_version.state.toString
+	val v_remote = sonoff_current_firmware_version.state.toString
+
+	if(v_local < v_remote) 
+	{
+		meter_koelkast_local_fw_version.postUpdate("upgrade available from " + v_local + " to " + v_remote)
+	}
+	else 
+	{
+		meter_koelkast_local_fw_version.postUpdate(v_local)
+	}
+end
+
+// ================ SENSOR AUDIOVIDEO ================
+rule "Sonoff Maintenance meter_audiovideo_action"
+when
+    Item meter_koelkast_action received command
+then 
+  	var device_id = "sonoff-meter-audiovideo"
+
+    switch (receivedCommand) {
+        case "restart" :
+            publish("mosquitto", "cmnd/" + device_id + "/restart", "1") 
+        case "query_fw" :
+            publish("mosquitto", "cmnd/" + device_id + "/status", "2")
+        case "upgrade" : {
+            publish("mosquitto", "cmnd/" + device_id + "/otaurl", "http://sonoff.maddox.co.uk/tasmota/sonoff.bin")
+            publish("mosquitto", "cmnd/" + device_id + "/upgrade", "1")
+        }
+    }
+	meter_audiovideo_action.postUpdate(NULL)
+end
+
+rule "sonoff-firmware_sonoff-meter-audiovideo"
+when
+	Item sonoff_current_firmware_version received update or
+	Item meter_audiovideo_local_fw_version received update
+then
+	val v_local = meter_audiovideo_local_fw_version.state.toString
+	val v_remote = sonoff_current_firmware_version.state.toString
+
+	if(v_local < v_remote) 
+	{
+		meter_audiovideo_local_fw_version.postUpdate("upgrade available from " + v_local + " to " + v_remote)
+	}
+	else 
+	{
+		meter_audiovideo_local_fw_version.postUpdate(v_local)
+	}
+end
+
+// ================ GROENE TL ================
+rule "Sonoff Maintenance switch_groene_tl_action"
+when
+    Item switch_groene_tl_action received command
+then 
+  	var device_id = "sonoff-green-tl"
+
+    switch (receivedCommand) {
+        case "restart" :
+            publish("mosquitto", "cmnd/" + device_id + "/restart", "1") 
+        case "query_fw" :
+        {
+            publish("mosquitto", "cmnd/" + device_id + "/status", "0")
+         //   logInfo("sonoff.rules", "Sonoff Maintenance on device: '"+ device_id + "' command: '" + receivedCommand + "' executed")    
+        }
+        case "upgrade" : {
+            publish("mosquitto", "cmnd/" + device_id + "/otaurl", "http://sonoff.maddox.co.uk/tasmota/sonoff.bin")
+            publish("mosquitto", "cmnd/" + device_id + "/upgrade", "1")
+        }
+    }
+	switch_groene_tl_action.postUpdate(NULL)
+end
+
+rule "sonoff-firmware_sonoff_green_tl"
+when
+	Item sonoff_current_firmware_version received update or
+	Item switch_groene_tl_local_fw_version received update
+then
+	val v_local = switch_groene_tl_local_fw_version.state.toString
+	val v_remote = sonoff_current_firmware_version.state.toString
+
+	if(v_local < v_remote) 
+	{
+		switch_groene_tl_fw_version.postUpdate("upgrade available from " + v_local + " to " + v_remote)
+	}
+	else 
+	{
+		switch_groene_tl_fw_version.postUpdate(v_local)
+	}
+end
+
+// ================ LED STRIP TV ================
+rule "Sonoff Maintenance switch_led_strip_tv_action"
+when
+    Item switch_led_strip_tv_action received command
+then 
+  	var device_id = "sonoff-led-strip-tv"
+
+    switch (receivedCommand) {
+        case "restart" :
+            publish("mosquitto", "cmnd/" + device_id + "/restart", "1") 
+        case "query_fw" :
+            publish("mosquitto", "cmnd/" + device_id + "/status", "2")
+        case "upgrade" : {
+            publish("mosquitto", "cmnd/" + device_id + "/otaurl", "http://sonoff.maddox.co.uk/tasmota/sonoff.bin")
+            publish("mosquitto", "cmnd/" + device_id + "/upgrade", "1")
+        }
+    }
+	switch_led_strip_tv_action.postUpdate(NULL)
+end
+
+rule "sonoff-firmware_sonoff-led-strip-tv"
+when
+	Item sonoff_current_firmware_version received update or
+	Item switch_led_strip_tv_local_fw_version received update
+then
+	val v_local = switch_led_strip_tv_local_fw_version.state.toString
+	val v_remote = sonoff_current_firmware_version.state.toString
+
+	if(v_local < v_remote) 
+	{
+		switch_led_strip_tv_fw_version.postUpdate("upgrade available from " + v_local + " to " + v_remote)
+	}
+	else 
+	{
+		switch_led_strip_tv_fw_version.postUpdate(v_local)
+	}
+end
+
+
+// ================ KANTOOR PC MONITORS ================
+rule "Sonoff Maintenance switch_kantoor_pc_monitors_action"
+when
+    Item switch_kantoor_pc_monitors_action received command
+then 
+  	var device_id = "sonoff-monitors-beast"
+
+    switch (receivedCommand) {
+        case "restart" :
+            publish("mosquitto", "cmnd/" + device_id + "/restart", "1") 
+        case "query_fw" :
+            publish("mosquitto", "cmnd/" + device_id + "/status", "2")
+        case "upgrade" : {
+            publish("mosquitto", "cmnd/" + device_id + "/otaurl", "http://sonoff.maddox.co.uk/tasmota/sonoff.bin")
+            publish("mosquitto", "cmnd/" + device_id + "/upgrade", "1")
+        }
+    }
+	switch_kantoor_pc_monitors_action.postUpdate(NULL)
+end
+
+rule "sonoff-firmware_sonoff-monitors-beast"
+when
+	Item sonoff_current_firmware_version received update or
+	Item switch_kantoor_pc_monitors_local_fw_version received update
+then
+	val v_local = switch_kantoor_pc_monitors_local_fw_version.state.toString
+	val v_remote = sonoff_current_firmware_version.state.toString
+
+	if(v_local < v_remote) 
+	{
+		switch_kantoor_pc_monitors_fw_version.postUpdate("upgrade available from " + v_local + " to " + v_remote)
+	}
+	else 
+	{
+		switch_kantoor_pc_monitors_fw_version.postUpdate(v_local)
+	}
+end
+
+
+// ================ LICHT WASHOEK ================
+rule "Sonoff Maintenance switch_licht_wasmachine_action"
+when
+    Item switch_licht_wasmachine_action received command
+then 
+  	var device_id = "sonoff-licht-washoek"
+
+    switch (receivedCommand) {
+        case "restart" :
+            publish("mosquitto", "cmnd/" + device_id + "/restart", "1") 
+        case "query_fw" :
+            publish("mosquitto", "cmnd/" + device_id + "/status", "2")
+        case "upgrade" : {
+            publish("mosquitto", "cmnd/" + device_id + "/otaurl", "http://sonoff.maddox.co.uk/tasmota/sonoff.bin")
+            publish("mosquitto", "cmnd/" + device_id + "/upgrade", "1")
+        }
+    }
+	switch_licht_wasmachine_action.postUpdate(NULL)
+end
+
+
+rule "sonoff-firmware_sonoff-licht-washoek"
+when
+	Item sonoff_current_firmware_version received update or
+	Item switch_licht_wasmachine_local_fw_version received update
+then
+	val v_local = switch_licht_wasmachine_local_fw_version.state.toString
+	val v_remote = sonoff_current_firmware_version.state.toString
+
+	if(v_local < v_remote) 
+	{
+		switch_licht_wasmachine_fw_version.postUpdate("upgrade available from " + v_local + " to " + v_remote)
+		// as an alternative we update a flag to use it later in a sitemap for color, visibility, etc
+		// SonoffUpgrade.postUpdate(1)
+	}
+	else 
+	{
+		switch_licht_wasmachine_fw_version.postUpdate(v_local)
+	}
+end
+
+// ================ SENSOR VENTILATOR ================
+rule "Sonoff Maintenance meter_ventilator_action"
+when
+    Item meter_ventilator_action received command
+then 
+  	var device_id = "sonoff-meter-ventilatie"
+
+    switch (receivedCommand) {
+        case "restart" :
+            publish("mosquitto", "cmnd/" + device_id + "/restart", "1") 
+        case "query_fw" :
+            publish("mosquitto", "cmnd/" + device_id + "/status", "2")
+        case "upgrade" : {
+            publish("mosquitto", "cmnd/" + device_id + "/otaurl", "http://sonoff.maddox.co.uk/tasmota/sonoff.bin")
+            publish("mosquitto", "cmnd/" + device_id + "/upgrade", "1")
+        }
+    }
+	meter_ventilator_action.postUpdate(NULL)
+end
+
+rule "sonoff-firmware_sonoff-meter-ventilatie"
+when
+	Item sonoff_current_firmware_version received update or
+	Item meter_ventilator_local_fw_version received update
+then
+	val v_local = meter_ventilator_local_fw_version.state.toString
+	val v_remote = sonoff_current_firmware_version.state.toString
+
+	if(v_local < v_remote) 
+	{
+		meter_ventilator_local_fw_version.postUpdate("upgrade available from " + v_local + " to " + v_remote)
+	}
+	else 
+	{
+		meter_ventilator_local_fw_version.postUpdate(v_local)
+	}
+end
+
+// ================ VENTILATIE ================
+rule "Sonoff Maintenance switch_ventilator_action"
+when
+    Item switch_ventilator_action received command
+then 
+  	var device_id = "sonoff-ventilatie"
+
+    switch (receivedCommand) {
+        case "restart" :
+            publish("mosquitto", "cmnd/" + device_id + "/restart", "1") 
+        case "query_fw" :
+            publish("mosquitto", "cmnd/" + device_id + "/status", "2")
+        case "upgrade" : {
+            publish("mosquitto", "cmnd/" + device_id + "/otaurl", "http://sonoff.maddox.co.uk/tasmota/sonoff.bin")
+            publish("mosquitto", "cmnd/" + device_id + "/upgrade", "1")
+        }
+    }
+	switch_ventilator_action.postUpdate(NULL)
+end
+
+
+rule "sonoff-firmware_sonoff-ventilatie"
+when
+	Item sonoff_current_firmware_version received update or
+	Item switch_ventilator_local_fw_version received update
+then
+	
+	val v_local = switch_ventilator_local_fw_version.state.toString
+	val v_remote = sonoff_current_firmware_version.state.toString
+
+	if(v_local < v_remote) 
+	{
+		switch_ventilator_fw_version.postUpdate("upgrade available from " + v_local + " to " + v_remote)
+	}
+	else 
+	{
+		switch_ventilator_fw_version.postUpdate(v_local)
+	}
+end
+
+// ================ MONITOR VERSTERKER SPACECAVE ================
+rule "Sonoff Maintenance switch_monitor_versterker_action"
+when
+    Item switch_monitor_versterker_action received command
+then 
+  	var device_id = "sonoff-versterker-monitor"
+
+    switch (receivedCommand) {
+        case "restart" :
+            publish("mosquitto", "cmnd/" + device_id + "/restart", "1") 
+        case "query_fw" :
+            publish("mosquitto", "cmnd/" + device_id + "/status", "2")
+        case "upgrade" : {
+            publish("mosquitto", "cmnd/" + device_id + "/otaurl", "http://sonoff.maddox.co.uk/tasmota/sonoff.bin")
+            publish("mosquitto", "cmnd/" + device_id + "/upgrade", "1")
+        }
+    }
+	switch_monitor_versterker_action.postUpdate(NULL)
+end
+
+
+rule "sonoff-firmware_sonoff-versterker-monitor"
+when
+	Item sonoff_current_firmware_version received update or
+	Item switch_monitor_versterker_local_fw_version received update
+then
+	val v_local = switch_monitor_versterker_local_fw_version.state.toString
+	val v_remote = sonoff_current_firmware_version.state.toString
+
+	if(v_local < v_remote) 
+	{
+		switch_monitor_versterker_fw_version.postUpdate("upgrade available from " + v_local + " to " + v_remote)
+	}
+	else 
+	{
+		switch_monitor_versterker_fw_version.postUpdate(v_local)
+	}
+end
+
+// ================ SAMSUNG SPEAKER ================
+rule "Sonoff Maintenance switch_samsung_speaker_action"
+when
+    Item switch_samsung_speaker_action received command
+then 
+  	var device_id = "switch_samsung_speaker"
+
+    switch (receivedCommand) {
+        case "restart" :
+            publish("mosquitto", "cmnd/" + device_id + "/restart", "1") 
+        case "query_fw" :
+            publish("mosquitto", "cmnd/" + device_id + "/status", "2")
+        case "upgrade" : {
+            publish("mosquitto", "cmnd/" + device_id + "/otaurl", "http://sonoff.maddox.co.uk/tasmota/sonoff.bin")
+            publish("mosquitto", "cmnd/" + device_id + "/upgrade", "1")
+        }
+    }
+	switch_samsung_speaker_action.postUpdate(NULL)
+end
+
+
+rule "sonoff-firmware_sonoff-samsung-speaker"
+when
+	Item sonoff_current_firmware_version received update or
+	Item switch_samsung_speaker_local_fw_version received update
+then
+	val v_local = switch_samsung_speaker_local_fw_version.state.toString
+	val v_remote = sonoff_current_firmware_version.state.toString
+
+	if(v_local < v_remote) 
+	{
+		switch_samsung_speaker_fw_version.postUpdate("upgrade available from " + v_local + " to " + v_remote)
+	}
+	else 
+	{
+		switch_samsung_speaker_fw_version.postUpdate(v_local)
+	}
+end

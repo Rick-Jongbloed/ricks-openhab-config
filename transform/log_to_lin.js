@@ -1,0 +1,1 @@
+(function(i){ return 2*(i + 100); })(input)

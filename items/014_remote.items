@@ -1,0 +1,43 @@
+// String remote_1_A			"Remote 1 knop A [%s]"			{rfxcom="<245759:RawData"}
+// String remote_1_B			"Remote 1 knop B [%s]"			{rfxcom="<4095:RawData"}
+// String remote_1_C			"Remote 1 knop C [%s]"			{rfxcom="<2047:RawData"}
+// String remote_1_D			"Remote 1 knop D [%s]"			{rfxcom="<8191:RawData"}
+
+//Switch remote_2_A			{rfxcom="<8290063:Command"}
+//Switch remote_2_B			{rfxcom="<8290063:Command"}
+//Switch remote_2_C			{rfxcom="<8290063:Command"}
+//Switch remote_2_D			{rfxcom="<8290063:Command"}
+
+Switch remote_3_a_1_ommand		        	"Remote 3 knop A 1 (command) [%s]"                  { channel="rfxcom:lighting4:d10d8fa9:518143:command" }
+Number remote_3_a_1_command_id	    		"Remote 3 knop A 1 (command id) [%d]"               { channel="rfxcom:lighting4:d10d8fa9:518143:commandId" }
+Number remote_3_a_1_signal_level  			"Remote 3 knop A 1 (signal level) [%d]"             { channel="rfxcom:lighting4:d10d8fa9:518143:signalLevel" }
+
+Switch remote_3_a_2_command		        	"Remote 3 knop A 2 (command) [%s]"                  { channel="rfxcom:lighting4:d10d8fa9:1042431:command" }
+Number remote_3_a_2_command_id	    		"Remote 3 knop A 2 (command id) [%d]"               { channel="rfxcom:lighting4:d10d8fa9:1042431:commandId" }
+Number remote_3_a_3_signal_level  			"Remote 3 knop A 2 (signal level) [%d]"             { channel="rfxcom:lighting4:d10d8fa9:1042431:signalLevel" }
+
+Switch remote_3_b_1_command		        	"Remote 3 knop B 1 (command) [%s]"                  { channel="rfxcom:lighting4:d10d8fa9:511999:command" }
+Number remote_3_b_1_command_id	    		"Remote 3 knop B 1 (command id) [%d]"               { channel="rfxcom:lighting4:d10d8fa9:511999:commandId" }
+Number remote_3_b_1_signal_level  			"Remote 3 knop B 1 (signal level) [%d]"             { channel="rfxcom:lighting4:d10d8fa9:511999:signalLevel" }
+
+Switch remote_3_b_2_command		        	"Remote 3 knop B 2 (command) [%s]"                  { channel="rfxcom:lighting4:d10d8fa9:1036287:command" }
+Number remote_3_b_2_command_id	    		"Remote 3 knop B 2 (command id) [%d]"               { channel="rfxcom:lighting4:d10d8fa9:1036287:commandId" }
+Number remote_3_b_2_signal_level  			"Remote 3 knop B 2 (signal level) [%d]"             { channel="rfxcom:lighting4:d10d8fa9:1036287:signalLevel" }
+
+Switch remote_3_c_command		        	"Remote 3 knop C (command) [%s]"                    { channel="rfxcom:lighting4:d10d8fa9:1019903:command" }
+Number remote_3_c_command_id	    		"Remote 3 knop C (command id) [%d]"                 { channel="rfxcom:lighting4:d10d8fa9:1019903:commandId" }
+Number remote_3_c_signal_level  			"Remote 3 knop C (signal level) [%d]"               { channel="rfxcom:lighting4:d10d8fa9:1019903:signalLevel" }
+
+Switch remote_3_d_command		        	"Remote 3 knop D (command) [%s]"                    { channel="rfxcom:lighting4:d10d8fa9:999423:command" }
+Number remote_3_d_command_id	    		"Remote 3 knop D (command id) [%d]"                 { channel="rfxcom:lighting4:d10d8fa9:999423:commandId" }
+Number remote_3_d_signal_level  			"Remote 3 knop D (signal level) [%d]"               { channel="rfxcom:lighting4:d10d8fa9:999423:signalLevel" }
+
+//Switch remote_4_A			{rfxcom="<8290063:Command"}
+//Switch remote_4_B			{rfxcom="<8290063:Command"}
+//Switch remote_4_C			{rfxcom="<8290063:Command"}
+//Switch remote_4_D			{rfxcom="<8290063:Command"}
+
+// String remote_5_A			"Remote 5 knop A [%s]"		{rfxcom="<524287:RawData"}
+// String remote_5_B			"Remote 5 knop B [%s]"		{rfxcom="<1048575:RawData"}
+//Switch Remote_5_C			{rfxcom="<8290063:Command"}
+//Switch Remote_5_D			{rfxcom="<8290063:Command"}

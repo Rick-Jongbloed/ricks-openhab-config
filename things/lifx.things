@@ -1,0 +1,4 @@
+Thing lifx:colorlight:D073D5243284 "LIFX Lamp eettafel" @ "Begane grond" [ deviceId="D073D5243284", fadetime=300 ] {
+    Channels:
+        Type color : color [ powerOnBrightness=75 ]
+}

@@ -1,0 +1,74 @@
+Bridge	unifi:controller:unifi_thuis	    "Unifi Controller: Thuis"   @   "Begane grond" [host="192.168.1.201", username="openhab", password="qt04I6rYb43h", port=8443, refresh=10, considerHome=180]
+{
+    // // FIXED DEVICES
+
+ // network:pingdevice:192_168_1_1 		"Unifi USG (192.168.1.1)" 									@ "Begane grond" 			[ hostname="192.168.1.1", retry=1, timeout=5000, refresh_interval=30000 ]   // OK
+    Thing   client  unifi_device_ziggo_horizon_dhcp_scope           "Ziggo Horizon (DHCP scope)"            @   "Begane grond"          [ mac="3c:62:00:6b:99:0b", contactType="NO" ]                 // network:pingdevice:192_168_1_2 		"Ziggo Horizon (192.168.1.2)"
+    Thing   client  unifi_device_ziggo_horizon                      "Ziggo Horizon"                         @   "Begane grond"          [ mac="3c:62:00:6b:99:0e", contactType="NO" ]                 // network:pingdevice:192_168_1_3 		"Ziggo Horizon (192.168.1.3) (DHCP)"
+ // SAMSUNG AANMELDEN!!!! // network:pingdevice:192_168_1_5 		"Samsung Multiroom speaker (192.168.1.5)" 				@ "Zolder" 					[ hostname="192.168.1.5", retry=1, timeout=5000, refresh_interval=30000 ]   // ----NIET AANGESLOTEN - TODO
+    
+// // ROAMING DEVICES
+    Thing   client  unifi_telefoon_sunny_prive                      "Telefoon Sunny"                        @   "Mobiel"                [ mac="f4:09:d8:31:3c:fd", contactType="NO" ]                 // network:pingdevice:192_168_1_10	    "Telefoon Sunny (192.168.1.10)" 				        
+    Thing   client  unifi_telefoon_rick_prive                       "Telefoon Rick prive"                   @   "Mobiel"                [ mac="8c:f5:a3:fb:36:12", contactType="NO" ]                 // network:pingdevice:192_168_1_11 	    "x Telefoon Rick prive (192.168.1.11)" 					
+    Thing   client  unifi_telefoon_rick_werk                        "Telefoon Rick werk"                    @   "Mobiel"                [ mac="b8:4f:d5:2a:a5:e0", contactType="NO" ]                 // network:pingdevice:192_168_1_12 	    "x Telefoon Rick werk (192.168.1.12)" 					
+    Thing   client  unifi_telefoon_claudia_prive                    "Telefoon Claudia"                      @   "Mobiel"                [ mac="8c:f5:a3:b4:cc:d4", contactType="NO" ]                 // network:pingdevice:192_168_1_13 	    "x Telefoon Claudia prive (192.168.1.13)" 				
+    Thing   client  unifi_tablet_rick_prive                         "Tablet Rick"                           @   "Mobiel"                [ mac="f4:09:d8:31:3c:fd", contactType="NO" ]                 // network:pingdevice:192_168_1_14 	    "Tablet Rick (192.168.1.14)" 							
+ // UITZOEKEN!!! - Eenmalig aanmelden!!! - Thing   client  unifi_ereader_claudia_prive          "E-Reader Claudia"               @   "Mobiel"              [ mac="3c:a9:f4:9d:9c:78", contactType="NO" ]                 // network:pingdevice:192_168_1_15 	"E-reader Claudia (192.168.1.15)"
+    Thing   client  unifi_laptop_rick_prive_lan                     "Laptop Rick prive lan"                 @   "Mobiel"                [ mac="68:b5:99:ea:66:de", contactType="NO" ]                  // network:pingdevice:192_168_1_16 	"Laptop Rick prive lan (192.168.1.16)"
+    Thing   client  unifi_laptop_rick_prive_wifi                    "Laptop Rick prive wifi"                @   "Mobiel"                [ mac="58:94:6b:1b:50:0c", contactType="NO" ]                  // network:pingdevice:192_168_1_17 	"Laptop Rick prive wifi (192.168.1.17)"
+ // UITZOEKEN!!!   Thing   client  unifi_laptop_rick_werk_lan           "Laptop Rick werk lan"             @   "Mobiel"              [ mac="3c:a9:f4:9d:9c:78", contactType="NO" ]   // network:pingdevice:192_168_1_18 	"Laptop Rick werk lan (192.168.1.18)"
+    Thing   client  unifi_laptop_rick_werk_wifi                     "Laptop Rick werk wifi"                 @   "Mobiel"                [ mac="3c:a9:f4:9d:9c:78", contactType="NO" ]                  // network:pingdevice:192_168_1_19 	"x Laptop Rick werk wifi (192.168.1.19)"
+ // UITZOEKEN!!! Thing client laptop_claudia_prive_lan           "Laptop Claudia lam" @ "Mobiel"              [ mac="3c:a9:f4:9d:9c:78", contactType="NO" ]                  // network:pingdevice:192_168_1_20		"Laptop Claudia prive lan (192.168.1.20)
+    Thing   client  unifi_laptop_claudia_prive_wifi                  "Laptop Claudia wifi"                  @   "Mobiel"                [ mac="68:07:15:1b:63:c2", contactType="NO" ]                   // network:pingdevice:192_168_1_21		"x Laptop Claudia prive wifi (192.168.1.21)"
+ // UITZOEKEN !!! //Thing   client  unifi_laptop_sunny_prive_lan          "Laptop Sunny lan"                @   "Mobiel"                [ mac="00:24:2c:45:0e:63", contactType="NO" ]                   // network:pingdevice:192_168_1_22		"Laptop Sunny lan (192.168.1.22)"
+    Thing   client  unifi_laptop_sunny_prive_wifi                   "Laptop Sunny lan   "                   @   "Mobiel"                [ mac="00:24:2c:45:0e:63", contactType="NO" ]                  // network:pingdevice:192_168_1_23		"Laptop Sunny wifi (192.168.1.23)"
+
+// CAMERAS
+    Thing   client  unifi_camera_buiten_voor                        "Camera buiten voor"                    @   "Mobiel"                [ mac="00:62:6e:67:7b:5f", contactType="NO" ]                          // network:pingdevice:192_168_1_25 	"Camera buiten voor (192.168.1.25)" 
+    Thing   client  unifi_camera_buiten_achter                      "Camera buiten achter"                  @   "Mobiel"                [ mac="44:2c:05:b5:ad:4e", contactType="NO" ]                         // network:pingdevice:192_168_1_26 	"Camera buiten achter (192.168.1.26)"
+
+// CONTROLLERS
+    Thing   client	unifi_controller_logitech_harmony_hub	        "Logitech Harmony Hub"			        @   "Begane grond" 			[ mac="00:04:20:eb:c0:4d", contactType="NO" ]                       // network:pingdevice:192_168_1_80		"x Harmony Hub (192.168.1.80)"
+    Thing   client  unifi_controller_philips_hue_bridge             "Philips Hue bridge"			        @   "Begane grond" 			[ mac="00:17:88:47:75:f9", contactType="NO" ]   	    	        /// network:pingdevice:192_168_1_81		"x Philips Hue bridge (192.168.1.81)"
+    Thing   client  unifi_controller_amazon_echo_dot                "Amazon Echo Dot" 				        @   "Begane grond" 			[ mac="40:b4:cd:04:70:85", contactType="NO" ]                       // network:pingdevice:192_168_1_82		"Amazon Echo Dot(192.168.1.82)
+    Thing   client  unifi_controller_honeywell_evohome	            "Honeywell EvoHome thermostaat"	        @   "Begane grond" 			[ mac="00:d0:2d:bf:bd:e4", contactType="NO" ]                       // network:pingdevice:192_168_1_83 	    "Honeywell EvoHome thermostaat (192.168.1.83)"
+    Thing   client  unifi_controller_google_chromecast              "Google Chromecast" 				    @   "Begane grond" 			[ mac="f4:f5:d8:e7:8e:ae", contactType="NO" ]                       // network:pingdevice:192_168_1_84 	    "x Google Chromecast (192.168.1.84)"
+    Thing   client  unifi_controller_xiaomi_gateway                 "Xiaomi Gateway"  				        @   "Eerste verdieping"		[ mac="34:ce:00:90:7e:07", contactType="NO" ]                       // network:pingdevice:192_168_1_85 	    "x Xiaomi Gateway (192.168.1.85)" 						
+// mysensors hier plaatsen
+// network:pingdevice:192_168_1_200 	"Mysensors gateway (192.168.1.200)" 					@ "Begane grond" 			[ hostname="192.168.1.200", retry=1, timeout=5000, refresh_interval=30000 ]
+
+// FIXED DEVICES
+    Thing   client  unifi_device_onkyo_receiver                     "Onkyo versterker"				        @   "Begane grond" 			[ mac="00:09:b0:47:69:5d", contactType="NO" ]                       // network:pingdevice:192_168_1_100	"x Onkyo versterker (192.168.1.100)"
+    Thing   client  unifi_device_htpc_woonkamer                     "XMBC (linux distro)"                   @   "Begane grond"          [ mac="b8:27:eb:92:11:45", contactType="NO" ]                 // network:pingdevice:192_168_1_101 		"Mediacenter PC (192.168.1.101)"  
+    Thing   client  unifi_device_computer_kantoor                   "Kantoor PC" 						    @   "Eerste verdieping"     [ mac="30:5a:3a:04:e5:fa", contactType="NO" ]                   // network:pingdevice:192_168_1_123	"Kantoor PC (192.168.1.123)"
+// mist raspberry pi zolder
+// UITZOEKEN !!! // network:pingdevice:192_168_1_6 		"Spacecave PC lan (192.168.1.6)" 						@ "Zolder" 				[ hostname="192.168.1.6", retry=1, timeout=5000, refresh_interval=30000 ]   // OK
+// UITZOEKEN !!! // network:pingdevice:192_168_1_7 		"Spacecave PC wifi (192.168.1.7)" 						@ "Zolder" 				[ hostname="192.168.1.7", retry=1, timeout=5000, refresh_interval=30000 ]   // OK IS UITGESCHAKELD, MAG WEG
+    
+// // SONOFFS
+    Thing   client  unifi_sonoff_switch_licht_wasmachine            "Sonoff switch licht wasmachine" 	    @   "Zolder" 				[ mac="5c:cf:7f:96:e9:bd", contactType="NO" ]// network:pingdevice:192_168_1_151 	"x Sonoff switch licht wasmachine (192.168.1.151)" 		
+    Thing   client  unifi_sonoff_switch_groene_tl                   "Sonoff switch groene TL" 			    @   "Begane grond" 			[ mac="5c:cf:7f:97:32:40", contactType="NO" ]// network:pingdevice:192_168_1_152 	"x Sonoff switch groene TL(192.168.1.152)" 				
+    
+// //153 ---> ???? De laatste sonoff die ik hier nog heb liggen, wat ga ik er mee doen?
+    Thing   client  unifi_sonoff_meter_ventilator                   "Sonoff meter ventilator (POW)" 	    @   "Zolder" 				[ mac="5c:cf:7f:e7:72:27", contactType="NO" ]// network:pingdevice:192_168_1_154 	"x Sonoff meter ventilator (POW) (192.168.1.154)" 		
+    Thing   client sonoff_switch_samsung_speaker                    "Sonoff switch Samsung speaker" 		@   "Zolder" 				[ mac="2c:3a:e8:05:85:0b", contactType="NO" ]// network:pingdevice:192_168_1_155 	"x Sonoff switch Samsung speaker (192.168.1.155)" 		
+    Thing   client  unifi_sonoff_switch_monitor_en_versterker       "Sonoff switch monitor en versterker" 	@   "Zolder" 				[ mac="5c:cf:7f:97:7c:b2", contactType="NO" ]// network:pingdevice:192_168_1_156 	"Sonoff switch monitor en versterker (192.168.1.156)" 	
+    Thing   client  unifi_sonoff_switch_monitors_kantoor_pc         "Sonoff switch monitors kantoor PC" 	@   "Eerste verdieping" 	[ mac="5c:cf:7f:97:0b:96", contactType="NO" ]// network:pingdevice:192_168_1_157 	"Sonoff switch monitors kantoor PC (192.168.1.157)" 	
+    Thing   client  unifi_sonoff_switch_machanische_afzuiging       "Sonoff switch mechanische afzuiging" 	@   "Zolder" 				[ mac="5c:cf:7f:e7:69:9e", contactType="NO" ]// network:pingdevice:192_168_1_158 	"x Sonoff switch mechanische afzuiging (192.168.1.158)" 
+    Thing   client  unifi_sonoff_meter_koelkast                     "Sonoff meter koelkast" 	            @   "Begane grond"			[ mac="2c:3a:e8:07:67:16", contactType="NO" ]// network:pingdevice:192_168_1_159 	"x Sonoff meter koelkast (192.168.1.159)" 	            
+    Thing   client  unifi_sonoff_meter_audiovideo                   "Sonoff meter audiovideo" 	            @   "Begane grond"			[ mac="5c:cf:7f:b4:a5:df", contactType="NO" ]// network:pingdevice:192_168_1_160 	"x Sonoff meter audiovideo (192.168.1.160)" 	        
+    Thing   client  unifi_sonoff_switch_led_strip_tv                "Sonoff switch led strip TV (S20)" 		@   "Begane grond" 			[ mac="2c:3a:e8:04:ed:63", contactType="NO" ]// network:pingdevice:192_168_1_161 	"x Sonoff switch led strip TV (S20) (192.168.1.161)" 	
+    //Thing   client  unifi_sonoff_touch_toilet_beneden               "Sonoff Touch toilet beneden" 		    @   "Begane grond" 			[ mac="30:5a:3a:04:e5:fa", contactType="NO" ]// network:pingdevice:192_168_1_162 	"Sonoff Touch toilet beneden (192.168.1.162)" 		    
+    Thing   client  unifi_sonoff_switch_deurbel                     "Sonoff switch deurbel" 		        @   "Begane grond" 			[ mac="5c:cf:7f:96:e8:f8", contactType="NO" ]// network:pingdevice:192_168_1_163 	"x Sonoff switch deurbel (192.168.1.163)" 		        
+    Thing   client  unifi_sonoff_kerstboom                          "Sonoff Kerstboom" 		                @   "Begane grond" 			[ mac="5c:cf:7f:96:e9:b8", contactType="NO" ]// network:pingdevice:192_168_1_164 	"x Sonoff Kerstboom (192.168.1.163)" 		            
+    
+
+// LAMPEN
+    Thing   client  unifi_light_lifx_eettafel                       "LIFX lamp eettafel" 		            @   "Begane grond" 			[ mac="d0:73:d5:24:32:84", contactType="NO" ]// network:pingdevice:192_168_1_171 	"LIFX lamp eettafel (192.168.1.171)" 	
+//    Thing   client  unifi_light_yeelight_gang_1e                    "Yeelight lamp gang" 		            @   "Eerste verdieping" 	[ mac="30:5a:3a:04:e5:fa", contactType="NO" ]// network:pingdevice:192_168_1_121 	"x Yeelight lamp gang (192.168.1.172)"
+
+// DOMOTICA SYSTEEM
+    Thing   client  unifi_device_domotica_01                        "Domotica-01" 					        @   "Begane grond" 			[ mac="00:1e:06:33:64:eb", contactType="NO" ]   // network:pingdevice:192_168_1_201 	"Domotica-01 (192.168.1.201)"
+    Thing   client  unifi_device_domotica_02                        "Domotica-02" 					        @   "Begane grond" 			[ mac="b8:27:eb:32:0d:fe", contactType="NO" ]   // network:pingdevice:192_168_1_202 	"Domotica-02 (192.168.1.202)"
+    Thing   client  unifi_device_domotica_03                        "Domotica-03" 					        @   "Begane grond"          [ mac="d6:14:f3:fe:96:81", contactType="NO" ]   // network:pingdevice:192_168_1_203 	"Domotica-03 (192.168.1.203)"
+}

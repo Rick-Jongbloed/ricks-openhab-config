@@ -1,0 +1,2 @@
+// als geen lichten beneden (groep night mode) en deur woonkamer gaat open, dan 5 minuten tv licht aan
+Switch		switch_led_strip_tv_toggle_night_mode								    "Led strip TV (switch) [%s]"						                                    <light> 				(g_testing)								                                                    { expire="5m, command=OFF" ,mqtt=">[mosquitto:cmnd/sonoff_switch_ledstrip_tv/power:command:*:default], <[mosquitto:stat/sonoff_switch_ledstrip_tv/POWER:state:default]" }

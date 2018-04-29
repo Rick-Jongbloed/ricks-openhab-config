@@ -1,0 +1,5 @@
+// ======== EXTERN ==========
+String		sonoff_current_firmware_version 						"Sonoff fw version on public server [%s]" 									(g_maintenance_sonoff_status, g_restore)															{ mqtt="<[maddox:sonoff-version:state:REGEX(.*?(\\d+\\.\\d+\\.\\d+).*)]" }
+
+// ======== GLOBAL ITEMS ==========
+String      switch_sonoff_maintenance_action                        "Sonoff upgrade action" 

@@ -1,0 +1,7 @@
+PLAYING=Playing
+PAUSED=Paused
+BUFFERING=Buffering
+UNKNOWN=Idle
+IDLE=Idle
+-=Idle
+NULL=Idle

@@ -1,0 +1,13 @@
+	// replaced by raspberry pi
+					// Switch item=mediacenter_pc_turn_off			mappings=[OFF="Uitzetten"]		visibility=[mediacenter_pc_net_online=="ON"]
+					// Switch item=mediacenter_pc_turn_on			mappings=[ON="Aanzetten"]		visibility=[mediacenter_pc_net_online=="OFF"]
+				
+                  //Text item=onkyo_receiver_harmony_hub																																			visibility=[logitech_harmony_hub_current_activity!="PowerOff"]
+                  	//Switch item=onkyo_receiver_harmony_hub_button_press		 		mappings=[PowerOn="Aanzetten"] 																					visibility=[logitech_harmony_hub_current_activity=="PowerOff"]
+					//Switch item=onkyo_receiver_harmony_hub_button_press		 	mappings=[PowerOff="Uitzetten", PowerOn="Aanzetten"] 															//visibility=[logitech_harmony_hub_current_activity=="PowerOff"]
+				
+
+                //Text item=upc_horizon_box_harmony_hub																																			visibility=[logitech_harmony_hub_current_activity!="PowerOff"]
+                	//Switch item=upc_horizon_box_harmony_hub_button_press	 		mappings=[PowerToggle="Aanzetten"] 																				visibility=[logitech_harmony_hub_current_activity=="PowerOff"]
+                    	//Text item=panasonic_tv_harmony_hub																																			visibility=[logitech_harmony_hub_current_activity!="PowerOff"]					
+                        	//Switch item=panasonic_tv_harmony_hub_button_press		 		mappings=[PowerOff="Uitzetten", PowerOn="Aanzetten"] 															//visibility=[logitech_harmony_hub_current_activity=="PowerOff"]

@@ -1,0 +1,71 @@
+import org.openhab.core.items.*
+import org.openhab.core.library.types.* 
+
+// rule to turn all the devices etc off - switch
+// rule "rule_scene_all_off_switch"
+// when
+//     Item scene_all_off_switch received command OFF
+// then
+// 	scene_all_off?.members.filter[s | s.state > 0 || s.state==ON].forEach [item | 
+// 		logDebug("rule-test","Scene: turning off item.name: " + item.name)
+// 		item.sendCommand(OFF)
+// 	]
+// end
+
+// // rule to turn all the devices etc off - status
+// rule "rule_scene_all_off_status"
+// when
+// 	System started 
+// or
+// 	Item scene_all_off changed
+// then
+// 	logDebug("rule-test","Scene_all_off1: Scene_all_off.members.size: " + scene_all_off.members.filter[s| s.state!=0 && s.state!=OFF].size.toString + " scene_all_off_status.state: " + scene_all_off_status.state.toString )
+//     if ((scene_all_off.members.filter[s| s.state > 0].size > 0 || scene_all_off.members.filter[s| s.state == ON].size > 0) && scene_all_off_status.state != ON)
+// 	{
+// 		logDebug("rule-test","Scene_all_off2: scene_all_off_status: " + scene_all_off_status.state.toString) 
+// 		postUpdate(scene_all_off_status, ON)
+// 	}
+
+//     if (scene_all_off.members.filter[s| s.state > 0].size == 0 && scene_all_off.members.filter[s| s.state == ON].size == 0 && scene_all_off_status.state != OFF)
+// 	{
+// 		logDebug("rule-test","Scene_all_off3: scene_all_off_status: " + scene_all_off_status.state.toString)
+// 		postUpdate(scene_all_off_status, OFF)
+// 	}
+// end
+
+// rule "bed_time_turn_on"
+// when
+// 	Time cron "0 30 21 1/1 * ? *" 
+// then
+// 	postUpdate(bed_time, ON)
+// end
+
+// rule "bed_time_turn_off"
+// when
+// 	Time cron "0 0 5 1/1 * ? *"
+// then
+// 	postUpdate(bed_time, OFF)
+// end
+	
+// rule to turn lights off if all devices in group are turned off (can be finetuned later)
+// todo:
+// 	- can only be done after 21:30 and before 05:00 - switch need to be created with timer rule or something, or better, check in this rule
+//			fixed by introducing switch bed_time
+//  - think of something smart to turn off the lights when i go upstairs
+// 	- think of something to turn on the lights from 05:00 to daytime, when claudia or i wake up.
+
+// rule "nightmode_downstairs_turn_lights_on"
+// when 
+// 	Item door_woonkamer_sensor changed from CLOSED to OPEN
+// then
+// 	// set lights to 25% dimming
+// 	if (bed_time == ON)// && nightmode_downstairs == OFF)
+// 	//if (nightmode_downstairs == OFF)
+// 	{
+// 		sendCommand (light_woonkamer_dimmer_boekenkast,	25)
+// 		sendCommand (light_woonkamer_dimmer_vitrinekast,25)		
+// 	}
+// end
+	
+
+

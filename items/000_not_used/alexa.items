@@ -1,0 +1,10 @@
+//Switch  alexa_living_chill                                      "chill mode"                            (alexa)         [ "Switchable" ]
+//Switch  alexa_living_read                                      "chill read"                            (alexa)         [ "Switchable" ]
+//Switch  alexa_living_full                                       "full"					(alexa)		[ "Switchable" ]
+//Switch  alexa_living_off                                        "all off"				(alexa)		[ "Switchable" ]
+//Switch  alexa_kitchen						"kitchen"				(alexa)		[ "Lighting" ]
+
+//Switch  light_gang_plafond                                                      "Plafondlamp gang [%s]"                                                 (gf_corridor,lights,scene_all_off,nightmode_downstairs,g_r$
+//Switch  light_buiten_voor                                                       "Buitenlamp voor [%s]"                                                  (gf_living,lights,scene_all_off,g_restore)                $
+
+

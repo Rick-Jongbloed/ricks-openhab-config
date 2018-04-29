@@ -1,0 +1,28 @@
+// 
+// create a status text item for each item. 
+// status kan zijn: ON, STANDBY, OFF 
+// moet met speciale engine die op basis van status van groep bepaald welke status het heeft 
+//
+// iconset: http://www.eclipse.org/smarthome/documentation/features/ui/iconset/classic/readme.html
+//
+
+
+
+
+
+	
+// missing: 
+//		laptop clau wired		// staat er al in, moet nog in DHCP plaatsen
+//		laptop rick werk wired		// staat er al in, moet nog in DHCP plaatsen
+//		laptop rick prive wifi		// staat er al in
+//		laptop rick prive wired		// staat er al in, moet nog in DHCP plaatsen
+//		laptop sunny wifi		// staat er al in, moet nog in DHCP plaatsen
+//		laptop sunny wired		// staat er al in, moet nog in DHCP plaatsen
+//		tablet Sunny			// staat er al in, moet nog in DHCP plaatsen
+//		telefoon rick prive		// staat er al in
+//		computer kantoor		// staat er al in
+//		e-reader clau			// staat er al in (.15)
+//		amazon echo dot			// staat er al in (.82)
+//		camera buiten voor		// staat er al in (.25)
+
+//Switch 		delayed_start													

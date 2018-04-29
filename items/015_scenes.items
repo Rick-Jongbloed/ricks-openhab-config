@@ -1,0 +1,20 @@
+// all off system
+Switch		scene_all_off_switch				"Turn all off"			(scenes)
+Switch		scene_all_off_status				"Turn all off [%s]"		(scenes, g_restore)
+
+Switch		bed_time							"Bed time"			(g_outdoor, g_restore)
+// nightmode downstairs syetem
+
+// licht scenes
+Number 		number_scene_lights_living			"Scene woonkamer"		    <light>
+Number 		number_scene_lights_kitchen			"Scene keuken"              <light>
+
+// woonkamer (en beetje keuken)
+Switch		switch_scene_living_chill			"Scene woonkamer chill"			    (scenes)		[ "Lighting" ] // special
+Switch		switch_scene_living_full			"Scene woonkamer full"			    (scenes)		[ "Lighting" ] // gekoppeld aan off
+
+// keuken
+//Switch 		switch_scene_kitchen				"Scene keuken"                      (scenes)		[ "Lighting" ] // aan = switch_scene_kitchen_cooking, uit = switch_scene_kitchen_off
+Switch		switch_scene_kitchen_off			"Scene keuken off"				    (scenes)		//[ "Lighting" ] // hier komt ook aan bij
+Switch		switch_scene_kitchen_cooking		"Scene keuken koken"			    (scenes)		//[ "Lighting" ] // gekopp
+Switch		switch_scene_kitchen_dining			"Scene keuken eten"				    (scenes)		//[ "Lighting" ] // special

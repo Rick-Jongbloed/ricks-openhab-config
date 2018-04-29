@@ -1,0 +1,19 @@
+// example:
+//
+// Bridge amazonechocontrol:account:account1 "Amazon Account" @ "Accounts" [amazonSite="amazon.de", email="myaccountemail@myprovider.com", password="secure", pollingIntervalInSeconds=60]
+// {
+//     Thing echo                 echo1 "Alexa" @ "Living Room" [serialNumber="SERIAL_NUMBER"]
+//     Thing echoshow             echo2 "Alexa" @ "Kitchen" [serialNumber="SERIAL_NUMBER"]
+//     Thing echospot             echo3 "Alexa" @ "Sleeping Room" [serialNumber="SERIAL_NUMBER"]
+//     Thing wha                  echo4 "Alexa" @ "Ground Floor Music Group" [serialNumber="SERIAL_NUMBER"]
+//     Thing unknown              echo5 "Alexa" @ "Very new echo device" [serialNumber="SERIAL_NUMBER"]
+//     Thing flashbriefingprofile flashbriefing1 "Flash Briefing" @ "Flash Briefings" 
+// }
+
+Bridge amazonechocontrol:account:account1 "Amazon Account" @ "Accounts" [amazonSite="amazon.co.uk", email="ricadelic@gmail.com", password="acYanUUXfAO5Nsy", pollingIntervalInSeconds=60]
+{
+    //Thing echo                           echodot1            "Alexa"                 @ "Begane grond" [serialNumber="G090LF0970120B4P"]
+    //Thing flashbriefingprofile              flashbriefing1      "Flash Briefing"        @ "Flash Briefings" 
+    Thing echo                              echodot1            "Alexa"                 @ "Alexa" [serialNumber="G090LF0970120B4P"]
+    Thing flashbriefingprofile              flashbriefing1      "Flash Briefing"        @ "Alexa" 
+}

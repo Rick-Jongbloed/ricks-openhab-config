@@ -1,0 +1,36 @@
+// concurrency items
+Switch		rule_chromecast_woonkamer_py_status_changed_is_running                                                                                          { expire="1s,   command=OFF"}    
+Switch      rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff                                                                              { expire="20s,  command=OFF"}
+Switch      rule_uninitialized_items_add_start                                                                                                              { expire="120s, command=OFF"}
+
+Switch      s_refresh_on      		                                                     "refresh Whats ON"				(g_maintenance)
+
+Switch      rule_whats_on_update_group_timer                                                                                                                { expire="20s,  command=OFF" }
+
+
+// motion wasmachinehok
+Switch      timer_rule_motion_wasmachine_light_init_hardware                                                                                                { expire="30s,  command=OFF" }
+Switch      timer_rule_motion_wasmachine_light_detected_motion                          "Licht wasmachinehok (timer-motion) [%s]"                           { expire="5m,   command=OFF" }
+Switch      timer_rule_motion_wasmachine_light_manual_off                               "Licht wasmachinehok (manual off timer) [%s]"                       { expire="1m,   command=OFF" }
+
+// motion kantoor
+Switch      timer_rule_kantoor_motion_init_hardware                                                                                                         { expire="30s,  command=OFF" }
+Switch      timer_rule_kantoor_motion_detected_motion                                   "Kantoor (timer-motion) [%s]"                                       { expire="5m,command=OFF" }
+
+// monitoren kantoor (wellicht samenvoegen met motion kantoor)
+Switch      timer_rule_kantoor_monitors_init_hardware                                                                                                       { expire="30s,  command=OFF" }
+
+// ventilation
+Switch      timer_rule_automate_ventilation_new_init_hardware                                                                                               { expire="30s,  command=OFF" }
+
+// scene: woonkamer
+Switch      timer_rule_scene_woonkamer_new_init_hardware                                                                                                    { expire="30s,  command=OFF" }
+//Switch      timer_rule_scene_woonkamer_disable_detection                                                                                                    { expire="3s, command=OFF" }
+
+// scene: keuken
+Switch      timer_rule_scene_kitchen_new_init_hardware                                                                                                      { expire="30s,  command=OFF" }
+//Switch      timer_rule_scene_woonkamer_disable_detection                                                                                                    { expire="3s, command=OFF" }
+
+// scene: all off
+Switch      rule_xiaomi_switch_kantoor_all_off_timer                                                                                                        { expire="60s,  command=OFF" }
+

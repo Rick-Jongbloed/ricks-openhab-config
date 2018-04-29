@@ -1,0 +1,608 @@
+
+
+
+
+// rule	"ventilation_level_set"
+// when
+//     	Item number_ventilator_level_set changed
+// then
+// 	// manual update button should reflect the new situation in case of automatic stuff
+// 	number_ventilator_level_set_manual.postUpdate(number_ventilator_level_set.state)
+
+// 	// process different states	
+// 	if (number_ventilator_level_set.state == 1)
+// 	{
+// 		//switch_livolo_button_2.postUpdate(OFF) // have to test
+// 		//switch_livolo_button_2.postUpdate(OFF) // have to test
+// 		switch_ventilator_toggle_1.sendCommand(OFF)
+// 		switch_ventilator_toggle_2.sendCommand(OFF)
+// 	}
+	
+// 	if (number_ventilator_level_set.state == 2)
+// 	{
+// //	    switch_livolo_button_2.postUpdate(OFF) // have to test
+// 		switch_ventilator_toggle_2.sendCommand(OFF)
+// 		Thread::sleep(500)
+// 		switch_ventilator_toggle_1.sendCommand(ON)
+// 	}
+	
+// 	if (number_ventilator_level_set.state == 3)
+// 	{
+// 		switch_ventilator_toggle_1.sendCommand(OFF)
+// 		Thread::sleep(500)
+// 		switch_ventilator_toggle_2.sendCommand(ON)
+// 	}
+// end
+
+
+
+
+// rule	"ventilation_level_number_set_manual_changed"
+// when
+//     Item number_ventilator_level_set_manual changed
+// then
+// 	if (number_ventilator_level_set_manual.state == 4) // auto
+// 	{
+// 		if (switch_ventilator_level_toggle_auto.state != ON)
+// 		{
+// 			switch_ventilator_level_toggle_auto.postUpdate(ON)
+// 		}
+// 		else
+// 		{
+// 			switch_ventilator_level_toggle_auto.postUpdate(OFF)
+// 		}
+// 	}
+// 	else
+// 	{
+// 		number_ventilator_level_set.postUpdate(number_ventilator_level_set_manual.state)
+// 		if (switch_ventilator_level_toggle_auto.state == ON)
+// 		{	
+// 			switch_ventilator_level_toggle_auto.postUpdate(OFF)
+// 		}
+// 	}
+// end
+
+// # rule	"automate_ventilation"
+// # when 
+// # 	Item humid_status_badkamer_sensor changed
+// # 	or Item switch_ventilator_level_toggle_auto changed to ON
+// # then
+// # 	if (switch_ventilator_level_toggle_auto.state == ON) // if auto setting is enabled
+// # 	{
+// # 		if (humid_status_badkamer_sensor.state == "WET") // and badkamer humid state is WET (Possible states: DRY, COMFORT, WET)
+// # 		{
+// # 			if (number_ventilator_level_set.state != 3)  // and current level isn't 3 (hoog)
+// # 			{
+// # 				number_ventilator_level_set.postUpdate(3) // set level to 3
+// # 			}		
+// # 		}
+// # 		else // state is comfort OR DRY
+// # 		{
+// # 			if (number_ventilator_level_set.state != 1) // and ventilatie level is niet 1 
+// # 			{
+// # 				number_ventilator_level_set.postUpdate(1) // set level to 1
+// # 			}		
+// # 		}
+// # 	}
+// # end	 
+
+// rule	"automate_ventilation"
+// when 
+// 	Item humid_status_badkamer_sensor changed
+// 	or Item switch_ventilator_level_toggle_auto changed from OFF to ON
+// 	or Item switch_ventilator_level_toggle_auto changed from NULL to ON
+// then
+// 	if (switch_ventilator_level_toggle_auto.state == ON) // if auto setting is enabled
+// 	{
+// 		if (humid_status_badkamer_sensor.state == "WET") // and badkamer humid state is WET (Possible states: DRY, COMFORT, WET)
+// 		{
+// 			if (number_ventilator_level_set.state != 3)  // and current level isn't 3 (hoog)
+// 			{
+// 				number_ventilator_level_set.postUpdate(3) // set level to 3
+// 			}		
+// 		}
+// 		else // state is comfort OR DRY
+// 		{
+// 			if (number_ventilator_level_set.state != 1) // and ventilatie level is niet 1 
+// 			{
+// 				number_ventilator_level_set.postUpdate(1) // set level to 1
+// 			}		
+// 		}
+// 	}
+// end	 
+
+// #rule "manage group uninitialized items"
+// #when
+// #    Time cron "0 0/1 * * * ?"   // every minute
+// #then
+// #	g_uninitialized.allMembers.filter (s | s.state != NULL).forEach [item | 
+// #		logInfo("rule-test","Manage uninitialized items group - debugging: (removing item: '" + item.name + "')")
+// #		g_uninitialized.removeMember(item)
+// #	]
+// #end
+
+// ================ HARMONY HUB INIT ================
+// rule "initialize harmony hub"
+// when
+// 	Item logitech_harmony_hub_current_activity changed
+// then
+// 	logInfo("rule-test", "LOGITECH HARMONY INIT: '"+ logitech_harmony_hub_current_activity + "'")
+// 	if (logitech_harmony_hub_current_activity.state == "PowerOff")
+// 	{
+// 		logitech_harmony_hub_toggle.postUpdate(OFF)
+// 	}
+// 	else
+// 	{
+// 		logitech_harmony_hub_toggle.postUpdate(ON)
+// 	}
+// end
+
+// rule "temp_badkamer_sensor_raw_temp_adjust"
+// when
+// //   Item temp_badkamer_sensor_raw received update
+//    Item temp_badkamer_sensor_raw changed
+// then
+//   	var Number temp_adjustment = 40
+// 	postUpdate(temp_badkamer_sensor_cali, (temp_badkamer_sensor_raw.state as DecimalType) - temp_adjustment)
+// end
+
+// rule "router_temperature_split"
+// when
+//    Item router_temperature changed
+// then
+// 	var array = router_temperature.state.toString.split(" ");
+// 	postUpdate(router_temperature_50_1, array.get(0))
+// 	postUpdate(router_temperature_24, 	array.get(1))
+// 	postUpdate(router_temperature_50_2,	array.get(2))
+// 	postUpdate(router_temperature_cpu, 	array.get(3))
+// end
+
+// rule "harmony_scenes"
+// when
+// 	Item logitech_harmony_hub_current_activity changed
+// then
+// 	if (logitech_harmony_hub_current_activity.state.toString == "Listen to Spotify")
+// 	{
+// 		if (upc_horizon_box_harmony_hub.state != OFF) 			{ upc_horizon_box_harmony_hub.postUpdate(OFF) }
+// 		if (panasonic_tv_harmony_hub.state != OFF)				{ panasonic_tv_harmony_hub.postUpdate(OFF)    }
+// 		if (onkyo_receiver_harmony_hub.state != ON)				{ onkyo_receiver_harmony_hub.postUpdate(ON)   }
+	
+// 		if (logitech_harmony_hub_status.state != ON) 			{ logitech_harmony_hub_status.postUpdate(ON)  }
+// 		if (logitech_harmony_hub_toggle.state != ON) 			{ logitech_harmony_hub_toggle.postUpdate(ON)  }
+// 	}
+	
+// 	if (logitech_harmony_hub_current_activity.state.toString == "Video streamen")
+// 	{
+// 		if (upc_horizon_box_harmony_hub.state != OFF) 			{ upc_horizon_box_harmony_hub.postUpdate(OFF) }
+// 		if (panasonic_tv_harmony_hub.state != ON)				{ panasonic_tv_harmony_hub.postUpdate(ON)    }
+// 		if (onkyo_receiver_harmony_hub.state != ON)				{ onkyo_receiver_harmony_hub.postUpdate(ON)   }
+	
+// 		if (logitech_harmony_hub_status.state != ON) 			{ logitech_harmony_hub_status.postUpdate(ON)  }
+// 		if (logitech_harmony_hub_toggle.state != ON) 			{ logitech_harmony_hub_toggle.postUpdate(ON)  }
+// 	}
+
+// 	if (logitech_harmony_hub_current_activity.state.toString == "PowerOff")
+// 	{
+// 		if (upc_horizon_box_harmony_hub.state != OFF) 			{ upc_horizon_box_harmony_hub.postUpdate(OFF) }
+// 		if (panasonic_tv_harmony_hub.state != OFF)				{ panasonic_tv_harmony_hub.postUpdate(OFF)    }
+// 		if (onkyo_receiver_harmony_hub.state != OFF)			{ onkyo_receiver_harmony_hub.postUpdate(OFF)  }
+
+// 		if (logitech_harmony_hub_status.state != OFF) 			{ logitech_harmony_hub_status.postUpdate(OFF) }  
+// 		if (logitech_harmony_hub_toggle.state != OFF) 			{ logitech_harmony_hub_toggle.postUpdate(OFF) }
+// 	}	
+	
+// 	if (logitech_harmony_hub_current_activity.state.toString == "Watch TV")
+// 	{
+// 		if (upc_horizon_box_harmony_hub.state != ON) 			{ upc_horizon_box_harmony_hub.postUpdate(ON)  }
+// 		if (panasonic_tv_harmony_hub.state != ON)				{ panasonic_tv_harmony_hub.postUpdate(ON)     }
+// 		if (onkyo_receiver_harmony_hub.state != ON)				{ onkyo_receiver_harmony_hub.postUpdate(ON)   }
+	
+// 		if (logitech_harmony_hub_status.state != ON) 			{ logitech_harmony_hub_status.postUpdate(ON)  }
+// 		if (logitech_harmony_hub_toggle.state != ON) 			{ logitech_harmony_hub_toggle.postUpdate(ON)  }
+// 	}	
+// end
+
+
+// rule "chromecast_woonkamer_py_status_changed"
+// when
+// 	Item chromecast_woonkamer_py_status changed
+// then
+// 	if (rule_chromecast_woonkamer_py_status_changed_is_running.state != ON && chromecast_woonkamer_py_status.state.toString != "BUFFERING")
+// 	{
+// 		postUpdate(rule_chromecast_woonkamer_py_status_changed_is_running, ON)
+// 		var boolean chromecast_is_active = (chromecast_woonkamer_py_status.state.toString == "PLAYING" || chromecast_woonkamer_py_status.state.toString == "PAUSED")// ||  chromecast_woonkamer_py_status.state.toString == "BUFFERING")
+	
+// 		if 	(logitech_harmony_hub_current_activity.state.toString != "Listen to Spotify" && 
+// 			(chromecast_woonkamer_py_status.state.toString == "PLAYING" || chromecast_woonkamer_py_status.state.toString == "PAUSED") &&
+// 			 chromecast_woonkamer_py_type.state.toString == "3")
+// 		{
+// 			sendCommand(logitech_harmony_hub_current_activity, "Listen to Spotify")
+// 		}
+// 		else if (logitech_harmony_hub_current_activity.state.toString != "Video streamen" && 
+// 			(chromecast_woonkamer_py_status.state.toString == "PLAYING" || chromecast_woonkamer_py_status.state.toString == "PAUSED") &&
+// 			 chromecast_woonkamer_py_type.state.toString != "3")
+// 		{
+// 			sendCommand(logitech_harmony_hub_current_activity, "Video streamen")
+// 		}
+
+// 		if (logitech_harmony_hub_current_activity.state.toString == "Listen to Spotify" || logitech_harmony_hub_current_activity.state.toString == "Video streamen")
+// 		{
+// 			if (chromecast_is_active == false)
+// 			{
+// 				sendCommand(rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff, ON)
+// 			}
+// 			else
+// 			{
+// 				if (rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff.state == ON)
+// 				{
+// 					postUpdate(rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff, OFF)
+// 				}
+// 			}
+// 		}	
+// 		postUpdate(rule_chromecast_woonkamer_py_status_changed_is_running, OFF)
+// 	}
+// end
+
+// rule "turn off harmony devices"
+// when 
+// 	Item rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff received command OFF
+// then
+// 		sendCommand(logitech_harmony_hub_current_activity, "PowerOff")
+// end
+
+// # set always to auto on startup
+// # rule 	"ventilation_init"
+// # when
+// # 	System started
+// # then
+// # 	switch_ventilator_level_toggle_auto.sendCommand(ON)
+// # end
+
+
+// # // ================ CHROMECAST PYTHON BINDING (MONITOR-CSS) ================
+// # rule "init_chromecast_monitor_css"
+// # when
+// # 	System started
+// # then
+// # 	sendCommand(chromecast_woonkamer_py_update, ON)  			// one time update & the expire binding makes sure it's turned off after 1 second.
+// # end
+
+// rule "system started"
+// when
+//     System started
+// then
+//     present.sendCommand(OFF) // assume no one is home on startup
+// end
+
+// rule "g_present updated, at least one sensor changed state"
+// when
+//     Item g_present received update
+// then
+//     // someone came home
+//     if (g_present.state == ON && present.state != ON) 
+//     {
+//         present_timer.postUpdate(OFF) // cancel the timer if necessary
+//         present.sendCommand(ON)
+//     }
+
+//     // no one is home
+//     else if(g_present.state == OFF && present.state != OFF)
+//     {
+//         present_timer.sendCommand(ON) // start the timer
+//     }
+// end
+
+// rule "present_timer expired"
+// when
+//     Item present_timer received command OFF
+// then
+//     present.sendCommand(OFF)
+// end
+
+// // ================ UNITIALIZED ITEMS ================
+// rule "group uninitialized items"
+// when
+// 	System started
+// then
+// 	// remove all items
+// 	g_uninitialized.allMembers.forEach [item | 
+// 		//	logInfo("rule-test","Init initialize items: debugging: (removing item: '" + item.name + "')")
+// 			g_uninitialized.removeMember(item)
+// 	]
+
+// 	// add all items after 120 seconds // should be done with the expire binding.
+// 	createTimer(now.plusSeconds(120)) [|
+// 		devices.allMembers.filter (s | s.state == NULL).forEach [item | 
+// 		//	logInfo("rule-test","Init debugging: (adding item: '" + item.name + "')")
+// 			g_uninitialized.addMember(item)
+// 		]
+// 	]
+// end
+
+// // ================ COMPUTERS PC ON/OFF INIT ================
+// rule "computers_pc_on_off_init"
+// when 
+// 	System started
+// then
+// 	mediacenter_pc_turn_on.postUpdate(OFF)
+// 	mediacenter_pc_turn_off.postUpdate(OFF)
+	
+// 	kantoor_pc_turn_on.postUpdate(OFF)					
+// 	kantoor_pc_turn_off.postUpdate(OFF)
+	
+// 	spacecave_pc_turn_on.postUpdate(OFF)
+// 	spacecave_pc_turn_off.postUpdate(OFF)			
+// end
+
+
+// //remote 1 button A pressed
+// rule "remote_1_A_updated" 
+// when
+// 	Item remote_1_A received update
+// then
+// 	logInfo("rule-test", "ITEM remote_1_A received update")	
+// 	sendCommand(light_keuken_dimmer_plafond, ON)		
+// end	
+
+// rule "remote_1_B_updated" 
+// when
+// 	Item remote_1_B received update
+// then
+// 	logInfo("rule-test", "ITEM remote_1_B received update")	
+// 	sendCommand(light_keuken_dimmer_plafond, OFF)		
+// end	
+
+// rule "remote_1_C_updated" 
+// when
+// 	Item remote_1_C received update
+// then
+// 	logInfo("rule-test", "ITEM remote_1_C received update: ")	
+// 	//sendCommand(scene_all_off_switch, OFF)		
+// end	
+
+// rule "remote_1_D_updated" 
+// when
+// 	Item remote_1_D received update
+// then
+// 	logInfo("rule-test", "ITEM remote_1_D received update")	
+// 	//sendCommand(light_keuken_dimmer_plafond, ON)		
+// end	
+
+
+// //remote 3 button A pressed
+// rule "remote_3_A_updated" 
+// when
+// 	Item remote_3_A received update
+// then
+// 	logInfo("rule-test", "ITEM remote_3_A received update")	
+// 	//sendCommand(light_keuken_dimmer_plafond, ON)		
+// end	
+
+// rule "remote_3_B_updated" 
+// when
+// 	Item remote_3_B received update
+// then
+// 	logInfo("rule-test", "ITEM remote_3_B received update")	
+// 	//sendCommand(light_keuken_dimmer_plafond, ON)		
+// end	
+
+// rule "remote_3_C_updated" 
+// when
+// 	Item remote_3_C received update
+// then
+// 	logInfo("rule-test", "ITEM remote_3_C received update: ")	
+// 	sendCommand(scene_all_off_switch, OFF)		
+// end	
+
+// rule "remote_3_D_updated" 
+// when
+// 	Item remote_3_D received update
+// then
+// 	logInfo("rule-test", "ITEM remote_3_D received update")	
+// 	//sendCommand(light_keuken_dimmer_plafond, ON)		
+// end	
+
+// // remote 5 button A pressed
+// rule "remote_5_A_updated" 
+// when
+// 	Item remote_5_A received update
+// then
+// 	logInfo("rule-test", "ITEM Remote_5_A received update")	
+// 		sendCommand(light_keuken_dimmer_plafond, ON)		
+// end	
+
+
+// // remote 5 button B pressed
+// rule "remote_5_B_updated" 
+// when
+// 	Item remote_5_B received update	
+// then
+// 	logInfo("rule-test", "ITEM Remote_5_B received update")	
+// 	sendCommand(light_keuken_dimmer_plafond, OFF)		
+// end	
+
+
+
+// // ================ GROENE TL ================
+// rule "Sonoff maintenance switch_groene_tl_init"
+// when
+//     Item switch_groene_tl_toggle_startup_state changed from NULL 
+// then 
+// //	logInfo("rule-test", "Sonoff startup init for device: '"+ switch_groene_tl_toggle.name + "' startup state: '" + switch_groene_tl_toggle_startup_state.state + "'")
+// 	switch_groene_tl_toggle.postUpdate(switch_groene_tl_toggle_startup_state.state)
+// end
+
+// // ================ LED STRIP TV ================
+// rule "Sonoff maintenance switch_led_strip_tv_init"
+// when
+//     Item switch_led_strip_tv_toggle_startup_state changed from NULL 
+// then 
+// 	logInfo("rule-test", "Sonoff startup init for device: '"+ switch_led_strip_tv_toggle.name + "' startup state: '" + switch_led_strip_tv_toggle_startup_state.state + "'")
+// 	switch_led_strip_tv_toggle.postUpdate(switch_led_strip_tv_toggle_startup_state.state)
+// end
+
+// // ================ KANTOOR PC MONITORS ================
+// rule "Sonoff maintenance switch_kantoor_pc_monitors_init"
+// when
+//     Item switch_kantoor_pc_monitors_toggle_startup_state changed from NULL 
+// then 
+// //	logInfo("rule-test", "Sonoff startup init for device: '"+ switch_kantoor_pc_monitors_toggle.name + "' startup state: '" + switch_kantoor_pc_monitors_toggle_startup_state.state + "'")
+// 	switch_kantoor_pc_monitors_toggle.postUpdate(switch_kantoor_pc_monitors_toggle_startup_state.state)
+// end
+
+// // ================ LICHT WASHOEK ================
+// rule "Sonoff maintenance switch_licht_wasmachine_init"
+// when
+//     Item switch_licht_wasmachine_toggle_startup_state changed from NULL 
+// then 
+// //	logInfo("rule-test", "Sonoff startup init for device: '"+ switch_licht_wasmachine_toggle.name + "' startup state: '" + switch_licht_wasmachine_toggle_startup_state.state + "'")
+// 	switch_licht_wasmachine_toggle.postUpdate(switch_licht_wasmachine_toggle_startup_state.state)
+// end
+
+// // ================ VENTILATIE 1 ================
+// rule "Sonoff maintenance switch_ventilator_1_init"
+// when
+//     Item switch_ventilator_toggle_1_startup_state changed from NULL 
+// then 
+// //	logInfo("rule-test", "Sonoff startup init for device: '"+ switch_ventilator_toggle_1.name + "' startup state: '" + switch_ventilator_toggle_1_startup_state.state + "'")
+// 	switch_ventilator_toggle_1.postUpdate(switch_ventilator_toggle_1_startup_state.state)
+// end
+
+// // ================ VENTILATIE 2 ================
+// rule "Sonoff maintenance switch_ventilator_2_init"
+// when
+//     Item switch_ventilator_toggle_2_startup_state changed from NULL 
+// then 
+// //	logInfo("rule-test", "Sonoff startup init for device: '"+ switch_ventilator_toggle_2.name + "' startup state: '" + switch_ventilator_toggle_2_startup_state.state + "'")
+// 	switch_ventilator_toggle_2.postUpdate(switch_ventilator_toggle_2_startup_state.state)
+// end
+
+// // ================ MONITOR VERSTERKER SPACECAVE ================
+// rule "Sonoff maintenance switch_monitor_versterker_init"
+// when
+//     Item switch_monitor_versterker_toggle_startup_state changed from NULL 
+// then 
+// //	logInfo("rule-test", "Sonoff startup init for device: '"+ switch_monitor_versterker_toggle.name + "' startup state: '" + switch_monitor_versterker_toggle_startup_state.state + "'")
+// 	switch_monitor_versterker_toggle.postUpdate(switch_monitor_versterker_toggle_startup_state.state)
+// end
+
+// // ================ SAMSUNG SPEAKER ================
+// rule "Sonoff maintenance switch_samsung_speaker_init"
+// when
+//     Item switch_samsung_speaker_toggle_startup_state changed from NULL 
+// then 
+// //	logInfo("rule-test", "Sonoff startup init for device: '"+ switch_samsung_speaker_toggle.name + "' startup state: '" + switch_samsung_speaker_toggle_startup_state.state + "'")
+// 	switch_samsung_speaker_toggle.postUpdate(switch_samsung_speaker_toggle_startup_state.state)
+// end
+
+
+// // ================ SONOFF STARTUP INIT ================
+// rule "Sonoff_maintenance_update_status_on_startup"
+// when
+//     System started 
+// then 
+//    val sonoff_device_ids = newArrayList(
+// 	    "sonoff-green-tl",
+// 	    "sonoff-switch-led-strip-tv",
+// 	    "sonoff-monitors-beast",
+// 	    "sonoff-licht-washoek",
+// 	    "sonoff-meter-ventilatie",
+// 		"sonoff-meter-koelkast",
+// 		"sonoff-meter-audiovideo",
+// 	    "sonoff-ventilatie",
+// 	    "sonoff-versterker-monitor",
+// 	    "switch_samsung_speaker"
+// 	)
+   
+//     for (String device_id : sonoff_device_ids) 
+//     {
+//  		logInfo("rule-test", "Sonoff INIT MQTT for Sonoff device: " + device_id)
+//     	publish("mosquitto", "cmnd/" + device_id + "/status", "2")
+//     	publish("mosquitto", "cmnd/" + device_id + "/status", "11")
+//     }
+// end
+
+
+// # rule "day"
+// # when
+// #         Channel 'astro:sun:home:rise#event' triggered START
+// # then
+// #         night.sendCommand(OFF)
+// #         day.sendCommand(ON)
+// # end
+
+
+
+// # rule "night"
+// # when
+// #         Channel 'astro:sun:home:set#event' triggered END
+// # then
+// #         day.sendCommand(OFF)
+// #         night.sendCommand(ON)
+// # end
+
+// // 
+// rule "Initialize day or night switch on system startup"
+// when
+//         System started
+// then
+//         val sunrise = new DateTime ((sunrise_time.state as DateTimeType).calendar.timeInMillis)
+//         val sunset = new DateTime ((sunset_time.state as DateTimeType).calendar.timeInMillis)
+
+// 	if(now.isAfter(sunrise) && now.isBefore(sunset))
+// 	{
+// 		day.sendCommand(ON)
+// 		night.sendCommand(OFF)
+// 	}
+// 	else if(now.isAfter(sunset) || now.isBefore(sunrise))
+// 	{
+// 		day.sendCommand(OFF)
+// 		night.sendCommand(ON)
+// 	}
+// end
+
+
+// manual config
+
+//rule	"ventilation_level_1_manual_livolo_input"
+//when
+//    Item switch_livolo_button_1 received command OFF
+//	or Item switch_livolo_button_2 received command OFF
+//then
+//	switch_ventilator_toggle_1.sendCommand(OFF)
+//	switch_ventilator_toggle_2.sendCommand(OFF)
+//	// beide knoppen ook uit
+//end
+//
+//rule	"ventilation_level_2_manual_livolo_input"
+//when
+//	Item switch_livolo_button_1 changed from OFF to ON
+//then
+//    switch_livolo_button_2.postUpdate(OFF)
+//	switch_ventilator_toggle_2.sendCommand(OFF)
+//	Thread::sleep(500)
+//	switch_ventilator_toggle_1.sendCommand(ON)
+//end
+//
+//rule	"ventilation_level_3_manual_livolo_input"
+//when
+//	Item switch_livolo_button_2 changed from OFF to ON
+//then
+//    switch_livolo_button_1.postUpdate(OFF)
+//	switch_ventilator_toggle_1.sendCommand(OFF)
+//	Thread::sleep(500)
+//	switch_ventilator_toggle_2.sendCommand(ON)
+//end
+
+//rule	"ventilation_level_init"
+//when
+//	System started
+//then
+//	switch_livolo_button_1.postUpdate(OFF)
+//	switch_ventilator_toggle_1.sendCommand(OFF)
+//	Thread::sleep(500)
+//	switch_ventilator_toggle_2.sendCommand(ON)
+//end
+
+
+

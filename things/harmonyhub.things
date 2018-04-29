@@ -1,0 +1,19 @@
+// =============== HARMONY HUB BINDING ====================
+//Bridge harmonyhub:hub:Woonkamer [ name="Woonkamer"] {
+// Bridge harmonyhub:hub:Woonkamer "Logitech Harmony Hub" 	@ "Begane grond" 	[host="192.168.1.80", discoveryTimeout=15, heartBeatInterval=30] {
+// 	Things:
+// 		device tv			[id=17826678]
+// 		device versterker	[id=17826621]
+// 		device upc_horizon	[id=17826659]
+// 		device mediacenter	[id=19360188]
+// 		device chromecast	[id=44591680]
+// }
+
+Bridge harmonyhub:hub:Woonkamer "Logitech Harmony Hub" 	@ "Begane grond" 	[host="192.168.1.80", discoveryTimeout=15, heartBeatInterval=30] {
+	Things:
+		device 17826678			"tv"			 	@ "Begane grond"	[id=17826678]
+		device 17826621			"versterker"		@ "Begane grond"	[id=17826621]
+		device 17826659			"upc_horizon"	 	@ "Begane grond"	[id=17826659]
+		device 19360188			"mediacenter"	 	@ "Begane grond"	[id=19360188]
+		device 44591680			"chromecast"	 	@ "Begane grond"	[id=44591680]
+}

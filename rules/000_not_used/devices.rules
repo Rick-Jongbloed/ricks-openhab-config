@@ -1,0 +1,12 @@
+// 
+// rule rule_upc_horizon_box_status
+// when
+//	Item spacecave_pc_status_nh changed
+//	or Item upc_horizon_box_harmony_hub changed
+//then
+//	if (spacecave_pc_status_nh == ON)
+//		{	
+//			upc_horizon_box_harmony_hub.postUpdate(OFF)
+//		}
+//end
+

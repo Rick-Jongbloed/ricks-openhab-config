@@ -1,0 +1,109 @@
+//// possible use on startup init proc
+
+rule "harmony_scenes" 		//moet kodi nog toevoegen?
+when
+	Item logitech_harmony_hub_current_activity changed
+then
+	//logInfo("rule-test","Rule: harmony_scenes-Harmony changed to: " + logitech_harmony_hub_current_activity.state.toString)
+	// 
+	if (logitech_harmony_hub_current_activity.state.toString == "Listen to Spotify")
+	{
+		if (upc_horizon_box_harmony_hub.state != OFF) 			{ upc_horizon_box_harmony_hub.postUpdate(OFF) }
+		if (panasonic_tv_harmony_hub.state != OFF)				{ panasonic_tv_harmony_hub.postUpdate(OFF)    }
+		if (onkyo_receiver_harmony_hub.state != ON)				{ onkyo_receiver_harmony_hub.postUpdate(ON)   }
+	
+		if (logitech_harmony_hub_status.state != ON) 			{ logitech_harmony_hub_status.postUpdate(ON)  }
+		if (logitech_harmony_hub_toggle.state != ON) 			{ logitech_harmony_hub_toggle.postUpdate(ON)  }
+	}
+	
+	if (logitech_harmony_hub_current_activity.state.toString == "Video streamen")
+	{
+		if (upc_horizon_box_harmony_hub.state != OFF) 			{ upc_horizon_box_harmony_hub.postUpdate(OFF) }
+		if (panasonic_tv_harmony_hub.state != ON)				{ panasonic_tv_harmony_hub.postUpdate(ON)    }
+		if (onkyo_receiver_harmony_hub.state != ON)				{ onkyo_receiver_harmony_hub.postUpdate(ON)   }
+	
+		if (logitech_harmony_hub_status.state != ON) 			{ logitech_harmony_hub_status.postUpdate(ON)  }
+		if (logitech_harmony_hub_toggle.state != ON) 			{ logitech_harmony_hub_toggle.postUpdate(ON)  }
+	}
+
+	if (logitech_harmony_hub_current_activity.state.toString == "PowerOff")
+	{
+		if (upc_horizon_box_harmony_hub.state != OFF) 			{ upc_horizon_box_harmony_hub.postUpdate(OFF) }
+		if (panasonic_tv_harmony_hub.state != OFF)				{ panasonic_tv_harmony_hub.postUpdate(OFF)    }
+		if (onkyo_receiver_harmony_hub.state != OFF)			{ onkyo_receiver_harmony_hub.postUpdate(OFF)  }
+
+		if (logitech_harmony_hub_status.state != OFF) 			{ logitech_harmony_hub_status.postUpdate(OFF) }  
+		if (logitech_harmony_hub_toggle.state != OFF) 			{ logitech_harmony_hub_toggle.postUpdate(OFF) }
+	}	
+	
+	if (logitech_harmony_hub_current_activity.state.toString == "Watch TV")
+	{
+		if (upc_horizon_box_harmony_hub.state != ON) 			{ upc_horizon_box_harmony_hub.postUpdate(ON)  }
+		if (panasonic_tv_harmony_hub.state != ON)				{ panasonic_tv_harmony_hub.postUpdate(ON)     }
+		if (onkyo_receiver_harmony_hub.state != ON)				{ onkyo_receiver_harmony_hub.postUpdate(ON)   }
+	
+		if (logitech_harmony_hub_status.state != ON) 			{ logitech_harmony_hub_status.postUpdate(ON)  }
+		if (logitech_harmony_hub_toggle.state != ON) 			{ logitech_harmony_hub_toggle.postUpdate(ON)  }
+	}	
+end
+
+rule "chromecast_woonkamer_py_status_changed"
+when
+	Item chromecast_woonkamer_py_status changed
+then
+	//logInfo("rule-test","concurrency_protection: " + rule_chromecast_woonkamer_py_status_changed_is_running.state.toString)
+	
+
+	if (rule_chromecast_woonkamer_py_status_changed_is_running.state != ON && chromecast_woonkamer_py_status.state.toString != "BUFFERING")
+	{
+		postUpdate(rule_chromecast_woonkamer_py_status_changed_is_running, ON)
+		
+		var boolean chromecast_is_active = (chromecast_woonkamer_py_status.state.toString == "PLAYING" || chromecast_woonkamer_py_status.state.toString == "PAUSED")// ||  chromecast_woonkamer_py_status.state.toString == "BUFFERING")
+		
+		//logInfo("rule-test","1-Chromecast changed to: '" + chromecast_woonkamer_py_status.state.toString + "' CC media type is: '" + chromecast_woonkamer_py_type.state.toString + "'") 
+		//logInfo("rule-test","2-Chromecast is active: '" + chromecast_is_active + "' Logitech activity is: '" +  logitech_harmony_hub_current_activity.state.toString + "'") 
+	
+		if 	(logitech_harmony_hub_current_activity.state.toString != "Listen to Spotify" && 
+			(chromecast_woonkamer_py_status.state.toString == "PLAYING" || chromecast_woonkamer_py_status.state.toString == "PAUSED") &&
+			 chromecast_woonkamer_py_type.state.toString == "3")
+		{
+		//	logInfo("rule-test","6.1-turning on activity listen to spofity")
+			sendCommand(logitech_harmony_hub_current_activity, "Listen to Spotify")
+		}
+		else if (logitech_harmony_hub_current_activity.state.toString != "Video streamen" && 
+			(chromecast_woonkamer_py_status.state.toString == "PLAYING" || chromecast_woonkamer_py_status.state.toString == "PAUSED") &&
+			 chromecast_woonkamer_py_type.state.toString != "3")
+		{
+		//	logInfo("rule-test","6.2-No music media type - turning on activity Video streamen")
+			sendCommand(logitech_harmony_hub_current_activity, "Video streamen")
+		}
+		
+		// turn off stuff  (// later wellicht een extra manual rule bijmaken, nu niet nodig)
+		if (logitech_harmony_hub_current_activity.state.toString == "Listen to Spotify" || logitech_harmony_hub_current_activity.state.toString == "Video streamen")
+		{
+		//	logInfo("rule-test","6.2-Chromecast PowerOff timer active: " + rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff.state.toString )
+			if (chromecast_is_active == false)
+			{
+		//		logInfo("rule-test","6.2-Chromecast is not active, turning ON activity PowerOff (timer started.. 10 sec)")
+				sendCommand(rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff, ON)
+			}
+			else
+			{
+				if (rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff.state == ON)
+				{
+		//			logInfo("rule-test","6.2-chromecast is active, cancelling timer...")
+					postUpdate(rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff, OFF)
+				}
+			}
+		}	
+		postUpdate(rule_chromecast_woonkamer_py_status_changed_is_running, OFF)
+	}
+end
+
+rule "turn off harmony devices"
+when 
+	Item rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff received command OFF
+then
+		//logInfo("rule-test","Timer passed, turning off")
+		sendCommand(logitech_harmony_hub_current_activity, "PowerOff")
+end

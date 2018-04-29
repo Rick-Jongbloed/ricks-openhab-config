@@ -1,0 +1,18 @@
+// settings
+Switch	    deurbel_setting_toggle_notification_sound_bel						"Bel gang"    			    <switch>				(settings_deurbel_action_selection, g_restore)
+Switch		deurbel_setting_toggle_notification_light_eettafel					"Licht eettafel"            <switch>				(settings_deurbel_action_selection, g_restore)
+Switch		deurbel_setting_toggle_notification_light_mihome_gw					"Licht mihome gw"    	    <switch>				(settings_deurbel_action_selection, g_restore)
+Switch		deurbel_setting_toggle_notification_sound_mihome_gw					"MiHome alarm"    		    <switch>				(settings_deurbel_action_selection, g_restore)
+Switch		deurbel_setting_toggle_notification_sound_alexa						"Alexa alarm"    		    <switch>				(settings_deurbel_action_selection, g_restore)
+Switch		deurbel_setting_toggle_notification_message_pushover				"Pushover message"    	    <switch>				(settings_deurbel_action_selection, g_restore)
+
+
+// action switches (moeten wellicht naar de device secties toe, nu nog even bij elkaar)
+Switch	    toggle_notification_sound_bel						                "Bel gang"    			    <switch>				(g_testing)
+Switch      toggle_notification_light_eettafel                                  "Alarm licht eettafel"      <alarm>                 (g_testing)                                                         //{ expire="5s,   command=OFF } // timer in script
+Switch		toggle_notification_light_mihome_gw					                "Alarm licht mihome gw"     <switch>				(g_testing)
+Switch		toggle_notification_sound_mihome_gw					                "Alarm geluid mihome gw"    <switch>				(g_testing)
+Switch      toggle_notification_sound_alexa                                     "Alexa geluid alarm"        <alarm>                 (g_testing)                                                         { expire="30s, command=OFF" }
+Switch		toggle_notification_message_pushover				                "Pushover notificatie123"  	<switch>				(g_testing)
+
+

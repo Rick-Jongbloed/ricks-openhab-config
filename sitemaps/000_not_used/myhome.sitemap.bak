@@ -1,0 +1,48 @@
+sitemap myhome label="Ons huis"
+{
+	Frame {
+		Group item=gGF label="Begane Grond" icon="groundfloor" {
+			Group item=GF_Kitchen {
+				Slider item=Light_Keuken_Dimmer_Plafond switchSupport				
+			}			
+			Group item=GF_Living {
+				Slider item=Light_Woonkamer_Dimmer_Boekenkast switchSupport				
+				Slider item=Light_Woonkamer_Dimmer_Vitrinekast switchSupport				
+				Switch item=Light_Woonkamer_LedstripTV				
+				Switch item=Light_Woonkamer_GroeneTL				
+			}			
+			Group item=GF_Corridor			
+			Group item=GF_Bathroom			
+		}		
+		Group item=gFF label="Eerste verdieping" icon="firstfloor" {
+			Group item=FF_Office label="Kantoor" icon="office"			
+			Group item=FF_Child label="Sunny" icon="child2" {
+				Text item=Door_Sunny_Sensor				
+			}			
+			Group item=FF_Bed label="Slaapkamer" icon="bedroom"			
+			Group item=FF_Corridor label="Gang" icon="corridor"			
+			Group item=FF_Bathroom label="Toilet"			
+			Group item=FF_Shower label="Badkamer" icon="bath"			
+		}		
+		Group item=gSF label="Zolder" icon="attic" {
+			Group item=SF_Spacecave label="Spacecave" icon="smiley"			
+			Group item=SF_Roomtink label="Tinkerbell" icon="wardrobe"			
+			Group item=SF_Corridor label="Gang" icon="corridor"			
+		}		
+		Group item=gOutdoor label="Buiten" icon="garden" {
+			Group item=Outdoor_Driveway label="Voortuin" icon="terrace"			
+			Group item=Outdoor_Backyard label="Achtertuin" icon="garden"			
+			Group item=Outdoor_Shed label="Schuur" icon="house"			
+		}		
+	}	
+	Frame {
+		Slider item=Light_Woonkamer_Dimmer_Boekenkast switchSupport		
+		Slider item=Light_Woonkamer_Dimmer_Vitrinekast switchSupport		
+		Switch item=Light_Woonkamer_LedstripTV		
+		Switch item=Light_Woonkamer_GroeneTL		
+		Slider item=Light_Keuken_Dimmer_Plafond switchSupport		
+	}	
+	Frame {
+		Text item=Door_Sunny_Sensor		
+	}	
+}

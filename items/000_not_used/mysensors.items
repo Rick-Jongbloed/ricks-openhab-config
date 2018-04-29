@@ -1,0 +1,16 @@
+// https://forum.mysensors.org/topic/3005/switching-from-v1-5-mqtt-gateway-to-esp8266-mqtt-client-gateway/6
+// http://www.makeuseof.com/tag/openhab-beginners-guide-part-2-zwave-mqtt-rules-charting/
+// http://www.makeuseof.com/tag/diy-smart-home-sensors-arduino-mysensors-openhab/
+
+// incoming to Openhab: {mqtt="<[mosq1:mygateway1-out/22/1/1/0/17:state:default]"}
+// outgoing from Openhab {mqtt=">[mosq1:mygateway1-in/22/1/1/0/24:state:*:default]"}
+//Contact		sensor_door_voordeur		"Contact Deursensor Voordeur [%s]"		(gf_corridor,sensors)		{mqtt="<[mosquitto:mygateway1-out/2/3/1/0/16:state:default]"}
+//Number		num_door_voordeur		"Number Deursensor Voordeur [%s]"		(gf_corridor,sensors)		{mqtt="<[mosquitto:mygateway1-out/2/3/1/0/16:state:default]"}
+//
+//Contact		sensor_door_achterdeur		"Contact Deursensor achterdeur [%s]"		(gf_living,sensors)		{mqtt="<[mosquitto:mygateway1-out/1/3/1/0/16:state:default]"}
+//Number		num_door_achterdeur		"Number Deursensor achterdeur [%s]"		(gf_living,sensors)		{mqtt="<[mosquitto:mygateway1-out/1/3/1/0/16:state:default]"}
+
+// naar ventilatie
+//Switch		relay_ventilatie_1		"Ventilatie relais 1 [%s]"			(sf_corridor)			{mqtt=">[mosquitto:mygateway1-in/3/1/0/0/2:command:ON:1],>[mosquitto:mygateway1-in/3/1/0/0/2:command:OFF:0]"}
+//Switch		relay_ventilatie_2		"Ventilatie relais 2 [%s]"			(sf_corridor)			{mqtt=">[mosquitto:mygateway1-in/3/2/0/0/2:command:ON:1],>[mosquitto:mygateway1-in/3/2/0/0/2:command:OFF:0]"}
+// mosquitto_pub -t 'mygateway1-in/3/2/2/0/2' -m 1

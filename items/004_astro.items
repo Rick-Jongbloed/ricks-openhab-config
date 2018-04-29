@@ -1,0 +1,9 @@
+Switch  day     (g_outdoor,g_restore)
+Switch  night   (g_outdoor,g_restore)
+
+DateTime        sunrise_time    "Sunrise time [%1$tH:%1$tM]"    <sun>   (g_outdoor,g_restore)           { channel="astro:sun:local:rise#start" }
+DateTime        sunset_time     "Sunset time [%1$tH:%1$tM]"     <sun>   (g_outdoor,g_restore)           { channel="astro:sun:local:set#end" }
+
+DateTime        date    "Date and Time: [%1$tA, %1$td.%1$tm.%1$tY %1$tT"        { ntp="Europe/Amsterdam:nl_NL" }
+
+
