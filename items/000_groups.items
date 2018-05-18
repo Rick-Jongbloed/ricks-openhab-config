@@ -96,12 +96,15 @@ Group						g_mihome_doorsensor_voordeur	    "Device: Xiaomi MiHome doorsensor: v
 Group						g_mihome_doorsensor_achterdeur	    "Device: Xiaomi MiHome doorsensor: Achterdeur"				<frontdoor>             (devices)
 Group						g_mihome_doorsensor_kantoor 	    "Device: Xiaomi MiHome doorsensor: Kantoor"				    <door>                  (devices)
 Group						g_mihome_doorsensor_spacecave 	    "Device: Xiaomi MiHome doorsensor: Spacecave"			    <door>                  (devices)
+Group						g_mihome_doorsensor_spacecave_raam_links 	    "Device: Xiaomi MiHome doorsensor: Spacecave raam links"			    <window>                  (devices)  
+Group						g_mihome_doorsensor_spacecave_raam_rechts 	    "Device: Xiaomi MiHome doorsensor: Spacecave raam rechts"			    <window>                  (devices)
 Group						g_mihome_doorsensor_toilet_bg 	    "Device: Xiaomi MiHome doorsensor: Toilet bg"			    <door>                  (devices)
 Group						g_mihome_doorsensor_toilet_1v 	    "Device: Xiaomi MiHome doorsensor: Toilet 1v"			    <door>                  (devices)
 Group						g_mihome_doorsensor_badkamer	    "Device: Xiaomi MiHome doorsensor: Badkamer"			    <door>                  (devices)
 Group						g_mihome_doorsensor_sunny   	    "Device: Xiaomi MiHome doorsensor: Sunny"   			    <door>                  (devices)
 
-Group                       g_mihome_motionsensor_kantoor           "Device: Xiaomi MiHome motionsensor: kantoor"               <motion>                (devices)
+Group                       g_mihome_motionsensor_kantoor_monitor           "Device: Xiaomi MiHome motionsensor: kantoor (monitor)"               <motion>                (devices)
+Group                       g_mihome_motionsensor_kantoor_plafond           "Device: Xiaomi MiHome motionsensor: kantoor (plafond)"               <motion>                (devices)
 Group                       g_mihome_motionsensor_wasmachine        "Device: Xiaomi MiHome motionsensor: wasmachine"            <motion>                (devices)
 Group                       g_mihome_motionsensor_keuken            "Device: Xiaomi MiHome motionsensor: keuken"                <motion>                (devices)
 Group                       g_mihome_motionsensor_gang_voordeur     "Device: Xiaomi MiHome motionsensor: Gang-Voordeur"         <motion>                (devices)
@@ -169,3 +172,5 @@ Group                       g_datetime                          "NTP: Date-time 
 Group                       g_weather                           "Weather: external source"                                      (devices)
 
 Group                       g_testing                           "Test/debug groep"                                              (All)
+
+Group                       g_idealarm                          "Idealarm"          

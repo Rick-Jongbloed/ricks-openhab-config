@@ -1,1 +1,2 @@
 Switch		test_switch						"Test switch"			(g_testing)
+Switch		test_switch_deurbel				"Test switch deurbel"			(g_testing)

@@ -1,0 +1,53 @@
+//Group G_Persist // Persist on change and system start up
+Group   g_alarm                       (g_restore)             //persistence
+Group   g_alarm_arming_mode           (g_alarm)
+Group   g_alarm_status                (g_alarm)
+Group   g_virtual_device              (g_alarm)
+Group   g_timer
+
+// different zones (first use 3 zonder, 1 for every floor)
+
+// zone: outdoor/house
+Number  Z1_Arming_Mode                      "Z1 Arming Mode: [MAP(en_armingmode.map):%s]"       <alarm>         (g_alarm_arming_mode)
+Number  Z1_Status                           "Z1 Status: [MAP(en_zonestatus.map):%s]"            <alarm>         (g_virtual_device)
+
+Switch  Toggle_Z1_Armed_Away                "Toggle Z1 Armed Away"                              <switch>        (g_virtual_device)          {expire="1s,command=OFF"}
+Switch  Toggle_Z1_Armed_Home                "Toggle Z1 Armed Home"                              <switch>        (g_virtual_device)          {expire="1s,command=OFF"}
+
+Number  Z1_Open_Sections                    "Z1 open sections [%.0f]"                           <door>          (g_virtual_device)
+
+Switch  Z1_Entry_Timer                      "Z1 entry timer [%s]"                               <time>          (g_timer)                   {expire="15s,command=OFF"}
+Switch  Z1_Exit_Timer                       "Z1 exit timer [%s]"                                <time>          (g_timer)                   {expire="2m,command=OFF"}
+Switch  Z1_Nag_Timer                        "Z1 nag timer [%s]"                                 <time>          (g_timer)                   {expire="4m,command=OFF"}
+Switch  Z1_Alert_Max_Timer                  "Z1 alert maximum time [%s]"                        <time>          (g_timer)                   {expire="20s,command=OFF"}
+
+Switch	toggle_notification_message_pushover_alarm			                "Pushover notificatie voor Alarm"  	            <switch>				(g_testing)
+
+
+// // zone: first floor
+// Number  Z2_Arming_Mode                      "Z2 Arming Mode: [MAP(en_armingmode.map):%s]"       <alarm>         (g_alarm_arming_mode)
+// Number  Z2_Status                           "Z2 Status: [MAP(en_zonestatus.map):%s]"            <alarm>         (g_virtual_device)
+
+// Switch  Toggle_Z2_Armed_Away                "Toggle Z2 Armed Away"                              <switch>        (g_virtual_device)          {expire="1s,command=OFF"}
+// Switch  Toggle_Z2_Armed_Home                "Toggle Z2 Armed Home"                              <switch>        (g_virtual_device)          {expire="1s,command=OFF"}
+
+// Number  Z2_Open_Sections                    "Z2 open sections [%.0f]"                           <door>          (g_virtual_device)
+
+// Switch  Z2_Entry_Timer                      "Z2 entry timer [%s]"                               <time>          (g_timer)                   {expire="15s,command=OFF"}
+// Switch  Z2_Exit_Timer                       "Z2 exit timer [%s]"                                <time>          (g_timer)                   {expire="2m,command=OFF"}
+// Switch  Z2_Nag_Timer                        "Z2 nag timer [%s]"                                 <time>          (g_timer)                   {expire="4m,command=OFF"}
+// Switch  Z2_Alert_Max_Timer                  "Z2 alert maximum time [%s]"                        <time>          (g_timer)                   {expire="20s,command=OFF"}
+
+// // zone: second floor
+// Number  Z3_Arming_Mode                      "Z3 Arming Mode: [MAP(en_armingmode.map):%s]"       <alarm>         (g_alarm_arming_mode)
+// Number  Z3_Status                           "Z3 Status: [MAP(en_zonestatus.map):%s]"            <alarm>         (g_virtual_device)
+
+// Switch  Toggle_Z3_Armed_Away                "Toggle Z3 Armed Away"                              <switch>        (g_virtual_device)          {expire="1s,command=OFF"}
+// Switch  Toggle_Z3_Armed_Home                "Toggle Z3 Armed Home"                              <switch>        (g_virtual_device)          {expire="1s,command=OFF"}
+
+// Number  Z3_Open_Sections                    "Z3 open sections [%.0f]"                           <door>          (g_virtual_device)
+
+// Switch  Z3_Entry_Timer                      "Z3 entry timer [%s]"                               <time>          (g_timer)                   {expire="15s,command=OFF"}
+// Switch  Z3_Exit_Timer                       "Z3 exit timer [%s]"                                <time>          (g_timer)                   {expire="2m,command=OFF"}
+// Switch  Z3_Nag_Timer                        "Z3 nag timer [%s]"                                 <time>          (g_timer)                   {expire="4m,command=OFF"}
+// Switch  Z3_Alert_Max_Timer                  "Z3 alert maximum time [%s]"                        <time>          (g_timer)                   {expire="20s,command=OFF"}

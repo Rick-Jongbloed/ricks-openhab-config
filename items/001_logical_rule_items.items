@@ -34,3 +34,7 @@ Switch      timer_rule_scene_kitchen_new_init_hardware                          
 // scene: all off
 Switch      rule_xiaomi_switch_kantoor_all_off_timer                                                                                                        { expire="60s,  command=OFF" }
 
+
+// motion licht gang
+Switch		timer_rule_automate_gang_licht_off	    									         (g_testing)                                                           { expire="2m,  command=OFF" }
+Switch		timer_rule_automate_gang_licht_init_hardware										                                                            { expire="30s,  command=OFF" }

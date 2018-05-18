@@ -15,7 +15,7 @@ Bridge  mihome:bridge:34ce00907e07                  "Xiaomi Gateway Bridge"     
         
         mihome:sensor_motion:158d00015e7b6a         "Xiaomi Motion Sensor Overloop"                 @ "Zolder"              [itemId="158d00015e7b6a"]
         mihome:sensor_motion:158d000121c485         "Xiaomi Motion Sensor Kantoor monitor"          @ "Eerste verdieping"   [itemId="158d000121c485"]
-
+        
         mihome:sensor_motion_aq2:158d00016db7e7     "Xiaomi Motion Sensor Keuken"                   @ "Begane grond"        [itemId="158d00016db7e7"]
         mihome:sensor_motion_aq2:158d0001e465e7     "Xiaomi Motion Sensor Gang-Voordeur"            @ "Begane grond"        [itemId="158d00022515ed"] // voordeur
         mihome:sensor_motion_aq2:158d00022515ed     "Xiaomi Motion Sensor woonkamer-gang"           @ "Begane grond"        [itemId="158d0001e465e7"] // gang deur gangkant 

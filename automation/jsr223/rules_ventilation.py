@@ -48,12 +48,13 @@ class rule_automate_ventilation_new(SimpleRule):
         
         # logging.info("@@@@ humid_status_badkamer_sensor: " + str(items.humid_status_badkamer_sensor))
 
-        # reporting hardware stuff
+        # # reporting hardware stuff
         # logging.info("@@@@ switch_ventilator_toggle_1_startup_state: " + str(items.switch_ventilator_toggle_1_startup_state))
         # logging.info("@@@@ switch_ventilator_toggle_1: " + str(items.switch_ventilator_toggle_1_startup_state))
         # logging.info("@@@@ switch_ventilator_toggle_2_startup_state: " + str(items.switch_ventilator_toggle_2_startup_state))
         # logging.info("@@@@ switch_ventilator_toggle_1: " + str(items.switch_ventilator_toggle_1_startup_state))
         
+
         # initializing hardware stuff
         if str(items.switch_ventilator_toggle_1_startup_state) == "NULL" or str(items.switch_ventilator_toggle_1_startup_state) == "NULL":
             

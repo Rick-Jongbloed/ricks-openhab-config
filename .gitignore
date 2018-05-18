@@ -1,3 +1,4 @@
 services/
-openhab2-jhyton/
+openhab2-jython/
  .vscode/
+ .gitignore
