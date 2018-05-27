@@ -4,7 +4,7 @@ scriptExtension.importPreset("RuleSupport")
 scriptExtension.importPreset("RuleSimple")
 
 from org.eclipse.smarthome.core.library.types import (HSBType, DecimalType, PercentType)
-from openhab.triggers import ItemCommandTrigger, StartupTrigger, ItemStateUpdateTrigger, item_triggered, ITEM_UPDATE
+from openhab.triggers import ItemCommandTrigger, StartupTrigger, ItemStateUpdateTrigger, item_triggered, ITEM_UPDATE, ItemStateChangeTrigger
 from openhab.log import logging
 from openhab.actions import Pushover, Mqtt
 from subprocess import call
@@ -29,21 +29,19 @@ def rule_switch_deurbel_switch_topic_mqtt_changed():
 		item_state = str(items.switch_deurbel_switch_topic)
 	return item_state
 
-
 class rule_deurbel_pressed(SimpleRule):
 	def __init__(self):
-		# self.item_name = "switch_deurbel_toggle"
-		self.item_name = "test_switch"
-		self.group_settings = "settings_deurbel_action_selection"
-
+		self.group_settings 		= "settings_deurbel_action_selection"
+		
 		self.triggers = [
 							StartupTrigger(),
-							ItemCommandTrigger(self.item_name),
-							
-							# should add all settings related stuff (only setcommand) - not needed as it's only an output and no external configuration is needed
+							#ItemCommandTrigger("switch_deurbel_toggle", command="ON"),
+							#ItemCommandTrigger("deurbel_losgekoppeld", command="ON"),
+							ItemCommandTrigger("switch_deurbel_pressed"),
+							ItemStateChangeTrigger("switch_deurbel_pressed"),
 							ItemCommandTrigger("deurbel_setting_toggle_notification_sound_bel"),
 							ItemCommandTrigger("timer_rule_deurbel_init_hardware", command="OFF"),
-							ItemStateUpdateTrigger("switch_deurbel_button_toggle")
+							ItemStateUpdateTrigger("switch_deurbel_button_toggle", state="TOGGLE")
 						]
 
 	# debug (log) module
@@ -128,43 +126,30 @@ class rule_deurbel_pressed(SimpleRule):
 					item_actuator_name = item_setting.name[len(substring_setting):]
 					if item_actuator_name in items:
 						self.items_enabled.append(item_actuator_name)
-					else:
-						logging.info("!!! Item '" + item_actuator_name + "' doesn't exist! - Not processsing item yet") # should be send to whatapp / pushover
+					#else:
+					#	logging.info("!!! Item '" + item_actuator_name + "' doesn't exist! - Not processsing item yet") # should be send to whatapp / pushover
 		return self
-
-
-		# reads settings from openhab (group settings_deurbel_action_selection)
-		# the item name of the action switch is in the name?
-		# bel deurbel
-		# bel alexa
-		# bel mihome gateway
-		# lichtsignaal woonkamer
-		# ooit voor elke setting een eigen init maken, goed structureren
-		# self.test_string_2 = "2222BLAAT"
-		# logging.info(self.test_string_2)
 
 	def get_trigger_info(self,input):						# OK, works
 		if "event" in input:
 			self.trigger = str(input['event'])
 		else:
 			self.trigger = "startup"
+		logging.info("Trigger: " + str(self.trigger))
 		return self
 
 	def door_bell_set(self):								# OK, works
 		if str(items.switch_deurbel_switch_mode_1) != self.doorbell_switch_mode_1:
-			logging.info("SETTING SwitchMode1 to " + self.doorbell_switch_mode_1)
+			logging.info("SETTING SwitchMode1 to " + self.doorbell_switch_mode_1 + " (Previous: " + str(items.switch_deurbel_switch_mode_1) + ")")
 			Mqtt.publish("mosquitto", "cmnd/" + "sonoff_switch_deurbel/SwitchMode1", self.doorbell_switch_mode_1)
-
 		if str(items.switch_deurbel_switch_topic) != self.doorbell_switch_topic:
-			logging.info("SETTING SwitchTopic to " + self.doorbell_switch_topic + " (items.switch_deurbel_switch_topic: " + str(items.switch_deurbel_switch_topic) + ")")
+			logging.info("SETTING SwitchTopic to " + self.doorbell_switch_topic + " (Previous: " + str(items.switch_deurbel_switch_topic) + ")")
 			Mqtt.publish("mosquitto", "cmnd/" + "sonoff_switch_deurbel/SwitchTopic", self.doorbell_switch_topic)						
-
 		if str(items.switch_deurbel_led_power) != self.doorbell_led_power:
-			logging.info("SETTING led_power to " + self.doorbell_led_power)
+			logging.info("SETTING led_power to " + self.doorbell_led_power + " (Previous: " + str(items.switch_deurbel_led_power) + ")")
 			events.sendCommand("switch_deurbel_led_power",self.doorbell_led_power)						
-
 		if str(items.deurbel_setting_toggle_notification_sound_bel) != self.doorbell_setting:
-			logging.info("SETTING deurbel_setting_toggle_notification_sound_bel to " + self.doorbell_setting)
+			logging.info("SETTING deurbel_setting_toggle_notification_sound_bel to " + self.doorbell_setting + " (Previous: " + str(items.deurbel_setting_toggle_notification_sound_bel) + ")")
 			events.postUpdate("deurbel_setting_toggle_notification_sound_bel", self.doorbell_setting)
 		return self
 
@@ -173,7 +158,7 @@ class rule_deurbel_pressed(SimpleRule):
 			# DISABLE DOORBELL
 			self.doorbell_setting = "OFF"
 			self.doorbell_switch_mode_1 = "2"		
-			self.doorbell_switch_topic = "sonoff_switch_deurbel_losgekoppeld"
+			self.doorbell_switch_topic = "switch_deurbel_losgekoppeld"
 			self.doorbell_led_power = "ON"
 		else:
 			# ENABLE DOORBELL 
@@ -183,8 +168,17 @@ class rule_deurbel_pressed(SimpleRule):
 			self.doorbell_led_power = "OFF"			
 		return self
 
+	def activate_actuators(self):
+		logging.info("1")
+		logging.info(str(self.items_enabled))
+		if len(self.items_enabled) > 0:
+			logging.info("2")
+			for item_enabled in items_enabled.getAllMembers():
+				logging.info("3")
+				logging.info(str(item_enabled))
+
 	def execute(self, module, input):
-		s = rule_deurbel_pressed()							# defines object (still learning)
+		s = rule_deurbel_pressed()							# defines object
 		s.read_settings()									# returns self.items_enabled
 #		s.log_device_states()								# logs debug info
 		s.get_trigger_info(input)							# returns self.trigger
@@ -192,12 +186,18 @@ class rule_deurbel_pressed(SimpleRule):
 		
 		logging.info ("s.initialized: " + str(s.initialized))
 		# if s.initialize_devices().initialized:
-		if s.initialized:
+		if not s.initialized:
+			logging.info("not yet initialized")
+		else:
 			logging.info("initialized")
 			s.door_bell_configure()
-			s.door_bell_set()
-		else:
-			logging.info("not yet initialized")
+			s.door_bell_set()								# writes configuration to doorbell hardware
+
+			if "switch_deurbel_pressed" in s.trigger:
+				s.activate_actuators()
+			else:
+				logging.info("Doorbell not pressed")
+
 automationManager.addRule(rule_deurbel_pressed())
 
 # # all actions:

@@ -11,6 +11,7 @@ Bridge  mihome:bridge:34ce00907e07                  "Xiaomi Gateway Bridge"     
         mihome:sensor_magnet:158d0001ab695f         "Xiaomi Door Sensor Toilet 1v"                  @ "Eerste verdieping"   [itemId="158d0001ab695f"]
         mihome:sensor_magnet:158d0001c0e00a         "Xiaomi Door Sensor Sunny"                      @ "Eerste verdieping"   [itemId="158d0001c0e00a"]  
         mihome:sensor_magnet:158d0001c0ed0f         "Xiaomi Door Sensor Badkamer"                   @ "Eerste verdieping"   [itemId="158d0001c0ed0f"]   
+        mihome:sensor_magnet_aq2:158d0001e48a20     "Xiaomi Raam Sensor Sunny"                      @ "Eerste verdieping"   [itemId="158d0001e48a20"]  
         mihome:sensor_magnet_aq2:158d0001b70c4f     "Xiaomi Raam Sensor Spacecave (links)"          @ "Zolder"              [itemId="158d0001b70c4f"]  
         mihome:sensor_magnet_aq2:158d0001b7b5aa     "Xiaomi Raam Sensor Spacecave (rechts)"         @ "Zolder"              [itemId="158d0001b7b5aa"]  
         
@@ -26,8 +27,8 @@ Bridge  mihome:bridge:34ce00907e07                  "Xiaomi Gateway Bridge"     
         mihome:sensor_weather_v1:158d0001e41223     "Xiaomi Temp/humid/baro Sensor Keuken"          @ "Begane grond"        [itemId="158d0001e41223"]
         mihome:sensor_weather_v1:158d0001b953bb     "Xiaomi Temp/humid/baro Sensor Slaapkamer"      @ "Eerste verdieping"   [itemId="158d0001b953bb"]
 
-        mihome:sensor_switch:158d00016c0af6         "Xiaomi Wireless Switch slaapkamer"             @ "Eerste verdieping"   [itemId="158d00016c0af6"]
+        mihome:sensor_switch:158d00016c0af6         "Wireless Switch slaapkamer C"                  @ "Eerste verdieping"   [itemId="158d00016c0af6"]
+        mihome:sensor_switch:158d000210bee8         "Wireless Switch slaapkamer R"                  @ "Eerste verdieping"   [itemId="158d000210bee8"]
         mihome:sensor_switch_aq2:158d0002134994     "Xiaomi Wireless Switch keuken"                 @ "Begane grond"        [itemId="158d0002134994"]       // todo (items)
-
-
 }
+

@@ -395,7 +395,21 @@ sitemap myhome label="Ons huis"
 	  	Group item=settings
 		Group item=g_maintenance
 	  	{
-	  		
+			Group item=g_chromecast label="Chromecast"
+			{
+				Frame label="Status"
+				{
+					Text item=chromecast_woonkamer_py_app
+					Text item=chromecast_woonkamer_py_type
+					Text item=chromecast_woonkamer_py_status
+				}
+				Frame label="Troubleshooting"
+				{
+					Switch item=chromecast_woonkamer_py_stop				mappings=[ON="Stop"]
+					Switch item=chromecast_woonkamer_py_reboot				mappings=[ON="Reboot"]
+					Switch item=chromecast_woonkamer_py_update				mappings=[ON="Update"]
+				}
+			}
 			Group item=g_uninitialized
 	  		Group item=g_monitoring
 			Group item=g_lastupdate

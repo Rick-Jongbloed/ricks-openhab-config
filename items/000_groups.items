@@ -141,7 +141,7 @@ Group						g_controller_harmony_hub		    "Device: Controller: Harmony Hub"						
 Group						g_controller_echo_dot			    "Device: Controller: Amazon Echo Dot"						    (devices)
 Group						g_controller_hue_bridge			    "Device: Controller: Philips Hue Bridge"					    (devices)
 Group                       g_controller_mihome_gateway         "Device: Controller: Xiaomi Mi Home Gateway"                    (devices)
-Group                       g_chromecast                        "Device: Streaming: Chromecast"								    (devices)
+Group                       g_chromecast                        "Device: Streaming: Chromecast"								<chromecast>    (devices)
 Group						g_evohome						    "Device: Heating: Evohome"  								    (devices)
 
 Group						g_receiver_onkyo				    "Device: Receiver: Onkyo 709"								    (devices)
