@@ -48,9 +48,9 @@ class IdeAlarmSensor(object):
         self.nagTimeoutMins = cfg['nagTimeoutMins']
         self.armWarn = cfg['armWarn']
         self.enabled = cfg['enabled']
-        self.log = logging.getLogger(LOG_PREFIX+'.IdeAlarmSensor.'+self.name.decode('utf8'))
+#        self.log = logging.getLogger(LOG_PREFIX+'.IdeAlarmSensor.'+self.name.decode('utf8'))
+        self.log = logging.getLogger(LOG_PREFIX+'.ideAlarm')
         #self.log.info('ideAlarm sensor ' + self.name.decode('utf8') + ' initialized...')
-        self.log.info('ideAlarm sensor ' + self.name.decode('utf8') + ' initialized...')
 
     def isEnabled(self):
         '''
@@ -103,7 +103,7 @@ class IdeAlarmZone(object):
         self.canArmWithTrippedSensors = cfg['canArmWithTrippedSensors']
         self.alarmTestMode = parent.alarmTestMode
         self.parent = weakref.ref(parent) # <= garbage-collector safe!
-        self.log = logging.getLogger(LOG_PREFIX+'.IdeAlarmZone.'+self.name.decode('utf8'))
+        self.log = logging.getLogger(LOG_PREFIX+'.ideAlarm')
         self.sensors = []
         for sensor in cfg['sensors']:
             self.sensors.append(IdeAlarmSensor(self, sensor))
@@ -354,7 +354,7 @@ class IdeAlarm(object):
         self.__version__ = '1.0.0'
         self.__version_info__ = tuple([ int(num) for num in self.__version__.split('.')])
 
-        self.log = logging.getLogger(LOG_PREFIX+'.IdeAlarm V'+self.__version__)
+        self.log = logging.getLogger(LOG_PREFIX+'.ideAlarm')
 
         import idealarm.config ######### TEMP 
         #reload(idealarm.config) ######### TEMP

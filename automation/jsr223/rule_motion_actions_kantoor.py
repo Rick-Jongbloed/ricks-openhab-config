@@ -15,7 +15,7 @@ class rule_kantoor_motion (SimpleRule):
                         ]
 
     def execute(self, module, input):
-        logging.info(input)
+        #logging.info(input)
 
         # initialize programmable items
         if str(items.timer_rule_kantoor_motion_detected_motion) == "NULL":
@@ -32,7 +32,7 @@ class rule_kantoor_motion (SimpleRule):
             trigger = str(input['event'])        
         else:
             trigger = "startup"
-        logging.info(trigger)
+        #logging.info(trigger)
 
         if "sensor_motion_office_motion_status" in trigger:
             logging.info("Kantoor: Motion detected. (Re)setting timer and keeping light on for 5 minutes")
@@ -67,7 +67,7 @@ class rule_kantoor_pc_monitors (SimpleRule):
 
     	else:
             # start of procedure
-            logging.info("**** kantoor_pc_net_online rule running due to state change in pc or motion (or startup)")
+            #logging.info("**** kantoor_pc_net_online rule running due to state change in pc or motion (or startup)")
 
             if items.timer_rule_kantoor_motion_detected_motion == OFF and items.switch_kantoor_pc_monitors_toggle == ON:
                 logging.info("**** timer_rule_kantoor_motion_detected_motion turned to OFF, switch_kantoor_pc_monitors_toggle is ON, TURNING switch_kantoor_pc_monitors_toggle OFF ****")
@@ -81,7 +81,7 @@ class rule_kantoor_pc_monitors (SimpleRule):
                 logging.info("**** kantoor_pc_net_online is OFF, switch_kantoor_pc_monitors_toggle is ON, TURNING switch_kantoor_pc_monitors_toggle OFF ****")
                 events.sendCommand("switch_kantoor_pc_monitors_toggle", "OFF")
             else:
-                logging.info("Rule kantoor PC monitors evaluated, but no change needed")
+                #logging.info("Rule kantoor PC monitors evaluated, but no change needed")
                 pass
 
 automationManager.addRule(rule_kantoor_pc_monitors())

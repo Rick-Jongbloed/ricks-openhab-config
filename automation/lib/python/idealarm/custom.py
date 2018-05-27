@@ -8,7 +8,8 @@ from org.eclipse.smarthome.core.library.types import OnOffType, OpenClosedType
 from openhab.log import logging, LOG_PREFIX
 from logging import DEBUG, INFO, WARNING, ERROR
 from mylib.utils import kw
-log = logging.getLogger(LOG_PREFIX + '.ideAlarm.custom')
+#log = logging.getLogger(LOG_PREFIX + '.ideAlarm.custom')
+log = logging.getLogger(LOG_PREFIX + '.ideAlarm')
 # Get direct access to the JSR223 scope types and objects (for Jython modules imported into scripts)
 from openhab.jsr223.scope import events, itemRegistry
 

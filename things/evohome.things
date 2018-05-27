@@ -1,5 +1,5 @@
 // =============== HONEYWELL EVOHOME BINDING ====================
-Bridge evohome:gateway:375e8686     "Honeywell EvoHome" 	    @   "Begane grond" 		[ username="ricadelic@gmail.com", password="yf4x5H7P6fm8Pv53", applicationId="91db1612-73fd-4500-91b2-e63b069b185c", refreshInterval=15000] 
+//Bridge evohome:gateway:375e8686     "Honeywell EvoHome" 	    @   "Begane grond" 		[ username="ricadelic@gmail.com", password="yf4x5H7P6fm8Pv53", applicationId="91db1612-73fd-4500-91b2-e63b069b185c", refreshInterval=15000] 
 // {
 //         display         Evotouch                 "Honeywell EvoTouch"        @   "Begane grond"     [ id="2596419" ]
 //         heatingzone     Woonkamer                "Heating zone Woonkamer"    @   "Begane grond"     [ id="2596418" ]
@@ -19,3 +19,9 @@ Bridge evohome:gateway:375e8686     "Honeywell EvoHome" 	    @   "Begane grond" 
 
 //evohome:      heatingzone:375e8686:Woonkamer
 //evohome:      display:375e8686:EvoTouch:SystemMode
+
+Bridge evohome:account:evohome_account [ username="ricadelic@gmail.com", password="yf4x5H7P6fm8Pv53" ]
+{
+    display             Evotouch                "Honeywell EvoTouch"        @   "Begane grond"          [ id="2596419" ]
+    heatingzone         Woonkamer               "Heating zone Woonkamer"    @   "Begane grond"          [ id="2596418" ]
+}

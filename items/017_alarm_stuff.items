@@ -1,3 +1,7 @@
+// item for mylib,utils
+String    ZZZ_Test_Reload_Finished            "Mylib reload has finished switch [%s]"
+
+
 //Group G_Persist // Persist on change and system start up
 Group   g_alarm                       (g_restore)             //persistence
 Group   g_alarm_arming_mode           (g_alarm)
@@ -22,6 +26,7 @@ Switch  Z1_Nag_Timer                        "Z1 nag timer [%s]"                 
 Switch  Z1_Alert_Max_Timer                  "Z1 alert maximum time [%s]"                        <time>          (g_timer)                   {expire="20s,command=OFF"}
 
 Switch	toggle_notification_message_pushover_alarm			                "Pushover notificatie voor Alarm"  	            <switch>				(g_testing)
+
 
 
 // // zone: first floor

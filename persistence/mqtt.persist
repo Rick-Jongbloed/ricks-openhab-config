@@ -5,7 +5,7 @@ Strategies {
 
 Items {
         // persist all items on every update
-       g_emoncms_mqtt* : strategy = everyUpdate
+      g_emoncms_mqtt* : strategy = everyUpdate
         
         // items per stuk toevoegen, voor test
         //<itemlist1> [-> "<alias1>"] : [strategy = <strategy1>, <strategy2>, ...]

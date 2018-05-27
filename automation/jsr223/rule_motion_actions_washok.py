@@ -52,7 +52,7 @@ class rule_motion_wasmachine_light (SimpleRule):
                 if str(items.switch_licht_wasmachine_led_state) == "NULL":
                     logging.info("Led state of switch washoek is in unknown state, pending refresh")
                 
-                Mqtt.publish("mosquitto", "cmnd/" + "sonoff_licht_washoek" + "/status", "0")
+                #Mqtt.publish("mosquitto", "cmnd/" + "sonoff_licht_washoek" + "/status", "0")
 
             # initialize led power item by querying led state (0=OFF, 8=ON)
             if str(items.switch_licht_wasmachine_led_power) == "NULL":
@@ -72,7 +72,8 @@ class rule_motion_wasmachine_light (SimpleRule):
 
             # Reschedule in 30 seconds until the items are in a proper state, if timer is somehow not yet running
             if items.timer_rule_motion_wasmachine_light_init_hardware != ON:
-                logging.info("Setting refresh timer (30s)")
+                logging.info("Setting refresh timer (30s) & updateting MQTT Status")
+                Mqtt.publish("mosquitto", "cmnd/" + "sonoff_licht_washoek" + "/status", "0")
                 events.sendCommand("timer_rule_motion_wasmachine_light_init_hardware","ON")        
             else:
                 logging.info("Not scheduling inittimer because it is already set (<30s): " + str(items.timer_rule_motion_wasmachine_light_init_hardware))
