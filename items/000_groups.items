@@ -174,3 +174,5 @@ Group                       g_weather                           "Weather: extern
 Group                       g_testing                           "Test/debug groep"                                              (All)
 
 Group                       g_idealarm                          "Idealarm"          
+
+Group                       g_afvalkalender                     "Afvalkalender"

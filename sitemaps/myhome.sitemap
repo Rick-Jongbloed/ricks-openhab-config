@@ -410,6 +410,7 @@ sitemap myhome label="Ons huis"
 					Switch item=chromecast_woonkamer_py_update				mappings=[ON="Update"]
 				}
 			}
+			Group item=g_afvalkalender
 			Group item=g_uninitialized
 	  		Group item=g_monitoring
 			Group item=g_lastupdate
