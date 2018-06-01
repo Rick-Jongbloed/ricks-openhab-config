@@ -7,6 +7,7 @@ Switch		deurbel_setting_toggle_notification_sound_alexa						"Alexa alarm"    		
 Switch		deurbel_setting_toggle_notification_message_pushover				"Pushover message"    	    <switch>				(settings_deurbel_action_selection, g_restore)
 
 
+
 // action switches (moeten wellicht naar de device secties toe, nu nog even bij elkaar)
 //Switch	    toggle_notification_sound_bel						                "Bel gang"    			    <switch>				(g_testing)
 Switch      toggle_notification_light_eettafel                                  "Alarm licht eettafel"      <alarm>                 (g_testing)                                                         //{ expire="5s,   command=OFF } // timer in script
@@ -14,6 +15,7 @@ Switch		toggle_notification_light_mihome_gw					                "Alarm licht mih
 Switch		toggle_notification_sound_mihome_gw					                "Alarm geluid mihome gw"    <switch>				(g_testing)
 Switch      toggle_notification_sound_alexa                                     "Alexa geluid alarm"        <alarm>                 (g_testing)                                                         { expire="30s, command=OFF" }
 Switch		toggle_notification_message_pushover				                "Pushover notificatie123"  	<switch>				(g_testing)
+
 
 // items voor buttontopic, etc
 Switch		switch_deurbel_led_power 						                    "Deurbel (led power) [%s]"								                                                        (g_sonoff_deurbel)                                                                                                                          { mqtt=">[mosquitto:cmnd/sonoff_switch_deurbel/LedPower:command:*:default]" }
@@ -24,6 +26,7 @@ String		switch_deurbel_switch_mode_1_mqtt      				                "Deurbel (swi
 String		switch_deurbel_switch_mode_1        				                "Deurbel (switchmode1) [%s]"			    				                                                    (g_sonoff_deurbel, g_maintenance_sonoff_status)                                                                                             
 String		switch_deurbel_switch_topic_mqtt       				                "Deurbel (SwitchTopic-mqtt) [%s]"							                                                    (g_sonoff_deurbel, g_maintenance_sonoff_status)                                                                                             { mqtt=">[mosquitto:cmnd/sonoff_switch_deurbel/SwitchTopic:command:*:default], <[mosquitto:stat/sonoff_switch_deurbel/RESULT:state:REGEX(^.{2}SwitchTopic.{3}(.*).{2}$]" }
 String		switch_deurbel_switch_topic          				                "Deurbel (SwitchTopic) [%s]"								                                                    (g_sonoff_deurbel, g_maintenance_sonoff_status)                                                                                             
+
 
 // switch voor losgekoppeld spul
 Switch		switch_deurbel_pressed             				                    "Deurbel (button) [%s]"								                                                            (g_sonoff_deurbel, g_maintenance_sonoff_status)                                                                                             { mqtt="<[mosquitto:cmnd/switch_deurbel_losgekoppeld/POWER1:state:default], <[mosquitto:cmnd/sonoff_switch_deurbel/POWER1:state:default]" }

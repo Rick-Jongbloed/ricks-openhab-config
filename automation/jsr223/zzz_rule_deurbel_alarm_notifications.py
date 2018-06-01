@@ -1,4 +1,6 @@
 #https://community.openhab.org/t/configurable-scenarios/10140/3
+#https://community.openhab.org/t/pushover-image-support/39201/66?u=ricadelic
+
 
 scriptExtension.importPreset("RuleSupport")
 scriptExtension.importPreset("RuleSimple")
@@ -169,18 +171,14 @@ class rule_deurbel_pressed(SimpleRule):
 		return self
 
 	def activate_actuators(self):
-		logging.info("1")
-		logging.info(str(self.items_enabled))
 		if len(self.items_enabled) > 0:
-			logging.info("2")
-			for item_enabled in items_enabled.getAllMembers():
-				logging.info("3")
-				logging.info(str(item_enabled))
+			for item_enabled in self.items_enabled:
+				events.sendCommand(item_enabled, "ON")
 
 	def execute(self, module, input):
 		s = rule_deurbel_pressed()							# defines object
 		s.read_settings()									# returns self.items_enabled
-#		s.log_device_states()								# logs debug info
+		# s.log_device_states()								# logs debug info
 		s.get_trigger_info(input)							# returns self.trigger
 		s.initialize_devices()								# set all devices to the current state if a device is NULL
 		
@@ -194,10 +192,10 @@ class rule_deurbel_pressed(SimpleRule):
 			s.door_bell_set()								# writes configuration to doorbell hardware
 
 			if "switch_deurbel_pressed" in s.trigger:
+				logging.info("Doorbell pressed. Starting configured actuators")
 				s.activate_actuators()
-			else:
-				logging.info("Doorbell not pressed")
-
+			# else:
+			# 	logging.info("Doorbell not pressed")
 automationManager.addRule(rule_deurbel_pressed())
 
 # # all actions:
@@ -269,7 +267,7 @@ class rule_toggle_notification_message_pushover(SimpleRule):
 	def __init__(self):
 		self.item_name = "toggle_notification_message_pushover"
 		self.triggers = [ ItemCommandTrigger(self.item_name, command="ON") ]
-		self.remote_url = "http://192.168.1.25:88/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=rick&pwd=eY8aQArrk9QU"
+		self.remote_url = "http://192.168.1.25:80/cgi-bin/CGIProxy.fcgi?cmd=snapPicture2&usr=rick&pwd=eY8aQArrk9QU"
 		self.local_file = "camera.jpg"
 		self.msg = "Er is aangebeld"
 
