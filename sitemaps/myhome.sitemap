@@ -184,7 +184,14 @@ sitemap myhome label="Ons huis"
 	}
 	Frame label="ideAlarm" {
 		Group item=g_idealarm {
-				
+			Frame label="Keypad"
+			{
+				Switch item=idealarm_keypad label="Alarm Keypad" 	icon="alarm"				mappings=[KEY1="1", KEY2="2", KEY3="3"]
+				Switch item=idealarm_keypad label=""				icon="none"					mappings=[KEY4="4", KEY5="5", KEY6="6"]
+				Switch item=idealarm_keypad label=""				icon="none"					mappings=[KEY7="7", KEY8="8", KEY9="9"]
+				Switch item=idealarm_keypad label=""				icon="none"					mappings=[KEYN="X", KEY0="0", KEYY="✓"]
+			}
+			
 			Frame label="Open Sections" {
 				Default item=Z1_Open_Sections
 				// Default item=Z2_Open_Sections
@@ -201,36 +208,49 @@ sitemap myhome label="Ons huis"
 			}
 
 			Frame label="Toggle switches" {
-				Default item=Toggle_Z1_Armed_Away
-				Default item=Toggle_Z1_Armed_Home
+				Switch item=Toggle_Z1_Armed_Away		mappings=[ON="Set away"]			visibility=[Z1_Arming_Mode!=2]
+				Switch item=Toggle_Z1_Armed_Home		mappings=[ON="Set home"]			visibility=[Z1_Arming_Mode!=1]
 			}
 
-			Frame label="Entry Timers" {
-				Default item=Z1_Entry_Timer
-			}
+			// Frame label="Entry Timers" {
+			// 	Default item=Z1_Entry_Timer
+			// }
 
-			Frame label="Exit Timers" {
-				Default item=Z1_Exit_Timer
-			}
+			// Frame label="Exit Timers" {
+			// 	Default item=Z1_Exit_Timer
+			// }
 
-			Frame label="Nag Timers" {
-				Default item=Z1_Nag_Timer
-			}
+			// Frame label="Nag Timers" {
+			// 	Default item=Z1_Nag_Timer
+			// }
 
-			Frame label="Alert Max Timer" {
-				Default item=Z1_Alert_Max_Timer
-			}
+			// Frame label="Alert Max Timer" {
+			// 	Default item=Z1_Alert_Max_Timer
+			// }
 
 			Frame label="Doors" {
-				Default item=door_keuken_sensor 				valuecolor=[CLOSED="green", OPEN="red"]
-				Default item=sensor_voordeur_switch_status 		valuecolor=[CLOSED="green", OPEN="red"]
-				Default item=sensor_achterdeur_switch_status 	valuecolor=[CLOSED="green", OPEN="red"]
+				Default item=door_keuken_sensor 						valuecolor=[CLOSED="green", OPEN="red"]
+				Default item=sensor_voordeur_switch_status 				valuecolor=[CLOSED="green", OPEN="red"]
+				Default item=sensor_achterdeur_switch_status 			valuecolor=[CLOSED="green", OPEN="red"]
+				Default item=sensor_schuifpui_switch_status 			valuecolor=[CLOSED="green", OPEN="red"]
 			}
 
 			Frame label="Windows" {
+				Default item=sensor_kantoor_raam_switch_status 				valuecolor=[CLOSED="green", OPEN="red"]
+				Default item=sensor_slaapkamer_raam_switch_status	 		valuecolor=[CLOSED="green", OPEN="red"]
+				Default item=sensor_sunny_switch_status				 		valuecolor=[CLOSED="green", OPEN="red"]
+				Default item=sensor_opslag_raam_switch_status		 		valuecolor=[CLOSED="green", OPEN="red"]
 				Default item=sensor_spacecave_raam_links_switch_status 		valuecolor=[CLOSED="green", OPEN="red"]
 				Default item=sensor_spacecave_raam_rechts_switch_status 	valuecolor=[CLOSED="green", OPEN="red"]
 			}
+
+			Frame label="Timers" {
+			 	Default item=Z1_Entry_Timer
+				Default item=Z1_Exit_Timer
+				Default item=Z1_Nag_Timer
+				Default item=Z1_Alert_Max_Timer
+			}
+
 			// Frame label="Sirenes" {
 			// 	Default item=Siren_Indoors
 			// 	Default item=Siren_Gardenshed
@@ -500,6 +520,7 @@ sitemap myhome label="Ons huis"
 			Text    item=amazon_echo_dot_flash_briefing_technical_save
 			Text    item=amazon_echo_dot_flash_briefing_technical_active
 			Text    item=amazon_echo_dot_flash_briefing_technical_play
+			
 		}
 	}
 }

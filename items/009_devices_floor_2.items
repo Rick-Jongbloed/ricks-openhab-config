@@ -114,6 +114,13 @@ Dimmer 		light_spacecave_colortemp							            "Hue color Spacecave (color
 String 		light_spacecave_alert								            "Hue color Spacecave (alert)"												                            (g_hue_lamp_spacecave, sf_spacecave)											                                            { channel="hue:0210:0017884775f9:6:alert"}
 Switch 		light_spacecave_effect								            "Hue color Spacecave (effect)"												                        (g_hue_lamp_spacecave, sf_spacecave)											                                                { channel="hue:0210:0017884775f9:6:effect"}
 
+// OPSLAG
+// raamsensor opslag
+Contact     sensor_opslag_raam_switch_status                           "Raamsensor Opslag (status) [%s]"                                          <door>                  (g_mihome_raamsensor_opslag,sf_storage,g_restore)                                                           { channel="mihome:sensor_magnet_aq2:158d0001de667d:isOpen" }
+Number      sensor_opslag_raam_alarm_timer                             "Raamsensor Opslag (alarm timer) [%d]"                                     <clock>                 (g_mihome_raamsensor_opslag,sf_storage)                                                                     { channel="mihome:sensor_magnet_aq2:158d0001de667d:isOpenAlarmTimer" }       // minimum 30 seconds
+DateTime    sensor_opslag_raam_last_opened                             "Raamsensor Opslag (Lastopenend) [%1$tY-%1$tm-%1$td  %1$tH:%1$tM]"         <clock-on>              (g_mihome_raamsensor_opslag,sf_storage,g_restore)                                                           { channel="mihome:sensor_magnet_aq2:158d0001de667d:lastOpened" }
+Number      sensor_opslag_raam_battery                                 "Raamsensor Opslag (battery) [%d %%]"                                      <battery>               (g_mihome_raamsensor_opslag,sf_storage,g_chart)                                                             { channel="mihome:sensor_magnet_aq2:158d0001de667d:batteryLevel" }
+Switch      sensor_opslah_raam_battery_low                             "Raamsensor Opslag (battery low) [%s]"                                     <energy>                (g_mihome_raamsensor_opslag,sf_storage)                                                                     { channel="mihome:sensor_magnet_aq2:158d0001de667d:lowBattery" }
 
 // optional binary flag
 //Number	SonoffUpgrade-

@@ -11,10 +11,14 @@ Bridge  mihome:bridge:34ce00907e07                  "Xiaomi Gateway Bridge"     
         mihome:sensor_magnet:158d0001ab695f         "Xiaomi Door Sensor Toilet 1v"                  @ "Eerste verdieping"   [itemId="158d0001ab695f"]
         mihome:sensor_magnet:158d0001c0e00a         "Xiaomi Door Sensor Sunny"                      @ "Eerste verdieping"   [itemId="158d0001c0e00a"]  
         mihome:sensor_magnet:158d0001c0ed0f         "Xiaomi Door Sensor Badkamer"                   @ "Eerste verdieping"   [itemId="158d0001c0ed0f"]   
+        
+        mihome:sensor_magnet_aq2:158d0001de6146     "Xiaomi Raam Sensor Kantoor"                    @ "Eerste verdieping"   [itemId="158d0001de6146"]
         mihome:sensor_magnet_aq2:158d0001e48a20     "Xiaomi Raam Sensor Sunny"                      @ "Eerste verdieping"   [itemId="158d0001e48a20"]  
+        mihome:sensor_magnet_aq2:158d0001de64c9     "Xiaomi Raam Sensor Slaapkamer"                 @ "Eerste verdieping"   [itemId="158d0001de64c9"]  
+        mihome:sensor_magnet_aq2:158d0001de667d     "Xiaomi Raam Sensor Opslag"                     @ "Zolder"              [itemId="158d0001de667d"]  
         mihome:sensor_magnet_aq2:158d0001b70c4f     "Xiaomi Raam Sensor Spacecave (links)"          @ "Zolder"              [itemId="158d0001b70c4f"]  
         mihome:sensor_magnet_aq2:158d0001b7b5aa     "Xiaomi Raam Sensor Spacecave (rechts)"         @ "Zolder"              [itemId="158d0001b7b5aa"]  
-        
+           
         mihome:sensor_motion:158d00015e7b6a         "Xiaomi Motion Sensor Overloop"                 @ "Zolder"              [itemId="158d00015e7b6a"]
         mihome:sensor_motion:158d000121c485         "Xiaomi Motion Sensor Kantoor monitor"          @ "Eerste verdieping"   [itemId="158d000121c485"]
         
@@ -23,7 +27,7 @@ Bridge  mihome:bridge:34ce00907e07                  "Xiaomi Gateway Bridge"     
         mihome:sensor_motion_aq2:158d00022515ed     "Xiaomi Motion Sensor woonkamer-gang"           @ "Begane grond"        [itemId="158d0001e465e7"]       // gang deur gangkant 
         mihome:sensor_motion_aq2:158d0001e52d75     "Xiaomi Motion Sensor gang-woonkamer"           @ "Begane grond"        [itemId="158d0001e52d75"]       // gang deur woonkamerkant
         mihome:sensor_motion_aq2:158d0001b1d1ff     "Xiaomi Motion Sensor kantoor plafond"          @ "Eerste verdieping"   [itemId="158d0001b1d1ff"] 
-        
+                
         mihome:sensor_weather_v1:158d0001e41223     "Xiaomi Temp/humid/baro Sensor Keuken"          @ "Begane grond"        [itemId="158d0001e41223"]
         mihome:sensor_weather_v1:158d0001b953bb     "Xiaomi Temp/humid/baro Sensor Slaapkamer"      @ "Eerste verdieping"   [itemId="158d0001b953bb"]
 

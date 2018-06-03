@@ -15,6 +15,7 @@ Group   g_timer
 Number  Z1_Arming_Mode                      "Z1 Arming Mode: [MAP(en_armingmode.map):%s]"       <alarm>         (g_alarm_arming_mode)
 Number  Z1_Status                           "Z1 Status: [MAP(en_zonestatus.map):%s]"            <alarm>         (g_virtual_device)
 
+
 Switch  Toggle_Z1_Armed_Away                "Toggle Z1 Armed Away"                              <switch>        (g_virtual_device)          {expire="1s,command=OFF"}
 Switch  Toggle_Z1_Armed_Home                "Toggle Z1 Armed Home"                              <switch>        (g_virtual_device)          {expire="1s,command=OFF"}
 
@@ -27,6 +28,8 @@ Switch  Z1_Alert_Max_Timer                  "Z1 alert maximum time [%s]"        
 
 Switch	toggle_notification_message_pushover_alarm			                "Pushover notificatie voor Alarm"  	            <switch>				(g_testing)
 
+// keypad
+String  idealarm_keypad
 
 
 // // zone: first floor
@@ -56,3 +59,4 @@ Switch	toggle_notification_message_pushover_alarm			                "Pushover no
 // Switch  Z3_Exit_Timer                       "Z3 exit timer [%s]"                                <time>          (g_timer)                   {expire="2m,command=OFF"}
 // Switch  Z3_Nag_Timer                        "Z3 nag timer [%s]"                                 <time>          (g_timer)                   {expire="4m,command=OFF"}
 // Switch  Z3_Alert_Max_Timer                  "Z3 alert maximum time [%s]"                        <time>          (g_timer)                   {expire="20s,command=OFF"}
+

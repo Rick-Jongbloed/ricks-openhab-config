@@ -94,6 +94,8 @@ Group						g_zwave_doorsensor_woonkamer	    "Device: Everspring doorsensors: deu
 // xiaomi
 Group						g_mihome_doorsensor_voordeur	    "Device: Xiaomi MiHome doorsensor: voordeur"				<frontdoor>             (devices)
 Group						g_mihome_doorsensor_achterdeur	    "Device: Xiaomi MiHome doorsensor: Achterdeur"				<frontdoor>             (devices)
+Group						g_mihome_doorsensor_schuifpui	    "Device: Xiaomi MiHome doorsensor: Schuifpui"				<frontdoor>             (devices)
+
 Group						g_mihome_doorsensor_kantoor 	    "Device: Xiaomi MiHome doorsensor: Kantoor"				    <door>                  (devices)
 Group						g_mihome_doorsensor_spacecave 	    "Device: Xiaomi MiHome doorsensor: Spacecave"			    <door>                  (devices)
 Group						g_mihome_doorsensor_spacecave_raam_links 	    "Device: Xiaomi MiHome doorsensor: Spacecave raam links"			    <window>                  (devices)  
@@ -102,6 +104,10 @@ Group						g_mihome_doorsensor_toilet_bg 	    "Device: Xiaomi MiHome doorsensor:
 Group						g_mihome_doorsensor_toilet_1v 	    "Device: Xiaomi MiHome doorsensor: Toilet 1v"			    <door>                  (devices)
 Group						g_mihome_doorsensor_badkamer	    "Device: Xiaomi MiHome doorsensor: Badkamer"			    <door>                  (devices)
 Group						g_mihome_doorsensor_sunny   	    "Device: Xiaomi MiHome doorsensor: Sunny"   			    <door>                  (devices)
+Group                       g_mihome_raamsensor_kantoor         "Device: Xiaomi MiHome raamsensor: Kantoor"   			    <window>                  (devices)
+Group                       g_mihome_raamsensor_slaapkamer      "Device: Xiaomi MiHome raamsensor: Slaapkamer"			    <window>                  (devices)
+Group                       g_mihome_raamsensor_opslag          "Device: Xiaomi MiHome raamsensor: Opslag"	    		    <window>                  (devices)
+
 
 Group                       g_mihome_motionsensor_kantoor_monitor           "Device: Xiaomi MiHome motionsensor: kantoor (monitor)"               <motion>                (devices)
 Group                       g_mihome_motionsensor_kantoor_plafond           "Device: Xiaomi MiHome motionsensor: kantoor (plafond)"               <motion>                (devices)
@@ -114,7 +120,9 @@ Group                       g_mihome_motionsensor_woonkamer_gang    "Device: Xia
 Group                       g_mihome_weathersensor_keuken       "Device: Xiaomi Aqara weathersensor: keuken"                <temperature>           (devices)
 Group                       g_mihome_weathersensor_slaapkamer   "Device: Xiaomi Aqara weathersensor: slaapkamer"            <temperature>           (devices)
 
-Group                       g_mihome_switch_kantoor             "Device: Xiaomi MiHome switch all off: kantoor"             <contact>               (devices)
+Group                       g_mihome_switch_slaapkamer_claudia             "Device: Xiaomi MiHome switch all off: slaapkamer - Claudia"             <contact>               (devices)
+Group                       g_mihome_switch_slaapkamer_rick             "Device: Xiaomi MiHome switch all off: slaapkamer - Rick"             <contact>               (devices)
+Group                       g_mihome_switch_eettafel             "Device: Xiaomi MiHome switch lamp eettafel"             <contact>               (devices)
 
 // anders
 Group                       g_lifx_lamp_eettafel                "Device: LIFX Color: Eettafel"                                  <colorlight>        (devices)
