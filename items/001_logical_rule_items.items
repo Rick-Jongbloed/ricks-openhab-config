@@ -32,7 +32,7 @@ Switch      timer_rule_scene_kitchen_new_init_hardware                          
 //Switch      timer_rule_scene_woonkamer_disable_detection                                                                                                    { expire="3s, command=OFF" }
 
 // scene: all off
-Switch      rule_xiaomi_switch_kantoor_all_off_timer                                                                                                        { expire="60s,  command=OFF" }
+Switch      rule_xiaomi_switch_slaapkamer_all_off_timer                                                                                                        { expire="60s,  command=OFF" }
 
 
 // motion licht gang

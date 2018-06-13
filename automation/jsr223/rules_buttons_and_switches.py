@@ -5,14 +5,19 @@ from openhab.triggers import ChannelEventTrigger,item_triggered,ITEM_UPDATE, Ite
 from openhab.log import logging
 from openhab.actions import Pushover
 
-class rule_xiaomi_switch_kantoor_all_off(SimpleRule):
+class rule_xiaomi_switch_slaapkamer_all_off(SimpleRule):
     def __init__(self):
-        self.device = "mihome:sensor_switch:158d00016c0af6:button"
+        self.device_1 = "mihome:sensor_switch:158d00016c0af6:button"
+        self.device_2 = "mihome:sensor_switch:158d000210bee8:button"
         self.triggers = [ 
-                            ChannelEventTrigger(channelUID=self.device, event="SHORT_PRESSED"),
-                           # ChannelEventTrigger(channelUID=self.device, event="DOUBLE_PRESSED"),
-                            ChannelEventTrigger(channelUID=self.device, event="LONG_PRESSED")
-                          #  ChannelEventTrigger(channelUID=self.device, event="LONG_RELEASED")
+                            ChannelEventTrigger(channelUID=self.device_1, event="SHORT_PRESSED"),
+                           # ChannelEventTrigger(channelUID=self.device_1, event="DOUBLE_PRESSED"),
+                            ChannelEventTrigger(channelUID=self.device_1, event="LONG_PRESSED"),
+                          #  ChannelEventTrigger(channelUID=self.device_1, event="LONG_RELEASED")
+                            ChannelEventTrigger(channelUID=self.device_2, event="SHORT_PRESSED"),
+                           # ChannelEventTrigger(channelUID=self.device_2, event="DOUBLE_PRESSED"),
+                            ChannelEventTrigger(channelUID=self.device_2, event="LONG_PRESSED")
+                          #  ChannelEventTrigger(channelUID=self.device_2, event="LONG_RELEASED")
                         ]
     # maak 4 modules
     def execute(self, module, input):
@@ -20,21 +25,25 @@ class rule_xiaomi_switch_kantoor_all_off(SimpleRule):
         logging.info("SWITCH INGEDRUKT: " + triggered_event)
 
         if triggered_event == "SHORT_PRESSED":
-            if items.rule_xiaomi_switch_kantoor_all_off_timer == ON:
+            if items.rule_xiaomi_switch_slaapkamer_all_off_timer == ON:
                 logging.info("*** Timer cancelled...")    
-                events.postUpdate("rule_xiaomi_switch_kantoor_all_off_timer", "OFF")
+                events.postUpdate("rule_xiaomi_switch_slaapkamer_all_off_timer", "OFF")
                 Pushover.pushover("All off timer cancelled...", "Telefoon_prive_rick01")
             else:
+                # toggle bedroom light
+                
                 logging.info("!!! Timer not running...")
                 #Pushover.pushover("All off timer not running...", "Telefoon_prive_rick01")
                 
         elif triggered_event == "DOUBLE_PRESSED":
+
+            # toggle bedroom light (sfeerlicht)
             pass
 
         elif triggered_event == "LONG_PRESSED":
-            # check if items.rule_xiaomi_switch_kantoor_all_off_timer is OFF (or NULL)
+            # check if items.rule_xiaomi_switch_slaapkamer_all_off_timer is OFF (or NULL)
             if items.rule_xiaomi_switch_kantoor_all_off_timer != ON:
-                events.sendCommand("rule_xiaomi_switch_kantoor_all_off_timer", "ON")
+                events.sendCommand("rule_xiaomi_switch_slaapkamer_all_off_timer", "ON")
                 Pushover.pushover("ALLES UIT KNOP: Timer gestart", "Telefoon_prive_rick01")
                 logging.info("*** All off timer started (60 seconds)")
             else:
@@ -44,11 +53,11 @@ class rule_xiaomi_switch_kantoor_all_off(SimpleRule):
         elif triggered_event == "LONG_RELEASED":
             pass
             
-automationManager.addRule(rule_xiaomi_switch_kantoor_all_off())
+automationManager.addRule(rule_xiaomi_switch_slaapkamer_all_off())
 
 class rule_all_off_execute(SimpleRule):
     def __init__(self):
-        self.triggers = [ItemCommandTrigger("rule_xiaomi_switch_kantoor_all_off_timer", command="OFF") ]
+        self.triggers = [ItemCommandTrigger("rule_xiaomi_switch_slaapkamer_all_off_timer", command="OFF") ]
     def execute(self, module, input):
         logging.info("rule_all_off_execute running.....")
         
