@@ -184,14 +184,20 @@ sitemap myhome label="Ons huis"
 	}
 	Frame label="ideAlarm" {
 		Group item=g_idealarm {
-			Frame label="Keypad"
+			Frame label="Keypad (test)"
 			{
-				Switch item=idealarm_keypad label="Alarm Keypad" 	icon="alarm"				mappings=[KEY1="1", KEY2="2", KEY3="3"]
-				Switch item=idealarm_keypad label=""				icon="none"					mappings=[KEY4="4", KEY5="5", KEY6="6"]
-				Switch item=idealarm_keypad label=""				icon="none"					mappings=[KEY7="7", KEY8="8", KEY9="9"]
-				Switch item=idealarm_keypad label=""				icon="none"					mappings=[KEYN="X", KEY0="0", KEYY="✓"]
+				Switch item=idealarm_keypad label="Alarm Keypad" 	icon="alarm"				mappings=[1="1", 2="2", 3="3"]
+				Switch item=idealarm_keypad label=""				icon="none"					mappings=[4="4", 5="5", 6="6"]
+				Switch item=idealarm_keypad label=""				icon="none"					mappings=[7="7", 8="8", 9="9"]
+				Switch item=idealarm_keypad label=""				icon="none"					mappings=[X="X", 0="0", V="✓"]
 			}
 			
+			Frame label="Info" {
+				Text  item=idealarm_keypad_full
+				// Default item=Z2_Open_Sections
+				// Default item=Z3_Open_Sections
+				// Default item=Z4_Open_Sections
+			}
 			Frame label="Open Sections" {
 				Default item=Z1_Open_Sections
 				// Default item=Z2_Open_Sections
@@ -200,33 +206,20 @@ sitemap myhome label="Ons huis"
 			}
 
 			Frame label="Arming Modes" {
-				Default item=Z1_Arming_Mode 	valuecolor=[0="black", 1="orange", 2="red"]
+				Default item=Z1_Arming_Mode 				valuecolor=[0="black", 1="orange", 2="red"]
 			}
 
 			Frame label="Statuses" {
-				Default item=Z1_Status 			valuecolor=[0="green", 1="red", 2="red", 3="red", 4="black"]
+				Default item=Z1_Status 						valuecolor=[0="green", 1="red", 2="red", 3="red", 4="black"]
+				Text item=alarm_status_indicator_z1		valuecolor=[ON="red", OFF="green"]
 			}
 
 			Frame label="Toggle switches" {
-				Switch item=Toggle_Z1_Armed_Away		mappings=[ON="Set away"]			visibility=[Z1_Arming_Mode!=2]
-				Switch item=Toggle_Z1_Armed_Home		mappings=[ON="Set home"]			visibility=[Z1_Arming_Mode!=1]
+				//Switch item=Toggle_Z1_Armed_Away		mappings=[ON="Set away"]			visibility=[Z1_Arming_Mode!=2]
+				//Switch item=Toggle_Z1_Armed_Home		mappings=[ON="Set home"]			visibility=[Z1_Arming_Mode!=1]
+				Switch item=Toggle_Z1_Armed_Away		//mappings=[ON="Set away"]			visibility=[Z1_Arming_Mode!=2]
+				Switch item=Toggle_Z1_Armed_Home		//mappings=[ON="Set home"]			visibility=[Z1_Arming_Mode!=1]
 			}
-
-			// Frame label="Entry Timers" {
-			// 	Default item=Z1_Entry_Timer
-			// }
-
-			// Frame label="Exit Timers" {
-			// 	Default item=Z1_Exit_Timer
-			// }
-
-			// Frame label="Nag Timers" {
-			// 	Default item=Z1_Nag_Timer
-			// }
-
-			// Frame label="Alert Max Timer" {
-			// 	Default item=Z1_Alert_Max_Timer
-			// }
 
 			Frame label="Doors" {
 				Default item=door_keuken_sensor 						valuecolor=[CLOSED="green", OPEN="red"]
@@ -263,33 +256,33 @@ sitemap myhome label="Ons huis"
 		{
 			Frame label="Deursensoren (alarm zone)" 
 			{
-				Text item=door_keuken_sensor 							label="Keukendeur"
-				Text item=sensor_voordeur_switch_status 				label="Voordeur"
-				Text item=sensor_achterdeur_switch_status 				label="Achterdeur"
-				Text item=sensor_spacecave_raam_links_switch_status 	label="Spacecave raam L"
-				Text item=sensor_spacecave_raam_rechts_switch_status	label="Spacecave raam R"
+				Text item=door_keuken_sensor 							label="Keukendeur"			valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_voordeur_switch_status 				label="Voordeur"			valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_achterdeur_switch_status 				label="Achterdeur"			valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_spacecave_raam_links_switch_status 	label="Spacecave raam L"	valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_spacecave_raam_rechts_switch_status	label="Spacecave raam R"	valuecolor=[CLOSED="green", OPEN="red"]
 			}
 			
 			Frame label="Deursensoren (indoor)" 
 			{
-				Text item=door_woonkamer_sensor 						label="Woonkamer-gang"
-				Text item=sensor_toilet_bg_switch_status 				label="Toilet bg"
-				Text item=sensor_badkamer_switch_status 				label="Badkamer"
-				Text item=sensor_kantoor_switch_status 					label="Kantoor"
-				Text item=sensor_sunny_switch_status 					label="Sunny"
-				Text item=sensor_toilet_1v_switch_status 				label="Toilet 1v"
-				Text item=sensor_spacecave_switch_status 				label="Spacecave"
+				Text item=door_woonkamer_sensor 						label="Woonkamer-gang"		valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_toilet_bg_switch_status 				label="Toilet bg"			valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_badkamer_switch_status 				label="Badkamer"			valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_kantoor_switch_status 					label="Kantoor"				valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_sunny_switch_status 					label="Sunny"				valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_toilet_1v_switch_status 				label="Toilet 1v"			valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_spacecave_switch_status 				label="Spacecave"			valuecolor=[CLOSED="green", OPEN="red"]
 			}
 
 			Frame label="Beweging" 
 			{
-				Text item=sensor_motion_keuken_last_motion				label="Keuken"
-				Text item=sensor_motion_gang_voordeur_last_motion 		label="Gang-voordeur"
-				Text item=sensor_motion_gang_woonkamer_last_motion 		label="Gang-tussendeur"
-				Text item=sensor_motion_woonkamer_gang_last_motion 		label="Woonkamer-tussendeur"
-				Text item=sensor_motion_office_last_motion				label="Kantoor monitor"
-				Text item=sensor_motion_office_plafond_last_motion		label="Kantoor plafond"
-				Text item=sensor_motion_wasmachine_last_motion 			label="Wasmachine"		
+				Text item=sensor_motion_keuken_last_motion				label="Keuken"					valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_motion_gang_voordeur_last_motion 		label="Gang-voordeur"			valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_motion_gang_woonkamer_last_motion 		label="Gang-tussendeur"			valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_motion_woonkamer_gang_last_motion 		label="Woonkamer-tussendeur"	valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_motion_office_last_motion				label="Kantoor monitor"			valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_motion_office_plafond_last_motion		label="Kantoor plafond"			valuecolor=[CLOSED="green", OPEN="red"]
+				Text item=sensor_motion_wasmachine_last_motion 			label="Wasmachine"				valuecolor=[CLOSED="green", OPEN="red"]
 			}
 			Frame label="Cameras"
 			{

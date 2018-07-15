@@ -8,8 +8,8 @@ NULL = UnDefType.NULL
 UNDEF = UnDefType.UNDEF
 
 ALARM_TEST_MODE = False
-#LOGGING_LEVEL = 'DEBUG'
-LOGGING_LEVEL = 'INFO'
+LOGGING_LEVEL = 'DEBUG'
+#LOGGING_LEVEL = 'INFO'
 NAG_INTERVAL_MINUTES = 6
 
 # You can define functions to determine if a sensor is enabled or not.

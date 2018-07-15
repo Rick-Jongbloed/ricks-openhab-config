@@ -3,19 +3,19 @@
 import weakref # Using this to prevent problems with garbage collection
 
 # Get direct access to the JSR223 scope types and objects (for Jython modules imported into scripts)
-from openhab.jsr223.scope import events, itemRegistry
+from lucid.jsr223.scope import events, itemRegistry
 from org.eclipse.smarthome.model.persistence.extensions import PersistenceExtensions
 
-from openhab.triggers import ItemCommandTrigger, ItemStateChangeTrigger
+from lucid.triggers import ItemCommandTrigger, ItemStateChangeTrigger
 
 from org.joda.time import DateTime
-from openhab.log import logging, LOG_PREFIX
+from lucid.log import logging, LOG_PREFIX
 from logging import DEBUG, INFO, WARNING, ERROR
 log = logging.getLogger(LOG_PREFIX + '.ideAlarm')
 
-#import mylib.utils ######### TEMP 
-#reload(mylib.utils) ######### TEMP 
-from mylib.utils import getEvent, isActive, getItemValue, postUpdateCheckFirst, sendCommandCheckFirst, kw
+#import lucid.utils ######### TEMP 
+#reload(lucid.utils) ######### TEMP 
+from lucid.utils import getEvent, isActive, getItemValue, postUpdateCheckFirst, sendCommandCheckFirst, kw
 from idealarm import custom
 #reload(custom) ######### TEMP 
 
@@ -48,8 +48,7 @@ class IdeAlarmSensor(object):
         self.nagTimeoutMins = cfg['nagTimeoutMins']
         self.armWarn = cfg['armWarn']
         self.enabled = cfg['enabled']
-#        self.log = logging.getLogger(LOG_PREFIX+'.IdeAlarmSensor.'+self.name.decode('utf8'))
-        self.log = logging.getLogger(LOG_PREFIX+'.ideAlarm')
+        self.log = logging.getLogger(LOG_PREFIX+'.IdeAlarmSensor.'+self.name.decode('utf8'))
         #self.log.info('ideAlarm sensor ' + self.name.decode('utf8') + ' initialized...')
 
     def isEnabled(self):
@@ -103,7 +102,7 @@ class IdeAlarmZone(object):
         self.canArmWithTrippedSensors = cfg['canArmWithTrippedSensors']
         self.alarmTestMode = parent.alarmTestMode
         self.parent = weakref.ref(parent) # <= garbage-collector safe!
-        self.log = logging.getLogger(LOG_PREFIX+'.ideAlarm')
+        self.log = logging.getLogger(LOG_PREFIX+'.IdeAlarmZone.'+self.name.decode('utf8'))
         self.sensors = []
         for sensor in cfg['sensors']:
             self.sensors.append(IdeAlarmSensor(self, sensor))
@@ -351,10 +350,10 @@ class IdeAlarm(object):
         Expects:
          - Nothing really...
         '''
-        self.__version__ = '1.0.0'
+        self.__version__ = '2.0.0'
         self.__version_info__ = tuple([ int(num) for num in self.__version__.split('.')])
 
-        self.log = logging.getLogger(LOG_PREFIX+'.ideAlarm')
+        self.log = logging.getLogger(LOG_PREFIX+'.IdeAlarm V'+self.__version__)
 
         import idealarm.config ######### TEMP 
         #reload(idealarm.config) ######### TEMP

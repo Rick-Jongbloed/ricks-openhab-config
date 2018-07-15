@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 '''
 custom_verbose_example.py
+
 Custom ideAlarm functions library.
 This file demonstrates a few possibilities, things you can implement in your own custom.py
 Use it for inspiration. It won't work "out of the box" in your system.
@@ -15,9 +16,9 @@ from org.joda.time.format import DateTimeFormat
 log = logging.getLogger(LOG_PREFIX + '.ideAlarm.custom')
 from lucid.utils import PRIO, PUSHOVER_PRIO, PUSHOVER_DEF_DEV, kw, sendCommandCheckFirst, greeting
 from lucid.actions import Pushover
-#from lucid.speak import tts
-#from lucid.sendsms import sms
-#from lucid.autoremote import autoremote
+from lucid.speak import tts
+from lucid.sendsms import sms
+from lucid.autoremote import autoremote
 import random
 
 # Get direct access to the JSR223 scope types and objects (for Jython modules imported into scripts)
@@ -33,27 +34,26 @@ CLOSED = OpenClosedType.CLOSED
 ZONESTATUS = {'NORMAL': 0, 'ALERT': 1, 'ERROR': 2, 'TRIPPED': 3, 'ARMING': 4}
 ARMINGMODE = {'DISARMED': 0, 'ARMED_HOME': 1, 'ARMED_AWAY': 2}
 
-# Have to test this when it's working (with Alexa)
-# def sayHello():
-#     hour = DateTime.now().getHourOfDay()
-#     if not (hour > 7 and hour < 22):
-#         return
-#     greetings = [greeting(), 'Hello', 'Greetings', 'Hi']
-#     peopleAtHome = []
-#     for member in itemRegistry.getItem('G_Presence_Family').getAllMembers():
-#         if member.state.toString() == 'OPEN': peopleAtHome.append(member.label)
-#     random.shuffle(peopleAtHome)
-#     msg = random.choice(greetings)
-#     for i in range(len(peopleAtHome)):
-#         person = peopleAtHome[i]
-#         msg += ' '+person
-#         if i+2 == len(peopleAtHome):
-#             msg +=' and'
-#         elif i+1 == len(peopleAtHome):
-#             msg +='.'
-#         elif i+2 < len(peopleAtHome):
-#             msg +=','
-#     tts(msg)
+def sayHello():
+    hour = DateTime.now().getHourOfDay()
+    if not (hour > 7 and hour < 22):
+        return
+    greetings = [greeting(), 'Hello', 'Greetings', 'Hi']
+    peopleAtHome = []
+    for member in itemRegistry.getItem('G_Presence_Family').getAllMembers():
+        if member.state.toString() == 'OPEN': peopleAtHome.append(member.label)
+    random.shuffle(peopleAtHome)
+    msg = random.choice(greetings)
+    for i in range(len(peopleAtHome)):
+        person = peopleAtHome[i]
+        msg += ' '+person
+        if i+2 == len(peopleAtHome):
+            msg +=' and'
+        elif i+1 == len(peopleAtHome):
+            msg +='.'
+        elif i+2 < len(peopleAtHome):
+            msg +=','
+    tts(msg)
 
 def onArmingModeChange(zone, newArmingMode, oldArmingMode):
     '''
@@ -63,21 +63,16 @@ def onArmingModeChange(zone, newArmingMode, oldArmingMode):
     if zone.zoneNumber == 1:
         if oldArmingMode is not None:
             Pushover.pushover('An Alarm Zone arming mode change for '+zone.name+' triggered, new value is: '+kw(ARMINGMODE, newArmingMode), PUSHOVER_DEF_DEV, PUSHOVER_PRIO['NORMAL'])
-            pass
 
         if newArmingMode == ARMINGMODE['DISARMED']:
-            #sendCommandCheckFirst('alarm_status_indicator_z1'+zone.zoneNumber, 'OFF')
-            ##sendCommandCheckFirst('alarm_status_indicator_z'+zone.zoneNumber, 'OFF') # Have to find out if this is working....
-            ##sendCommandCheckFirst('Wall_Plug_Bedroom_Fan', 'OFF')
-            ##sayHello()
-            pass
+            sendCommandCheckFirst('Alarm_Status_Indicator_1', 'OFF')
+            sendCommandCheckFirst('Wall_Plug_Bedroom_Fan', 'OFF')
+            sayHello()
         elif newArmingMode == ARMINGMODE['ARMED_HOME']:
-            #sendCommandCheckFirst('Wall_Plug_Bedroom_Fan', 'ON')
-            pass
+            sendCommandCheckFirst('Wall_Plug_Bedroom_Fan', 'ON')
 
         if newArmingMode != ARMINGMODE['DISARMED']:
-            #sendCommandCheckFirst('alarm_status_indicator_z1'+zone.zoneNumber, 'ON')
-            pass
+            sendCommandCheckFirst('Alarm_Status_Indicator_1', 'ON')
 
     log.debug('Custom function: onArmingModeChange: '+zone.name.decode('utf-8')+' ---> '+kw(ARMINGMODE, newArmingMode))
 
@@ -91,8 +86,7 @@ def onZoneStatusChange(zone, newZoneStatus, oldZoneStatus, errorMessage=None):
     if newZoneStatus == ZONESTATUS['ERROR']:
         errMes = 'Error when arming zone '+zone.name.decode('utf-8')+': '+errorMessage
         log.error(errMes)
-        #Fix pushover - have to adopt to new message
-        #Pushover.pushover(errMes, PUSHOVER_DEF_DEV, PUSHOVER_PRIO['HIGH'])
+        Pushover.pushover(errMes, PUSHOVER_DEF_DEV, PUSHOVER_PRIO['HIGH'])
 
     elif newZoneStatus == ZONESTATUS['ALERT']:
         # Get all sensors that have been tripped since 2 minutes regardless of their current state
@@ -113,26 +107,23 @@ def onZoneStatusChange(zone, newZoneStatus, oldZoneStatus, errorMessage=None):
                 msg +=', '
         msg = u'Alarm in zone '+zone.name.decode('utf-8')+'. '+msg
         log.error(msg)
-        # Should pushover error message?
 
         if zone.alarmTestMode:
             log.info('ideAlarm in TESTING MODE')
-            #tts(msg, PRIO['EMERGENCY'])
-            #Pushover.pushover(msg, PUSHOVER_DEF_DEV, PUSHOVER_PRIO['NORMAL'])
+            tts(msg, PRIO['EMERGENCY'])
+            Pushover.pushover(msg, PUSHOVER_DEF_DEV, PUSHOVER_PRIO['NORMAL'])
         else:
-            #tts(msg, PRIO['EMERGENCY'])
-            #Pushover.pushover(msg, PUSHOVER_DEF_DEV, PUSHOVER_PRIO['EMERGENCY'])
-            pass
+            tts(msg, PRIO['EMERGENCY'])
+            Pushover.pushover(msg, PUSHOVER_DEF_DEV, PUSHOVER_PRIO['EMERGENCY'])
 
     elif newZoneStatus == ZONESTATUS['TRIPPED']:
         if zone.zoneNumber == 1:
             alertText = u'Intrusion in '+zone.name.decode('utf-8')
-            #tts(alertText, PRIO['EMERGENCY'])
+            tts(alertText, PRIO['EMERGENCY'])
 
     elif newZoneStatus == ZONESTATUS['ARMING']:
         if zone.zoneNumber == 1:
-            #tts('sad cat', PRIO['HIGH'])
-            pass
+            tts('sad cat', PRIO['HIGH'])
 
 def onArmingWithOpenSensors(zone, armingMode):
     '''
@@ -158,9 +149,7 @@ def onArmingWithOpenSensors(zone, armingMode):
     if msg != '':
         msg = u'Open sections in '+zone.name.decode('utf-8')+'. '+msg
         log.error(msg)
-        #tts(msg, PRIO['HIGH'])
-        #should use pushover
-        pass
+        tts(msg, PRIO['HIGH'])
 
 def onNagTimer(zone, nagSensors):
     '''
@@ -186,10 +175,6 @@ def onNagTimer(zone, nagSensors):
     msg = u'Open sections in '+zone.name.decode('utf-8')+'. '+msg
     log.info(msg)
     if zone.zoneNumber in [1, 3, 4] and itemRegistry.getItem('Z1_Block_Nag_Timer').state != ON:
-        #tts(msg, PRIO['HIGH'])
-        #should use pushover
-        pass
+        tts(msg, PRIO['HIGH'])
     elif zone.zoneNumber == 2 and itemRegistry.getItem('Z2_Block_Nag').state != ON:
-        #tts(msg, PRIO['MODERATE'])
-        #should use pushover
-        pass
+        tts(msg, PRIO['MODERATE'])

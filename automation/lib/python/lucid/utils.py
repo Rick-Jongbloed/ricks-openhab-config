@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from org.eclipse.smarthome.core.types import UnDefType
 from org.eclipse.smarthome.core.library.types import IncreaseDecreaseType, NextPreviousType, OnOffType, OpenClosedType, PlayPauseType, RewindFastforwardType, StopMoveType, UpDownType, DecimalType
-from org.joda.time import DateTime
+import org.joda.time.DateTime as DateTime
 from org.joda.time.format import DateTimeFormat
-from openhab.log import logging, LOG_PREFIX
+from lucid.log import logging, LOG_PREFIX
+import lucid.config as config
 log = logging.getLogger(LOG_PREFIX + '.utils')
 
 # Get direct access to the JSR223 scope types and objects (for Jython modules imported into scripts)
-from openhab.jsr223.scope import events, itemRegistry
+from lucid.jsr223.scope import events, itemRegistry
 
 # Some useful dictionaries
 PRIO = {'LOW': 0, 'MODERATE': 1, 'HIGH': 2, 'EMERGENCY': 3}
@@ -214,13 +215,19 @@ def getEvent(inputs):
     hasReloadFinished()
     return Event(inputs)
 
+def pronounce(word):
+    '''Makes a word easier to pronounce for TTS'''
+    if word in config.pronounce:
+        return config.pronounce[word]
+    else:
+        return word
+
 def greeting():
-    timeOfDay= getItemValue('V_TimeOfDay', TIMEOFDAY['DAY'])
-    if timeOfDay == TIMEOFDAY['DAY']: greeting = 'Good day'
-    elif timeOfDay == TIMEOFDAY['EVENING']: greeting = 'Good evening'
-    elif timeOfDay == TIMEOFDAY['NIGHT']: greeting = 'Good night'
-    else: greeting = 'Good morning'
-    return greeting
+    timeOfDay = getItemValue('V_TimeOfDay', TIMEOFDAY['DAY'])
+    if timeOfDay in config.greeting:
+        return config.greeting[timeOfDay]
+    else:
+        return 'good day'
 
 def isBright():
     '''Returns true when light level is bright'''

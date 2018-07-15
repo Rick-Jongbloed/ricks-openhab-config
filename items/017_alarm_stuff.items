@@ -1,6 +1,5 @@
-// item for mylib,utils
-String    ZZZ_Test_Reload_Finished            "Mylib reload has finished switch [%s]"
-
+// item for mylib,utils,lucid
+String    ZZZ_Test_Reload_Finished            "Mylib reload has finished switch [%s]"   (G_PersistOnChange) // Used for checking if reloading 
 
 //Group G_Persist // Persist on change and system start up
 Group   g_alarm                       (g_restore)             //persistence
@@ -8,13 +7,13 @@ Group   g_alarm_arming_mode           (g_alarm)
 Group   g_alarm_status                (g_alarm)
 Group   g_virtual_device              (g_alarm)
 Group   g_timer
-
-// different zones (first use 3 zonder, 1 for every floor)
+//Group   g_alarm_z1, this this is probably to get the sensors belonging to a zone, not documented
+// different zones (plan is to use 4 zones, 1 for every floor + one for outside)
 
 // zone: outdoor/house
+
 Number  Z1_Arming_Mode                      "Z1 Arming Mode: [MAP(en_armingmode.map):%s]"       <alarm>         (g_alarm_arming_mode)
 Number  Z1_Status                           "Z1 Status: [MAP(en_zonestatus.map):%s]"            <alarm>         (g_virtual_device)
-
 
 Switch  Toggle_Z1_Armed_Away                "Toggle Z1 Armed Away"                              <switch>        (g_virtual_device)          {expire="1s,command=OFF"}
 Switch  Toggle_Z1_Armed_Home                "Toggle Z1 Armed Home"                              <switch>        (g_virtual_device)          {expire="1s,command=OFF"}
@@ -26,10 +25,12 @@ Switch  Z1_Exit_Timer                       "Z1 exit timer [%s]"                
 Switch  Z1_Nag_Timer                        "Z1 nag timer [%s]"                                 <time>          (g_timer)                   {expire="4m,command=OFF"}
 Switch  Z1_Alert_Max_Timer                  "Z1 alert maximum time [%s]"                        <time>          (g_timer)                   {expire="20s,command=OFF"}
 
+Switch  alarm_status_indicator_z1           "Z1 Alarm status indicator [%s]"                    <alarm>         (g_virtual_device)
 Switch	toggle_notification_message_pushover_alarm			                "Pushover notificatie voor Alarm"  	            <switch>				(g_testing)
 
 // keypad
 String  idealarm_keypad
+String  idealarm_keypad_full                "Entered code [%s]" 
 
 
 // // zone: first floor
