@@ -183,4 +183,4 @@ Group                       g_testing                           "Test/debug groe
 
 Group                       g_idealarm                          "Idealarm"          
 
-Group                       g_afvalkalender                     "Afvalkalender"
+Group                       g_afvalkalender                     "Afvalkalender"                                                 (g_outdoor)

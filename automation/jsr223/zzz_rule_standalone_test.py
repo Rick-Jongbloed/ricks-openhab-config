@@ -1,20 +1,22 @@
 
 # TESTING AREA
-# scriptExtension.importPreset("RuleSupport")
-# scriptExtension.importPreset("RuleSimple")
+scriptExtension.importPreset("RuleSupport")
+scriptExtension.importPreset("RuleSimple")
 
-# from openhab.triggers import ItemStateChangeTrigger
-# from openhab.log import logging
+from openhab.triggers import ItemStateChangeTrigger
+from openhab.log import logging
 
-# class MyRule111(SimpleRule):
-#     def __init__(self):
-#         self.triggers = [ ItemStateChangeTrigger("test_switch") ]
-#     def execute(self, module, input):
-#        logging.info("test")
-#        logging.info(input)
-#        logging.info(input.get("newState"))
-#        logging.info(input.get("oldState"))
-# automationManager.addRule(MyRule111())
+class MyRule112(SimpleRule):
+    def __init__(self):
+        self.triggers = [ ItemStateChangeTrigger("test_switch") ]
+    def execute(self, module, input):
+       logging.info("test")
+    #    logging.info(input)
+    #    logging.info(input.get("newState"))
+    #    logging.info(input.get("oldState"))
+    events.sendCommand("amazon_echo_dot_tts", "who does no-one listen to me. One time i will rule the world. bye") 
+    
+automationManager.addRule(MyRule112())
 
 
 # from org.eclipse.smarthome.automation import *

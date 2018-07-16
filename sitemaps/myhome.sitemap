@@ -172,15 +172,17 @@ sitemap myhome label="Ons huis"
 		}		
 	
 		Group item=g_outdoor
-//		{
-//				Group item=Outdoor_Driveway label="Voortuin" icon="terrace"			
-//				Group item=Outdoor_Backyard label="Achtertuin" icon="garden"			
-//				Group item=Outdoor_Shed label="Schuur" icon="house"
-//				Text item=Humidity
-//				Text item=Temperature
+		{
+				Group item=outdoor_driveway label="Voortuin" icon="terrace"			
+				Group item=outdoor_backyard label="Achtertuin" icon="garden"			
+				Group item=outdoor_shed label="Schuur" icon="house"
+				Group item=g_afvalkalender icon="calendar"
+				// groep voor camera
+				Text item=Humidity
+				Text item=Temperature
 //				Text item=Sunrise_Time
 //				Text item=Sunset_Time
-//			}
+			}
 	}
 	Frame label="ideAlarm" {
 		Group item=g_idealarm {
@@ -423,7 +425,7 @@ sitemap myhome label="Ons huis"
 					Switch item=chromecast_woonkamer_py_update				mappings=[ON="Update"]
 				}
 			}
-			Group item=g_afvalkalender
+			
 			Group item=g_uninitialized
 	  		Group item=g_monitoring
 			Group item=g_lastupdate

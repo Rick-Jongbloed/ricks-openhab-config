@@ -1,4 +1,4 @@
-DateTime	afvalkalender_packages							   "Afvalkalender plastic [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"				            <status>				(g_afvalkalender)
-DateTime	afvalkalender_paper		    					   "Afvalkalender papier [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"				            <status>				(g_afvalkalender)
-DateTime	afvalkalender_greengrey							   "Afvalkalender duo [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"				                <status>			    (g_afvalkalender)
+DateTime	afvalkalender_packages							   "Plastic [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"				            <status>				(g_afvalkalender)
+DateTime	afvalkalender_paper		    					   "Papier [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"				            <status>				(g_afvalkalender)
+DateTime	afvalkalender_greengrey							   "Duo [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"				                <status>			    (g_afvalkalender)
 String	    afvalkalender_earliest  						   "Eerstvolgende bak [%s]"				                                            <status>			    (g_afvalkalender)

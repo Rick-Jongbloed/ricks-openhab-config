@@ -3,10 +3,14 @@ scriptExtension.importPreset("RuleSupport")
 
 from openhab.log import logging
 from openhab.triggers import StartupTrigger, CronTrigger
+from openhab import date
+from openhab.actions import Pushover
+
 import datetime
 from dateutil.relativedelta import relativedelta
 import json
 import requests
+from java.util import Calendar, GregorianCalendar
 
 class rule_process_ical(SimpleRule):
     def __init__(self):
@@ -62,4 +66,33 @@ class rule_process_ical(SimpleRule):
             
             # update item
             events.postUpdate("afvalkalender_earliest",earliest_overall[earliest_overall_item])
+
 automationManager.addRule(rule_process_ical())
+
+class rule_notify_afvalkalender(SimpleRule):
+    def __init__(self):
+        self.triggers = [ 
+#                StartupTrigger(),           # for testing
+                CronTrigger("0 0 19 1/1 * ? *"),              # cron: check every day @ 19:00
+                CronTrigger("0 0 21 1/1 * ? *")              # cron: check every day @ 21:00 
+                ]
+    
+    def execute(self, module, input):
+        now = datetime.datetime.now()
+        earliest_garbage_retrieval_type = str(items.afvalkalender_earliest)
+        garbage_retrieval_datetime = getattr(items, earliest_garbage_retrieval_type)
+        logging.info (garbage_retrieval_datetime)
+        garbage_retrieval_datetime_python = date.to_python_datetime(garbage_retrieval_datetime)
+        delta = garbage_retrieval_datetime_python - now
+        if delta.days == 0: 
+            if earliest_garbage_retrieval_type == "afvalkalender_packages":
+                garbage_description = "plastic"
+            elif earliest_garbage_retrieval_type == "afvalkalender_paper":
+                garbage_description = "papier"
+            elif earliest_garbage_retrieval_type == "afvalkalender_greengrey":
+                garbage_description = "duo"
+            msg = "Morgenochtend wordt de " + garbage_description + "bak geleegd!"
+            logging.info("Posting msg: " + msg)
+            Pushover.sendPushoverMessage(Pushover.pushoverBuilder(msg))
+
+automationManager.addRule(rule_notify_afvalkalender())
