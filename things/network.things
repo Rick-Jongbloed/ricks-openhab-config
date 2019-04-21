@@ -38,10 +38,13 @@ network:pingdevice:192_168_1_81		"x Philips Hue bridge (192.168.1.81)" 					@ "B
 network:pingdevice:192_168_1_82		"x Amazon Echo Dot(192.168.1.82)" 						@ "Begane grond" 			[ hostname="192.168.1.82", retry=1, timeout=5000, refresh_interval=30000 ]  // OK
 network:pingdevice:192_168_1_83 	"x Honeywell EvoHome thermostaat (192.168.1.83)" 			@ "Begane grond" 			[ hostname="192.168.1.83", retry=1, timeout=5000, refresh_interval=30000 ]  // OK
 network:pingdevice:192_168_1_84 	"x Google Chromecast (192.168.1.84)" 					@ "Begane grond" 			[ hostname="192.168.1.84", retry=1, timeout=5000, refresh_interval=30000 ]  // OK
-network:pingdevice:192_168_1_85 	"x Xiaomi Gateway (192.168.1.85)" 						@ "Eerste verdieping"  		[ hostname="192.168.1.85", retry=1, timeout=5000, refresh_interval=30000 ]  // OK
+network:pingdevice:192_168_1_85 	"x Xiaomi Gateway 1(192.168.1.85)" 						@ "Eerste verdieping"  		[ hostname="192.168.1.85", retry=1, timeout=5000, refresh_interval=30000 ]  // OK
+//network:pingdevice:192_168_1_85 	"x Xiaomi Gateway 2 (192.168.1.86)" 						@ "Zolder"  		[ hostname="192.168.1.85", retry=1, timeout=5000, refresh_interval=30000 ]  // OK
+// 86
 
+network:pingdevice:192_168_1_87 	"Mysensors gateway (192.168.1.87)" 					        @ "Begane grond" 			[ hostname="192.168.1.87", retry=1, timeout=5000, refresh_interval=30000 ]
 //
-// 86 ... 99
+// 87 ... 99
 //
 network:pingdevice:192_168_1_100	"x Onkyo versterker (192.168.1.100)" 						@ "Begane grond" 			[ hostname="192.168.1.100", retry=1, timeout=5000, refresh_interval=30000 ]  // OK
 network:pingdevice:192_168_1_101    "Libreelec HTPC  (192.168.1.101)" 							@ "Begane grond" 			[ hostname="192.168.1.101", retry=1, timeout=5000, refresh_interval=30000 ] 
@@ -71,12 +74,12 @@ network:pingdevice:192_168_1_164 	"x Sonoff switch deurbel (192.168.1.164)" 		  
 //
 // 165 .... 170
 //
-network:pingdevice:192_168_1_171 	"x LIFX lamp eettafel (192.168.1.171)" 		            @ "Begane grond" 			[ hostname="192.168.1.171", retry=1, timeout=5000, refresh_interval=30000 ]
+network:pingdevice:192_168_1_171 	"x LIFX lamp eettafel (192.168.1.171)" 		            @ "Begane grond" 			    [ hostname="192.168.1.171", retry=1, timeout=5000, refresh_interval=30000 ]
 network:pingdevice:192_168_1_121 	"x Yeelight lamp gang (192.168.1.172)" 		            @ "Eerste verdieping" 			[ hostname="192.168.1.172", retry=1, timeout=5000, refresh_interval=30000 ]
 //
 // 172 .... 199
 //
-network:pingdevice:192_168_1_200 	"Mysensors gateway (192.168.1.200)" 					@ "Begane grond" 			[ hostname="192.168.1.200", retry=1, timeout=5000, refresh_interval=30000 ]
+
 network:pingdevice:192_168_1_201 	"x Domotica-01 (192.168.1.201)" 					        @ "Begane grond" 			[ hostname="192.168.1.201", retry=1, timeout=5000, refresh_interval=30000 ]
 network:pingdevice:192_168_1_202 	"x Domotica-02 (192.168.1.202)" 					        @ "Begane grond" 			[ hostname="192.168.1.202", retry=1, timeout=5000, refresh_interval=30000 ]
 network:pingdevice:192_168_1_203 	"x Domotica-03 (192.168.1.203)" 					        @ "Begane grond" 			[ hostname="192.168.1.203", retry=1, timeout=5000, refresh_interval=30000 ]

@@ -34,16 +34,18 @@ sitemap myhome label="Ons huis"
 
 				Frame label="Ventilatie"
 				{
-					Switch item=number_ventilator_level_set_manual 		label="Centrale afzuiging (★) []" 		mappings=['1'="1", '2'="2", '3'="3"] 																					visibility=[switch_ventilator_level_toggle_auto==ON]
-					Switch item=number_ventilator_level_set_manual 		label="Centrale afzuiging []" 			mappings=['1'="1", '2'="2", '3'="3", '4'="☆"]																			visibility=[switch_ventilator_level_toggle_auto==OFF]
+					Switch item=number_ventilator_level_set_manual 		label="Centrale afzuiging (★) []" 			mappings=['1'="1", '2'="2", '3'="3"] 																					visibility=[switch_ventilator_level_toggle_auto==ON]
+					Switch item=number_ventilator_level_set_manual 		label="Centrale afzuiging []" 				mappings=['1'="1", '2'="2", '3'="3", '4'="☆"]																			visibility=[switch_ventilator_level_toggle_auto==OFF]
 				}
 				
 				Frame label="Verwarming"
 				{
-					Text item=evohome_woonkamer_setpoint
+					Text item=evohome_woonkamer_setpoint_current
 					Text item=evohome_woonkamer_setpoint_status
-					Text item=evohome_woonkamer_temp
-					Text item=evohome_evotouch_systemmode
+					Text item=evohome_woonkamer_temperature
+					Text item=evohome_woonkamer_setpoint_permanent
+//					Switch item=evohome_woonkamer_setpoint_override_cancel		// moet eens uitzoeken hoe dit werkt
+//					Text item=evohome_evotouch_systemmode
 				}
 
 				Frame label="Multimedia"
@@ -107,15 +109,15 @@ sitemap myhome label="Ons huis"
 				Switch item=light_plafond_sunny_effect					label="Effect"					visibility=[light_plafond_sunny_toggle=="ON"]
 
 			}
-			Group item=FF_Bed label="Slaapkamer" icon="bedroom"
-			Group item=FF_Corridor label="Gang" icon="corridor"	
+			Group item=ff_bed label="Slaapkamer" icon="bedroom"
+			Group item=ff_corridor label="Gang" icon="corridor"	
 			{
 				Text item=sensor_badkamer_switch_status 				label="Deursensor"
 				Text item=sensor_kantoor_switch_status 					label="Kantoor"
 				Text item=sensor_sunny_switch_status 					label="Sunny"
 				Text item=sensor_toilet_1v_switch_status 				label="Toilet 1v"
 			}		
-			Group item=FF_Bathroom label="Toilet"
+			Group item=ff_bathroom label="Toilet"
 			{
 
 				Frame label="Ventilatie"
@@ -128,7 +130,7 @@ sitemap myhome label="Ons huis"
 					Text item=sensor_toilet_1v_switch_status 				label="Deursensor"
 				}
 			}			
-			Group item=FF_Shower label="Badkamer" icon="bath"			
+			Group item=ff_shower label="Badkamer" icon="bath"			
 			{
 				Frame label="Ventilatie"
 				{
@@ -305,7 +307,7 @@ sitemap myhome label="Ons huis"
 			{
 				Text item=temperature_outdoor							label="Buiten"
 				Text item=sensor_miflora_spiderplant_temperature 		label="Spiderplant"
-				Text item=evohome_woonkamer_temp 						label="Woonkamer (Evohome)"
+				Text item=evohome_woonkamer_temperature					label="Woonkamer (Evohome)"
 				Text item=sensor_weather_keuken_temperature 			label="Keuken (Afzuigkap)"
 						// emonlcd
 				Text item=open_energy_meter_emontx3_temp1 				label="Meterkast"
@@ -425,7 +427,19 @@ sitemap myhome label="Ons huis"
 					Switch item=chromecast_woonkamer_py_update				mappings=[ON="Update"]
 				}
 			}
-			
+			Group item=g_logreader_test
+			{
+				Frame label="openHAB Log Reader" 
+				{
+					Text item=logreader_errors
+					Text item=logreader_last_error
+					Text item=logreader_warnings
+					Text item=logreader_last_warning
+					//Text item=logreader_customs
+					//Text item=logreader_last_custom
+					Text item=logreader_log_rotated
+				}
+			}
 			Group item=g_uninitialized
 	  		Group item=g_monitoring
 			Group item=g_lastupdate

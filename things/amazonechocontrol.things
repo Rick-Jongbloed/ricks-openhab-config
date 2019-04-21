@@ -15,6 +15,6 @@ Bridge amazonechocontrol:account:account1 "Amazon Account" @ "Accounts" [amazonS
     //Thing echo                           echodot1            "Alexa"                 @ "Begane grond" [serialNumber="G090LF0970120B4P"]
     //Thing flashbriefingprofile              flashbriefing1      "Flash Briefing"        @ "Flash Briefings" 
     Thing echo                              echodot1            "Alexa"                         @ "Alexa" [serialNumber="G090LF0970120B4P"]
-    Thing flashbriefingprofile              flashbriefing1      "Flash Briefing Technical"      @ "Alexa" 
-    Thing flashbriefingprofile              flashbriefing2      "Flash Briefing Life Style"     @ "Alexa" 
+    //Thing flashbriefingprofile              flashbriefing1      "Flash Briefing Technical"      @ "Alexa" 
+    //Thing flashbriefingprofile              flashbriefing2      "Flash Briefing Life Style"     @ "Alexa" 
 }

@@ -1,3 +1,3 @@
-OPEN=Offline
-CLOSED=Online
+OFF=Offline
+ON=Online
 -=""

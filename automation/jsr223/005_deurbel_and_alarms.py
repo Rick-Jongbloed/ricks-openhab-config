@@ -5,10 +5,15 @@
 scriptExtension.importPreset("RuleSupport")
 scriptExtension.importPreset("RuleSimple")
 
+from lucid.rules import rule, addRule
+from lucid.log import logging, LOG_PREFIX
+
 from org.eclipse.smarthome.core.library.types import (HSBType, DecimalType, PercentType)
-from openhab.triggers import ItemCommandTrigger, StartupTrigger, ItemStateUpdateTrigger, item_triggered, ITEM_UPDATE, ItemStateChangeTrigger
-from openhab.log import logging
-from openhab.actions import Pushover, Mqtt
+#from openhab.triggers import ItemCommandTrigger, StartupTrigger, ItemStateUpdateTrigger, item_triggered, ITEM_UPDATE, ItemStateChangeTrigger
+from lucid.triggers import ItemCommandTrigger, ItemStateUpdateTrigger, item_triggered, ITEM_UPDATE, ItemStateChangeTrigger, StartupTrigger
+
+#from lucid.log import logging
+from lucid.actions import Pushover, Mqtt
 from subprocess import call
 
 import time         # timer
@@ -31,20 +36,22 @@ def rule_switch_deurbel_switch_topic_mqtt_changed():
 		item_state = str(items.switch_deurbel_switch_topic)
 	return item_state
 
-class rule_deurbel_pressed(SimpleRule):
-	def __init__(self):
-		self.group_settings 		= "settings_deurbel_action_selection"
-		
-		self.triggers = [
-							StartupTrigger(),
-							#ItemCommandTrigger("switch_deurbel_toggle", command="ON"),
-							#ItemCommandTrigger("deurbel_losgekoppeld", command="ON"),
-							ItemCommandTrigger("switch_deurbel_pressed"),
-							ItemStateChangeTrigger("switch_deurbel_pressed"),
-							ItemCommandTrigger("deurbel_setting_toggle_notification_sound_bel"),
-							ItemCommandTrigger("timer_rule_deurbel_init_hardware", command="OFF"),
-							ItemStateUpdateTrigger("switch_deurbel_button_toggle", state="TOGGLE")
-						]
+
+@rule
+class rule_deurbel_pressed(object):
+	# def __init__(self):
+	# 	self.group_settings 		= "settings_deurbel_action_selection"
+	def getEventTriggers(self):
+		return [ 
+					#ItemCommandTrigger("switch_deurbel_toggle", command="ON"),
+					#ItemCommandTrigger("deurbel_losgekoppeld", command="ON"),
+					StartupTrigger(),
+					ItemCommandTrigger("switch_deurbel_pressed"),
+					ItemStateChangeTrigger("switch_deurbel_pressed"),
+					ItemCommandTrigger("deurbel_setting_toggle_notification_sound_bel"),
+					ItemCommandTrigger("timer_rule_deurbel_init_hardware", command="OFF"),
+					ItemStateUpdateTrigger("switch_deurbel_button_toggle", state="TOGGLE")
+				]
 
 	# debug (log) module
 	def log_device_states(self):							# OK, works
@@ -118,8 +125,9 @@ class rule_deurbel_pressed(SimpleRule):
 		logging.info ("self.initialized: " + str(self.initialized))
 		return self
 
+
 	def read_settings(self):								# OK, works...
-		group = itemRegistry.getItem(self.group_settings)
+		group = itemRegistry.getItem("settings_deurbel_action_selection")
 		self.items_enabled = []
 		for item_setting in group.getAllMembers():					# could create a filter so the next line isn't needed.
 			if str(item_setting.state) == "ON":
@@ -196,16 +204,17 @@ class rule_deurbel_pressed(SimpleRule):
 				s.activate_actuators()
 			# else:
 			# 	logging.info("Doorbell not pressed")
-automationManager.addRule(rule_deurbel_pressed())
+addRule(rule_deurbel_pressed())
 
 # # all actions:
-class rule_toggle_notification_light_eettafel(SimpleRule):
-	def __init__(self):
-		self.item_name_actuator = "light_eettafel_color"
-		self.item_name_notification = "toggle_notification_light_eettafel"
-
-		self.triggers = [ ItemCommandTrigger(self.item_name_notification, command="ON") ]
-
+@rule
+class rule_toggle_notification_light_eettafel(object):
+	# def __init__(self):
+	# 	self.item_name_actuator = "light_eettafel_color"
+	# 	self.item_name_notification = "toggle_notification_light_eettafel"
+	
+	def getEventTriggers(self):
+		return [ ItemCommandTrigger("toggle_notification_light_eettafel", command="ON") ]
 
 	def execute(self, module, input):
 
@@ -234,33 +243,35 @@ class rule_toggle_notification_light_eettafel(SimpleRule):
 				self.bright = PercentType(100)
 				self.light = HSBType(self.hue,self.sat,self.bright)
 
-				events.sendCommand(self.item_name_actuator, str(self.light))
+				events.sendCommand(light_eettafel_color, str(self.light))
 				time.sleep (2)
 		events.sendCommand(self.item_name_actuator, "OFF")
 		events.postUpdate(self.item_name_notification, "OFF")
-automationManager.addRule(rule_toggle_notification_light_eettafel())
+addRule(rule_toggle_notification_light_eettafel())
 
-class rule_toggle_notification_sound_alexa(SimpleRule):
-	def __init__(self):
-		self.item_name = "toggle_notification_sound_alexa"
-		self.alarm_sound = "ECHO:system_alerts_melodic_01"
-		self.alexa_alarm_item = "amazon_echo_dot_play_alarm_sound"
+@rule
+class rule_toggle_notification_sound_alexa(object):
+	# def __init__(self):
+	# 	self.item_name = "toggle_notification_sound_alexa"
+	# 	self.alarm_sound = "ECHO:system_alerts_melodic_01"
+	# 	self.alexa_alarm_item = "amazon_echo_dot_play_alarm_sound"
 
-		self.triggers = [
-							ItemCommandTrigger(self.item_name, command="ON"),
-							ItemCommandTrigger(self.item_name, command="OFF")
-						]
+	def getEventTriggers(self):
+		return [ 
+						ItemCommandTrigger("toggle_notification_sound_alexa", command="ON"),
+						ItemCommandTrigger("toggle_notification_sound_alexa", command="OFF")
+					]
 
 	def execute(self, module, input):
 		input_command = input['command']
 		#logging.info(input_command)
 		if input['command'] == "ON":
-			logging.info(self.alexa_alarm_item)
-			logging.info(self.alarm_sound)
-			events.sendCommand(self.alexa_alarm_item, self.alarm_sound)
+			logging.info("amazon_echo_dot_play_alarm_sound")
+			logging.info("ECHO:system_alerts_melodic_01")
+			events.sendCommand("amazon_echo_dot_play_alarm_sound", "ECHO:system_alerts_melodic_01")
 		else:
-			events.sendCommand(self.alexa_alarm_item, "")
-automationManager.addRule(rule_toggle_notification_sound_alexa())
+			events.sendCommand("amazon_echo_dot_play_alarm_sound", "")
+addRule(rule_toggle_notification_sound_alexa())
 
 
 class rule_toggle_notification_message_pushover(SimpleRule):

@@ -3,7 +3,7 @@ Bridge  hue:bridge:0017884775f9                                 "Philips Hue Bri
      Things:
             0210                1                               "Lamp gang 1v"                                  @ "Eerste verdieping"           [ lightId="1" ]           
             0220                2                               "Kantoor lamp links"                            @ "Eerste verdieping"           [ lightId="2" ]
-            0220                3                               "Kantoor lamp midden"                           @ "Eerste verdieping"           [ lightId="3" ]
+            0220                3                               "Plafondlamp Slaapkamer"                        @ "Eerste verdieping"           [ lightId="3" ]
             0220                4                               "Kantoor lamp rechts"                           @ "Eerste verdieping"           [ lightId="4" ]
             0210                5                               "Plafondlamp Sunny"                             @ "Eerste verdieping"           [ lightId="5" ]
             0210                6                               "Lamp Spacecave"                                @ "Zolder"                      [ lightId="6" ]

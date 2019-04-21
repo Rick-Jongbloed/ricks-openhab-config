@@ -3,7 +3,9 @@ scriptExtension.importPreset("RuleSupport")
 
 
 from openhab.log import logging
-from openhab.triggers import StartupTrigger, ItemStateChangeTrigger, ItemCommandTrigger, item_triggered, ITEM_COMMAND
+#from openhab.triggers import StartupTrigger, ItemStateChangeTrigger, ItemCommandTrigger, item_triggered, ITEM_COMMAND
+from openhab.triggers import ItemStateChangeTrigger, ItemCommandTrigger, item_triggered, ITEM_COMMAND
+from lucid.triggers import StartupTrigger
 from openhab.actions import Mqtt, Pushover
 from time import sleep
      
@@ -18,6 +20,7 @@ class rule_automate_ventilation_new(SimpleRule):
                             ItemStateChangeTrigger("humid_status_badkamer_sensor")                          # luchtvochtigheid verandert in badkamer
                         ]
     def execute(self, module, input):
+        
         
         # reporting and logic on trigger
         #logging.info("TRIGGER: " + str(input))   
@@ -46,18 +49,32 @@ class rule_automate_ventilation_new(SimpleRule):
         # reporting logic stuff
         # logging.info("@@@@ number_ventilator_level_set_manual: " + str(items.number_ventilator_level_set_manual))
         
+
         # logging.info("@@@@ humid_status_badkamer_sensor: " + str(items.humid_status_badkamer_sensor))
 
         # # reporting hardware stuff
-        # logging.info("@@@@ switch_ventilator_toggle_1_startup_state: " + str(items.switch_ventilator_toggle_1_startup_state))
-        # logging.info("@@@@ switch_ventilator_toggle_1: " + str(items.switch_ventilator_toggle_1_startup_state))
-        # logging.info("@@@@ switch_ventilator_toggle_2_startup_state: " + str(items.switch_ventilator_toggle_2_startup_state))
-        # logging.info("@@@@ switch_ventilator_toggle_1: " + str(items.switch_ventilator_toggle_1_startup_state))
+        #logging.info("@@@@ switch_ventilator_toggle_1_startup_state: " + str(items.switch_ventilator_toggle_1_startup_state))
+        #logging.info("@@@@ switch_ventilator_toggle_1: " + str(items.switch_ventilator_toggle_1_startup_state))
+        #logging.info("@@@@ switch_ventilator_toggle_2_startup_state: " + str(items.switch_ventilator_toggle_2_startup_state))
+        #logging.info("@@@@ switch_ventilator_toggle_1: " + str(items.switch_ventilator_toggle_1_startup_state))
         
 
         # initializing hardware stuff
         if str(items.switch_ventilator_toggle_1_startup_state) == "NULL" or str(items.switch_ventilator_toggle_1_startup_state) == "NULL":
             
+            # extra switch (status_rule_automate_ventilation_init) voor status
+            #if (items.status_rule_automate_ventilation_init_counter == "NULL" or items.status_rule_automate_ventilation_init_counter == "Initialized"):
+            #    logging.info("@@@@ status_rule_automate_ventilation_init_counter: " + str(items.status_rule_automate_ventilation_init_counter))
+            #    counter = 0
+            #    logging.info("@@@@ counter variable: " + str(counter))
+            #    #events.postUpdate("status_rule_automate_ventilation_init_counter",counter)
+            #else:
+            #    logging.info("@@@@ status_rule_automate_ventilation_init_counter: " + str(items.status_rule_automate_ventilation_init_counter))
+            #    counter = items.status_rule_automate_ventilation_init_counter + 1
+            #    logging.info("@@@@ counter variable: " + str(counter))
+            #
+            #events.postUpdate("status_rule_automate_ventilation_init_counter",items.status_rule_automate_ventilation_init_counter + 1)
+
             # poll mqtt device
             logging.info("@@@@ Devices are in unknown state, polling MQTT")
             Mqtt.publish("mosquitto", "cmnd/" + "sonoff_switch_ventilatie" + "/status", "0")

@@ -3,14 +3,35 @@
 # Note! If you make any changes to this file, your script must reload this library
 
 # Rename this file to config.py and edit it to suit your needs
+from logging import DEBUG, INFO, WARNING, ERROR
 
-#not using autoremote
+
+# Define at what time of day you want morning, day,evening and night to start
+# Mandatory. Do not remove.
+timeOfDay = {
+    'morningStart': {'Hour': 7, 'Minute': 0},
+    'dayStart': {'Hour': 8, 'Minute': 0},
+    'eveningStart': {'Hour': 18, 'Minute': 0},
+    'nightStart': {'Hour': 22, 'Minute': 30}
+}
+
+# Mandatory. Do not remove.
+customItemNames = {
+    'sysLightLevel': 'Sys_LightLevel', # Item that holds daylight value in LUX
+    'reloadFinished': 'ZZZ_Test_Reload_Finished', # A persisted item that we use to check if releoad has finished
+    'allowTTSSwitch': 'Sonos_Allow_TTS_And_Sounds', # Switch item that must be ON to allow normal prio TTS and sounds to pass
+}
+
+# Mandatory. Do not remove.
+customGroupNames = {
+    'lockDevice': 'G_Lock', # Group Item name that you've assigned to all your door lock devices
+}
+
 autoremote = {
     'password': 'secret',
     'key': 'very-long-key-goes-here',
     }
 
-#not using clickatell
 clickatell = {
     'sender': '49123456789',
     'user': 'xxxxxxxxxxxx',
@@ -24,30 +45,45 @@ clickatell = {
 }
 
 # Weather Underground Config
+# Sensors for each type of weather data are put in a python list in priority order.
+# The first sensor that has been reporting data since the time out defined in sensor_dead_after_mins
+# will be used. If you don't have a certain sensor type, just put None (Don't put None inside a list)
+# Not mandatory. You may remove.
 wunderground = {
+    'logLevel': DEBUG,
     'stationdata': {
-        "weather_upload": True,
-        "station_id": "XXXXXXX",
-        "station_key": "xxxxxxxxxx",
-        "upload_frequency": 5
+        "weather_upload": False, # Set to True to actually upload anything
+        "station_id": "XXXXXX",
+        "station_key": "xxxxxxxx",
+        "upload_frequency": 1
     },
+    "sensor_dead_after_mins": 65, # If sensors hasn't reported within this time, they are presumed dead
     'sensors': {
-        "tempc": 'XXXXXXXXX',
-        "humidity": 'XXXXXXXXX',
-        "pressurembar": 'XXXXXXXXX',
-        "soiltempc": 'XXXXXXXXX',
-        "soilmoisture": 'XXXXXXXXX',
-        "winddir": 'XXXXXXXXX',
-        "windspeedms": 'XXXXXXXXX',
-        "windgustms": 'XXXXXXXXX',
-        "solarradiation": 'XXXXXXXXX'
+        "tempc": ['XXX', 'YYY'], # The script will pick the first sensor in the list that is not presumed dead
+        "humidity": [None],
+        "pressurembar": [None],
+        "rainhour": [None],
+        "raintoday": [None],
+        "soiltempc": [None],
+        "soilmoisture": [None],
+        "winddir": [None],
+        "windspeedms": [None], # Using a 10m avg device here will become much smoother
+        "windgustms": [None], # Using a 10m avg device here will become much smoother
+        "windgustdir": [None], # Using a 10m avg device here will become much smoother
+        "winddir_avg2m": [None],
+        "windspeedms_avg2m": [None],
+        "windgustms_10m": [None], # Do not set if using a 10m avg device for instant wind speed above
+        "windgustdir_10m": [None], # Do not set if using a 10m avg device for instant wind gust above
+        "solarradiation": ['XXXXXX', 'YYYYYYY'] # The script will pick the first solar light sensor in the list with the highest value
     }
 }
 
+# Mandatory. Do not remove.
 pronounce = {
     'Carlos': 'Carl'
 }
 
+# Mandatory. Do not remove.
 greeting = {
     0: 'Good night',
     1: 'Good morning',
@@ -79,7 +115,16 @@ sonos = {
         },
     }
 }
-
 idealarm = {
     'alarm_code': '1234'
+}
+
+button_config = {
+    'kitchen': {
+        'device_1': 'mihome:sensor_switch_aq2:158d0002134994:button'
+    },
+    'bedroom': {
+        'device_1': 'mihome:sensor_switch_aq2:158d0002134994',             # todo
+        'device_2': 'mihome:sensor_switch_aq2:158d0002134994'               # todo
+    }
 }

@@ -6,6 +6,8 @@ from org.joda.time.format import DateTimeFormat
 from lucid.log import logging, LOG_PREFIX
 import lucid.config as config
 log = logging.getLogger(LOG_PREFIX + '.utils')
+import random
+import time
 
 # Get direct access to the JSR223 scope types and objects (for Jython modules imported into scripts)
 from lucid.jsr223.scope import events, itemRegistry
@@ -24,9 +26,6 @@ WIND_TEXTS = {0: u'Calm to light breeze. 0â€“3,3 m/s', 1: u'Gentle breeze. 3,4â€
 
 # Some useful constants
 PUSHOVER_DEF_DEV = "d5833"
-EVERY_10_SECONDS = "0/10 * * * * ?"
-EVERY_15_SECONDS = "0/15 * * * * ?"
-EVERY_30_SECONDS = "0/30 * * * * ?"
 
 NULL = UnDefType.NULL
 UNDEF = UnDefType.UNDEF
@@ -41,66 +40,11 @@ def isActive(item):
     A door lock is special in the way that when it's locked its contacts are OPEN hence
     the value needs to be inverted for the alarm system to determine if it's 'active'
     '''
-    #log.debug(str(devState))
-    #if devState in [ON, OPEN, NULL, UNDEF]:
     active = False
     if item.state in [ON, OPEN]:
         active = True
-    active = not active if 'G_Lock' in item.groupNames else active
+    active = not active if config.customGroupNames['lockDevice'] in item.groupNames else active
     return active
-
-class Event:
-    def __init__(self, inputs):
-        self.isCron = False
-        self.isStartup = False
-        self.isCommand = False
-        self.isUpdate = False
-        self.itemName = None
-        self.state = None
-        self.isActive = None
-        self.item = None
-        self.isItem = False
-        if not inputs:
-            self.type = 'Cron'
-            self.isCron = True
-        elif 'event' in inputs:
-            # Type can be 'ItemStateEvent', 'ItemStateChangedEvent' or 'ItemCommandEvent'
-            self.type = inputs['event'].getType()
-        else:
-            self.type = 'Startup'
-            self.isStartup = True
-        _event = inputs.get('event')
-        if _event is not None:
-            self.itemName = _event.itemName
-            if 'getItemState' in dir(_event):
-                _state = _event.getItemState()
-                _oldState = _event.getOldItemState() if 'getOldItemState' in dir(_event) else None
-                self.isUpdate = True
-            elif 'getItemCommand' in dir(_event):
-                _state = _event.getItemCommand()
-                _oldState = None # object has no attribute 'getOldItemCommand'
-                self.isCommand = True
-            _attr = getattr(_state, 'intValue', None)
-            _oldAttr = getattr(_oldState, 'intValue', None)
-            if type(_state) in [IncreaseDecreaseType, NextPreviousType, OnOffType, OpenClosedType, PlayPauseType, RewindFastforwardType, StopMoveType, UpDownType]:
-                self.state = _state.toString()
-            elif _attr is not None:
-                self.state = _state.floatValue() if '.' in str(_state) else _state.intValue()
-            elif str(type(_state)) == 'NoneType':
-                self.state = None
-            else:
-                self.state = _state.toString()
-            if type(_oldState) in [IncreaseDecreaseType, NextPreviousType, OnOffType, OpenClosedType, PlayPauseType, RewindFastforwardType, StopMoveType, UpDownType]:
-                self.oldState = _oldState.toString()
-            elif _oldAttr is not None:
-                self.oldState = _oldState.floatValue() if '.' in str(_oldState) else _oldState.intValue()
-            elif str(type(_oldState)) == 'NoneType' or _oldState is None:
-                self.oldState = None
-            else:
-                self.oldState = _oldState.toString()
-            self.item = itemRegistry.getItem(self.itemName)
-            self.isActive = isActive(self.item)
-            self.isItem = True
 
 def curDateText():
     '''Get the current date and time as text'''
@@ -127,6 +71,8 @@ def getItemValue(itemName, defVal):
         return item.state.intValue() if item.state not in [NULL, UNDEF] else defVal
     elif type(defVal) is float:
         return item.state.floatValue() if item.state not in [NULL, UNDEF] else defVal
+    elif defVal in [ON, OFF, OPEN, CLOSED]:
+        return item.state if item.state not in [NULL, UNDEF] else defVal
     elif type(defVal) is str:
         return item.state.toString() if item.state not in [NULL, UNDEF] else defVal
     elif type(defVal) is DateTime:
@@ -152,10 +98,21 @@ def getLastUpdate(pe, item):
         log.warning('Exception when getting lastUpdate data for item: ' + unicode(item.name) + ', returning 1970-01-01T00:00:00Z')
         return DateTime(0)
 
-def postUpdateCheckFirst(itemName, newValue, sendCommand=False):
+def sendCommand(itemName, newValue):
+    '''
+    Sends a command to an item regerdless of it's current state
+    '''
+    events.sendCommand(itemName, str(newValue))
+
+def postUpdate(itemName, newValue):
+    '''
+    Posts an update to an item regerdless of it's current state
+    '''
+    events.postUpdate(itemName, str(newValue))
+
+def postUpdateCheckFirst(itemName, newValue, sendACommand=False, floatPrecision=-1):
     '''
     newValue must be of a type supported by the item
-
     Checks if the current state of the item is different than the desired new state.
     If the target state is the same, no update is posted.
     sendCommand vs postUpdate:
@@ -173,47 +130,59 @@ def postUpdateCheckFirst(itemName, newValue, sendCommand=False):
         if type(newValue) is int:
             compareValue = itemRegistry.getItem(itemName).state.intValue()
         elif type(newValue) is float:
-            compareValue = itemRegistry.getItem(itemName).state.floatValue()
+            '''
+            Unfortunately, most decimal fractions cannot be represented exactly as binary fractions.
+            A consequence is that, in general, the decimal floating-point numbers you enter are only
+            approximated by the binary floating-point numbers actually stored in the machine.
+            Therefore, comparing the stored value with the new value will most likely always result in a difference.
+            You can supply the named argument floatPrecision to round the value before comparing
+            '''
+            if floatPrecision == -1:
+                compareValue = itemRegistry.getItem(itemName).state.floatValue()
+            else:
+                compareValue = round(itemRegistry.getItem(itemName).state.floatValue(), floatPrecision)
+        elif newValue in [ON, OFF, OPEN, CLOSED]:
+            compareValue = itemRegistry.getItem(itemName).state
         elif type(newValue) is str:
             compareValue = itemRegistry.getItem(itemName).state.toString()
         else:
             log.error('Can not set '+str(itemName)+' to the unsupported type '+str(type(newValue))+'. Value: '+str(newValue))
     if (compareValue is not None and compareValue != newValue) or item.state in [NULL, UNDEF]:
-        if sendCommand:
+        if sendACommand:
             log.debug('New sendCommand value for '+itemName+' is '+str(newValue))
-            events.sendCommand(itemName, str(newValue))
+            sendCommand(itemName, newValue)
         else:
             log.debug('New postUpdate value for '+itemName+' is '+str(newValue))
-            events.postUpdate(itemName, str(newValue))
+            postUpdate(itemName, newValue)
         return True
     else:
         return False
 
-def sendCommandCheckFirst(itemName, newValue):
+def sendCommandCheckFirst(itemName, newValue, floatPrecision=-1):
     ''' See postUpdateCheckFirst '''
-    return postUpdateCheckFirst(itemName, newValue, True)
+    return postUpdateCheckFirst(itemName, newValue, sendACommand=True, floatPrecision=floatPrecision)
 
 def hasReloadFinished(exitScript=False):
     '''
-    Sometimes scripts are running before all Items have finished loading. Add a delay that will solve that.
+    Sometimes scripts are running before all Items have finished loading.
+    To prevent that, place an item, only for this purpose last in your last items file.(alphabetic order).
+    The item must be persisted on change.
+    We will check if this item has a specific value. Define the name of the item in your lucid config file.
+    Name it whatever you like but it's better if it starts with the last letter in the alphabet.
+    Example Item:
+    String ZZZ_Test_Reload_Finished (G_PersistOnChange)
     '''
+    HELLO = 'Hello'
     try:
-        if itemRegistry.getItem('ZZZ_Test_Reload_Finished').state.toString == 'Hello':
+        if itemRegistry.getItem(config.customItemNames['reloadFinished']).state.toString == HELLO:
             return True
     except:
         if exitScript: return False
-        import random
-        import time
         timeToSleep = 0.5+random.uniform(0, 1)
         time.sleep(timeToSleep)
         log.info('WAITING '+str(timeToSleep)+' sec !!!')
-        postUpdateCheckFirst('ZZZ_Test_Reload_Finished', 'Hello')
+        postUpdateCheckFirst(config.customItemNames['reloadFinished'], HELLO)
     return True
-
-def getEvent(inputs):
-    '''Returns the useful event object'''
-    hasReloadFinished()
-    return Event(inputs)
 
 def pronounce(word):
     '''Makes a word easier to pronounce for TTS'''
@@ -223,6 +192,9 @@ def pronounce(word):
         return word
 
 def greeting():
+    # To use this, you should set up astro.py as described
+    # here https://github.com/OH-Jython-Scripters/lucid/blob/master/Script%20Examples/astro.py
+    # It will take care of updating the item 'V_TimeOfDay' for you
     timeOfDay = getItemValue('V_TimeOfDay', TIMEOFDAY['DAY'])
     if timeOfDay in config.greeting:
         return config.greeting[timeOfDay]
@@ -231,19 +203,19 @@ def greeting():
 
 def isBright():
     '''Returns true when light level is bright'''
-    return getItemValue('Sys_LightLevel', LIGHT_LEVEL['BRIGHT']) == LIGHT_LEVEL['BRIGHT']
+    return getItemValue(config.customItemNames['sysLightLevel'], LIGHT_LEVEL['BRIGHT']) == LIGHT_LEVEL['BRIGHT']
 
 def isShady():
     '''Returns true when shady or darker than shady'''
-    return getItemValue('Sys_LightLevel', LIGHT_LEVEL['BRIGHT']) <= LIGHT_LEVEL['SHADY']
+    return getItemValue(config.customItemNames['sysLightLevel'], LIGHT_LEVEL['BRIGHT']) <= LIGHT_LEVEL['SHADY']
 
 def isDark():
     '''Returns true when dark or darker than dark'''
-    return getItemValue('Sys_LightLevel', LIGHT_LEVEL['BRIGHT']) <= LIGHT_LEVEL['DARK']
+    return getItemValue(config.customItemNames['sysLightLevel'], LIGHT_LEVEL['BRIGHT']) <= LIGHT_LEVEL['DARK']
 
 def isBlack():
     '''Returns true if black, otherwise false'''
-    return getItemValue('Sys_LightLevel', LIGHT_LEVEL['BRIGHT']) <= LIGHT_LEVEL['BLACK']
+    return getItemValue(config.customItemNames['sysLightLevel'], LIGHT_LEVEL['BRIGHT']) <= LIGHT_LEVEL['BLACK']
 
 '''
 				 Safety pig has arrived!

@@ -2,12 +2,12 @@
 //   ICONS MISSING!!!
 
 // Auto Rick // should be done via BLUETOOTH
-//Number      wifi_car_signal_dBm 							"Auto Rick: Sterkte wifi signaal [%d dBm]"					                                                (g_auto_rick, g_chart)									{ exec="<[/bin/sh@@-c@@/opt/openhab2/conf/scripts/detect_wifi_signal.sh Audi94466:3000:REGEX((.*))]" }
-//Number      wifi_car_signal_linear              			"Auto Rick: Sterkte wifi signaal [%.0f %]"									                                (g_auto_rick, g_chart)									
+//Number      wifi_car_signal_dBm 							"Auto Rick: Sterkte wifi signaal [%d dBm]"					                                                (g_auto_rick, g_chart, g_elastic_mqtt)									{ exec="<[/bin/sh@@-c@@/opt/openhab2/conf/scripts/detect_wifi_signal.sh Audi94466:3000:REGEX((.*))]" }
+//Number      wifi_car_signal_linear              			"Auto Rick: Sterkte wifi signaal [%.0f %]"									                                (g_auto_rick, g_chart, g_elastic_mqtt)									
 
 // telefoon Sunny -         192.168.1.10
 Switch		telefoon_sunny_net_online				        "Telefoon Sunny (net) [%s]"						                                    <network>				(g_telefoon_sunny, g_present)                       { channel="network:pingdevice:192_168_1_10:online" }          
-Number		telefoon_sunny_net_time					        "Telefoon Sunny (ping) [%.0f ms]"					                                <status>				(g_telefoon_sunny, g_chart)	                        { channel="network:pingdevice:192_168_1_10:latency" }
+Number		telefoon_sunny_net_time					        "Telefoon Sunny (ping) [%.0f ms]"					                                <status>				(g_telefoon_sunny, g_chart, g_elastic_mqtt)	                        { channel="network:pingdevice:192_168_1_10:latency" }
 DateTime	telefoon_sunny_net_lastseen				        "Telefoon Sunny (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"				            <calendar>				(g_telefoon_sunny, g_restore)                       { channel="network:pingdevice:192_168_1_10:lastseen" }
 
 Switch     telefoon_sunny_unifi_online                     "Telefoon Rick prive (U-status) [MAP(unifi.map):%s]"                                <presence>              (g_telefoon_sunny)                                  { channel="unifi:client:unifi_thuis:unifi_telefoon_sunny_prive:online" }
@@ -21,7 +21,7 @@ DateTime    telefoon_sunny_unifi_lastseen                   "Telefoon Rick prive
 
 // telefoon Rick prive -    192.168.1.11
 Switch		telefoon_rick_prive_net_online			    	"Telefoon Rick (net) [%s]"							                                <network>				(g_telefoon_rick_prive, g_present)                  { channel="network:pingdevice:192_168_1_11:online" }
-Number		telefoon_rick_prive_net_time					"Telefoon Rick (ping) [%.0f ms]"					                                <status>				(g_telefoon_rick_prive, g_chart)                    { channel="network:pingdevice:192_168_1_11:latency" }         
+Number		telefoon_rick_prive_net_time					"Telefoon Rick (ping) [%.0f ms]"					                                <status>				(g_telefoon_rick_prive, g_chart, g_elastic_mqtt)                    { channel="network:pingdevice:192_168_1_11:latency" }         
 DateTime	telefoon_rick_prive_net_lastseen				"Telefoon Rick (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"					        <calendar>				(g_telefoon_rick_prive, g_restore)                  { channel="network:pingdevice:192_168_1_11:lastseen" }            
 
 Switch     telefoon_rick_prive_unifi_online                "Telefoon Rick prive (status) [MAP(unifi.map):%s]"                                  <presence>              (g_telefoon_rick_prive)                             { channel="unifi:client:unifi_thuis:unifi_telefoon_rick_prive:online" }
@@ -34,7 +34,7 @@ DateTime    telefoon_rick_prive_unifi_lastseen              "Telefoon Rick prive
 
 // telefoon Rick werk -     192.168.1.12
 Switch		telefoon_rick_werk_net_online					"Telefoon Rick (werk) (net) [%s]"					                                <network>				(g_telefoon_rick_werk, g_present)                   { channel="network:pingdevice:192_168_1_12:online" }         
-Number		telefoon_rick_werk_net_time						"Telefoon Rick (werk) (ping) [%.0f ms]"				                                <status>				(g_telefoon_rick_werk, g_chart)                     { channel="network:pingdevice:192_168_1_12:latency" }         
+Number		telefoon_rick_werk_net_time						"Telefoon Rick (werk) (ping) [%.0f ms]"				                                <status>				(g_telefoon_rick_werk, g_chart, g_elastic_mqtt)                     { channel="network:pingdevice:192_168_1_12:latency" }         
 DateTime	telefoon_rick_werk_net_lastseen					"Telefoon Rick (werk) (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"			        <calendar>				(g_telefoon_rick_werk, g_restore)                   { channel="network:pingdevice:192_168_1_12:lastseen" }            
 
 Switch		telefoon_rick_werk_unifi_online	                "Telefoon Rick (werk) (U-online) [MAP(unifi.map):%s]"	                            <switch>			    (g_telefoon_rick_werk)                              { channel="unifi:client:unifi_thuis:unifi_telefoon_rick_werk:online" }
@@ -47,7 +47,7 @@ DateTime	telefoon_rick_werk_unifi_lastseen               "Telefoon Rick (werk) (
 
 // telefoon Claudia -       192.168.1.13
 Switch		telefoon_claudia_prive_net_online				"Telefoon Claudia (net) [%s]"						                                <network>				(g_telefoon_claudia_prive, g_present)               { channel="network:pingdevice:192_168_1_13:online" }          
-Number		telefoon_claudia_prive_net_time					"Telefoon Claudia (ping) [%.0f ms]"					                                <status>				(g_telefoon_claudia_prive, g_chart)	                { channel="network:pingdevice:192_168_1_13:latency" }
+Number		telefoon_claudia_prive_net_time					"Telefoon Claudia (ping) [%.0f ms]"					                                <status>				(g_telefoon_claudia_prive, g_chart, g_elastic_mqtt)	                { channel="network:pingdevice:192_168_1_13:latency" }
 DateTime	telefoon_claudia_prive_net_lastseen				"Telefoon Claudia (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"				        <calendar>				(g_telefoon_claudia_prive, g_restore)               { channel="network:pingdevice:192_168_1_13:lastseen" }
 
 Switch		telefoon_claudia_prive_unifi_online	            "Telefoon Claudia (U-online) [MAP(unifi.map):%s]"	                                <switch>			    (g_telefoon_claudia_prive)                          { channel="unifi:client:unifi_thuis:unifi_telefoon_claudia_prive:online" }
@@ -60,7 +60,7 @@ DateTime	telefoon_claudia_prive_unifi_lastseen           "Telefoon Claudia (U-La
 
 // tablet Rick -            192.168.1.14
 Switch		tablet_rick_net_online							"Tablet Rick (net) [%s]"							                                <network>				(g_tablet_rick, g_present)                          { channel="network:pingdevice:192_168_1_14:online" }         
-Number		tablet_rick_net_time							"Tablet Rick (ping) [%.0f ms]"						                                <status>				(g_tablet_rick, g_chart)                            { channel="network:pingdevice:192_168_1_14:latency" }         
+Number		tablet_rick_net_time							"Tablet Rick (ping) [%.0f ms]"						                                <status>				(g_tablet_rick, g_chart, g_elastic_mqtt)                            { channel="network:pingdevice:192_168_1_14:latency" }         
 DateTime	tablet_rick_net_lastseen						"Tablet Rick (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"					        <calendar>				(g_tablet_rick, g_restore)                          { channel="network:pingdevice:192_168_1_14:lastseen" }         
 
 Switch		tablet_rick_unifi_online	                    "Tablet Rick (U-online) [MAP(unifi.map):%s]"	                                    <switch>			    (g_tablet_rick)                                     { channel="unifi:client:unifi_thuis:unifi_tablet_rick_prive:online" }
@@ -74,7 +74,7 @@ DateTime	tablet_rick_unifi_lastseen                      "Tablet Rick (U-LastSee
 
 // e-reader Claudia -       192.168.1.15
 Switch		e_reader_claudia_net_online						"E-Reader Claudia (net) [%s]"						                                <network>				(g_e_reader_claudia, g_present)                     { channel="network:pingdevice:192_168_1_15:online" }         
-Number		e_reader_claudia_net_time						"E-Reader Claudia (ping) [%.0f ms]"					                                <status>				(g_e_reader_claudia, g_chart)	                    { channel="network:pingdevice:192_168_1_15:latency" }         
+Number		e_reader_claudia_net_time						"E-Reader Claudia (ping) [%.0f ms]"					                                <status>				(g_e_reader_claudia, g_chart, g_elastic_mqtt)	                    { channel="network:pingdevice:192_168_1_15:latency" }         
 DateTime	e_reader_claudia_net_lastseen					"E-Reader Claudia (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"				        <calendar>				(g_e_reader_claudia, g_restore)                     { channel="network:pingdevice:192_168_1_15:lastseen" }         
 
 // Contact		switch_deurbel_unifi_online	                                "Deurbel (U-online) [MAP(unifi.map):%s]"	                                            <switch>			    (g_sonoff_deurbel)                                                                  	                                                    { channel="unifi:client:unifi_thuis:unifi_sonoff_switch_deurbel:online" }
@@ -87,7 +87,7 @@ DateTime	e_reader_claudia_net_lastseen					"E-Reader Claudia (lastseen) [%1$td.%
 
 // tablet Sunny	- TODO
 //Switch		tablet_sunny_net_online							"Tablet Sunny (net) [%s]"							                                <network>				(g_tablet_sunny, g_present)              //           { channel="network:pingdevice:192_168_1_11:online" }         
-//Number		tablet_sunny_net_time							"Tablet Sunny (ping) [%.0f ms]"						                                <status>				(g_tablet_sunny, g_chart)                //           { channel="network:pingdevice:192_168_1_11:latency" }         
+//Number		tablet_sunny_net_time							"Tablet Sunny (ping) [%.0f ms]"						                                <status>				(g_tablet_sunny, g_chart, g_elastic_mqtt)                //           { channel="network:pingdevice:192_168_1_11:latency" }         
 //DateTime	tablet_sunny_net_lastseen						"Tablet Sunny (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"					        <calendar>				(g_tablet_sunny, g_restore)              //           { channel="network:pingdevice:192_168_1_11:lastseen" }         
 
 // Contact		switch_deurbel_unifi_online	                                "Deurbel (U-online) [MAP(unifi.map):%s]"	                                            <switch>			    (g_sonoff_deurbel)                                                                  	                                                    { channel="unifi:client:unifi_thuis:unifi_sonoff_switch_deurbel:online" }
@@ -101,7 +101,7 @@ DateTime	e_reader_claudia_net_lastseen					"E-Reader Claudia (lastseen) [%1$td.%
 
 // laptop Rick prive
 Switch		laptop_rick_prive_net_online					"Laptop Rick (prive) (net) [%s]"					                                <network>				(g_laptop_rick_prive, g_present)                    { channel="network:pingdevice:192_168_1_17:online" }         
-Number		laptop_rick_prive_net_time						"Laptop Rick (prive) (ping) [%.0f ms]"				                                <status>				(g_laptop_rick_prive, g_chart)                      { channel="network:pingdevice:192_168_1_17:latency" }         
+Number		laptop_rick_prive_net_time						"Laptop Rick (prive) (ping) [%.0f ms]"				                                <status>				(g_laptop_rick_prive, g_chart, g_elastic_mqtt)                      { channel="network:pingdevice:192_168_1_17:latency" }         
 DateTime	laptop_rick_prive_net_lastseen					"Laptop Rick (prive) (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"			   	    <calendar>				(g_laptop_rick_prive, g_restore)                    { channel="network:pingdevice:192_168_1_17:lastseen" }         
 
 Switch		laptop_rick_prive_unifi_online	                "Deurbel (U-online) [MAP(unifi.map):%s]"	                                        <switch>			    (g_laptop_rick_prive)                               { channel="unifi:client:unifi_thuis:unifi_laptop_rick_prive_wifi:online" }
@@ -113,7 +113,7 @@ Number		laptop_rick_prive_unifi_uptime	                "Laptop Rick (prive) (U-U
 DateTime	laptop_rick_prive_unifi_lastseen                "Laptop Rick (prive) (U-LastSeen) [%1$tH:%1$tM:%1$tS]"                              <time>	                (g_laptop_rick_prive)	                            { channel="unifi:client:unifi_thuis:unifi_laptop_rick_prive_wifi:lastSeen" }
 
 Switch		laptop_rick_prive_fixed_net_online		        "Laptop Rick (prive) fixed (net) [%s]"				                                <network>				(g_laptop_rick_prive, g_present)                    { channel="network:pingdevice:192_168_1_16:online" }         
-Number		laptop_rick_prive_fixed_net_time				"Laptop Rick (prive) fixed (ping) [%.0f ms]"		                                <status>				(g_laptop_rick_prive, g_chart)                      { channel="network:pingdevice:192_168_1_16:latency" }         
+Number		laptop_rick_prive_fixed_net_time				"Laptop Rick (prive) fixed (ping) [%.0f ms]"		                                <status>				(g_laptop_rick_prive, g_chart, g_elastic_mqtt)                      { channel="network:pingdevice:192_168_1_16:latency" }         
 DateTime	laptop_rick_prive_fixed_net_lastseen			"Laptop Rick (prive) fixed (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"		        <calendar>				(g_laptop_rick_prive, g_restore)                    { channel="network:pingdevice:192_168_1_16:lastseen" }         
 
 Switch		laptop_rick_prive_fixed_unifi_online	        "Laptop Rick (prive) fixed (U-online) [MAP(unifi.map):%s]"	                        <switch>			    (g_laptop_rick_prive)                               { channel="unifi:client:unifi_thuis:unifi_laptop_rick_prive_lan:online" }
@@ -127,7 +127,7 @@ DateTime	laptop_rick_prive_fixed_unifi_lastseen          "Laptop Rick (prive) fi
 
 // laptop Rick werk (fixed (192.168.1.18) & wifi (192.168.1.19))
 Switch		laptop_rick_werk_fixed_net_online				"Laptop Rick (werk) fixed (net) [%s]"				                                <network>				(g_laptop_rick_werk, g_present)                     { channel="network:pingdevice:192_168_1_18:online" }         
-Number		laptop_rick_werk_fixed_net_time					"Laptop Rick (werk) fixed (ping) [%.0f ms]"			                                <status>				(g_laptop_rick_werk, g_chart)                       { channel="network:pingdevice:192_168_1_18:latency" }         
+Number		laptop_rick_werk_fixed_net_time					"Laptop Rick (werk) fixed (ping) [%.0f ms]"			                                <status>				(g_laptop_rick_werk, g_chart, g_elastic_mqtt)                       { channel="network:pingdevice:192_168_1_18:latency" }         
 DateTime	laptop_rick_werk_fixed_net_lastseen				"Laptop Rick (werk) fixed (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"	            <calendar>				(g_laptop_rick_werk, g_restore)                     { channel="network:pingdevice:192_168_1_18:lastseen" }         
 
 // todo
@@ -140,7 +140,7 @@ DateTime	laptop_rick_werk_fixed_net_lastseen				"Laptop Rick (werk) fixed (lasts
 // DateTime	laptop_rick_werk_fixed_unifi_lastseen           "Laptop Rick (werk) fixed (U-LastSeen) [%1$tH:%1$tM:%1$tS]"                         <time>	                (g_laptop_rick_werk)	                            { channel="unifi:client:unifi_thuis:unifi_laptop_rick_werk_lan:lastSeen" }
 
 Switch		laptop_rick_werk_net_online						"Laptop Rick (werk) (net) [%s]"						                                <network>				(g_laptop_rick_werk, g_present)                     { channel="network:pingdevice:192_168_1_19:online" }
-Number		laptop_rick_werk_net_time						"Laptop Rick (werk) (ping) [%.0f ms]"				                                <status>				(g_laptop_rick_werk, g_chart)                       { channel="network:pingdevice:192_168_1_19:latency" }
+Number		laptop_rick_werk_net_time						"Laptop Rick (werk) (ping) [%.0f ms]"				                                <status>				(g_laptop_rick_werk, g_chart, g_elastic_mqtt)                       { channel="network:pingdevice:192_168_1_19:latency" }
 DateTime    laptop_rick_werk_net_lastseen					"Laptop Rick (werk) (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"                     <calendar>				(g_laptop_rick_werk, g_restore)                     { channel="network:pingdevice:192_168_1_19:lastseen" }            
 
 Switch		laptop_rick_werk_unifi_online	                "Laptop Rick (werk) (U-online) [MAP(unifi.map):%s]"	                                <switch>			    (g_laptop_rick_werk)                        	    { channel="unifi:client:unifi_thuis:unifi_laptop_rick_werk_wifi:online" }
@@ -155,7 +155,7 @@ DateTime	laptop_rick_werk_unifi_lastseen                 "Laptop Rick (werk) (U-
 
 // laptop Sunny
 Switch		laptop_sunny_net_online							"Laptop Sunny (net) [%s]"							                                <network>				(g_laptop_sunny, g_present)                         { channel="network:pingdevice:192_168_1_23:online" }         
-Number		laptop_sunny_net_time							"Laptop Sunny (ping) [%.0f ms]"						                                <status>				(g_laptop_sunny, g_chart)                           { channel="network:pingdevice:192_168_1_23:latency" }         
+Number		laptop_sunny_net_time							"Laptop Sunny (ping) [%.0f ms]"						                                <status>				(g_laptop_sunny, g_chart, g_elastic_mqtt)                           { channel="network:pingdevice:192_168_1_23:latency" }         
 DateTime	laptop_sunny_net_lastseen						"Laptop Sunny (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"					        <calendar>				(g_laptop_sunny, g_restore)                         { channel="network:pingdevice:192_168_1_23:lastseen" }         
 
 Switch		laptop_sunny_unifi_online	                    "Laptop Sunny (U-online) [MAP(unifi.map):%s]"	                                    <switch>			    (g_sonoff_deurbel)                      { channel="unifi:client:unifi_thuis:unifi_laptop_sunny_prive_wifi:online" }
@@ -167,7 +167,7 @@ Number		laptop_sunny_unifi_uptime	                    "Laptop Sunny (U-Uptime) [
 DateTime	laptop_sunny_unifi_lastseen                     "Laptop Sunny (U-LastSeen) [%1$tH:%1$tM:%1$tS]"                                 	 <time>	                (g_laptop_sunny)	                                { channel="unifi:client:unifi_thuis:unifi_laptop_sunny_prive_wifi:lastSeen" }
 
 Switch		laptop_sunny_fixed_net_online					"Laptop Sunny fixed (net) [%s]"						                                <network>				(g_laptop_sunny, g_present)                         { channel="network:pingdevice:192_168_1_22:online" }         
-Number		laptop_sunny_fixed_net_time						"Laptop Sunny fixed (ping) [%s]"					                                <status>				(g_laptop_sunny, g_chart)                           { channel="network:pingdevice:192_168_1_22:latency" }         
+Number		laptop_sunny_fixed_net_time						"Laptop Sunny fixed (ping) [%s]"					                                <status>				(g_laptop_sunny, g_chart, g_elastic_mqtt)                           { channel="network:pingdevice:192_168_1_22:latency" }         
 DateTime	laptop_sunny_fixed_net_lastseen					"Laptop Sunny fixed (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"				        <calendar>				(g_laptop_sunny, g_restore)                         { channel="network:pingdevice:192_168_1_22:lastseen" }         
 
 // Contact		switch_deurbel_unifi_online	                                "Deurbel (U-online) [MAP(Unifi.map):%s]"	                                            <switch>			    (g_sonoff_deurbel)                                                                  	                                                    { channel="unifi:client:unifi_thuis:unifi_sonoff_switch_deurbel:online" }
@@ -180,7 +180,7 @@ DateTime	laptop_sunny_fixed_net_lastseen					"Laptop Sunny fixed (lastseen) [%1$
 
 // laptop Claudia
 Switch		laptop_claudia_net_online						"Laptop Claudia (net) [%s]"							                                <network>				(g_laptop_claudia_prive, g_present)                 { channel="network:pingdevice:192_168_1_21:online" }         
-Number		laptop_claudia_net_time							"Laptop Claudia (ping) [%.0f ms]"					                                <status>				(g_laptop_claudia_prive, g_chart)	                { channel="network:pingdevice:192_168_1_21:latency" }         
+Number		laptop_claudia_net_time							"Laptop Claudia (ping) [%.0f ms]"					                                <status>				(g_laptop_claudia_prive, g_chart, g_elastic_mqtt)	                { channel="network:pingdevice:192_168_1_21:latency" }         
 DateTime	laptop_claudia_net_lastseen						"Laptop Claudia (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"					        <status>				(g_laptop_claudia_prive, g_restore)                 { channel="network:pingdevice:192_168_1_21:lastseen" }         
 
 Switch		laptop_claudia_unifi_online	                    "Laptop Claudia (U-online) [MAP(unifi.map):%s]"	                                    <switch>			    (g_laptop_claudia_prive)                            { channel="unifi:client:unifi_thuis:unifi_laptop_claudia_prive_wifi:online" }
@@ -192,7 +192,7 @@ Number		laptop_claudia_unifi_uptime	                    "Laptop Claudia (U-Uptim
 DateTime	laptop_claudia_unifi_lastseen                   "Laptop Claudia (U-LastSeen) [%1$tH:%1$tM:%1$tS]"                                 	<time>	                (g_laptop_claudia_prive)	                        { channel="unifi:client:unifi_thuis:unifi_laptop_claudia_prive_wifi:lastSeen" }
 
 Switch		laptop_claudia_fixed_net_online					"Laptop Claudia fixed (net) [%s]"					                                <network>				(g_laptop_claudia_prive, g_present)                 { channel="network:pingdevice:192_168_1_20:online" }         
-Number		laptop_claudia_fixed_net_time					"Laptop Claudia fixed (ping) [%.0f ms]"				                                <status>				(g_laptop_claudia_prive, g_chart)                   { channel="network:pingdevice:192_168_1_20:latency" }         
+Number		laptop_claudia_fixed_net_time					"Laptop Claudia fixed (ping) [%.0f ms]"				                                <status>				(g_laptop_claudia_prive, g_chart, g_elastic_mqtt)                   { channel="network:pingdevice:192_168_1_20:latency" }         
 DateTime	laptop_claudia_fixed_net_lastseen				"Laptop Claudia fixed (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"			        <calendar>				(g_laptop_claudia_prive, g_restore)                 { channel="network:pingdevice:192_168_1_20:lastseen" }         
 
 // Contact		switch_deurbel_unifi_online	                                "Deurbel (U-online) [MAP(Unifi.map):%s]"	                                            <switch>			    (g_sonoff_deurbel)                                                                  	                                                    { channel="unifi:client:unifi_thuis:unifi_sonoff_switch_deurbel:online" }
@@ -205,5 +205,5 @@ DateTime	laptop_claudia_fixed_net_lastseen				"Laptop Claudia fixed (lastseen) [
 
 // telefoon Extra 
 // Switch		telefoon_extra_net_online						"Telefoon Extra (net) [%s]"							                            <network>				(g_telefoon_extra, g_present)                   { channel="network:pingdevice:192_168_1_11:online" }         
-// Number		telefoon_extra_net_time							"Telefoon Extra (ping) [%.0f ms]"					                            <status>				(g_telefoon_extra, g_chart)                     { channel="network:pingdevice:192_168_1_11:latency" }         
+// Number		telefoon_extra_net_time							"Telefoon Extra (ping) [%.0f ms]"					                            <status>				(g_telefoon_extra, g_chart, g_elastic_mqtt)                     { channel="network:pingdevice:192_168_1_11:latency" }         
 // DateTime	    telefoon_extra_net_lastseen						"Telefoon Extra (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"				        <calendar>				(g_telefoon_extra, g_restore)                   { channel="network:pingdevice:192_168_1_11:lastseen" }         

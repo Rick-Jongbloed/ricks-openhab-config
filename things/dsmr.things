@@ -1,0 +1,10 @@
+// =============== DSMR BINDING ====================
+//Bridge dsmr:dsmrBridge:fe7bd8da "P1 Meter (Gas/electriciteit)" @ "Begane grond"		[serialPort="/dev/pts/3"] {
+//Bridge dsmr:dsmrBridge:fe7bd8da                         "P1 Meter (Gas/electriciteit)"  @ "Begane grond"		[ serialPort="/dev/ttyUSB-P1", portsettings="115200 8n1" ] {
+Bridge dsmr:dsmrBridge:fe7bd8da                         "P1 Meter (Gas/electriciteit)"  @ "Begane grond"		[ serialPort="/dev/ttyUSB-P1-V"] {
+    Things:
+        device_v5 				dsmr_device_v5 			"DSMR Device meter V5"	        @ "Begane grond"                    [ channel=-1 ] 
+        electricity_v5_0 		dsmr_electricity_v5 	"DSMR Electicity meter"	        @ "Begane grond"	                [ channel=0 ]
+		m3_v5_0					dsmr_gas_v5				"DSMR Gas meter"    	        @ "Begane grond"                	[ channel=1 ]
+}
+

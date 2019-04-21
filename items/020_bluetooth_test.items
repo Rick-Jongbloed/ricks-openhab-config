@@ -1,0 +1,3 @@
+Switch      bluetooth_adapter_discovering                                        "Bluetooth Adapter Discovering [%s]"                                                                                                     { channel="bluetooth:adapter:001A7DDA7113:discovering" }
+Switch      bluetooth_adapter_discovery_control                                  "Bluetooth Adapter Discovery control [%s]"                                                                                               { channel="bluetooth:adapter:001A7DDA7113:discovering-control" }
+DateTime    bluetooth_adapter_last_updated                                       "Last updated [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"                                { channel="bluetooth:adapter:001A7DDA7113:last-updated" }

@@ -1,48 +1,48 @@
-from org.eclipse.smarthome.automation import Visibility
-from org.eclipse.smarthome.automation.handler import TriggerHandler
-from openhab.jsr223 import scope
-import openhab
+# from org.eclipse.smarthome.automation import Visibility
+# from org.eclipse.smarthome.automation.handler import TriggerHandler
+# from openhab.jsr223 import scope
+# import openhab
 
 
 
-scope.scriptExtension.importPreset("RuleSupport")
-scope.scriptExtension.importPreset("RuleFactories")
+# scope.scriptExtension.importPreset("RuleSupport")
+# scope.scriptExtension.importPreset("RuleFactories")
 
-class _StartupTriggerHandlerFactory(scope.TriggerHandlerFactory):
+# class _StartupTriggerHandlerFactory(scope.TriggerHandlerFactory):
         
-    class Handler(TriggerHandler):
-        def __init__(self, trigger):
-            self.trigger = trigger
+#     class Handler(TriggerHandler):
+#         def __init__(self, trigger):
+#             self.trigger = trigger
             
-        def setRuleEngineCallback(self, rule_engine_callback):
-            rule_engine_callback.triggered(self.trigger, {'startup': True})
+#         def setRuleEngineCallback(self, rule_engine_callback):
+#             rule_engine_callback.triggered(self.trigger, {'startup': True})
             
-        def dispose(self):
-            pass
+#         def dispose(self):
+#             pass
         
-    def get(self, trigger):
-        return _StartupTriggerHandlerFactory.Handler(trigger)
+#     def get(self, trigger):
+#         return _StartupTriggerHandlerFactory.Handler(trigger)
     
-    def ungetHandler(self, module, ruleUID, handler):
-        pass
+#     def ungetHandler(self, module, ruleUID, handler):
+#         pass
     
-    def dispose(self):
-        pass
+#     def dispose(self):
+#         pass
     
 
-openhab.STARTUP_MODULE_ID = "jsr223.StartupTrigger"
+# openhab.STARTUP_MODULE_ID = "jsr223.StartupTrigger"
 
-def scriptLoaded(*args):
-    scope.automationManager.addTriggerHandler(
-        openhab.STARTUP_MODULE_ID, 
-        _StartupTriggerHandlerFactory())
+# def scriptLoaded(*args):
+#     scope.automationManager.addTriggerHandler(
+#         openhab.STARTUP_MODULE_ID, 
+#         _StartupTriggerHandlerFactory())
 
-    scope.automationManager.addTriggerType(scope.TriggerType(
-        openhab.STARTUP_MODULE_ID, [],
-        "the rule is activated", 
-        "Triggers when a rule is activated the first time",
-        set(), Visibility.VISIBLE, []))
+#     scope.automationManager.addTriggerType(scope.TriggerType(
+#         openhab.STARTUP_MODULE_ID, [],
+#         "the rule is activated", 
+#         "Triggers when a rule is activated the first time",
+#         set(), Visibility.VISIBLE, []))
     
-def scriptUnloaded():
-    scope.automationManager.removeHandler(openhab.STARTUP_MODULE_ID)
-    scope.automationManager.removeModuleType(openhab.STARTUP_MODULE_ID)
+# def scriptUnloaded():
+#     scope.automationManager.removeHandler(openhab.STARTUP_MODULE_ID)
+#     scope.automationManager.removeModuleType(openhab.STARTUP_MODULE_ID)

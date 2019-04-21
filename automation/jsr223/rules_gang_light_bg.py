@@ -3,7 +3,10 @@ scriptExtension.importPreset("RuleSimple")
 scriptExtension.importPreset("RuleSupport")
 
 from openhab.log import logging
-from openhab.triggers import StartupTrigger, ItemStateChangeTrigger, ItemCommandTrigger, item_triggered, ITEM_COMMAND, ItemStateUpdateTrigger
+#from openhab.triggers import StartupTrigger, ItemStateChangeTrigger, ItemCommandTrigger, item_triggered, ITEM_COMMAND, ItemStateUpdateTrigger
+from openhab.triggers import ItemStateChangeTrigger, ItemCommandTrigger, item_triggered, ITEM_COMMAND, ItemStateUpdateTrigger
+from lucid.triggers import StartupTrigger
+
 from openhab.actions import Mqtt, Pushover
 from time import sleep
      

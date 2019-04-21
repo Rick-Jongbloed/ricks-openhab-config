@@ -1,0 +1,21 @@
+// // mysensors stuff
+// node get name
+// node get ??? 
+// node get mysensors version nr 
+// node get sketch version nr
+
+String		sensor_controller_ventilation_power_1									"Livolo power line 1 (reading) [%s]"							                                        <light> 				(g_arduino_mysensors_gateway)					                                                                                            { mqtt="<[mosquitto:mygateway1-out/10/21/1/0/17:state:default]" }
+String		sensor_controller_ventilation_power_2									"Livolo power line 2 (reading) [%s]"							                                        <fan> 				    (g_arduino_mysensors_gateway)					                                                                                            { mqtt="<[mosquitto:mygateway1-out/10/22/1/0/17:state:default]" }
+Switch      switch_controller_ventilation_relay_1									"Livolo relay 1 (switch) [%s]"							                                        <light> 				(g_arduino_mysensors_gateway)					                                                                                                    { mqtt=">[mosquitto:mygateway1-in/10/1/2/1/2:command:*:MAP(mysensors.map)], <[mosquitto:mygateway1-out/10/1/2/1/2:state:MAP(mysensors.map)]" }
+Switch      switch_controller_ventilation_relay_2									"Livolo relay 2 (switch) [%s]"							                                        <light> 				(g_arduino_mysensors_gateway)					                                                                                                    { mqtt=">[mosquitto:mygateway1-in/10/2/2/1/2:command:*:MAP(mysensors.map)], <[mosquitto:mygateway1-out/10/2/2/1/2:state:MAP(mysensors.map)]" }
+
+// livolo switch nog aan/uitschakelen
+Switch		switch_livolo_button_1									    "Livolo knop 1 [%s]"														            <fan>                   (g_livolo_kitchen, gf_living,g_arduino_mysensors_gateway)		                 
+Switch		switch_livolo_button_2									    "Livolo knop 2 [%s]"														            <light>                 (g_livolo_kitchen, gf_living,g_arduino_mysensors_gateway)                        
+
+Switch		switch_livolo_button_command								"Livolo knop command [%s]"														        <light>                 (g_livolo_kitchen, gf_living,g_arduino_mysensors_gateway)                                                                                                               { channel="rfxcom:lighting5:9bcd2975:command"}                                   
+Contact		switch_livolo_button_contact								"Livolo knop contact [%s]"														        <light>                 (g_livolo_kitchen, gf_living,g_arduino_mysensors_gateway)                                                                                                               { channel="rfxcom:lighting5:9bcd2975:contact"}                                   
+Dimmer		switch_livolo_button_dimming_level							"Livolo knop dimmingLevel [%s]"														    <light>                 (g_livolo_kitchen, gf_living,g_arduino_mysensors_gateway)                                                                                                               { channel="rfxcom:lighting5:9bcd2975:dimmingLevel"}                                   
+Number		switch_livolo_button_mood								    "Livolo knop mood [%s]"														            <light>                 (g_livolo_kitchen, gf_living,g_arduino_mysensors_gateway)                                                                                                               { channel="rfxcom:lighting5:9bcd2975:mood"}                                   
+Number		switch_livolo_button_signal_level						    "Livolo knop signalLevel [%s]"														    <light>                 (g_livolo_kitchen, gf_living,g_arduino_mysensors_gateway)                                                                                                               { channel="rfxcom:lighting5:9bcd2975:signalLevel"}                                   
+

@@ -17,7 +17,9 @@ def _item_getattr(self, name):
 type(items).__getattr__ = _item_getattr.__get__(items, type(items))
 
 from openhab.log import logging
-from openhab.triggers import StartupTrigger
+#from openhab.triggers import StartupTrigger
+from lucid.triggers import StartupTrigger
+
 
 
 from openhab.jsr223 import scope

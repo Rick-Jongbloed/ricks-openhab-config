@@ -3,20 +3,20 @@ String network_adapter_name          				{ channel="systeminfo:computer:odroid64
 String network_name                  				{ channel="systeminfo:computer:odroid64:network#networkName" }
 String network_ip                    				{ channel="systeminfo:computer:odroid64:network#ip" }
 String network_mac                   				{ channel="systeminfo:computer:odroid64:network#mac" }
-Number network_data_sent             (g_chart) 		{ channel="systeminfo:computer:odroid64:network#dataSent" }
+Number network_data_sent             (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:network#dataSent" }
 Number network_data_recevied         				{ channel="systeminfo:computer:odroid64:network#dataReceived" }
-Number network_packages_sent         (g_chart) 		{ channel="systeminfo:computer:odroid64:network#packagesSent" }
-Number network_packages_recevied     (g_chart) 		{ channel="systeminfo:computer:odroid64:network#packagesReceived" }
+Number network_packages_sent         (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:network#packagesSent" }
+Number network_packages_recevied     (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:network#packagesReceived" }
 
 /* cpu information*/
 String cpu_name                     { channel="systeminfo:computer:odroid64:cpu#name" }
 //String cpu_description              { channel="systeminfo:computer:odroid64:cpu#description" }
-Number cpu_load                     (g_chart) 		{ channel="systeminfo:computer:odroid64:cpu#load" }
-Number cpu_load1                    (g_chart) 		{ channel="systeminfo:computer:odroid64:cpu#load1" }
-Number cpu_load5                    (g_chart) 		{ channel="systeminfo:computer:odroid64:cpu#load5" }
-Number cpu_load15                   (g_chart) 		{ channel="systeminfo:computer:odroid64:cpu#load15" }
-Number cpu_threads                  (g_chart) 		{ channel="systeminfo:computer:odroid64:cpu#threads" }
-Number cpu_uptime                   (g_chart)				{ channel="systeminfo:computer:odroid64:cpu#uptime" }
+Number cpu_load                     (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:cpu#load" }
+Number cpu_load1                    (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:cpu#load1" }
+Number cpu_load5                    (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:cpu#load5" }
+Number cpu_load15                   (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:cpu#load15" }
+Number cpu_threads                  (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:cpu#threads" }
+Number cpu_uptime                   (g_chart, g_elastic_mqtt)				{ channel="systeminfo:computer:odroid64:cpu#uptime" }
 
 /* Drive information*/
 String drive_name                    		 		{ channel="systeminfo:computer:odroid64:drive#name" }
@@ -27,22 +27,22 @@ String drive_serial                  				{ channel="systeminfo:computer:odroid64
 String storage_name                  				{ channel="systeminfo:computer:odroid64:storage#name" }
 String storage_type                  				{ channel="systeminfo:computer:odroid64:storage#type" }
 String storage_description           				{ channel="systeminfo:computer:odroid64:storage#description" }
-Number storage_available             (g_chart) 		{ channel="systeminfo:computer:odroid64:storage#available" }
-Number storage_used                  (g_chart) 		{ channel="systeminfo:computer:odroid64:storage#used" }
-Number storage_total                 (g_chart) 		{ channel="systeminfo:computer:odroid64:storage#total" }
-Number storage_available_percent     (g_chart) 		{ channel="systeminfo:computer:odroid64:storage#availablePercent" }
+Number storage_available             (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:storage#available" }
+Number storage_used                  (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:storage#used" }
+Number storage_total                 (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:storage#total" }
+Number storage_available_percent     (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:storage#availablePercent" }
 
 /* Memory information*/
-Number memory_available              (g_chart) 		{ channel="systeminfo:computer:odroid64:memory#available" }
-Number memory_used                   (g_chart) 		{ channel="systeminfo:computer:odroid64:memory#used" }
-Number memory_total                  (g_chart) 		{ channel="systeminfo:computer:odroid64:memory#total" }
-Number memory_available_percent      (g_chart) 		{ channel="systeminfo:computer:odroid64:memory#availablePercent" }
+Number memory_available              (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:memory#available" }
+Number memory_used                   (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:memory#used" }
+Number memory_total                  (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:memory#total" }
+Number memory_available_percent      (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:memory#availablePercent" }
 
 /* Swap memory information*/
-//Number swap_available                (g_chart) 		{ channel="systeminfo:computer:odroid64:swap#available" }
-//Number swap_used                     (g_chart) 		{ channel="systeminfo:computer:odroid64:swap#used" }
-//Number swap_total                    (g_chart) 		{ channel="systeminfo:computer:odroid64:swap#total" }
-//Number swap_available_percent        (g_chart) 		{ channel="systeminfo:computer:odroid64:swap#availablePercent" }
+//Number swap_available                (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:swap#available" }
+//Number swap_used                     (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:swap#used" }
+//Number swap_total                    (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:swap#total" }
+//Number swap_available_percent        (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:swap#availablePercent" }
 
 /* Battery information*/
 //String battery_name                   { channel="systeminfo:computer:odroid64:battery#name" }
@@ -53,11 +53,11 @@ Number memory_available_percent      (g_chart) 		{ channel="systeminfo:computer:
 //String display_description           { channel="systeminfo:computer:odroid64:display#information" }
 
 /* Sensors information*/
-//Number sensor_cpu_temp                (g_chart) 		{ channel="systeminfo:computer:odroid64:sensors#cpuTemp" }
-//Number sensor_cpu_voltage             (g_chart) 		{ channel="systeminfo:computer:odroid64:sensors#cpuVoltage" }
+//Number sensor_cpu_temp                (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:sensors#cpuTemp" }
+//Number sensor_cpu_voltage             (g_chart, g_elastic_mqtt) 		{ channel="systeminfo:computer:odroid64:sensors#cpuVoltage" }
 //Number sensor_fan_speed               { channel="systeminfo:computer:odroid64:sensors#fanSpeed" }
 
-Number sensor_cpu_temp                (g_chart) 		{ exec="<[cat /sys/class/thermal/thermal_zone0/temp:30000:JS(milli.js)]" }
+Number sensor_cpu_temp                (g_chart, g_elastic_mqtt) 		{ exec="<[cat /sys/class/thermal/thermal_zone0/temp:30000:JS(milli.js)]" }
 
 
 ///* Process information*/

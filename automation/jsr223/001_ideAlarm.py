@@ -1,9 +1,13 @@
+# default
 from lucid.rules import rule, addRule
 from idealarm import ideAlarm
-from lucid.utils import hasReloadFinished, getEvent, postUpdateCheckFirst, sendCommandCheckFirst
+from lucid.utils import hasReloadFinished
+
+# custom
+from lucid.utils import postUpdateCheckFirst, sendCommandCheckFirst
 from lucid.triggers import ItemCommandTrigger
 import lucid.config as config
-from logging import DEBUG, INFO, WARNING, ERROR
+#from logging import DEBUG, INFO, WARNING, ERROR
 
 @rule
 class ideAlarmTrigger(object):
@@ -13,12 +17,10 @@ class ideAlarmTrigger(object):
         return ideAlarm.getTriggers()
 
     def execute(self, modules, inputs):
-        if not hasReloadFinished(True): 
-            return
-        ideAlarm.execute(modules, inputs)
+        if not hasReloadFinished(True): return
+        ideAlarm.execute(self, modules, inputs)
 
 addRule(ideAlarmTrigger())
-
 # # do stuff on keypad press
 # #   create item that stores complete password (keypad: idealarm_keypad, full_key: idealarm_keypad_full)
 # #   create rule to process keypresses:

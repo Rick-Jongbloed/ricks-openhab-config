@@ -7,22 +7,43 @@ from openhab.actions import Pushover
 
 class rule_xiaomi_switch_slaapkamer_all_off(SimpleRule):
     def __init__(self):
+            
         self.device_1 = "mihome:sensor_switch:158d00016c0af6:button"
         self.device_2 = "mihome:sensor_switch:158d000210bee8:button"
+        
         self.triggers = [ 
                             ChannelEventTrigger(channelUID=self.device_1, event="SHORT_PRESSED"),
-                           # ChannelEventTrigger(channelUID=self.device_1, event="DOUBLE_PRESSED"),
+                            ChannelEventTrigger(channelUID=self.device_1, event="DOUBLE_PRESSED"),
                             ChannelEventTrigger(channelUID=self.device_1, event="LONG_PRESSED"),
                           #  ChannelEventTrigger(channelUID=self.device_1, event="LONG_RELEASED")
                             ChannelEventTrigger(channelUID=self.device_2, event="SHORT_PRESSED"),
-                           # ChannelEventTrigger(channelUID=self.device_2, event="DOUBLE_PRESSED"),
+                            ChannelEventTrigger(channelUID=self.device_2, event="DOUBLE_PRESSED"),
                             ChannelEventTrigger(channelUID=self.device_2, event="LONG_PRESSED")
                           #  ChannelEventTrigger(channelUID=self.device_2, event="LONG_RELEASED")
                         ]
-    # maak 4 modules
+    # todo: create four modules
     def execute(self, module, input):
-        triggered_event = str(input['event']).replace(self.device + " triggered ", "")
+
+        #double check as i'm using two switches
+        triggered_event = str(input['event']).replace(self.device_1 + " triggered ", "")
+        triggered_event = triggered_event.replace(self.device_2 + " triggered ", "")
         logging.info("SWITCH INGEDRUKT: " + triggered_event)
+
+        # load light settings
+        mood_light_dimmer = str(items.light_plafond_slaapkamer_dimmer_setting_mood_light)
+        mood_light_colortemp = str(items.light_plafond_slaapkamer_colortemp_setting_mood_light)
+        full_light_dimmer = str(items.light_plafond_slaapkamer_dimmer_setting_full_light)
+        full_light_colortemp = str(items.light_plafond_slaapkamer_colortemp_setting_full_light)
+
+        # set light type
+        if str(items.light_plafond_slaapkamer_toggle) == "ON":
+            if str(items.light_plafond_slaapkamer_dimmer) == mood_light_dimmer and str(items.light_plafond_slaapkamer_colortemp) == mood_light_colortemp:
+                light_configuration = "mood_light"
+            elif str(items.light_plafond_slaapkamer_dimmer) == full_light_dimmer and str(items.light_plafond_slaapkamer_colortemp) == full_light_colortemp:
+                light_configuration = "full_light"
+            else:
+                light_configuration = "unknown"
+
 
         if triggered_event == "SHORT_PRESSED":
             if items.rule_xiaomi_switch_slaapkamer_all_off_timer == ON:
@@ -30,26 +51,47 @@ class rule_xiaomi_switch_slaapkamer_all_off(SimpleRule):
                 events.postUpdate("rule_xiaomi_switch_slaapkamer_all_off_timer", "OFF")
                 Pushover.pushover("All off timer cancelled...", "Telefoon_prive_rick01")
             else:
-                # toggle bedroom light
+                #logging.info("!!! Timer not running..., using regular function")
+                # toggle bedroom light (sfeerlicht)
+                if str(items.light_plafond_slaapkamer_toggle) == "ON":
+                    # if light_configuration != "mood_light":       # Disabled as it's not practical. Mood light is set when we go to bed. We expect the light to turn off when you click once
+                    #     events.sendCommand("light_plafond_slaapkamer_dimmer",mood_light_dimmer)
+                    #     events.sendCommand("light_plafond_slaapkamer_colortemp",mood_light_colortemp)
+                    # else:
+                        events.sendCommand("light_plafond_slaapkamer_toggle","OFF")
+
+                if str(items.light_plafond_slaapkamer_toggle) == "OFF":
+                    events.sendCommand("light_plafond_slaapkamer_dimmer",mood_light_dimmer)
+                    events.sendCommand("light_plafond_slaapkamer_colortemp",mood_light_colortemp)
+                    events.postUpdate("light_plafond_slaapkamer_toggle","ON")
                 
-                logging.info("!!! Timer not running...")
+                
                 #Pushover.pushover("All off timer not running...", "Telefoon_prive_rick01")
                 
         elif triggered_event == "DOUBLE_PRESSED":
+            # toggle bedroom light (FULL)
+            if str(items.light_plafond_slaapkamer_toggle) == "ON":
+                if light_configuration != "full_light":
+                    events.sendCommand("light_plafond_slaapkamer_dimmer",full_light_dimmer)
+                    events.sendCommand("light_plafond_slaapkamer_colortemp",full_light_colortemp)
+                else:
+                    events.sendCommand("light_plafond_slaapkamer_toggle","OFF")
 
-            # toggle bedroom light (sfeerlicht)
-            pass
+            if str(items.light_plafond_slaapkamer_toggle) == "OFF":
+                events.sendCommand("light_plafond_slaapkamer_dimmer",full_light_dimmer)
+                events.sendCommand("light_plafond_slaapkamer_colortemp",full_light_colortemp)
+                events.postUpdate("light_plafond_slaapkamer_toggle","ON") 
 
         elif triggered_event == "LONG_PRESSED":
             # check if items.rule_xiaomi_switch_slaapkamer_all_off_timer is OFF (or NULL)
-            if items.rule_xiaomi_switch_kantoor_all_off_timer != ON:
+            if items.rule_xiaomi_switch_slaapkamer_all_off_timer != ON:
                 events.sendCommand("rule_xiaomi_switch_slaapkamer_all_off_timer", "ON")
                 Pushover.pushover("ALLES UIT KNOP: Timer gestart", "Telefoon_prive_rick01")
                 logging.info("*** All off timer started (60 seconds)")
             else:
                 logging.info("*** All off timer is already running (<60 seconds)")
                 Pushover.pushover("All off timer is already running...", "Telefoon_prive_rick01")
-                pass
+
         elif triggered_event == "LONG_RELEASED":
             pass
             

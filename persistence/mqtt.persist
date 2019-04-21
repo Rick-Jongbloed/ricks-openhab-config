@@ -5,10 +5,6 @@ Strategies {
 
 Items {
         // persist all items on every update
-      g_emoncms_mqtt* : strategy = everyUpdate
-        
-        // items per stuk toevoegen, voor test
-        //<itemlist1> [-> "<alias1>"] : [strategy = <strategy1>, <strategy2>, ...]
-  //      meter_koelkast_power            -> "koelkastpower" : strategy = everyUpdate
-   //     meter_ventilator_power          -> "ventilatorpower" : strategy = everyUpdate
+        // disabled as this generated errors! have to monitor this!
+      // g_elastic_mqtt* : strategy = everyUpdate
 }

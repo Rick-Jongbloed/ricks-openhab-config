@@ -2,7 +2,9 @@ scriptExtension.importPreset("RuleSimple")
 scriptExtension.importPreset("RuleSupport")
 
 from openhab.log import logging
-from openhab.triggers import StartupTrigger, CronTrigger
+#from openhab.triggers import StartupTrigger, CronTrigger
+from openhab.triggers import CronTrigger
+from lucid.triggers import StartupTrigger
 from openhab import date
 from openhab.actions import Pushover
 

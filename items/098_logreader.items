@@ -1,13 +1,13 @@
-DateTime        logreader_log_rotated               "Last Log Rotation [%1$tY.%1$tm.%1$te %1$tR]"   <time>              { channel="logreader:reader:reader1:logRotated" } 
-DateTime        logreader_last_read                 "Last Read [%1$tY.%1$tm.%1$te %1$tR]"           <time>              { channel="logreader:reader:reader1:lastRead" }
-DateTime        logreader_last_line                 "Last Line [%1$tY.%1$tm.%1$te %1$tR]"           <time>              { channel="logreader:reader:reader1:lastLine" }
-Number          logreader_warnings                  "Warning lines [%d]"                            <alarm>             { channel="logreader:reader:reader1:warningLines" }
-Number          logreader_errors                    "Error lines [%d]"                              <alarm>             { channel="logreader:reader:reader1:errorLines" }
-String          logreader_last_warning_line         "LastWarningLine [%s]"                                              { channel="logreader:reader:reader1:lastWarningLine" }
-String          logreader_last_error_line           "LastErrorLine [%s]"                                                { channel="logreader:reader:reader1:lastErrorLine" }
-
+DateTime logreader_log_rotated        "Last Log Rotation [%1$tY.%1$tm.%1$te %1$tR]"   <time>  { channel="logreader:reader:openhablog:logRotated" }
+Number   logreader_errors            "Error events matched [%d]"                     <alarm> { channel="logreader:reader:openhablog:errorEvents" }
+String   logreader_last_error         "Last error [%s]"                                       { channel="logreader:reader:openhablog:lastErrorEvent" }
+Number   logreader_warnings          "Warning events matched [%d]"                   <alarm> { channel="logreader:reader:openhablog:warningEvents" }
+String   logreader_last_warning       "Last warning [%s]"                                     { channel="logreader:reader:openhablog:lastWarningEvent" }
+//Number   logreader_customs           "Custom events matched [%d]"                    <alarm> { channel="logreader:reader:openhablog:customEvents" }
+//String   logreader_last_custom        "Last Custom [%s]"                                      { channel="logreader:reader:openhablog:lastCustomEvent" }
 
 // todo:
 // groep aanmaken hiervoor, onder maintenance
 // sitemap aanmaken
 // controleren of er nog meer dingen in kunnen
+

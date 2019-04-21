@@ -19,7 +19,7 @@ Group						ff_bathroom						    "Toilet"					                <toilet>							(g_f
 Group						ff_shower						    "Badkamer"					                <bath>								(g_ff)	
 Group						sf_storage						    "Opslag"					                <wardrobe>							(g_sf)	
 Group						sf_spacecave					    "Spacecave"					                <party>							    (g_sf)
-Group						sf_corridor						    "Gang"						                <corridor>							(g_sf)
+Group					    sf_corridor						    "Gang"						                <corridor>							(g_sf)
 Group						outdoor_shed					    "Schuur"					                <greenhouse>						(g_outdoor)	
 Group						outdoor_driveway				    "Voortuin"					                <terrace>							(g_outdoor)	
 Group						outdoor_backyard				    "Tuin"						                <garden>							(g_outdoor)	
@@ -34,11 +34,14 @@ Group						sensors_power					    "Energie"   				                <energy>							
 //Group						numbers							    "Alle Nummers"				                <kitchen>							(All)	
 Group						devices							    "Alle apparaten"			                <text>		    					(All)	
 //Group						devices_roaming					    "Mobiel"					                <kitchen>							(devices)
-
+Group                       ff_office_lights                    "Alle lichten op kantoor"                   <light>                             (ff_office)
 Group						g_state_on						    "Whats ON"					                <switch>							(All)
+
 Group						settings						    "Instellingen"				                <settings>							(All)
 Group						settings_all_off_selection		    "All off knop - Include/exclude"	        <settings>  						(settings)
 Group						settings_deurbel_action_selection   "Deurbel acties - Include/exclude" 	        <settings>  						(settings)
+Group						settings_bedroom_light_settings     "Licht slaapkamer - Mood/Full" 	            <settings>  						(settings)
+
 Group						persistence						    "Persistence items"			                <switch-off>						(g_maintenance)
 Group						automation_presence				    "Presence items"			                <presence>							(sensors)
 Group						scenes							    "Scenes"					                <party>						        (All)
@@ -56,13 +59,15 @@ Group						g_uninitialized					    "Alle nog niet geinitialiseerde items"							
 Group                       g_lastupdate_rule                   "Alle items die een lastupdate nodig"                           (g_maintenance)
 Group                       g_lastupdate                        "Alle lastupdate statussen"                                     (g_maintenance)
 
+// logreader groups
+Group                       g_logreader_test                    "Logreader text group"                                             (g_maintenance)
 
 // Persistence Groups
 Group						g_my_openhab					    "MyOpenhab"					                <computer>							(persistence)	// for Items that are exposed to IFTTT
 Group						g_chart							    "Charting"					                <chart>								(persistence)	// for Items to persist for charting (influxDB)
 Group						g_history						    "History"					                <meld_achtung>						(persistence)	// for Items to preserve their history (influxDB) / RRDjxx) // not used (yet)
 Group						g_restore						    "Restore on startup"		                <calendar>							(persistence)	// for Items to restore on startup
-Group						g_emoncms_mqtt   				    "EmonCMS to MQTT"		                    <calendar>							(persistence)	// for Items to expose to EmonCMS via MQTT
+Group						g_elastic_mqtt   				    "Item status naar Elastic"                    <calendar>						(persistence)	// for Items to expose to Elastic via MQTT
 
 // device groups (all devices from a specific group, non-formatted, for troubleshooting purposes)
 Group						g_sonoff_green_tl				    "Device: Sonoff Groene TL"										(devices)
@@ -127,12 +132,12 @@ Group                       g_mihome_switch_eettafel             "Device: Xiaomi
 // anders
 Group                       g_lifx_lamp_eettafel                "Device: LIFX Color: Eettafel"                                  <colorlight>        (devices)
 
-Group 						g_hue_lamp_gang_1v 			        "Device: Hue Color v2: gang 1v"         						<colorlight>        (devices)
-Group 						g_hue_lamp_kantoor_links		    "Device: Hue Ambiance: plafond kantoor links"					<light>             (devices)
-Group 						g_hue_lamp_kantoor_midden 		    "Device: Hue Ambiance: plafond kantoor midden"			        <light>             (devices)
+Group 						g_hue_lamp_plafond_slaapkamer		"Device: Hue Ambiance: plafond slaapkamer"         				<light>        (devices)
+Group 						g_hue_lamp_kantoor_links		    "Device: Hue Color v3: plafond kantoor links"					<colorlight>             (devices)
+Group 						g_hue_lamp_kantoor_midden 		    "Device: Hue Color v2: plafond kantoor midden"			        <colorlight>             (devices)
 Group 						g_hue_lamp_kantoor_rechts 		    "Device: Hue Ambiance: plafond kantoor rechts"				    <light>     	    (devices)
 Group 						g_hue_lamp_plafond_sunny 		    "Device: Hue Color v3: plafond Sunny"					        <colorlight>        (devices)
-Group 						g_hue_lamp_spacecave    		    "Device: Hue Color v3: Spacecave"   					        <colorlight>        (devices)
+Group 						g_hue_lamp_spacecave    		    "Device: Hue Ambiance: Spacecave"   					        <light>        (devices)
 
 Group						g_livolo_kitchen				    "Device: Livolo switch: Ventilatie"								(devices)
 
@@ -142,6 +147,7 @@ Group						g_server_openhab				    "Device: Server: Openhab on Odroid"								(d
 Group 						g_speaker_samsung_multiroom		    "Device: Speaker: Samsung Multiroom"							(devices)
 
 Group						g_arduino_mysensors_gateway 	    "Device: Arduino: Mysensors gateway"							(devices)
+Group						g_arduino_mysensors_node_10_ventilatation    "Device: Arduino: Mysensors Node 10 - ventilation"							(devices)
 
 Group						g_controller_emonhub			    "Device: Open Energy Monitor system"						    (devices)
 Group						g_controller_zwave			        "Device: Zwave controller (zstick)"						        (devices)
