@@ -1,0 +1,3 @@
+bundle:start-level org.eclipse.smarthome.model.rule 90
+bundle:start-level org.eclipse.smarthome.model.rule.ide 90
+bundle:start-level org.eclipse.smarthome.model.rule.runtime 90
