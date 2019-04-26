@@ -180,8 +180,7 @@ sitemap myhome label="Ons huis"
 				Group item=outdoor_shed label="Schuur" icon="house"
 				Group item=g_afvalkalender icon="calendar"
 				// groep voor camera
-				Text item=Humidity
-				Text item=Temperature
+				Group item=g_weather
 //				Text item=Sunrise_Time
 //				Text item=Sunset_Time
 			}

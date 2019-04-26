@@ -1,3 +1,3 @@
-Number		temperature_outdoor		"Temperature [%.2f C]"	                               (g_weather, g_outdoor,g_restore, g_elastic_mqtt)		    { weather="locationId=myhome, type=temperature, property=current"}
-Number		humidity_outdoor		"Humidity [%d %%]"		                               (g_weather, g_outdoor,g_restore, g_elastic_mqtt)		    { weather="locationId=myhome, type=athmosphere, property=humidity"}
+//Number		temperature_outdoor		"Temperature [%.2f C]"	                               (g_weather, g_outdoor,g_restore, g_elastic_mqtt)		    { weather="locationId=myhome, type=temperature, property=current"}
+//Number		humidity_outdoor		"Humidity [%d %%]"		                               (g_weather, g_outdoor,g_restore, g_elastic_mqtt)		    { weather="locationId=myhome, type=athmosphere, property=humidity"}
 DateTime    ntp_datetime            "Date [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"          (g_datetime)                             { channel="ntp:ntp:local:dateTime" }

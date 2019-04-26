@@ -1,0 +1,139 @@
+// atmosphere
+Number   outdoor_humidity_fio    	  "(Fio) Humidity [%d %%]"  	 (g_weather_fio) {weather="locationId=home-fio, type=atmosphere, property=humidity"}
+Number   outdoor_visibility_fio    	  "(Fio) Visibility [%.2f km]" (g_weather_fio) {weather="locationId=home-fio, type=atmosphere, property=visibility"}
+Number   outdoor_pressure_fio    	  "(Fio) Pressure [%.2f mb]"   (g_weather_fio) {weather="locationId=home-fio, type=atmosphere, property=pressure"}
+String   outdoor_pressure_trend_fio   "(Fio) Pressuretrend [%s]"   (g_weather_fio) {weather="locationId=home-fio, type=atmosphere, property=pressureTrend"}
+Number   outdoor_ozone_fio            "(Fio) Ozone [%d ppm]"    	 (g_weather_fio) {weather="locationId=home-fio, type=atmosphere, property=ozone"}
+Number   outdoor_uv_index_fio         "(Fio) UV Index"             (g_weather_fio) {weather="locationId=home-fio, type=atmosphere, property=uvIndex, scale=0"}
+
+// clouds
+Number   outdoor_clouds_fio   "(Fio) Clouds [%.0f %%]"  (g_weather_fio) {weather="locationId=home-fio, type=clouds, property=percent"}
+
+// condition
+String   outdoor_condition_fio        "(Fio) Condition [%s]"     (g_weather_fio) {weather="locationId=home-fio, type=condition, property=text"}
+String   outdoor_condition_id_fio     "(Fio) Condition id [%s]"  (g_weather_fio) {weather="locationId=home-fio, type=condition, property=id"}
+DateTime outdoor_observation_time_fio  "(Fio) Observation time [%1$td.%1$tm.%1$tY %1$tH:%1$tM]" (g_weather_fio)  {weather="locationId=home-fio, type=condition, property=observationTime"}
+DateTime outdoor_lastupdate_fio       "(Fio) Last update [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"       (g_weather_fio) {weather="locationId=home-fio, type=condition, property=lastUpdate"}
+//String   outdoor_common_id_fio         "(Fio) Common id [%s]"    (g_weather)  {weather="locationId=home-fio, type=condition, property=commonId"}
+
+// precipitation
+Number   outdoor_rain_fio          "(Fio) Rain [%.2f mm/h]"  (g_weather_fio) {weather="locationId=home-fio, type=precipitation, property=rain"}
+Number   outdoor_Snow_fio          "(Fio) Snow [%.2f mm/h]"  (g_weather_fio) {weather="locationId=home-fio, type=precipitation, property=snow"}
+Number   outdoor_precip_probability_fio   "(Fio) Precip probability [%d %%]" (g_weather_fio)  {weather="locationId=home-fio, type=precipitation, property=probability"}
+
+// temperature
+Number   outdoor_temperature_fio      "(Fio) Temperature [%.2f °C]"    (g_weather_fio)   {weather="locationId=home-fio, type=temperature, property=current"}
+Number   outdoor_temp_feel_fio        "(Fio) Temperature feel [%.2f °C]" (g_weather_fio) {weather="locationId=home-fio, type=temperature, property=feel"}
+Number   outdoor_temp_dewpoint_fio    "(Fio) Dewpoint [%.2f °C]"        (g_weather_fio)  {weather="locationId=home-fio, type=temperature, property=dewpoint"}
+
+// min and max values only available in forecasts
+Number   outdoor_temp_min_fio         "(Fio) Temperature min [%.2f °C]" (g_weather_fio)  {weather="locationId=home-fio, type=temperature, property=min"}
+Number   outdoor_temp_max_fio         "(Fio) Temperature max [%.2f °C]"  (g_weather_fio) {weather="locationId=home-fio, type=temperature, property=max"}
+String   outdoor_temp_minmax_fio      "(Fio) Min/Max [%s °C]"            (g_weather_fio) {weather="locationId=home-fio, type=temperature, property=minMax"}
+
+// wind
+Number   outdoor_wind_speed_fio           "(Fio) Windspeed [%.2f km/h]"  (g_weather_fio)  {weather="locationId=home-fio, type=wind, property=speed"}
+Number   outdoor_wind_speed_Beaufort_fio  "(Fio) Windspeed Beaufort [%d]" (g_weather_fio) {weather="locationId=home-fio, type=wind, property=speed, unit=beaufort"}
+Number   outdoor_wind_speed_Knots_fio     "(Fio) Windspeed [%.2f kn]"     (g_weather_fio) {weather="locationId=home-fio, type=wind, property=speed, unit=knots"}
+String	 outdoor_wind_direction_fio       "(Fio) Wind direction [%s]"     (g_weather_fio) {weather="locationId=home-fio, type=wind, property=direction"}
+Number   outdoor_wind_degree_fio         "(Fio) Wind degree [%.0f °]"    (g_weather_fio) {weather="locationId=home-fio, type=wind, property=degree"}
+Number   outdoor_wind_gust_fio            "(Fio) Wind gust [%.2f km/h]"  (g_weather_fio)  {weather="locationId=home-fio, type=wind, property=gust"}
+Number   outdoor_wind_gust_beaufort_fio   "(Fio) Wind gust Beaufort [%d]" (g_weather_fio) {weather="locationId=home-fio, type=wind, property=gust, unit=beaufort"}
+Number   outdoor_wind_gust_Knots_fio      "(Fio) Wind gust [%.2f kn]"   (g_weather_fio)   {weather="locationId=home-fio, type=wind, property=gust, unit=knots"}
+Number   outdoor_wind_chill_fio          "(Fio) Wind chill [%.2f °C]"   (g_weather_fio)  {weather="locationId=home-fio, type=wind, property=chill"}
+
+
+// OpenWeatherMap
+
+// OpenWeatherMap
+
+// atmosphere
+Number   outdoor_humidity_owm    	  "(Owm) Humidity [%d %%]"  	 (g_weather_owm) {weather="locationId=home-owm, type=atmosphere, property=humidity"}
+Number   outdoor_visibility_owm    	  "(Owm) Visibility [%.2f km]" (g_weather_owm) {weather="locationId=home-owm, type=atmosphere, property=visibility"}
+Number   outdoor_pressure_owm    	  "(Owm) Pressure [%.2f mb]"   (g_weather_owm) {weather="locationId=home-owm, type=atmosphere, property=pressure"}
+String   outdoor_pressure_trend_owm   "(Owm) Pressuretrend [%s]"   (g_weather_owm) {weather="locationId=home-owm, type=atmosphere, property=pressureTrend"}
+Number   outdoor_ozone_owm            "(Owm) Ozone [%d ppm]"    	 (g_weather_owm) {weather="locationId=home-owm, type=atmosphere, property=ozone"}
+Number   outdoor_uv_index_owm         "(Owm) UV Index"             (g_weather_owm) {weather="locationId=home-owm, type=atmosphere, property=uvIndex, scale=0"}
+
+// clouds
+Number   outdoor_clouds_owm   "(Owm) Clouds [%.0f %%]"  (g_weather_owm) {weather="locationId=home-owm, type=clouds, property=percent"}
+
+// condition
+String   outdoor_condition_owm        "(Owm) Condition [%s]"     (g_weather_owm) {weather="locationId=home-owm, type=condition, property=text"}
+String   outdoor_condition_id_owm     "(Owm) Condition id [%s]"  (g_weather_owm) {weather="locationId=home-owm, type=condition, property=id"}
+DateTime outdoor_observation_time_owm  "(Owm) Observation time [%1$td.%1$tm.%1$tY %1$tH:%1$tM]" (g_weather_owm)  {weather="locationId=home-owm, type=condition, property=observationTime"}
+DateTime outdoor_lastupdate_owm       "(Owm) Last update [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"       (g_weather_owm) {weather="locationId=home-owm, type=condition, property=lastUpdate"}
+//String   outdoor_common_id_owm         "(Owm) Common id [%s]"    (g_weather)  {weather="locationId=home-owm, type=condition, property=commonId"}
+
+// precipitation
+Number   outdoor_rain_owm          "(Owm) Rain [%.2f mm/h]"  (g_weather_owm) {weather="locationId=home-owm, type=precipitation, property=rain"}
+Number   outdoor_Snow_owm          "(Owm) Snow [%.2f mm/h]"  (g_weather_owm) {weather="locationId=home-owm, type=precipitation, property=snow"}
+Number   outdoor_precip_probability_owm   "(Owm) Precip probability [%d %%]" (g_weather_owm)  {weather="locationId=home-owm, type=precipitation, property=probability"}
+
+// temperature
+Number   outdoor_temperature_owm      "(Owm) Temperature [%.2f °C]"    (g_weather_owm)   {weather="locationId=home-owm, type=temperature, property=current"}
+Number   outdoor_temp_feel_owm        "(Owm) Temperature feel [%.2f °C]" (g_weather_owm) {weather="locationId=home-owm, type=temperature, property=feel"}
+Number   outdoor_temp_dewpoint_owm    "(Owm) Dewpoint [%.2f °C]"        (g_weather_owm)  {weather="locationId=home-owm, type=temperature, property=dewpoint"}
+
+// min and max values only available in forecasts
+Number   outdoor_temp_min_owm         "(Owm) Temperature min [%.2f °C]" (g_weather_owm)  {weather="locationId=home-owm, type=temperature, property=min"}
+Number   outdoor_temp_max_owm         "(Owm) Temperature max [%.2f °C]"  (g_weather_owm) {weather="locationId=home-owm, type=temperature, property=max"}
+String   outdoor_temp_minmax_owm      "(Owm) Min/Max [%s °C]"            (g_weather_owm) {weather="locationId=home-owm, type=temperature, property=minMax"}
+
+// wind
+Number   outdoor_wind_speed_owm           "(Owm) Windspeed [%.2f km/h]"  (g_weather_owm)  {weather="locationId=home-owm, type=wind, property=speed"}
+Number   outdoor_wind_speed_Beaufort_owm  "(Owm) Windspeed Beaufort [%d]" (g_weather_owm) {weather="locationId=home-owm, type=wind, property=speed, unit=beaufort"}
+Number   outdoor_wind_speed_Knots_owm     "(Owm) Windspeed [%.2f kn]"     (g_weather_owm) {weather="locationId=home-owm, type=wind, property=speed, unit=knots"}
+String	 outdoor_wind_direction_owm       "(Owm) Wind direction [%s]"     (g_weather_owm) {weather="locationId=home-owm, type=wind, property=direction"}
+Number   outdoor_wind_degree_owm         "(Owm) Wind degree [%.0f °]"    (g_weather_owm) {weather="locationId=home-owm, type=wind, property=degree"}
+Number   outdoor_wind_gust_owm            "(Owm) Wind gust [%.2f km/h]"  (g_weather_owm)  {weather="locationId=home-owm, type=wind, property=gust"}
+Number   outdoor_wind_gust_beaufort_owm   "(Owm) Wind gust Beaufort [%d]" (g_weather_owm) {weather="locationId=home-owm, type=wind, property=gust, unit=beaufort"}
+Number   outdoor_wind_gust_Knots_owm      "(Owm) Wind gust [%.2f kn]"   (g_weather_owm)   {weather="locationId=home-owm, type=wind, property=gust, unit=knots"}
+Number   outdoor_wind_chill_owm          "(Owm) Wind chill [%.2f °C]"   (g_weather_owm)  {weather="locationId=home-owm, type=wind, property=chill"}
+
+// WeatherBit
+
+// atmosphere
+Number   outdoor_humidity_wb    	  "(Wb) Humidity [%d %%]"  	 (g_weather_wb) {weather="locationId=home-wb, type=atmosphere, property=humidity"}
+Number   outdoor_visibility_wb    	  "(Wb) Visibility [%.2f km]" (g_weather_wb) {weather="locationId=home-wb, type=atmosphere, property=visibility"}
+Number   outdoor_pressure_wb    	  "(Wb) Pressure [%.2f mb]"   (g_weather_wb) {weather="locationId=home-wb, type=atmosphere, property=pressure"}
+String   outdoor_pressure_trend_wb   "(Wb) Pressuretrend [%s]"   (g_weather_wb) {weather="locationId=home-wb, type=atmosphere, property=pressureTrend"}
+Number   outdoor_ozone_wb            "(Wb) Ozone [%d ppm]"    	 (g_weather_wb) {weather="locationId=home-wb, type=atmosphere, property=ozone"}
+Number   outdoor_uv_index_wb         "(Wb) UV Index"             (g_weather_wb) {weather="locationId=home-wb, type=atmosphere, property=uvIndex, scale=0"}
+
+// clouds
+Number   outdoor_clouds_wb   "(Wb) Clouds [%.0f %%]"  (g_weather_wb) {weather="locationId=home-wb, type=clouds, property=percent"}
+
+// condition
+String   outdoor_condition_wb        "(Wb) Condition [%s]"     (g_weather_wb) {weather="locationId=home-wb, type=condition, property=text"}
+String   outdoor_condition_id_wb     "(Wb) Condition id [%s]"  (g_weather_wb) {weather="locationId=home-wb, type=condition, property=id"}
+DateTime outdoor_observation_time_wb  "(Wb) Observation time [%1$td.%1$tm.%1$tY %1$tH:%1$tM]" (g_weather_wb)  {weather="locationId=home-wb, type=condition, property=observationTime"}
+DateTime outdoor_lastupdate_wb       "(Wb) Last update [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"       (g_weather_wb) {weather="locationId=home-wb, type=condition, property=lastUpdate"}
+//String   outdoor_common_id_wb         "(Wb) Common id [%s]"    (g_weather)  {weather="locationId=home-wb, type=condition, property=commonId"}
+
+// precipitation
+Number   outdoor_rain_wb          "(Wb) Rain [%.2f mm/h]"  (g_weather_wb) {weather="locationId=home-wb, type=precipitation, property=rain"}
+Number   outdoor_Snow_wb          "(Wb) Snow [%.2f mm/h]"  (g_weather_wb) {weather="locationId=home-wb, type=precipitation, property=snow"}
+Number   outdoor_precip_probability_wb   "(Wb) Precip probability [%d %%]" (g_weather_wb)  {weather="locationId=home-wb, type=precipitation, property=probability"}
+
+// temperature
+Number   outdoor_temperature_wb      "(Wb) Temperature [%.2f °C]"    (g_weather_wb)   {weather="locationId=home-wb, type=temperature, property=current"}
+Number   outdoor_temp_feel_wb        "(Wb) Temperature feel [%.2f °C]" (g_weather_wb) {weather="locationId=home-wb, type=temperature, property=feel"}
+Number   outdoor_temp_dewpoint_wb    "(Wb) Dewpoint [%.2f °C]"        (g_weather_wb)  {weather="locationId=home-wb, type=temperature, property=dewpoint"}
+
+// min and max values only available in forecasts
+Number   outdoor_temp_min_wb         "(Wb) Temperature min [%.2f °C]" (g_weather_wb)  {weather="locationId=home-wb, type=temperature, property=min"}
+Number   outdoor_temp_max_wb         "(Wb) Temperature max [%.2f °C]"  (g_weather_wb) {weather="locationId=home-wb, type=temperature, property=max"}
+String   outdoor_temp_minmax_wb      "(Wb) Min/Max [%s °C]"            (g_weather_wb) {weather="locationId=home-wb, type=temperature, property=minMax"}
+
+// wind
+Number   outdoor_wind_speed_wb           "(Wb) Windspeed [%.2f km/h]"  (g_weather_wb)  {weather="locationId=home-wb, type=wind, property=speed"}
+Number   outdoor_wind_speed_Beaufort_wb  "(Wb) Windspeed Beaufort [%d]" (g_weather_wb) {weather="locationId=home-wb, type=wind, property=speed, unit=beaufort"}
+Number   outdoor_wind_speed_Knots_wb     "(Wb) Windspeed [%.2f kn]"     (g_weather_wb) {weather="locationId=home-wb, type=wind, property=speed, unit=knots"}
+String	 outdoor_wind_direction_wb       "(Wb) Wind direction [%s]"     (g_weather_wb) {weather="locationId=home-wb, type=wind, property=direction"}
+Number   outdoor_wind_degree_wb         "(Wb) Wind degree [%.0f °]"    (g_weather_wb) {weather="locationId=home-wb, type=wind, property=degree"}
+Number   outdoor_wind_gust_wb            "(Wb) Wind gust [%.2f km/h]"  (g_weather_wb)  {weather="locationId=home-wb, type=wind, property=gust"}
+Number   outdoor_wind_gust_beaufort_wb   "(Wb) Wind gust Beaufort [%d]" (g_weather_wb) {weather="locationId=home-wb, type=wind, property=gust, unit=beaufort"}
+Number   outdoor_wind_gust_Knots_wb      "(Wb) Wind gust [%.2f kn]"   (g_weather_wb)   {weather="locationId=home-wb, type=wind, property=gust, unit=knots"}
+Number   outdoor_wind_chill_wb          "(Wb) Wind chill [%.2f °C]"   (g_weather_wb)  {weather="locationId=home-wb, type=wind, property=chill"}
+

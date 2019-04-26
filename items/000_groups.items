@@ -183,7 +183,10 @@ Group						g_auto_rick						    "Car: Audi A3 E-Tron Rick"							    	    (devic
 
 // Other
 Group                       g_datetime                          "NTP: Date-time stuff"                                          (devices)
-Group                       g_weather                           "Weather: external source"                                      (devices)
+Group                       g_weather                           "Weather: external source"             <sun_clouds>                         (devices)
+Group                       g_weather_fio                       "Weather: Dark Sky"                                             (g_weather)
+Group                       g_weather_wb                        "Weather: WeatherBit"                                           (g_weather)
+Group                       g_weather_owm                       "Weather: OpenWeatherMap"                                       (g_weather)
 
 Group                       g_testing                           "Test/debug groep"                                              (All)
 

@@ -1,3 +1,4 @@
 OFF=Offline
 ON=Online
--=""
+-=Unknown
+NULL=Unknown
