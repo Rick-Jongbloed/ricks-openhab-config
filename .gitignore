@@ -1,6 +1,5 @@
 services/
-openhab2-jython/
- .vscode/
- .gitignore
- *.py[cod]
- *$py.class
+.vscode/
+.gitignore
+*.py[cod]
+*$py.class
