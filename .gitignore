@@ -3,3 +3,4 @@ services/
 .gitignore
 *.py[cod]
 *$py.class
+openhab2-jython/
