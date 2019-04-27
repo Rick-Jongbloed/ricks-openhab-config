@@ -43,3 +43,4 @@ def scriptLoaded(id):
 def scriptUnloaded():
     core.osgi.unregister_service(core.JythonItemChannelLinkProvider)
     delattr(core, 'JythonItemChannelLinkProvider')
+    

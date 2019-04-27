@@ -1,12 +1,10 @@
 scriptExtension.importPreset("RuleSimple")
 scriptExtension.importPreset("RuleSupport")
 
-from openhab.log import logging
-#from openhab.triggers import StartupTrigger, CronTrigger
-from openhab.triggers import CronTrigger
-from lucid.triggers import StartupTrigger
-from openhab import date
-from openhab.actions import Pushover
+from core.log import logging
+from core.triggers import StartupTrigger, CronTrigger
+from core import date
+from core.actions import Pushover
 
 import datetime
 from dateutil.relativedelta import relativedelta
@@ -17,9 +15,9 @@ from java.util import Calendar, GregorianCalendar
 class rule_process_ical(SimpleRule):
     def __init__(self):
         self.triggers = [ 
-                StartupTrigger(),
-                CronTrigger("0 0 6 1/1 * ? *")              # cron: every day...
-                ]
+                StartupTrigger().trigger,
+                CronTrigger("0 0 6 1/1 * ? *").trigger              # cron: every day...
+            ]
 
     def execute(self, module, input):
         logging.info("Rule: rule_process_ical started")
@@ -75,9 +73,9 @@ class rule_notify_afvalkalender(SimpleRule):
     def __init__(self):
         self.triggers = [ 
 #                StartupTrigger(),           # for testing
-                CronTrigger("0 0 19 1/1 * ? *"),              # cron: check every day @ 19:00
-                CronTrigger("0 0 21 1/1 * ? *")              # cron: check every day @ 21:00 
-                ]
+                CronTrigger("0 0 19 1/1 * ? *").trigger,              # cron: check every day @ 19:00
+                CronTrigger("0 0 21 1/1 * ? *").trigger              # cron: check every day @ 21:00 
+            ]
     
     def execute(self, module, input):
         now = datetime.datetime.now()

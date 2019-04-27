@@ -2,9 +2,8 @@ scriptExtension.importPreset("RuleSimple")
 scriptExtension.importPreset("RuleSupport")
 
 #from openhab.triggers import ChannelEventTrigger,StartupTrigger
-from openhab.triggers import ChannelEventTrigger
-from lucid.triggers import StartupTrigger
-from openhab.log import logging
+from core.triggers import ChannelEventTrigger, StartupTrigger
+from core.log import logging
 import datetime
 
 # VERWIJDEREN ALS DAG  -> NACHT WERKT!!!

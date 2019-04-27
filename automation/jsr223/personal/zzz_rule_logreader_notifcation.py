@@ -1,9 +1,9 @@
 scriptExtension.importPreset("RuleSimple")
 scriptExtension.importPreset("RuleSupport")
 
-from openhab.triggers import item_triggered, ITEM_CHANGE
-from openhab.log import logging
-from openhab.actions import Mqtt, Pushover
+from core.triggers import item_triggered, ITEM_CHANGE
+from core.log import logging
+from core.actions import Mqtt, Pushover
 
 @item_triggered("logreader_last_read", ITEM_CHANGE)
 def rule_logreader_last_read_notification_on_error():

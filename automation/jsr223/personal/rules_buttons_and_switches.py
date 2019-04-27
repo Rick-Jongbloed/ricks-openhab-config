@@ -1,9 +1,11 @@
 scriptExtension.importPreset("RuleSupport")
 scriptExtension.importPreset("RuleSimple")
 
-from openhab.triggers import ChannelEventTrigger,item_triggered,ITEM_UPDATE, ItemCommandTrigger
-from openhab.log import logging
-from openhab.actions import Pushover
+#from core.triggers import ChannelEventTrigger,item_triggered,ITEM_UPDATE, ItemCommandTrigger
+from core.rules import rule
+from core.triggers import ChannelEventTrigger, ItemCommandTrigger, when
+from core.log import logging
+from core.actions import Pushover
 
 class rule_xiaomi_switch_slaapkamer_all_off(SimpleRule):
     def __init__(self):
@@ -139,15 +141,17 @@ automationManager.addRule(rule_all_off_execute())
 #         logging.info(input)
 # automationManager.addRule(rule_remote_3_a_test())
 
-@item_triggered("remote_3_a_1_command_id", ITEM_UPDATE)
-@item_triggered("remote_3_a_2_command_id", ITEM_UPDATE)
-def rule_remote_3_a_command_id_updated():
+@rule("Remote 3, button A1 & A2")
+@when("Item remote_3_a_1_command_id received update")
+@when("Item remote_3_a_2_command_id received update")
+def rule_remote_3_a_command_id_updated(event):
     logging.info("Rule rule_remote_3_a_command_id_updated running...")
     events.sendCommand("light_keuken_dimmer_plafond","ON")
 
-@item_triggered("remote_3_b_1_command_id", ITEM_UPDATE)
-@item_triggered("remote_3_b_2_command_id", ITEM_UPDATE)
-def rule_remote_3_b_command_id_updated():
+@rule("Remote 3, button B1 & B2")
+@when("Item remote_3_b_1_command_id received update")
+@when("Item remote_3_b_2_command_id received update")
+def rule_remote_3_b_command_id_updated(event):
     logging.info("Rule remote_3_b_command_id running...")
     events.sendCommand("light_keuken_dimmer_plafond","OFF")
 

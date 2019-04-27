@@ -3,8 +3,8 @@
 scriptExtension.importPreset("RuleSupport")
 scriptExtension.importPreset("RuleSimple")
 
-from openhab.triggers import ItemStateChangeTrigger
-from openhab.log import logging
+from core.triggers import ItemStateChangeTrigger
+from core.log import logging
 
 class MyRule112(SimpleRule):
     def __init__(self):
@@ -19,8 +19,8 @@ class MyRule112(SimpleRule):
 automationManager.addRule(MyRule112())
 
 
-# from org.eclipse.smarthome.automation import *
-# # from org.eclipse.smarthome.automation.module.script.rulesupport.shared import RuleSimple
+# from org.openhab.core.automation import *
+# # from org.openhab.core.automation.module.script.rulesupport.shared import RuleSimple
 # from org.eclipse.smarthome.config.core import Configuration
 
 

@@ -1,8 +1,8 @@
 scriptExtension.importPreset("RuleSupport")
 scriptExtension.importPreset("RuleSimple")
 
-from openhab.triggers import ItemStateChangeTrigger
-from openhab.log import logging
+from core.triggers import ItemStateChangeTrigger
+from core.log import logging
 
 # ///* was:
 # //import hnwqbgbl.concurrent.locks.ReentrantLock

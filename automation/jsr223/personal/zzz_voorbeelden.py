@@ -72,3 +72,9 @@
 #         events.postUpdate("toggle_notification_light_eettafel", "OFF")
 # #        logging.info("ALARM: EETTAFEL: EIND")
 # automationManager.addRule(rule_toggle_notification_light_eettafel())
+
+from org.slf4j import Logger, LoggerFactory
+log = LoggerFactory.getLogger("org.eclipse.smarthome.model.script.Rules")
+import sys
+log.info("JSR223: version=[{}]".format(sys.version))
+log.info("JSR223: path=[{}]".format(sys.path))

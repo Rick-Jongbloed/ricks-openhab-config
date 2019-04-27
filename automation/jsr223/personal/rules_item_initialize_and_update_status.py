@@ -1,10 +1,11 @@
 scriptExtension.importPreset("RuleSimple")
 scriptExtension.importPreset("RuleSupport")
-
-from openhab.log import logging
+import core
+from core.log import logging
 #from openhab.triggers import time_triggered, item_triggered, StartupTrigger, ItemCommandTrigger, EVERY_MINUTE, ITEM_CHANGE, item_group_triggered
-from openhab.triggers import time_triggered, item_triggered, ItemCommandTrigger, EVERY_MINUTE, ITEM_CHANGE, item_group_triggered
-from lucid.triggers import StartupTrigger
+#from core.triggers import time_triggered, item_triggered, ItemCommandTrigger, EVERY_MINUTE, ITEM_CHANGE, item_group_triggered
+#from core.triggers import  EVERY_MINUTE
+from core.triggers import StartupTrigger
 # from datetime import datetime
 # from java.util import Date
 

@@ -1,8 +1,7 @@
-from lucid.rules import rule, addRule
-from lucid.triggers import ChannelEventTrigger, item_triggered, ITEM_UPDATE, ItemCommandTrigger
-from lucid.actions import Pushover
-from lucid.utils import hasReloadFinished, postUpdateCheckFirst, sendCommandCheckFirst
-import lucid.config as config
+from core.rules import rule
+from core.triggers import ChannelEventTrigger
+from core.actions import Pushover
+#import core.config as config   // todo
 
 @rule
 class rule_xiaomi_switch_keuken(object):
@@ -16,7 +15,7 @@ class rule_xiaomi_switch_keuken(object):
         ]
 
     def execute(self, modules, inputs):
-        device_1 = config.button_config['kitchen']['device_1']
+        device_1 = config.button_config['kitchen']['device_1']  #// todo
         
         triggered_event = str(inputs['event']).replace(device_1 + " triggered ", "")
         self.log.info("SWITCH PRESSED: " + triggered_event)
@@ -35,9 +34,7 @@ class rule_xiaomi_switch_keuken(object):
                 #Pushover.pushover("All off timer not running...", "Telefoon_prive_rick01")
             pass                
         elif triggered_event == "DOUBLE_PRESSED":
-            # toggle different lamp styles (like hue, sfeer, bright, etc)
-
-            
+            # toggle different lamp styles (like hue, sfeer, bright, etc
             pass
 
         elif triggered_event == "LONG_PRESSED":
@@ -56,6 +53,3 @@ class rule_xiaomi_switch_keuken(object):
             pass
         elif triggered_event == "LONG_RELEASED":
             pass
-            
-
-addRule(rule_xiaomi_switch_keuken())

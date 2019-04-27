@@ -7,7 +7,7 @@ log = logging.getLogger(LOG_PREFIX + ".core.JythonExtensionProvider")
 def scriptLoaded(*args):    
     try:
         from java.lang import Class
-        name = "org.eclipse.smarthome.automation.module.script.ScriptExtensionProvider"
+        name = "org.openhab.core.automation.module.script.ScriptExtensionProvider"
         ScriptExtensionProvider = Class.forName(name, True, scriptExtension.getClass().getClassLoader())
         
         class JythonExtensionProvider(ScriptExtensionProvider):            

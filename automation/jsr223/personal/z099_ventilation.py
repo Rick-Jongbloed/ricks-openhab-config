@@ -1,49 +1,46 @@
 scriptExtension.importPreset("RuleSimple")
 scriptExtension.importPreset("RuleSupport")
-
-
-from openhab.log import logging
-#from openhab.triggers import StartupTrigger, ItemStateChangeTrigger, ItemCommandTrigger, item_triggered, ITEM_COMMAND
-from openhab.triggers import ItemStateChangeTrigger, ItemCommandTrigger, item_triggered, ITEM_COMMAND
-from lucid.triggers import StartupTrigger
-from openhab.actions import Mqtt, Pushover
+from core.log import logging, LOG_PREFIX
+from core.triggers import StartupTrigger, ItemStateChangeTrigger, ItemCommandTrigger
 from time import sleep
-     
+from core.actions import Pushover
+
 class rule_automate_ventilation_new(SimpleRule):
     def __init__(self):
-        self.triggers = [ 
-                            StartupTrigger(),                                                               # Run on startup to initialize, will reset the timer(!)
-                            ItemCommandTrigger("timer_rule_automate_ventilation_new_init_hardware", command="OFF"),                       # GUI instellingen      
-                            ItemCommandTrigger("number_ventilator_level_set_manual"),                       # GUI instellingen      
-                            #ItemCommandTrigger("switch_ventilator_level_toggle_auto",   command="ON"),      # Manual mode gaat uit na 20 minuten
-                            ItemStateChangeTrigger("switch_ventilator_level_toggle_auto",state="ON", previousState="OFF"),      # Manual mode gaat uit na 20 minuten
-                            ItemStateChangeTrigger("humid_status_badkamer_sensor")                          # luchtvochtigheid verandert in badkamer
+        self.triggers = [                                                     
+                            ItemCommandTrigger("timer_rule_automate_ventilation_new_init_hardware", command="OFF").trigger,                       # GUI instellingen      
+                            ItemCommandTrigger("number_ventilator_level_set_manual").trigger,                       # GUI instellingen      
+                            ItemStateChangeTrigger("switch_ventilator_level_toggle_auto", state="ON", previousState="OFF").trigger,      # Manual mode gaat uit na 20 minuten
+                            ItemStateChangeTrigger("humid_status_badkamer_sensor").trigger,   # luchtvochtigheid verandert in badkamer
+                            StartupTrigger().trigger                             # Run on startup to initialize, will reset the timer(!)
                         ]
-    def execute(self, module, input):
-        
+    def execute(self, module, inputs):
+        log = logging.getLogger(LOG_PREFIX + ".test_logging_script")
         
         # reporting and logic on trigger
-        #logging.info("TRIGGER: " + str(input))   
-        #logging.info("@@@@ switch_ventilator_level_toggle_auto: " + str(items.switch_ventilator_level_toggle_auto))
+        self.log.info("TRIGGER: " + str(inputs))  
+        log.info("TRIGGER: " + str(inputs))  
+        logging.info("@@@@ switch_ventilator_level_toggle_auto: " + str(items.switch_ventilator_level_toggle_auto))
         # special logic to define automatic/manual
-        if "event" in input:
-            if "number_ventilator_level_set_manual" in str(input['event']):
-                level_gui_manual = str(input['command'])
-                #logging.info(level_gui_manual)
+        if "event" in inputs:
+            if "number_ventilator_level_set_manual" in str(inputs['event']):
+                level_gui_manual = str(inputs['command'])
+                logging.info(level_gui_manual)
                 if level_gui_manual == "4":
+
                     #if str(items.switch_ventilator_level_toggle_auto) == "OFF":
                     logging.info("POSTUPDATING AUTO TO ON")
                     events.postUpdate("switch_ventilator_level_toggle_auto", "ON")
                     #Pushover.pushover("Ventilatie status: autosensing", "Telefoon_prive_rick01")  
                     sleep(0.5)
- #                   logging.info("MANUAL = 4, switch_ventilator_level_toggle_auto: " + str(level_gui_manual))
+                    logging.info("MANUAL = 4, switch_ventilator_level_toggle_auto: " + str(level_gui_manual))
                 else:
                     #if str(items.switch_ventilator_level_toggle_auto) == "ON":
                     events.sendCommand("switch_ventilator_level_toggle_auto", "OFF")  
                     Pushover.pushover("Ventilatie status: override (20m) gestart", "Telefoon_prive_rick01")  
                     sleep(0.5)
  #                   logging.info("MANUAL IS NOT 4, switch_ventilator_level_toggle_auto: " + str(level_gui_manual))
-            elif "switch_ventilator_level_toggle_auto" in str(input['event']):
+            elif "switch_ventilator_level_toggle_auto" in str(inputs['event']):
                 #logging.info("CATHCA")
                 Pushover.pushover("Ventilatie status: override (20m) verlopen", "Telefoon_prive_rick01")  
         # reporting logic stuff
@@ -53,10 +50,10 @@ class rule_automate_ventilation_new(SimpleRule):
         # logging.info("@@@@ humid_status_badkamer_sensor: " + str(items.humid_status_badkamer_sensor))
 
         # # reporting hardware stuff
-        #logging.info("@@@@ switch_ventilator_toggle_1_startup_state: " + str(items.switch_ventilator_toggle_1_startup_state))
-        #logging.info("@@@@ switch_ventilator_toggle_1: " + str(items.switch_ventilator_toggle_1_startup_state))
-        #logging.info("@@@@ switch_ventilator_toggle_2_startup_state: " + str(items.switch_ventilator_toggle_2_startup_state))
-        #logging.info("@@@@ switch_ventilator_toggle_1: " + str(items.switch_ventilator_toggle_1_startup_state))
+        logging.info("@@@@ switch_ventilator_toggle_1_startup_state: " + str(items.switch_ventilator_toggle_1_startup_state))
+        logging.info("@@@@ switch_ventilator_toggle_1: " + str(items.switch_ventilator_toggle_1_startup_state))
+        logging.info("@@@@ switch_ventilator_toggle_2_startup_state: " + str(items.switch_ventilator_toggle_2_startup_state))
+        logging.info("@@@@ switch_ventilator_toggle_1: " + str(items.switch_ventilator_toggle_1_startup_state))
         
 
         # initializing hardware stuff
@@ -131,12 +128,12 @@ automationManager.addRule(rule_automate_ventilation_new())
 
 class number_ventilator_level_set(SimpleRule):
     def __init__(self):
-        self.triggers = [ ItemCommandTrigger("number_ventilator_level_set") ]
-    def execute(self, module, input):
+        self.triggers = [ ItemCommandTrigger("number_ventilator_level_set").trigger ]
+    def execute(self, module, inputs):
     
         # ventilatiefunctie zou alleen de switches mogen zetten als deze nog niet zijn ingesteld
 #        logging.info(input)
-        level_ventilation = input['command']
+        level_ventilation = inputs['command']
 #        logging.info(str(level_ventilation))
         if str(level_ventilation) == "1":
             events.sendCommand("switch_ventilator_toggle_1", "OFF")
@@ -157,14 +154,14 @@ automationManager.addRule(number_ventilator_level_set())
 class rule_switch_ventilator_level_set_manual_alexa(SimpleRule):
     def __init__(self):
         self.triggers = [ 
-                            ItemCommandTrigger("switch_ventilator_level_set_manual_alexa", command="ON"),
-                            ItemCommandTrigger("switch_ventilator_level_set_manual_alexa", command="OFF") 
+                            ItemCommandTrigger("switch_ventilator_level_set_manual_alexa", command="ON").trigger,
+                            ItemCommandTrigger("switch_ventilator_level_set_manual_alexa", command="OFF").trigger 
                         ]
-    def execute(self, module, input):
+    def execute(self, module, inputs):
         
         # ventilatiefunctie zou alleen de switches mogen zetten als deze nog niet zijn ingesteld
 #        logging.info(input)
-        command = input['command']
+        command = inputs['command']
 #        logging.info(str(level_ventilation))
         if command == "ON":
             events.sendCommand("number_ventilator_level_set_manual", "3")

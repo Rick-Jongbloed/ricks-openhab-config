@@ -1,8 +1,8 @@
 scriptExtension.importPreset("RuleSupport")
 scriptExtension.importPreset("RuleSimple")
 
-from openhab.log import logging
-from openhab.triggers import ItemCommandTrigger, item_triggered, ITEM_UPDATE, ITEM_CHANGE, ITEM_COMMAND
+from core.log import logging
+from core.triggers import ItemCommandTrigger, item_triggered, ITEM_UPDATE, ITEM_CHANGE, ITEM_COMMAND
 
 class logitech_harmony_hub_toggle(SimpleRule):
     def __init__(self):

@@ -1,11 +1,10 @@
 scriptExtension.importPreset("RuleSimple")
 scriptExtension.importPreset("RuleSupport")
 
-from openhab.log import logging
-#from openhab.triggers import ItemStateUpdateTrigger, ItemCommandTrigger, ItemStateChangeTrigger, StartupTrigger
-from openhab.triggers import ItemStateUpdateTrigger, ItemCommandTrigger, ItemStateChangeTrigger
-from lucid.triggers import StartupTrigger
-from openhab.actions import Mqtt, Pushover
+from core.log import logging
+from core.triggers import ItemStateUpdateTrigger, ItemCommandTrigger, ItemStateChangeTrigger, StartupTrigger
+from core.triggers import StartupTrigger
+from core.actions import Pushover, Things
 
 class rule_kantoor_motion (SimpleRule):
     def __init__(self):
@@ -18,7 +17,7 @@ class rule_kantoor_motion (SimpleRule):
                         ]
 
     def execute(self, module, input):
-        #logging.info(input)
+        logging.info(input)
 
         # initialize programmable items
         if str(items.timer_rule_kantoor_motion_detected_motion) == "NULL":
@@ -56,7 +55,7 @@ class rule_kantoor_pc_monitors (SimpleRule):
                             ItemStateChangeTrigger("light_plafond_kantoor_midden_toggle"),
                             ItemStateChangeTrigger("light_plafond_kantoor_links_toggle"),
                             ItemStateChangeTrigger("kantoor_pc_net_online"),
-                            ItemCommandTrigger("timer_rule_kantoor_motion_detected_motion", commsnd="ON")
+                            ItemCommandTrigger("timer_rule_kantoor_motion_detected_motion", command="ON")
                             # timer_rule_kantoor_motion_override_cooldowm 
                         ]
 

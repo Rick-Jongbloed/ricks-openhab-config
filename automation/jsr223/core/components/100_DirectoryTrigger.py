@@ -1,7 +1,7 @@
 from java.nio.file.StandardWatchEventKinds import ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY
 
-from org.eclipse.smarthome.automation import Visibility
-from org.eclipse.smarthome.automation.handler import TriggerHandler
+from org.openhab.core.automation import Visibility
+from org.openhab.core.automation.handler import TriggerHandler
 from org.eclipse.smarthome.core.service import AbstractWatchService
 
 import core

@@ -5,15 +5,13 @@
 scriptExtension.importPreset("RuleSupport")
 scriptExtension.importPreset("RuleSimple")
 
-from lucid.rules import rule, addRule
-from lucid.log import logging, LOG_PREFIX
+from core.rules import rule, addRule
+from core.log import logging, LOG_PREFIX
 
 from org.eclipse.smarthome.core.library.types import (HSBType, DecimalType, PercentType)
-#from openhab.triggers import ItemCommandTrigger, StartupTrigger, ItemStateUpdateTrigger, item_triggered, ITEM_UPDATE, ItemStateChangeTrigger
-from lucid.triggers import ItemCommandTrigger, ItemStateUpdateTrigger, item_triggered, ITEM_UPDATE, ItemStateChangeTrigger, StartupTrigger
-
-#from lucid.log import logging
-from lucid.actions import Pushover, Mqtt
+from core.triggers import ItemCommandTrigger, ItemStateUpdateTrigger, ItemStateChangeTrigger, StartupTrigger, when
+from core.rules import rule
+from core.actions import Pushover, Things
 from subprocess import call
 
 import time         # timer
@@ -21,20 +19,22 @@ import os
 import urllib       # save camera file
 
 # Rule needed to make sure the status can be stored correctly
-@item_triggered("switch_deurbel_switch_mode_1_mqtt", event_types=ITEM_UPDATE, result_item_name="switch_deurbel_switch_mode_1")
+@rule("Rule: Item switch_deurbel_switch_mode_1_mqtt received update")
+@when ("Item switch_deurbel_switch_mode_1_mqtt received update")
 def rule_switch_deurbel_switch_mode_1_mqtt_changed():
-	item_state = str(items.switch_deurbel_switch_mode_1_mqtt)
+	item_state = str(switch_deurbel_switch_mode_1_mqtt)
 	if item_state == "NULL" or len(item_state) == 0:
 		item_state = str(items.switch_deurbel_switch_mode_1)
-	return item_state
+	postUpdate("switch_deurbel_switch_mode_1_mqtt", item_state)		#might neet to be sendcommand
 
 # Rule needed to make sure the status can be stored correctly
-@item_triggered("switch_deurbel_switch_topic_mqtt", event_types=ITEM_UPDATE, result_item_name="switch_deurbel_switch_topic")
+@rule("Rule: Item switch_deurbel_switch_topic_mqtt received update")
+@when ("Item switch_deurbel_switch_topic_mqtt received update")
 def rule_switch_deurbel_switch_topic_mqtt_changed():
 	item_state = str(items.switch_deurbel_switch_topic_mqtt)
 	if item_state == "NULL" or len(item_state) == 0:
 		item_state = str(items.switch_deurbel_switch_topic)
-	return item_state
+	postUpdate("switch_deurbel_switch_topic_mqtt", item_state)		#might neet to be sendcommand
 
 
 @rule
@@ -204,9 +204,10 @@ class rule_deurbel_pressed(object):
 				s.activate_actuators()
 			# else:
 			# 	logging.info("Doorbell not pressed")
-addRule(rule_deurbel_pressed())
+#addRule(rule_deurbel_pressed())
 
 # # all actions:
+# build to new type *with rule and when)
 @rule
 class rule_toggle_notification_light_eettafel(object):
 	# def __init__(self):
@@ -247,7 +248,7 @@ class rule_toggle_notification_light_eettafel(object):
 				time.sleep (2)
 		events.sendCommand(self.item_name_actuator, "OFF")
 		events.postUpdate(self.item_name_notification, "OFF")
-addRule(rule_toggle_notification_light_eettafel())
+#addRule(rule_toggle_notification_light_eettafel())
 
 @rule
 class rule_toggle_notification_sound_alexa(object):
@@ -271,7 +272,7 @@ class rule_toggle_notification_sound_alexa(object):
 			events.sendCommand("amazon_echo_dot_play_alarm_sound", "ECHO:system_alerts_melodic_01")
 		else:
 			events.sendCommand("amazon_echo_dot_play_alarm_sound", "")
-addRule(rule_toggle_notification_sound_alexa())
+#addRule(rule_toggle_notification_sound_alexa())
 
 
 class rule_toggle_notification_message_pushover(SimpleRule):

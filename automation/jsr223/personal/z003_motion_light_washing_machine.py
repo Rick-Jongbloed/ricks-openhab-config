@@ -1,39 +1,31 @@
 scriptExtension.importPreset("RuleSimple")
 scriptExtension.importPreset("RuleSupport")
 
-#from openhab.log import logging
-from lucid.rules import rule, addRule
-from lucid.log import logging, LOG_PREFIX
+from core.log import logging, LOG_PREFIX
+from core.triggers import StartupTrigger, ItemStateUpdateTrigger, ItemCommandTrigger
+from core.actions import Mqtt, Pushover
 
-#from openhab.triggers import ItemStateUpdateTrigger, ItemCommandTrigger, StartupTrigger
-#from openhab.triggers import ItemStateUpdateTrigger, ItemCommandTrigger
-from lucid.triggers import ItemStateUpdateTrigger, ItemCommandTrigger
-from lucid.triggers import StartupTrigger
-#from openhab.actions import Mqtt, Pushover
-from lucid.actions import Mqtt, Pushover
-
-@rule
-#class rule_motion_wasmachine_light (SimpleRule):
-class rule_motion_wasmachine_light(object):
-    # def __init__(self): #itemName, state=None, triggerName=None
-    #     self.triggers = [ 
-    #                         StartupTrigger(),
-    #                         ItemStateUpdateTrigger("sensor_motion_wasmachine_motion_status", state="ON"),
-    #                         ItemStateUpdateTrigger("switch_licht_wasmachine_button_toggle"),
-    #                         ItemCommandTrigger("timer_rule_motion_wasmachine_light_detected_motion", command="OFF"),
-    #                         ItemCommandTrigger("timer_rule_motion_wasmachine_light_manual_off", command="OFF"),
-    #                         ItemCommandTrigger("timer_rule_motion_wasmachine_light_init_hardware", command="OFF")
-    #                     ]
+#@rule
+class rule_motion_wasmachine_light (SimpleRule):
+    def __init__(self): #itemName, state=None, triggerName=None
+        self.triggers = [ 
+                            StartupTrigger(),
+                            ItemStateUpdateTrigger("sensor_motion_wasmachine_motion_status", state="ON"),
+                            ItemStateUpdateTrigger("switch_licht_wasmachine_button_toggle"),
+                            ItemCommandTrigger("timer_rule_motion_wasmachine_light_detected_motion", command="OFF"),
+                            ItemCommandTrigger("timer_rule_motion_wasmachine_light_manual_off", command="OFF"),
+                            ItemCommandTrigger("timer_rule_motion_wasmachine_light_init_hardware", command="OFF")
+                        ]
     
-    def getEventTriggers(self):
-        return [ 
-                             StartupTrigger(),
-                             ItemStateUpdateTrigger("sensor_motion_wasmachine_motion_status", state="ON"),
-                             ItemStateUpdateTrigger("switch_licht_wasmachine_button_toggle"),
-                             ItemCommandTrigger("timer_rule_motion_wasmachine_light_detected_motion", command="OFF"),
-                             ItemCommandTrigger("timer_rule_motion_wasmachine_light_manual_off", command="OFF"),
-                             ItemCommandTrigger("timer_rule_motion_wasmachine_light_init_hardware", command="OFF")
-                         ]
+    # def getEventTriggers(self):
+    #     return [ 
+    #                          StartupTrigger(),
+    #                          ItemStateUpdateTrigger("sensor_motion_wasmachine_motion_status", state="ON"),
+    #                          ItemStateUpdateTrigger("switch_licht_wasmachine_button_toggle"),
+    #                          ItemCommandTrigger("timer_rule_motion_wasmachine_light_detected_motion", command="OFF"),
+    #                          ItemCommandTrigger("timer_rule_motion_wasmachine_light_manual_off", command="OFF"),
+    #                          ItemCommandTrigger("timer_rule_motion_wasmachine_light_init_hardware", command="OFF")
+    #                      ]
 
 
     def execute(self, module, input):
@@ -204,4 +196,4 @@ class rule_motion_wasmachine_light(object):
                 events.sendCommand("switch_licht_wasmachine_toggle", "OFF")
                 # ergens moet deze timer gecancelled worden, overal waar manual aan wordt gezet
 
-addRule(rule_motion_wasmachine_light())
+automationManager.addRule(rule_motion_wasmachine_light())

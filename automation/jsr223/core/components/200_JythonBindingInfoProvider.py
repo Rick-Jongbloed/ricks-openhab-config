@@ -30,3 +30,4 @@ def scriptLoaded(id):
 def scriptUnloaded():
     core.osgi.unregister_service(core.JythonBindingInfoProvider)
     delattr(core, 'JythonBindingInfoProvider')
+    

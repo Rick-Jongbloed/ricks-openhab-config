@@ -1,1 +1,3 @@
-(function(i){ return i - 20; })(input)
+(function(i) { 
+    return (parseInt(i)-20);
+}) (input)

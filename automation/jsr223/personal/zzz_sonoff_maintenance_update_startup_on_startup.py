@@ -1,13 +1,13 @@
 scriptExtension.importPreset("RuleSimple")
 scriptExtension.importPreset("RuleSupport")
 
-from lucid.actions import Mqtt
+from core.actions import Mqtt
 
-from lucid.rules import rule, addRule
-from lucid.triggers import ItemStateChangeTrigger, StartupTrigger, item_group_triggered, ITEM_UPDATE
-from lucid.log import logging, LOG_PREFIX
+#from core.rules import rule, addRule
+from core.triggers import ItemStateChangeTrigger, StartupTrigger, item_group_triggered, ITEM_UPDATE
+from core.log import logging, LOG_PREFIX
 
-
+# OMBOUWEN TOT NIEUWE RULE (Met When)
 # WORK IN PROGRESS BIJ DEZE RULE
 @rule
 class init_sonoff_maintenance_update_status_on_startup(object):
@@ -16,7 +16,6 @@ class init_sonoff_maintenance_update_status_on_startup(object):
         return [
             StartupTrigger() # Runs every startup
         ]
-
 
     def execute(self, module, input):
         function = 'sonoff.request_device_status'

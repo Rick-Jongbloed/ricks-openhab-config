@@ -1,0 +1,47 @@
+// Bridge mqtt:broker:local [ host="192.168.1.203:1883", secure=false]
+// {
+// //   Thing topic miflora {
+// //         Channels:
+// //             Type number : temperature "Air Temperature"   [ stateTopic="sensor/temperature_celsius" ]
+// //             Type number : humidity "Humidity"  [ stateTopic="sensor/humidity" ]
+// //     }
+// }
+
+Bridge mqtt:broker:sonoff "MQTT Broker (Sonoff Maddox)" [ host="sonoff.maddox.co.uk", secure=false, clientID="myMQTTClient" ]
+{
+    Thing topic sonoff_version "Sonoff latest available firmware version" {
+        Channels:
+            Type string : version "sonoff_current_firmware_version"  [ stateTopic="sonoff-version" ] //, transformationPattern="REGEX:(.*?(\\d+\\.\\d+\\.\\d+).*)" ]
+    }
+}
+
+
+Bridge mqtt:broker:local "MQTT Broken (domotica-03)" [ host="192.168.1.203", secure=false, clientID="openhabclient" ]
+{
+    // Sonoff switch licht wasmachine (192.168.1.151)
+    // Sonoff switch groene TL(192.168.1.152)
+    // Sonoff meter ventilator (POW) (192.168.1.154)
+    // Sonoff switch Samsung speaker (192.168.1.155)
+    // Sonoff switch monitor en versterker (192.168.1.156)
+    // Sonoff switch monitors kantoor PC (192.168.1.157)
+
+    // Sonoff switch mechanische afzuiging (192.168.1.158)
+    Thing topic sonoff_switch_ventilatie "Sonoff double switch 1 (ventilatie)" @ "Zolder" {
+        Channels:
+            Type switch : channel_switch_ventilator_toggle_1                    "channel_switch_ventilator_toggle_1"                [ stateTopic="stat/sonoff_switch_ventilatie/POWER1", commandTopic="cmnd/sonoff_switch_ventilatie/power1" ] 
+            Type string : channel_switch_ventilator_toggle_1_startup_state      "channel_switch_ventilator_toggle_1_startup_state"  [ stateTopic="stat/sonoff_switch_ventilatie/STATUS11", transformationPattern="JSONPATH:$.StatusSTS.POWER1" ] //JSONPATH:($.StatusSTS.POWER1)
+            Type switch : channel_switch_ventilator_toggle_2                    "channel_switch_ventilator_toggle_2"                [ stateTopic="stat/sonoff_switch_ventilatie/POWER2", commandTopic="cmnd/sonoff_switch_ventilatie/power2" ]
+            Type string : channel_switch_ventilator_toggle_2_startup_state      "channel_switch_ventilator_toggle_2_startup_state"  [ stateTopic="stat/sonoff_switch_ventilatie/STATUS11", transformationPattern="JSONPATH:$.StatusSTS.POWER2" ] //JSONPATH:($.StatusSTS.POWER1)
+            Type switch : channel_switch_ventilator_reachable                   "channel_switch_ventilator_reachable"               [ stateTopic="tele/sonoff_switch_ventilatie/LWT", transformationPattern="MAP:reachable.map" ] 
+            Type number : channel_switch_ventilator_rssi                        "channel_switch_ventilator_rssi"                    [ stateTopic="tele/sonoff_switch_ventilatie/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
+            Type string : channel_switch_ventilator_local_fw_version            "channel_switch_ventilator_local_fw_version"        [ stateTopic="stat/sonoff_switch_ventilatie/STATUS1", transformationPattern="JSONPATH:$.StatusFWR.Version" ]
+    }
+    
+    // Sonoff meter koelkast (192.168.1.159)
+    // Sonoff meter audiovideo (192.168.1.160)
+    // Sonoff switch led strip TV (S20) (192.168.1.161)
+    // Sonoff Touch toilet beneden (192.168.1.162)
+    // Sonoff Kerstboom (192.168.1.163)
+    // Sonoff switch deurbel (192.168.1.164)
+    
+}
