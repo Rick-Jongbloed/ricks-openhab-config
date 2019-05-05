@@ -1,5 +1,5 @@
-from org.openhab.core.automation import Visibility
-from org.openhab.core.automation.handler import TriggerHandler
+from org.eclipse.smarthome.automation import Visibility
+from org.eclipse.smarthome.automation.handler import TriggerHandler
 
 import core
 from core.jsr223 import scope

@@ -31,3 +31,5 @@ class rule_test_error (SimpleRule):
         logging.info(input)
         logging.info("KRIJG NOU WAT ")
 automationManager.addRule(rule_test_error())
+
+

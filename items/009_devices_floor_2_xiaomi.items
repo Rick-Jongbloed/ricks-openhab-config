@@ -1,0 +1,162 @@
+// ========= OVERLOOP ZOLDER =========
+
+// bewegingssensor wasmachine
+Switch                      sensor_motion_wasmachine_motion_status
+                            "Bewegingssensor wasmachine (status) [%s]"
+                            <motion>
+                            (g_mihome_motionsensor_wasmachine, sf_corridor)
+                            { channel="mihome:sensor_motion:158d00015e7b6a:motion" }
+
+Number                      sensor_motion_wasmachine_motion_timer
+                            "Bewegingssensor wasmachine (timer) [%d]"
+                            <clock>
+                            (g_mihome_motionsensor_wasmachine)
+                            { channel="mihome:sensor_motion:158d00015e7b6a:motionOffTimer" }
+
+DateTime                    sensor_motion_wasmachine_last_motion
+                            "Bewegingssensor wasmachine (last motion) [%1$tY-%1$tm-%1$td  %1$tH:%1$tM]"
+                            <motion>
+                            (g_mihome_motionsensor_wasmachine, sf_corridor, g_restore, g_lastupdate)
+                            { channel="mihome:sensor_motion:158d00015e7b6a:lastMotion" }
+
+Number                      sensor_motion_wasmachine_battery
+                            "Bewegingssensor wasmachine (battery) [%d %%]"
+                            <battery>
+                            (g_mihome_motionsensor_wasmachine, g_restore, g_chart, g_elastic_mqtt)
+                            { channel="mihome:sensor_motion:158d00015e7b6a:batteryLevel" }
+
+Switch                      sensor_motion_wasmachine_battery_low
+                            "Bewegingssensor wasmachine (battery low) [%s]"
+                            <energy>
+                            (g_mihome_motionsensor_wasmachine, g_restore)
+                            { channel="mihome:sensor_motion:158d00015e7b6a:lowBattery" }
+
+
+// ========= SPACECAVE =========
+// Xiaomi Window Switch spacecave
+Contact                     sensor_spacecave_switch_status
+                            "Deursensor spacecave (status) [%s]"
+                            <door>
+                            (g_mihome_doorsensor_spacecave,sf_spacecave,g_restore)
+                            { channel="mihome:sensor_magnet:158d0001d839b4:isOpen" }
+
+Number                      sensor_spacecave_alarm_timer
+                            "Deursensor spacecave (alarm timer) [%d]"
+                            <clock>
+                            (g_mihome_doorsensor_spacecave,sf_spacecave)
+                            { channel="mihome:sensor_magnet:158d0001d839b4:isOpenAlarmTimer" }
+
+DateTime                    sensor_spacecave_last_opened
+                            "Deursensor spacecave (Lastopenend) [%1$tY-%1$tm-%1$td  %1$tH:%1$tM]"
+                            <clock-on>
+                            (g_mihome_doorsensor_spacecave,sf_spacecave,g_restore)
+                            { channel="mihome:sensor_magnet:158d0001d839b4:lastOpened" }
+
+Number                      sensor_spacecave_battery
+                            "Deursensor spacecave (battery) [%d %%]"
+                            <battery>
+                            (g_mihome_doorsensor_spacecave,sf_spacecave,g_chart, g_elastic_mqtt)
+                            { channel="mihome:sensor_magnet:158d0001d839b4:batteryLevel" }
+
+Switch                      sensor_spacecave_battery_low
+                            "Deursensor spacecave (battery low) [%s]"
+                            <energy>
+                            (g_mihome_doorsensor_spacecave,sf_spacecave)
+                            { channel="mihome:sensor_magnet:158d0001d839b4:lowBattery" }
+
+
+// raam links       mihome:sensor_magnet_aq2:158d0001b7b5aa:isOpen
+Contact                     sensor_spacecave_raam_links_switch_status
+                            "Raam spacecave links (status) [%s]"
+                            <window>
+                            (g_mihome_doorsensor_spacecave_raam_links,sf_spacecave,g_restore)
+                            { channel="mihome:sensor_magnet_aq2:158d0001b70c4f:isOpen" }
+
+Number                      sensor_spacecave_raam_links_alarm_timer
+                            "Raam spacecave links(alarm timer) [%d]"
+                            <clock>
+                            (g_mihome_doorsensor_spacecave_raam_links,sf_spacecave)
+                            { channel="mihome:sensor_magnet_aq2:158d0001b70c4f:isOpenAlarmTimer" }
+
+DateTime                    sensor_spacecave_raam_links_last_opened
+                            "Raam spacecave links (Lastopenend) [%1$tY-%1$tm-%1$td  %1$tH:%1$tM]"
+                            <clock-on>
+                            (g_mihome_doorsensor_spacecave_raam_links,sf_spacecave,g_restore)
+                            { channel="mihome:sensor_magnet_aq2:158d0001b70c4f:lastOpened" }
+
+Number                      sensor_spacecave_raam_links_battery
+                            "Raam spacecave links (battery) [%d %%]"
+                            <battery>
+                            (g_mihome_doorsensor_spacecave_raam_links,sf_spacecave,g_chart, g_elastic_mqtt)
+                            { channel="mihome:sensor_magnet_aq2:158d0001b70c4f:batteryLevel" }
+
+Switch                      sensor_spacecave_raam_links_battery_low
+                            "Raam spacecave links (battery low) [%s]"
+                            <energy>
+                            (g_mihome_doorsensor_spacecave_raam_links,sf_spacecave)
+                            { channel="mihome:sensor_magnet_aq2:158d0001b70c4f:lowBattery" }
+
+
+// raam rechts
+Contact                     sensor_spacecave_raam_rechts_switch_status
+                            "Raam spacecave rechts (status) [%s]"
+                            <window>
+                            (g_mihome_doorsensor_spacecave_raam_rechts,sf_spacecave,g_restore)
+                            { channel="mihome:sensor_magnet_aq2:158d0001b7b5aa:isOpen" }
+
+Number                      sensor_spacecave_raam_rechts_alarm_timer
+                            "Raam spacecave rechts (alarm timer) [%d]"
+                            <clock>
+                            (g_mihome_doorsensor_spacecave_raam_rechts,sf_spacecave)
+                            { channel="mihome:sensor_magnet_aq2:158d0001b7b5aa:isOpenAlarmTimer" }
+
+DateTime                    sensor_spacecave_raam_rechts_last_opened
+                            "Raam spacecave rechts (Lastopenend) [%1$tY-%1$tm-%1$td  %1$tH:%1$tM]"
+                            <clock-on>
+                            (g_mihome_doorsensor_spacecave_raam_rechts,sf_spacecave,g_restore)
+                            { channel="mihome:sensor_magnet_aq2:158d0001b7b5aa:lastOpened" }
+
+Number                      sensor_spacecave_raam_rechts_battery
+                            "Raam spacecave rechts (battery) [%d %%]"
+                            <battery>
+                            (g_mihome_doorsensor_spacecave_raam_rechts,sf_spacecave,g_chart, g_elastic_mqtt)
+                            { channel="mihome:sensor_magnet_aq2:158d0001b7b5aa:batteryLevel" }
+
+Switch                      sensor_spacecave_raam_rechts_battery_low
+                            "Raam spacecave rechts (battery low) [%s]"
+                            <energy>
+                            (g_mihome_doorsensor_spacecave_raam_rechts,sf_spacecave)
+                            { channel="mihome:sensor_magnet_aq2:158d0001b7b5aa:lowBattery" }
+
+
+// OPSLAG
+// raamsensor opslag
+Contact                     sensor_opslag_raam_switch_status
+                            "Raamsensor Opslag (status) [%s]"
+                            <door>
+                            (g_mihome_raamsensor_opslag,sf_storage,g_restore)
+                            { channel="mihome:sensor_magnet_aq2:158d0001de667d:isOpen" }
+
+Number                      sensor_opslag_raam_alarm_timer
+                            "Raamsensor Opslag (alarm timer) [%d]"
+                            <clock>
+                            (g_mihome_raamsensor_opslag,sf_storage)
+                            { channel="mihome:sensor_magnet_aq2:158d0001de667d:isOpenAlarmTimer" }
+
+DateTime                    sensor_opslag_raam_last_opened
+                            "Raamsensor Opslag (Lastopenend) [%1$tY-%1$tm-%1$td  %1$tH:%1$tM]"
+                            <clock-on>
+                            (g_mihome_raamsensor_opslag,sf_storage,g_restore)
+                            { channel="mihome:sensor_magnet_aq2:158d0001de667d:lastOpened" }
+
+Number                      sensor_opslag_raam_battery
+                            "Raamsensor Opslag (battery) [%d %%]"
+                            <battery>
+                            (g_mihome_raamsensor_opslag,sf_storage,g_chart, g_elastic_mqtt)
+                            { channel="mihome:sensor_magnet_aq2:158d0001de667d:batteryLevel" }
+
+Switch                      sensor_opslah_raam_battery_low
+                            "Raamsensor Opslag (battery low) [%s]"
+                            <energy>
+                            (g_mihome_raamsensor_opslag,sf_storage)
+                            { channel="mihome:sensor_magnet_aq2:158d0001de667d:lowBattery" }

@@ -43,3 +43,4 @@ class rule_astro_manage_day_or_night_switch(SimpleRule):
             events.sendCommand("night", "ON")
         logging.info("Rule rule_astro_manage_day_or_night_switch started DAY='" + str(items.day) + "' NIGHT='" + str(items.night) + "'...")
 automationManager.addRule(rule_astro_manage_day_or_night_switch())
+

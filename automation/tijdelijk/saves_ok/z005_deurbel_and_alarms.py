@@ -250,6 +250,7 @@ class rule_toggle_notification_light_eettafel(object):
 		events.postUpdate(self.item_name_notification, "OFF")
 #addRule(rule_toggle_notification_light_eettafel())
 
+
 @rule
 class rule_toggle_notification_sound_alexa(object):
 	# def __init__(self):

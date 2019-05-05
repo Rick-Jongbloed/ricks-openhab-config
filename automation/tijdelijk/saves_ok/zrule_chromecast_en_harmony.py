@@ -2,7 +2,8 @@ scriptExtension.importPreset("RuleSupport")
 scriptExtension.importPreset("RuleSimple")
 
 from core.log import logging
-from core.triggers import ItemCommandTrigger, item_triggered, ITEM_UPDATE, ITEM_CHANGE, ITEM_COMMAND
+from core.triggers import ItemCommandTrigger, when  #item_triggered, ITEM_UPDATE, ITEM_CHANGE, ITEM_COMMAND
+from core.rules import rule
 
 class logitech_harmony_hub_toggle(SimpleRule):
     def __init__(self):
@@ -15,7 +16,9 @@ class logitech_harmony_hub_toggle(SimpleRule):
         #    pass
 automationManager.addRule(logitech_harmony_hub_toggle())
 
-@item_triggered("logitech_harmony_hub_current_activity",ITEM_CHANGE)
+@rule("Logitech Harmony Hub Current Activity Changed (Set logitech_harmony_hub_toggle)")
+@when("Item logitech_harmony_hub_current_activity changed")
+#@item_triggered("logitech_harmony_hub_current_activity",ITEM_CHANGE)
 def rule_harmony_hub_initialize():
     logging.info("Running logitech_harmony_hub_current_activity hub rule...")
     if str(items.logitech_harmony_hub_current_activity) == "PowerOff":
@@ -23,7 +26,10 @@ def rule_harmony_hub_initialize():
     else:
         events.postUpdate("logitech_harmony_hub_toggle", "ON")
 
-@item_triggered("logitech_harmony_hub_current_activity", ITEM_CHANGE)
+
+@rule("Logitech Harmony Hub Current Activity Changed (Set all items in openhab menu)")
+@when("Item logitech_harmony_hub_current_activity changed")
+#@item_triggered("logitech_harmony_hub_current_activity", ITEM_CHANGE)
 def rule_logitech_harmony_hub_current_activity():
     logging.info("rule_logitech_harmony_hub_current_activity started....")
 
@@ -80,7 +86,9 @@ def rule_logitech_harmony_hub_current_activity():
             events.postUpdate("logitech_harmony_hub_toggle","ON")
 
 
-@item_triggered("logitech_harmony_hub_current_activity", ITEM_CHANGE)
+@rule("Logitech Harmony Hub Current Activity Changed (Set all items in openhab menu)")
+@when("Item logitech_harmony_hub_current_activity changed")
+#@item_triggered("logitech_harmony_hub_current_activity", ITEM_CHANGE)
 def rule_chromecast_woonkamer_py_status_changed():
     if items.rule_chromecast_woonkamer_py_status_changed_is_running != ON and str(items.chromecast_woonkamer_py_status) != "BUFFERING":
         events.postUpdate("rule_chromecast_woonkamer_py_status_changed_is_running", "ON")
@@ -103,8 +111,9 @@ def rule_chromecast_woonkamer_py_status_changed():
  		events.postUpdate("rule_chromecast_woonkamer_py_status_changed_is_running", "OFF")
 
 
-
-@item_triggered("rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff", ITEM_COMMAND) # deze rule moet naar een item toe.
+@rule("Logitech Harmony Hub rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff Changed")
+@when("Item rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff changed")
+#@item_triggered("rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff", ITEM_COMMAND) # deze rule moet naar een item toe.
 def rule_turn_off_harmony_devices_delayed():
     if item.rule_chromecast_woonkamer_py_status_changed_start_harmony_poweroff == OFF:
         events.sendCommand("logitech_harmony_hub_current_activity", "PowerOff")

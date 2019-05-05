@@ -2,14 +2,12 @@
 scriptExtension.importPreset("RuleSimple")
 scriptExtension.importPreset("RuleSupport")
 
-from openhab.log import logging
-#from openhab.triggers import StartupTrigger, ItemStateChangeTrigger, ItemCommandTrigger, item_triggered, ITEM_COMMAND, ItemStateUpdateTrigger
-from openhab.triggers import ItemStateChangeTrigger, ItemCommandTrigger, item_triggered, ITEM_COMMAND, ItemStateUpdateTrigger
-from lucid.triggers import StartupTrigger
-
-from openhab.actions import Mqtt, Pushover
+from core.log import logging
+from core.triggers import ItemStateChangeTrigger, ItemCommandTrigger, ItemStateUpdateTrigger, StartupTrigger
+from core.actions import Things, Pushover
 from time import sleep
      
+
 class rule_automate_keuken_licht(SimpleRule):
     def __init__(self):
         self.triggers = [ 

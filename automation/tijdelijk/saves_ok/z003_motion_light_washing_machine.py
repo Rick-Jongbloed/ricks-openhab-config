@@ -3,7 +3,7 @@ scriptExtension.importPreset("RuleSupport")
 
 from core.log import logging, LOG_PREFIX
 from core.triggers import StartupTrigger, ItemStateUpdateTrigger, ItemCommandTrigger
-from core.actions import Mqtt, Pushover
+from core.actions import Things, Pushover
 
 #@rule
 class rule_motion_wasmachine_light (SimpleRule):

@@ -28,7 +28,7 @@ See docs for java.time.temporal.ChronoUnit, if you want more information.
 import datetime
 import sys
 
-if 'org.openhab.core.automation' in sys.modules:
+if 'org.eclipse.smarthome.automation' in sys.modules:
     # Workaround for Jython JSR223 bug where
     # dates and datetimes are converted to java.sql.Date
     # and java.sql.Timestamp

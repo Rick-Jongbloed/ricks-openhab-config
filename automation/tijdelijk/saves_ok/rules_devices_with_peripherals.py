@@ -1,7 +1,10 @@
-from openhab.log import logging
-from openhab.triggers import item_triggered, ITEM_CHANGE
+from core.log import logging
+from core.triggers import when
+from core.rules import rule
 
-@item_triggered("spacecave_pc_fixed_net_online",ITEM_CHANGE)
+@rule("Spacecave PC is online")
+@when("Item spacecave_pc_fixed_net_online changed") 
+#@item_triggered("spacecave_pc_fixed_net_online",ITEM_CHANGE)
 def rule_spacecave_turn_monitors_on_when_pc_is_turned_on():
     logging.info("**** rule_spacecave_turn_monitors_on_when_pc_is_turned_on rule running due to state change")
     if items.spacecave_pc_fixed_net_online == ON and items.switch_monitor_versterker_toggle == OFF:

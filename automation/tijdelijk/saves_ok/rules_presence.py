@@ -1,13 +1,16 @@
 scriptExtension.importPreset("RuleSimple")
 scriptExtension.importPreset("RuleSupport")
 
-from openhab.log import logging
-from openhab.triggers import item_group_triggered, ItemCommandTrigger, ITEM_UPDATE
+from core.log import logging
+from core.triggers import ItemCommandTrigger, when
+from core.rules import rule
 
 # Presence detection - 
 # if presence is not detected, but was on, a timer is started (5m)
 # if presence is detected, someone_is_present is set to ON
-@item_group_triggered("g_present", ITEM_UPDATE)
+@rule("Set present timer when item g_present updates")
+@when("Item g_present received update")
+#@item_group_triggered("g_present", ITEM_UPDATE)
 def rule_group_present_updated(event):
     #logging.info("Running present detection rule...")
     if items.g_present == ON and items.someone_is_present != ON:           # Someone came home, or an item is updated

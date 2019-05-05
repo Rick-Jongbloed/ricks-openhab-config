@@ -7,6 +7,7 @@ from core.triggers import ChannelEventTrigger, ItemCommandTrigger, when
 from core.log import logging
 from core.actions import Pushover
 
+
 class rule_xiaomi_switch_slaapkamer_all_off(SimpleRule):
     def __init__(self):
             

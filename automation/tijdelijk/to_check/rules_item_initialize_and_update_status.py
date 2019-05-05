@@ -10,6 +10,7 @@ from core.triggers import StartupTrigger
 # from java.util import Date
 
 
+
 class rule_startup_initialize(SimpleRule):
     def __init__(self):
         self.triggers = [ StartupTrigger() ]

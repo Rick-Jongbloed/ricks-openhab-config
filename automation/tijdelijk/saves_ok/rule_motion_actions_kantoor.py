@@ -6,6 +6,8 @@ from core.triggers import ItemStateUpdateTrigger, ItemCommandTrigger, ItemStateC
 from core.triggers import StartupTrigger
 from core.actions import Pushover, Things
 
+
+
 class rule_kantoor_motion (SimpleRule):
     def __init__(self):
         self.triggers = [ 

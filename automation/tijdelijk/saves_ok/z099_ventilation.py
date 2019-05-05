@@ -5,6 +5,7 @@ from core.triggers import StartupTrigger, ItemStateChangeTrigger, ItemCommandTri
 from time import sleep
 from core.actions import Pushover
 
+
 class rule_automate_ventilation_new(SimpleRule):
     def __init__(self):
         self.triggers = [                                                     

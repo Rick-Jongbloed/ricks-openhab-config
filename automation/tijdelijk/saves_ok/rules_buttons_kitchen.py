@@ -3,6 +3,7 @@ from core.triggers import ChannelEventTrigger
 from core.actions import Pushover
 #import core.config as config   // todo
 
+
 @rule
 class rule_xiaomi_switch_keuken(object):
     def getEventTriggers(self):

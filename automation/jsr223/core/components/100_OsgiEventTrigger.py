@@ -2,8 +2,8 @@ import java.util
 import traceback
 import uuid
 
-from org.openhab.core.automation import Visibility
-from org.openhab.core.automation.handler import TriggerHandler
+from org.eclipse.smarthome.automation import Visibility
+from org.eclipse.smarthome.automation.handler import TriggerHandler
 
 import core
 from core.osgi.events import OsgiEventAdmin, event_dict, osgi_triggers

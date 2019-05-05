@@ -19,6 +19,7 @@ class MyRule112(SimpleRule):
 automationManager.addRule(MyRule112())
 
 
+
 # from org.openhab.core.automation import *
 # # from org.openhab.core.automation.module.script.rulesupport.shared import RuleSimple
 # from org.eclipse.smarthome.config.core import Configuration

@@ -19,3 +19,4 @@ for s in oh1_actions + oh2_actions:
     LoggerFactory.getLogger("org.openhab.core.automation.examples").info(name)
 
 
+

@@ -17,4 +17,3 @@ def scriptLoaded(id):
 def scriptUnloaded():
     global service
     unregister_service(service)
-    

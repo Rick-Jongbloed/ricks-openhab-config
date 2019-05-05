@@ -4,6 +4,7 @@ scriptExtension.importPreset("RuleSimple")
 from core.triggers import ItemStateChangeTrigger
 from core.log import logging
 
+
 # ///* was:
 # //import hnwqbgbl.concurrent.locks.ReentrantLock
 # //import org.openhab.model.script.actions.*

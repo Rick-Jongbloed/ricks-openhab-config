@@ -1,7 +1,7 @@
 scriptExtension.importPreset("RuleSimple")
 scriptExtension.importPreset("RuleSupport")
 
-from core.actions import Mqtt
+from core.actions import Things
 
 #from core.rules import rule, addRule
 from core.triggers import ItemStateChangeTrigger, StartupTrigger, item_group_triggered, ITEM_UPDATE
