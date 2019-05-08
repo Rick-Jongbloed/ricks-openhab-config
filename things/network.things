@@ -69,8 +69,8 @@ network:pingdevice:192_168_1_159 	"x Sonoff meter koelkast (192.168.1.159)" 	   
 network:pingdevice:192_168_1_160 	"x Sonoff meter audiovideo (192.168.1.160)" 	            @ "Begane grond"			[ hostname="192.168.1.160", retry=1, timeout=5000, refresh_interval=30000 ]
 network:pingdevice:192_168_1_161 	"x Sonoff switch led strip TV (S20) (192.168.1.161)" 		@ "Begane grond" 			[ hostname="192.168.1.161", retry=1, timeout=5000, refresh_interval=30000 ]
 network:pingdevice:192_168_1_162 	"Sonoff Touch toilet beneden (192.168.1.162)" 		    @ "Begane grond" 			[ hostname="192.168.1.162", retry=1, timeout=5000, refresh_interval=30000 ]
-network:pingdevice:192_168_1_163 	"x Sonoff Kerstboom (192.168.1.163)" 		                @ "Begane grond" 			[ hostname="192.168.1.163", retry=1, timeout=5000, refresh_interval=30000 ]
-network:pingdevice:192_168_1_164 	"x Sonoff switch deurbel (192.168.1.164)" 		        @ "Begane grond" 			[ hostname="192.168.1.164", retry=1, timeout=5000, refresh_interval=30000 ]
+network:pingdevice:192_168_1_164 	"x Sonoff Kerstboom (192.168.1.164)" 		                @ "Begane grond" 			[ hostname="192.168.1.164", retry=1, timeout=5000, refresh_interval=30000 ]
+network:pingdevice:192_168_1_163 	"x Sonoff switch deurbel (192.168.1.163)" 		        @ "Begane grond" 			[ hostname="192.168.1.163", retry=1, timeout=5000, refresh_interval=30000 ]
 //
 // 165 .... 170
 //

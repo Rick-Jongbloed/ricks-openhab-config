@@ -15,49 +15,143 @@ Bridge mqtt:broker:sonoff "MQTT Broker (Sonoff Maddox)" [ host="sonoff.maddox.co
     }
 }
 
-Bridge mqtt:broker:local "MQTT Broken (domotica-03)" [ host="192.168.1.203", secure=false, clientID="openhabclient" ]
+Bridge mqtt:broker:local "MQTT Broker (domotica-03)" [ host="192.168.1.203", secure=false, clientID="openhabclient" ]
 {
     // Sonoff switch licht wasmachine (192.168.1.151)
      Thing topic sonoff_switch_licht_wasmachine "Sonoff switch (licht wasmachine)" @ "Zolder" {
         Channels:
-            Type switch : channel_switch_licht_wasmachine_toggle                      "channel_switch_licht_wasmachine_toggle"                    [ stateTopic="stat/sonoff_licht_washoek/POWER", commandTopic="cmnd/sonoff_licht_washoek/power" ] 
-            Type string : channel_switch_licht_wasmachine_toggle_startup_state        "channel_switch_licht_wasmachine_toggle_startup_state"      [ stateTopic="stat/sonoff_licht_washoek/STATUS11", transformationPattern="JSONPATH:$.StatusSTS.POWER" ] //JSONPATH:($.StatusSTS.POWER)
-            Type switch : channel_switch_licht_wasmachine_reachable                   "channel_switch_licht_wasmachine_reachable"                 [ stateTopic="tele/sonoff_licht_washoek/LWT", transformationPattern="MAP:reachable.map" ] 
-            Type number : channel_switch_licht_wasmachine_rssi                        "channel_switch_licht_wasmachine_rssi"                      [ stateTopic="tele/sonoff_licht_washoek/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
-            Type switch : channel_switch_licht_wasmachine_ledpower                    "channel_switch_licht_wasmachine_ledpower"                  [ commandTopic="cmnd/sonoff_licht_washoek/LedPower" ]
-            Type number : channel_switch_licht_wasmachine_led_state                   "channel_switch_licht_wasmachine_led_state"                 [ commandTopic="cmnd/sonoff_licht_washoek/LedState", stateTopic="stat/sonoff_licht_washoek/STATUS", transformationPattern="JSONPATH:$.Status.LedState" ]      
-            Type string : channel_switch_licht_wasmachine_button_topic                "channel_switch_licht_wasmachine_button_topic"              [ commandTopic="cmnd/sonoff_licht_washoek/ButtonTopic", stateTopic="stat/sonoff_licht_washoek/STATUS", transformationPattern="JSONPATH:$.Status.ButtonTopic" ]
-            Type string : channel_switch_licht_wasmachine_button_toggle               "channel_switch_licht_wasmachine_button_toggle"             [ stateTopic="stat/sonoff_licht_washoek_button/POWER", commandTopic="cmnd/sonoff_licht_washoek_button/power" ]
-            Type string : channel_switch_licht_wasmachine_local_fw_version            "channel_switch_licht_wasmachine_local_fw_version"          [ stateTopic="stat/sonoff_licht_washoek/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version" ]        
+            Type switch : channel_switch_licht_wasmachine_toggle                        "channel_switch_licht_wasmachine_toggle"                                    [ stateTopic="stat/sonoff_licht_washoek/POWER", commandTopic="cmnd/sonoff_licht_washoek/power" ] 
+            Type string : channel_switch_licht_wasmachine_toggle_startup_state          "channel_switch_licht_wasmachine_toggle_startup_state"                      [ stateTopic="stat/sonoff_licht_washoek/STATUS11", transformationPattern="JSONPATH:$.StatusSTS.POWER" ] //JSONPATH:($.StatusSTS.POWER)
+            Type switch : channel_switch_licht_wasmachine_reachable                     "channel_switch_licht_wasmachine_reachable"                                 [ stateTopic="tele/sonoff_licht_washoek/LWT", transformationPattern="MAP:reachable.map" ] 
+            Type number : channel_switch_licht_wasmachine_rssi                          "channel_switch_licht_wasmachine_rssi"                                      [ stateTopic="tele/sonoff_licht_washoek/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
+            Type string : channel_switch_licht_wasmachine_local_fw_version              "channel_switch_licht_wasmachine_local_fw_version"                          [ stateTopic="stat/sonoff_licht_washoek/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version" ]        
+            Type switch : channel_switch_licht_wasmachine_ledpower                      "channel_switch_licht_wasmachine_ledpower"                                  [ commandTopic="cmnd/sonoff_licht_washoek/LedPower" ]
+            Type number : channel_switch_licht_wasmachine_led_state                     "channel_switch_licht_wasmachine_led_state"                                 [ commandTopic="cmnd/sonoff_licht_washoek/LedState", stateTopic="stat/sonoff_licht_washoek/STATUS", transformationPattern="JSONPATH:$.Status.LedState" ]      
+            Type string : channel_switch_licht_wasmachine_button_topic                  "channel_switch_licht_wasmachine_button_topic"                              [ commandTopic="cmnd/sonoff_licht_washoek/ButtonTopic", stateTopic="stat/sonoff_licht_washoek/STATUS", transformationPattern="JSONPATH:$.Status.ButtonTopic" ]
+            Type string : channel_switch_licht_wasmachine_button_toggle                 "channel_switch_licht_wasmachine_button_toggle"                             [ stateTopic="stat/sonoff_licht_washoek_button/POWER", commandTopic="cmnd/sonoff_licht_washoek_button/power" ]
      }
     // Sonoff switch groene TL(192.168.1.152)
+    Thing topic sonoff_switch_groene_tl "Sonoff switch (groene tl)" @ "Begane grond" {
+        Channels:
+            Type switch : channel_switch_groene_tl_toggle                               "channel_switch_groene_tl_toggle"                                           [ stateTopic="stat/sonoff_green_tl/POWER", commandTopic="cmnd/sonoff_green_tl/power" ] 
+            Type string : channel_switch_groene_tl_toggle_startup_state                 "channel_switch_groene_tl_toggle_startup_state"                             [ stateTopic="stat/sonoff_green_tl/STATUS11", transformationPattern="JSONPATH:$.StatusSTS.POWER" ] //JSONPATH:($.StatusSTS.POWER)
+            Type switch : channel_switch_groene_tl_reachable                            "channel_switch_groene_tl_reachable"                                        [ stateTopic="tele/sonoff_green_tl/LWT", transformationPattern="MAP:reachable.map" ] 
+            Type number : channel_switch_groene_tl_rssi                                 "channel_switch_groene_tl_rssi"                                             [ stateTopic="tele/sonoff_green_tl/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
+            Type string : channel_switch_groene_tl_local_fw_version                     "channel_switch_groene_tl_local_fw_version"                                 [ stateTopic="stat/sonoff_green_tl/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version" ]        
+    }
+    
     // Sonoff meter ventilator (POW) (192.168.1.154)
+    Thing topic sonoff_meter_ventilator "Sonoff meter ventilator (POW)" @ "Zolder" {
+        Channels:
+            Type number : channel_meter_ventilator_power                                "channel_meter_ventilator_power"                                            [ stateTopic="tele/sonoff_meter_ventilatie/ENERGY", transformationPattern="JSONPATH:$.Power" ]
+            Type number : channel_meter_ventilator_voltage                              "channel_meter_ventilator_voltage"                                          [ stateTopic="tele/sonoff_meter_ventilatie/ENERGY", transformationPattern="JSONPATH:$.Voltage" ]
+            Type number : channel_meter_ventilator_current                              "channel_meter_ventilator_current"                                          [ stateTopic="tele/sonoff_meter_ventilatie/ENERGY", transformationPattern="JSONPATH:$.Current" ]
+            Type number : channel_meter_ventilator_real_power_factor                    "channel_meter_ventilator_real_power_factor"                                [ stateTopic="tele/sonoff_meter_ventilatie/ENERGY", transformationPattern="JSONPATH:$.Factor" ]
+            Type number : channel_meter_ventilator_energy_usage_since_last_update       "channel_meter_ventilator_energy_usage_since_last_update"                   [ stateTopic="tele/sonoff_meter_ventilatie/ENERGY", transformationPattern="JSONPATH:$.Period" ]
+            Type number : channel_meter_ventilator_energy_usage_today                   "channel_meter_ventilator_energy_usage_today"                               [ stateTopic="tele/sonoff_meter_ventilatie/ENERGY", transformationPattern="JSONPATH:$.Today" ]
+            Type number : channel_meter_ventilator_energy_usage_yesterday               "channel_meter_ventilator_energy_usage_yesterday"                           [ stateTopic="tele/sonoff_meter_ventilatie/ENERGY", transformationPattern="JSONPATH:$.Yesterday" ]           
+            Type switch : channel_meter_ventilator_reachable                            "channel_meter_ventilator_reachable"                                        [ stateTopic="tele/sonoff_meter_ventilatie/LWT", transformationPattern="MAP:reachable.map" ] 
+            Type number : channel_meter_ventilator_rssi                                 "channel_meter_ventilator_rssi"                                             [ stateTopic="tele/sonoff_meter_ventilatie/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
+            Type string : channel_meter_ventilator_local_fw_version                     "channel_meter_ventilator_local_fw_version"                                 [ stateTopic="stat/sonoff_meter_ventilatie/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version" ]        
+    }
+
     // Sonoff switch Samsung speaker (192.168.1.155)
+    // not in use?
+
     // Sonoff switch monitor en versterker (192.168.1.156)
+    // zolder, not in use?
+
+    // moet ik opnieuw updaten
     // Sonoff switch monitors kantoor PC (192.168.1.157)
+     // Thing topic sonoff_switch_groene_tl "Sonoff switch (groene tl)" @ "Begane grond" {
+    //     Channels:
+    //         Type switch : channel_switch_groene_tl_toggle                      "channel_switch_groene_tl_toggle"                                    [ stateTopic="stat/sonoff_green_tl/POWER", commandTopic="cmnd/sonoff_green_tl/power" ] 
+    //         Type string : channel_switch_groene_tl_toggle_startup_state        "channel_switch_groene_tl_toggle_startup_state"                      [ stateTopic="stat/sonoff_green_tl/STATUS11", transformationPattern="JSONPATH:$.StatusSTS.POWER" ] //JSONPATH:($.StatusSTS.POWER)
+    //         Type switch : channel_switch_groene_tl_reachable                   "channel_switch_groene_tl_reachable"                                 [ stateTopic="tele/sonoff_green_tl/LWT", transformationPattern="MAP:reachable.map" ] 
+    //         Type number : channel_switch_groene_tl_rssi                        "channel_switch_groene_tl_rssi"                                      [ stateTopic="tele/sonoff_green_tl/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
+    //         Type string : channel_switch_groene_tl_local_fw_version            "channel_switch_groene_tl_local_fw_version"                          [ stateTopic="stat/sonoff_green_tl/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version" ]        
+    // }   
 
     // Sonoff switch mechanische afzuiging (192.168.1.158)
     Thing topic sonoff_switch_ventilatie "Sonoff double switch (ventilatie)" @ "Zolder" {
         Channels:
-            Type switch : channel_switch_ventilator_toggle_1                    "channel_switch_ventilator_toggle_1"                            [ stateTopic="stat/sonoff_switch_ventilatie/POWER1", commandTopic="cmnd/sonoff_switch_ventilatie/power1" ] 
-            Type string : channel_switch_ventilator_toggle_1_startup_state      "channel_switch_ventilator_toggle_1_startup_state"              [ stateTopic="stat/sonoff_switch_ventilatie/STATUS11", transformationPattern="JSONPATH:$.StatusSTS.POWER1" ] //JSONPATH:($.StatusSTS.POWER1)
-            Type switch : channel_switch_ventilator_toggle_2                    "channel_switch_ventilator_toggle_2"                            [ stateTopic="stat/sonoff_switch_ventilatie/POWER2", commandTopic="cmnd/sonoff_switch_ventilatie/power2" ]
-            Type string : channel_switch_ventilator_toggle_2_startup_state      "channel_switch_ventilator_toggle_2_startup_state"              [ stateTopic="stat/sonoff_switch_ventilatie/STATUS11", transformationPattern="JSONPATH:$.StatusSTS.POWER2" ] //JSONPATH:($.StatusSTS.POWER1)
-            Type switch : channel_switch_ventilator_reachable                   "channel_switch_ventilator_reachable"                           [ stateTopic="tele/sonoff_switch_ventilatie/LWT", transformationPattern="MAP:reachable.map" ] 
-            Type number : channel_switch_ventilator_rssi                        "channel_switch_ventilator_rssi"                                [ stateTopic="tele/sonoff_switch_ventilatie/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
-            Type string : channel_switch_ventilator_local_fw_version            "channel_switch_ventilator_local_fw_version"                    [ stateTopic="stat/sonoff_switch_ventilatie/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version" ]        
+            Type switch : channel_switch_ventilator_toggle_1                            "channel_switch_ventilator_toggle_1"                                        [ stateTopic="stat/sonoff_switch_ventilatie/POWER1", commandTopic="cmnd/sonoff_switch_ventilatie/power1" ] 
+            Type string : channel_switch_ventilator_toggle_1_startup_state              "channel_switch_ventilator_toggle_1_startup_state"                          [ stateTopic="stat/sonoff_switch_ventilatie/STATUS11", transformationPattern="JSONPATH:$.StatusSTS.POWER1" ] //JSONPATH:($.StatusSTS.POWER1)
+            Type switch : channel_switch_ventilator_toggle_2                            "channel_switch_ventilator_toggle_2"                                        [ stateTopic="stat/sonoff_switch_ventilatie/POWER2", commandTopic="cmnd/sonoff_switch_ventilatie/power2" ]
+            Type string : channel_switch_ventilator_toggle_2_startup_state              "channel_switch_ventilator_toggle_2_startup_state"                          [ stateTopic="stat/sonoff_switch_ventilatie/STATUS11", transformationPattern="JSONPATH:$.StatusSTS.POWER2" ] //JSONPATH:($.StatusSTS.POWER1)
+            Type switch : channel_switch_ventilator_reachable                           "channel_switch_ventilator_reachable"                                       [ stateTopic="tele/sonoff_switch_ventilatie/LWT", transformationPattern="MAP:reachable.map" ] 
+            Type number : channel_switch_ventilator_rssi                                "channel_switch_ventilator_rssi"                                            [ stateTopic="tele/sonoff_switch_ventilatie/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
+            Type string : channel_switch_ventilator_local_fw_version                    "channel_switch_ventilator_local_fw_version"                                [ stateTopic="stat/sonoff_switch_ventilatie/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version" ]        
     }
-
-
 
     //{ mqtt="<[mosquitto:tele/sonoff_licht_washoek/INFO1:state:JSONPATH($.Version)], <[mosquitto:stat/sonoff_licht_washoek/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }
 
-
     // Sonoff meter koelkast (192.168.1.159)
+    Thing topic sonoff_meter_koelkast "Sonoff meter koelkast (POW)" @ "Begane grond" {
+        Channels:
+            Type number : channel_meter_koelkast_power                                "channel_meter_koelkast_power"                                                [ stateTopic="tele/sonoff_meter_koelkast/ENERGY", transformationPattern="JSONPATH:$.Power" ]
+            Type number : channel_meter_koelkast_voltage                              "channel_meter_koelkast_voltage"                                              [ stateTopic="tele/sonoff_meter_koelkast/ENERGY", transformationPattern="JSONPATH:$.Voltage" ]
+            Type number : channel_meter_koelkast_current                              "channel_meter_koelkast_current"                                              [ stateTopic="tele/sonoff_meter_koelkast/ENERGY", transformationPattern="JSONPATH:$.Current" ]
+            Type number : channel_meter_koelkast_real_power_factor                    "channel_meter_koelkast_real_power_factor"                                    [ stateTopic="tele/sonoff_meter_koelkast/ENERGY", transformationPattern="JSONPATH:$.Factor" ]
+            Type number : channel_meter_koelkast_energy_usage_since_last_update       "channel_meter_koelkast_energy_usage_since_last_update"                       [ stateTopic="tele/sonoff_meter_koelkast/ENERGY", transformationPattern="JSONPATH:$.Period" ]
+            Type number : channel_meter_koelkast_energy_usage_today                   "channel_meter_koelkast_energy_usage_today"                                   [ stateTopic="tele/sonoff_meter_koelkast/ENERGY", transformationPattern="JSONPATH:$.Today" ]
+            Type number : channel_meter_koelkast_energy_usage_yesterday               "channel_meter_koelkast_energy_usage_yesterday"                               [ stateTopic="tele/sonoff_meter_koelkast/ENERGY", transformationPattern="JSONPATH:$.Yesterday" ]           
+            Type switch : channel_meter_koelkast_reachable                            "channel_meter_koelkast_reachable"                                            [ stateTopic="tele/sonoff_meter_koelkast/LWT", transformationPattern="MAP:reachable.map" ] 
+            Type number : channel_meter_koelkast_rssi                                 "channel_meter_koelkast_rssi"                                                 [ stateTopic="tele/sonoff_meter_koelkast/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
+            Type string : channel_meter_koelkast_local_fw_version                     "channel_meter_koelkast_local_fw_version"                                     [ stateTopic="stat/sonoff_meter_koelkast/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version" ]        
+    }
+
     // Sonoff meter audiovideo (192.168.1.160)
+    Thing topic sonoff_meter_audiovideo "Sonoff meter audiovideo (POW)" @ "Begane grond" {
+        Channels:
+            Type number : channel_meter_audiovideo_power                                "channel_meter_audiovideo_power"                                            [ stateTopic="tele/sonoff_meter_audiovideo/ENERGY", transformationPattern="JSONPATH:$.Power" ]
+            Type number : channel_meter_audiovideo_voltage                              "channel_meter_audiovideo_voltage"                                          [ stateTopic="tele/sonoff_meter_audiovideo/ENERGY", transformationPattern="JSONPATH:$.Voltage" ]
+            Type number : channel_meter_audiovideo_current                              "channel_meter_audiovideo_current"                                          [ stateTopic="tele/sonoff_meter_audiovideo/ENERGY", transformationPattern="JSONPATH:$.Current" ]
+            Type number : channel_meter_audiovideo_real_power_factor                    "channel_meter_audiovideo_real_power_factor"                                [ stateTopic="tele/sonoff_meter_audiovideo/ENERGY", transformationPattern="JSONPATH:$.Factor" ]
+            Type number : channel_meter_audiovideo_energy_usage_since_last_update       "channel_meter_audiovideo_energy_usage_since_last_update"                   [ stateTopic="tele/sonoff_meter_audiovideo/ENERGY", transformationPattern="JSONPATH:$.Period" ]
+            Type number : channel_meter_audiovideo_energy_usage_today                   "channel_meter_audiovideo_energy_usage_today"                               [ stateTopic="tele/sonoff_meter_audiovideo/ENERGY", transformationPattern="JSONPATH:$.Today" ]
+            Type number : channel_meter_audiovideo_energy_usage_yesterday               "channel_meter_audiovideo_energy_usage_yesterday"                           [ stateTopic="tele/sonoff_meter_audiovideo/ENERGY", transformationPattern="JSONPATH:$.Yesterday" ]           
+            Type switch : channel_meter_audiovideo_reachable                            "channel_meter_audiovideo_reachable"                                        [ stateTopic="tele/sonoff_meter_audiovideo/LWT", transformationPattern="MAP:reachable.map" ] 
+            Type number : channel_meter_audiovideo_rssi                                 "channel_meter_audiovideo_rssi"                                             [ stateTopic="tele/sonoff_meter_audiovideo/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
+            Type string : channel_meter_audiovideo_local_fw_version                     "channel_meter_audiovideo_local_fw_version"                                 [ stateTopic="stat/sonoff_meter_audiovideo/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version" ]        
+    }
+
     // Sonoff switch led strip TV (S20) (192.168.1.161)
+    Thing topic switch_led_strip_tv "Sonoff switch (ledstrip tv)" @ "Begane grond" {
+        Channels:
+            Type switch : channel_switch_led_strip_tv_toggle                            "channel_switch_led_strip_tv_toggle"                                        [ stateTopic="stat/sonoff_switch_ledstrip_tv/POWER", commandTopic="cmnd/sonoff_switch_ledstrip_tv/power" ] 
+            Type string : channel_switch_led_strip_tv_toggle_startup_state              "channel_switch_led_strip_tv_toggle_startup_state"                          [ stateTopic="stat/sonoff_switch_ledstrip_tv/STATUS11", transformationPattern="JSONPATH:$.StatusSTS.POWER" ] //JSONPATH:($.StatusSTS.POWER)
+            Type switch : channel_switch_led_strip_tv_reachable                         "channel_switch_led_strip_tv_reachable"                                     [ stateTopic="tele/sonoff_switch_ledstrip_tv/LWT", transformationPattern="MAP:reachable.map" ] 
+            Type number : channel_switch_led_strip_tv_rssi                              "channel_switch_led_strip_tv_rssi"                                          [ stateTopic="tele/sonoff_switch_ledstrip_tv/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
+            Type string : channel_switch_led_strip_tv_local_fw_version                  "channel_switch_led_strip_tv_local_fw_version"                              [ stateTopic="stat/sonoff_switch_ledstrip_tv/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version" ]        
+    }
     // Sonoff Touch toilet beneden (192.168.1.162)
-    // Sonoff Kerstboom (192.168.1.163)
-    // Sonoff switch deurbel (192.168.1.164)
     
+
+// kertbook = 164
+
+    // Sonoff switch deurbel (192.168.1.164)
+    Thing topic sonoff_switch_deurbel "Sonoff switch deurbel" @ "Begane grond" {
+        Channels:
+            Type switch : channel_sonoff_switch_deurbel_toggle                          "channel_sonoff_switch_deurbel_toggle"                                      [ stateTopic="stat/sonoff_switch_deurbel/POWER", commandTopic="cmnd/sonoff_switch_deurbel/power" ] 
+            Type string : channel_sonoff_switch_deurbel_toggle_startup_state            "channel_sonoff_switch_deurbel_toggle_startup_state"                        [ stateTopic="stat/sonoff_switch_deurbel/STATUS11", transformationPattern="JSONPATH:$.StatusSTS.POWER" ] //JSONPATH:($.StatusSTS.POWER)
+            Type switch : channel_sonoff_switch_deurbel_reachable                       "channel_sonoff_switch_deurbel_reachable"                                   [ stateTopic="tele/sonoff_switch_deurbel/LWT", transformationPattern="MAP:reachable.map" ] 
+            Type number : channel_sonoff_switch_deurbel_rssi                            "channel_sonoff_switch_deurbel_rssi"                                        [ stateTopic="tele/sonoff_switch_deurbel/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
+            Type string : channel_sonoff_switch_deurbel_local_fw_version                "channel_sonoff_switch_deurbel_local_fw_version"                            [ stateTopic="stat/sonoff_switch_deurbel/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version" ]        
+            //Type switch : channel_sonoff_switch_deurbel_ledpower                    "channel_sonoff_switch_deurbel_ledpower"                    [ commandTopic="cmnd/sonoff_licht_washoek/LedPower" ]
+            //Type number : channel_sonoff_switch_deurbel_led_state                   "channel_sonoff_switch_deurbel_led_state"                   [ commandTopic="cmnd/sonoff_licht_washoek/LedState", stateTopic="stat/sonoff_licht_washoek/STATUS", transformationPattern="JSONPATH:$.Status.LedState" ]      
+            //Type string : channel_sonoff_switch_deurbel_button_topic                "channel_sonoff_switch_deurbel_button_topic"                [ commandTopic="cmnd/sonoff_licht_washoek/ButtonTopic", stateTopic="stat/sonoff_licht_washoek/STATUS", transformationPattern="JSONPATH:$.Status.ButtonTopic" ]
+            //Type string : channel_sonoff_switch_deurbel_button_toggle               "channel_sonoff_switch_deurbel_button_toggle"               [ stateTopic="stat/sonoff_licht_washoek_button/POWER", commandTopic="cmnd/sonoff_licht_washoek_button/power" ]
+     }
+
+         // Sonoff Kerstboom (192.168.1.164)
+    Thing topic sonoff_switch_kerstboom "Sonoff switch kerstboom" @ "Begane grond" {
+        Channels:
+            Type switch : channel_sonoff_switch_kerstboom_toggle                      "channel_sonoff_switch_kerstboom_toggle"                                    [ stateTopic="stat/sonoff_switch_kerstboom/POWER", commandTopic="cmnd/sonoff_switch_kerstboom/power" ] 
+            Type string : channel_sonoff_switch_kerstboom_toggle_startup_state        "channel_sonoff_switch_kerstboom_toggle_startup_state"                      [ stateTopic="stat/sonoff_switch_kerstboom/STATUS11", transformationPattern="JSONPATH:$.StatusSTS.POWER" ] //JSONPATH:($.StatusSTS.POWER)
+            Type switch : channel_sonoff_switch_kerstboom_reachable                   "channel_sonoff_switch_kerstboom_reachable"                                 [ stateTopic="tele/sonoff_switch_kerstboom/LWT", transformationPattern="MAP:reachable.map" ] 
+            Type number : channel_sonoff_switch_kerstboom_rssi                        "channel_sonoff_switch_kerstboom_rssi"                                      [ stateTopic="tele/sonoff_switch_kerstboom/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
+            Type string : channel_sonoff_switch_kerstboom_local_fw_version            "channel_sonoff_switch_kerstboom_local_fw_version"                          [ stateTopic="stat/sonoff_switch_kerstboom/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version" ]        
+    }
+
 }

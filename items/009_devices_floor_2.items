@@ -88,21 +88,103 @@ String                      switch_licht_wasmachine_button_toggle
 
 
 // meter voor ventilatie - geen toggle!
-Switch	 	meter_ventilator_net_online								        "Meter ventilator (net) [%s]"								                <network>		        (g_sonoff_meter_ventilator)                                                         { channel="network:pingdevice:192_168_1_154:online" }
-Number 		meter_ventilator_net_time								        "Meter ventilator (ping) [%.0f ms]"						                    <status>			    (g_sonoff_meter_ventilator, g_chart, g_elastic_mqtt)                                     { channel="network:pingdevice:192_168_1_154:latency" }
-DateTime	meter_ventilator_net_lastseen				                    "Meter ventilator (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"		        <calendar>				(g_sonoff_meter_ventilator, g_restore)                                               { channel="network:pingdevice:192_168_1_154:lastseen" }            
-Number 		meter_ventilator_power             		 		                "Meter ventilator (power) [%.1f W]"						                    <energy>			    (g_sonoff_meter_ventilator, g_chart, g_elastic_mqtt)			                {mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/ENERGY:state:JSONPATH($.Power)]" }
-Number 		meter_ventilator_voltage            				            "Meter ventilator (line voltage) [%.1f V]"				                    <energy>			    (g_sonoff_meter_ventilator, g_chart, g_elastic_mqtt)			                {mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/ENERGY:state:JSONPATH($.Voltage)]" }
-Number 		meter_ventilator_current            				            "Meter ventilator (line current) [%.1f A]"				                    <energy>			    (g_sonoff_meter_ventilator, g_chart, g_elastic_mqtt)						                {mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/ENERGY:state:JSONPATH($.Current)]" }
-Number 		meter_ventilator_real_power_factor					            "Meter ventilator (real power ratio) [%s]"				                    <energy>			    (g_sonoff_meter_ventilator, g_elastic_mqtt)						                {mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/ENERGY:state:JSONPATH($.Factor)]" }
-Number 		meter_ventilator_energy_usage_since_last_update	                "Meter ventilator (usage since last update) [%.1f kWh]"	                    <energy>			    (g_sonoff_meter_ventilator, g_elastic_mqtt)						                {mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/ENERGY:state:JSONPATH($.Period)]" }
-Number 		meter_ventilator_energy_usage_today				                "Meter ventilator (today's usage) [%.1f kWh]"				                <energy>		        (g_sonoff_meter_ventilator, g_elastic_mqtt)						                {mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/ENERGY:state:JSONPATH($.Yesterday)]" }
-Number 		meter_ventilator_energy_usage_yesterday 			            "Meter ventilator (yesterday's usage) [%.1f kWh]"			                <energy>		        (g_sonoff_meter_ventilator, g_elastic_mqtt)						                {mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/ENERGY:state:JSONPATH($.Today)]" }
-String	 	meter_ventilator_action__sonoff_meter_ventilatie                "Meter ventilator (action)"								                    <network>			    (g_maintenance_sonoff_action)					                {autoupdate="false" }
-String		meter_ventilator_local_fw_version 					            "Meter ventilator (running fw version) [%s]"								                        (g_sonoff_meter_ventilator, g_maintenance_sonoff_status, g_sonoff_firmware) 		                                                { mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/INFO1:state:JSONPATH($.Version)], <[mosquitto:stat/sonoff_meter_ventilatie/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }
-String		meter_ventilator_fw_version 						            "Meter ventilator (fw version) [%s]"										                        (g_sonoff_meter_ventilator, g_maintenance_sonoff_status)
-Switch		meter_ventilator_reachable								        "Meter ventilator (reachable) [%s]"				                            <switch>				(g_sonoff_meter_ventilator)										                                                                    { mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/LWT:state:MAP(reachable.map)]" }
-Number		meter_ventilator_rssi									        "Meter ventilator (RSSI) [%d %%]"					                        <status>				(g_sonoff_meter_ventilator, g_chart, g_elastic_mqtt)							                                                                    { mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/STATE:state:JSONPATH($.Wifi.RSSI)]" }	
+Switch                      meter_ventilator_net_online
+                            "Meter ventilator (net) [%s]"
+                            <network>
+                            (g_sonoff_meter_ventilator)
+                            { channel="network:pingdevice:192_168_1_154:online" }
+
+Number                      meter_ventilator_net_time
+                            "Meter ventilator (ping) [%.0f ms]"
+                            <status>
+                            (g_sonoff_meter_ventilator, g_chart, g_elastic_mqtt)
+                            { channel="network:pingdevice:192_168_1_154:latency" }
+
+DateTime                    meter_ventilator_net_lastseen
+                            "Meter ventilator (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"
+                            <calendar>
+                            (g_sonoff_meter_ventilator, g_restore)
+                            { channel="network:pingdevice:192_168_1_154:lastseen" }
+
+Number                      meter_ventilator_power
+                            "Meter ventilator (power) [%.1f W]"
+                            <energy>
+                            (g_sonoff_meter_ventilator, g_chart, g_elastic_mqtt)
+                            { channel="mqtt:topic:local:sonoff_meter_ventilator:channel_meter_ventilator_power" }
+                            //{mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/ENERGY:state:JSONPATH($.Power)]" }
+
+Number                      meter_ventilator_voltage
+                            "Meter ventilator (line voltage) [%.1f V]"
+                            <energy>
+                            (g_sonoff_meter_ventilator, g_chart, g_elastic_mqtt)
+                            { channel="mqtt:topic:local:sonoff_meter_ventilator:channel_meter_ventilator_voltage" }                            
+                            //{mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/ENERGY:state:JSONPATH($.Voltage)]" }
+
+Number                      meter_ventilator_current
+                            "Meter ventilator (line current) [%.1f A]"
+                            <energy>
+                            (g_sonoff_meter_ventilator, g_chart, g_elastic_mqtt)
+                            { channel="mqtt:topic:local:sonoff_meter_ventilator:channel_meter_ventilator_current" }                            
+                            //{mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/ENERGY:state:JSONPATH($.Current)]" }
+
+Number                      meter_ventilator_real_power_factor
+                            "Meter ventilator (real power ratio) [%s]"
+                            <energy>
+                            (g_sonoff_meter_ventilator, g_elastic_mqtt)
+                            { channel="mqtt:topic:local:sonoff_meter_ventilator:channel_meter_ventilator_real_power_factor" }                            
+                            //{mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/ENERGY:state:JSONPATH($.Factor)]" }
+
+Number                      meter_ventilator_energy_usage_since_last_update
+                            "Meter ventilator (usage since last update) [%.1f kWh]"
+                            <energy>
+                            (g_sonoff_meter_ventilator, g_elastic_mqtt)
+                            { channel="mqtt:topic:local:sonoff_meter_ventilator:channel_meter_ventilator_energy_usage_since_last_update" }                            
+                            //{mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/ENERGY:state:JSONPATH($.Period)]" }
+
+Number                      meter_ventilator_energy_usage_today
+                            "Meter ventilator (today's usage) [%.1f kWh]"
+                            <energy>
+                            (g_sonoff_meter_ventilator, g_elastic_mqtt)
+                            { channel="mqtt:topic:local:sonoff_meter_ventilator:channel_meter_ventilator_energy_usage_today" }                            
+                            //{mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/ENERGY:state:JSONPATH($.Yesterday)]" }
+
+Number                      meter_ventilator_energy_usage_yesterday
+                            "Meter ventilator (yesterday's usage) [%.1f kWh]"
+                            <energy>
+                            (g_sonoff_meter_ventilator, g_elastic_mqtt)
+                            { channel="mqtt:topic:local:sonoff_meter_ventilator:channel_meter_ventilator_energy_usage_yesterday" }                            
+                            //{mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/ENERGY:state:JSONPATH($.Today)]" }
+
+String                      meter_ventilator_action__sonoff_meter_ventilatie
+                            "Meter ventilator (action)"
+                            <network>
+                            (g_maintenance_sonoff_action)
+                            {autoupdate="false" }
+
+String                      meter_ventilator_local_fw_version
+                            "Meter ventilator (running fw version) [%s]"
+                            (g_sonoff_meter_ventilator, g_maintenance_sonoff_status, g_sonoff_firmware)
+                            { channel="mqtt:topic:local:sonoff_meter_ventilator:channel_meter_ventilator_local_fw_version" }                            
+                            //{ mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/INFO1:state:JSONPATH($.Version)], <[mosquitto:stat/sonoff_meter_ventilatie/STATUS2:state:JSONPATH($.StatusFWR.Version)]" }
+
+String                      meter_ventilator_fw_version
+                            "Meter ventilator (fw version) [%s]"
+                            (g_sonoff_meter_ventilator, g_maintenance_sonoff_status)
+
+Switch                      meter_ventilator_reachable
+                            "Meter ventilator (reachable) [%s]"
+                            <switch>
+                            (g_sonoff_meter_ventilator)
+                            { channel="mqtt:topic:local:sonoff_meter_ventilator:channel_meter_ventilator_reachable" }                            
+                            //{ mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/LWT:state:MAP(reachable.map)]" }
+
+Number                      meter_ventilator_rssi
+                            "Meter ventilator (RSSI) [%d %%]"
+                            <status>
+                            (g_sonoff_meter_ventilator, g_chart, g_elastic_mqtt)
+                            { channel="mqtt:topic:local:sonoff_meter_ventilator:channel_meter_ventilator_rssi" }                            
+                            //{ mqtt="<[mosquitto:tele/sonoff_meter_ventilatie/STATE:state:JSONPATH($.Wifi.RSSI)]" }
+
 
 
 // switch ventilator
