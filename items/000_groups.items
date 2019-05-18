@@ -63,7 +63,7 @@ Group                       g_maintenance_rules                 "Alle rule-speci
 Group                       g_rule_initialization_items         "Items voor rule initialization"                                                (g_maintenance_rules)
 Group                       g_rule_ventilation_items            "Items voor rule ventilation"                                                   (g_maintenance_rules)
 Group                       g_rule_licht_wasmachine_items       "Items voor rule licht wasmachine"                                              (g_maintenance_rules)
-
+Group                       g_rule_remote_controls_rfxcom       "Items voor rule remote controls rfxcom"                                        (g_maintenance_rules)
 
 
 

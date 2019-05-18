@@ -1,5 +1,4 @@
-scriptExtension.importPreset("RuleSimple")
-scriptExtension.importPreset("RuleSupport")
+
 
 from core.log import logging, LOG_PREFIX
 from core.triggers import StartupTrigger, ItemStateUpdateTrigger, ItemCommandTrigger, when

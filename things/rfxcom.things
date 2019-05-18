@@ -8,18 +8,20 @@ Bridge rfxcom:bridge:d10d8fa9       "RFXCom device"                 @ "Begane gr
     
     
 // remote #2 (A,B,C,D)       
-    // Thing Lighting4 1042431 [ deviceId="1042431", subType="PT2262"]    
-    // Thing Lighting4 658542 [ deviceId="658542", subType="PT2262"]
-    // Thing Lighting4 658542 [ deviceId="658542", subType="PT2262"]
-    // Thing Lighting4 67127 [ deviceId="67127", subType="PT2262"]
+    // Thing lighting4 1042431 [ deviceId="1042431", subType="PT2262"]    
+    // Thing lighting4 658542 [ deviceId="658542", subType="PT2262"]
+    // Thing lighting4 658542 [ deviceId="658542", subType="PT2262"]
+    // Thing lighting4 67127 [ deviceId="67127", subType="PT2262"]
 
 // remote #3 (A,B,C,D)   
-    // Thing Lighting4 518143 "Remote Button A" @ "Mobiel"     [ deviceId="518143", subType="PT2262"]
-    // Thing Lighting4 511999 "Remote Button B" @ "Mobiel"     [ deviceId="511999", subType="PT2262"]
-    // Thing Lighting4 1019903 "Remote Button C" @ "Mobiel"    [ deviceId="1019903", subType="PT2262"]
-    // Thing Lighting4 999423 "Remote Button D" @ "Mobiel"     [ deviceId="999423", subType="PT2262"]
-// remote #4 (A,B,C,D)   
+    Thing lighting4 remote_button_3_a_1   "Remote 3 Button A (1)"   @ "Mobiel"     [ deviceId="518143", subType="PT2262" ]
+    Thing lighting4 remote_button_3_a_2   "Remote 3 Button A (2)"   @ "Mobiel"     [ deviceId="1042431", subType="PT2262" ]
+    Thing lighting4 remote_button_3_b_1   "Remote 3 Button B (1)"   @ "Mobiel"     [ deviceId="511999", subType="PT2262" ]
+    Thing lighting4 remote_button_3_b_2   "Remote 3 Button B (2)"   @ "Mobiel"     [ deviceId="1036287", subType="PT2262" ]
+    Thing lighting4 remote_button_3_c     "Remote 3 Button C (1)"   @ "Mobiel"     [ deviceId="1019903", subType="PT2262" ]
+    Thing lighting4 remote_button_3_d     "Remote 3 Button D (1)"   @ "Mobiel"     [ deviceId="999423", subType="PT2262" ]
 
+    
 // remote #5 (A,B,C,D)   
 
 }
