@@ -1,3 +1,3 @@
 (function(i) { 
-    return (parseInt(i)-20);
+    return (i - 40).toFixed(1);
 }) (input)

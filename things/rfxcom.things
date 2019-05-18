@@ -1,5 +1,5 @@
 Bridge rfxcom:bridge:d10d8fa9       "RFXCom device"                 @ "Begane grond"        [ serialPort="/dev/ttyUSB-RFXcom", disableDiscovery=true ] {
-    Thing temperaturehumidity imagetonronix_sensor_keuken "Temp/Humid sensor badkamer"    @ "Eerste verdieping"   [ deviceId="35072", subType="TH9" ]
+    Thing temperaturehumidity imagetonronix_sensor_badkamer "Temp/Humid sensor badkamer"    @ "Eerste verdieping"   [ deviceId="35072", subType="TH9" ]
     
  // remote #1 (A,B,C,D)   
     

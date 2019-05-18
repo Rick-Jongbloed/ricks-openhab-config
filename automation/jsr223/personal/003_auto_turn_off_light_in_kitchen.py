@@ -10,6 +10,7 @@ from core.triggers import when
 def rule_automate_keuken_licht(event):
     function = 'rule_automate_keuken_licht'
     log = logging.getLogger(LOG_PREFIX + '.' + function)
+    
     log.info("rule_automate_keuken_licht started")
     if str(items.timer_rule_automate_keuken_licht_off) == "NULL":                                                                     # initialize timer (set to off, so it's initialized)
         events.sendCommand("timer_rule_automate_keuken_licht_off","OFF")                
