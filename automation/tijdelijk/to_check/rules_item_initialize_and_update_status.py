@@ -5,7 +5,8 @@ from core.log import logging
 #from openhab.triggers import time_triggered, item_triggered, StartupTrigger, ItemCommandTrigger, EVERY_MINUTE, ITEM_CHANGE, item_group_triggered
 #from core.triggers import time_triggered, item_triggered, ItemCommandTrigger, EVERY_MINUTE, ITEM_CHANGE, item_group_triggered
 #from core.triggers import  EVERY_MINUTE
-from core.triggers import StartupTrigger
+from core.triggers import StartupTrigger, when
+from core.rules import rule
 # from datetime import datetime
 # from java.util import Date
 
@@ -54,6 +55,8 @@ class rule_startup_initialize(SimpleRule):
         logging.info("Rule rule_startup_initialize: Initializing all off timer....")
         events.postUpdate("rule_xiaomi_switch_kantoor_all_off_timer", "OFF")
 automationManager.addRule(rule_startup_initialize())
+
+
 
 @time_triggered(EVERY_MINUTE)
 def rule_manage_group_unitialized_items():

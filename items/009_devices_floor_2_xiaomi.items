@@ -4,7 +4,7 @@
 Switch                      sensor_motion_wasmachine_motion_status
                             "Bewegingssensor wasmachine (status) [%s]"
                             <motion>
-                            (g_mihome_motionsensor_wasmachine, sf_corridor)
+                            (g_mihome_motionsensor_wasmachine, sf_corridor, g_rule_licht_wasmachine_items)
                             { channel="mihome:sensor_motion:158d00015e7b6a:motion" }
 
 Number                      sensor_motion_wasmachine_motion_timer

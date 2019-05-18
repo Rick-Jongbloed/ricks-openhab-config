@@ -48,16 +48,24 @@ Group						scenes							    "Scenes"					                <party>						        (A
 Group:Switch:OR(ON,OFF)		scene_all_off					    "Alles uitschakelen [%d]"	                <switch-off>						(scenes)
 Group:Switch:AND(OFF,ON)	nightmode_downstairs			    "Nachtmodus [%s]"												(scenes)
 Group						g_maintenance					    "Maintenance"						        <settings>					(All)
-Group						g_monitoring					    "Monitoring"													(g_maintenance)
-Group						g_sonoff						    "Sonoff stuff"													(g_maintenance)
-Group:Switch:OR(ON, OFF)    g_sonoff_startup_states             "Sonoff startup state items"                                    (g_sonoff)
-Group                       g_sonoff_firmware                   "Sonoff local firmware version"                                 (g_sonoff)
-Group						g_maintenance_sonoff_upgrade	    "Upgrade status"												(g_sonoff)
-Group						g_maintenance_sonoff_status		    "Full device status"											(g_sonoff)
-Group						g_maintenance_sonoff_action		    "Actions"														(g_sonoff)
-Group						g_uninitialized					    "Alle nog niet geinitialiseerde items"							(g_maintenance)
-Group                       g_lastupdate_rule                   "Alle items die een lastupdate nodig"                           (g_maintenance)
-Group                       g_lastupdate                        "Alle lastupdate statussen"                                     (g_maintenance)
+Group						g_monitoring					    "Monitoring"													        	    (g_maintenance)
+Group						g_sonoff						    "Sonoff stuff"													                (g_maintenance)
+Group:Switch:OR(ON, OFF)    g_sonoff_startup_states             "Sonoff startup state items"                                                    (g_sonoff)
+Group                       g_sonoff_firmware                   "Sonoff local firmware version"                                                 (g_sonoff)
+Group						g_maintenance_sonoff_upgrade	    "Upgrade status"												                (g_sonoff)
+Group						g_maintenance_sonoff_status		    "Full device status"											                (g_sonoff)
+Group						g_maintenance_sonoff_action		    "Actions"														                (g_sonoff)
+Group						g_uninitialized					    "Alle nog niet geinitialiseerde items"							                (g_maintenance)
+Group                       g_lastupdate_rule                   "Alle items die een lastupdate nodig"                                           (g_maintenance)
+Group                       g_lastupdate                        "Alle lastupdate statussen"                                                     (g_maintenance)
+
+Group                       g_maintenance_rules                 "Alle rule-specifieke configuraties"                                            (g_maintenance)
+Group                       g_rule_initialization_items         "Items voor rule initialization"                                                (g_maintenance_rules)
+Group                       g_rule_ventilation_items            "Items voor rule ventilation"                                                   (g_maintenance_rules)
+Group                       g_rule_licht_wasmachine_items       "Items voor rule licht wasmachine"                                              (g_maintenance_rules)
+
+
+
 
 // logreader groups
 Group                       g_logreader_test                    "Logreader text group"                                             (g_maintenance)

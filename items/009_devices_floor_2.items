@@ -18,10 +18,10 @@ DateTime                    switch_licht_wasmachine_net_lastseen
                             (g_sonoff_licht_washoek, g_restore)
                             { channel="network:pingdevice:192_168_1_151:lastseen" }
 
-Switch                      switch_licht_wasmacihine_toggle
+Switch                      switch_licht_wasmachine_toggle
                             "Licht wasmachinehok (switch) [%s]"
                             <light>
-                            (g_sonoff_licht_washoek, sf_corridor)
+                            (g_sonoff_licht_washoek, sf_corridor, g_rule_licht_wasmachine_items)
                             { channel="mqtt:topic:local:sonoff_switch_licht_wasmachine:channel_switch_licht_wasmachine_toggle" }
                             //{ mqtt=">[mosquitto:cmnd/sonoff_licht_washoek/power:command:*:default], <[mosquitto:stat/sonoff_licht_washoek/POWER:state:default]" }
 
@@ -39,13 +39,13 @@ Switch                      switch_licht_wasmachine_reachable
                             { channel="mqtt:topic:local:sonoff_switch_licht_wasmachine:channel_switch_licht_wasmachine_reachable" }
                             //{ mqtt="<[mosquitto:tele/sonoff_licht_washoek/LWT:state:MAP(reachable.map)]"}
 
-Number                      switch_licht_wasmachiine_rssi
+Number                      switch_licht_wasmachine_rssi
                             "Licht wasmachinehok (RSSI) [%d %%]"
                             <network>
                             (g_sonoff_licht_washoek, g_chart, g_elastic_mqtt)
                             { channel="mqtt:topic:local:sonoff_switch_licht_wasmachine:channel_switch_licht_wasmachine_rssi" }
                             //{ mqtt="<[mosquitto:tele/sonoff_licht_washoek/STATE:state:JSONPATH($.Wifi.RSSI)], <[mosquitto:stat/sonoff_licht_washoek/STATUS11:state:JSONPATH($.StatusSTS.Wifi.RSSI)]"}
-
+ 
 String                      switch_licht_wasmachine_action__sonoff_licht_washoek
                             "Licht wasmachinehok (action)"
                             <network>
@@ -64,25 +64,25 @@ String                      switch_licht_wasmachine_fw_version
 
 Switch                      switch_licht_wasmachine_led_power
                             "Licht wasmachinehok (led power) [%s]"
-                            (g_sonoff_licht_washoek)
+                            (g_sonoff_licht_washoek, g_rule_licht_wasmachine_items)
                             { channel="mqtt:topic:local:sonoff_switch_licht_wasmachine:channel_switch_licht_wasmachine_ledpower" }
                             //{ mqtt=">[mosquitto:cmnd/sonoff_licht_washoek/LedPower:command:*:default]" }
 
 Number                      switch_licht_wasmachine_led_state
                             "Licht wasmachinehok (led state) [%d]"
-                            (g_sonoff_licht_washoek, g_maintenance_sonoff_status)
+                            (g_sonoff_licht_washoek, g_maintenance_sonoff_status, g_rule_licht_wasmachine_items)
                             { channel="mqtt:topic:local:sonoff_switch_licht_wasmachine:channel_switch_licht_wasmachine_led_state" }
                             //{ mqtt=">[mosquitto:cmnd/sonoff_licht_washoek/LedState:command:*:default], <[mosquitto:stat/sonoff_licht_washoek/STATUS:state:JSONPATH($.Status.LedState)]" }
 
 String                      switch_licht_wasmachine_button_topic
                             "Licht wasmachinehok (button topic) [%s]"
-                            (g_sonoff_licht_washoek, g_maintenance_sonoff_status)
+                            (g_sonoff_licht_washoek, g_maintenance_sonoff_status, g_rule_licht_wasmachine_items)
                             { channel="mqtt:topic:local:sonoff_switch_licht_wasmachine:channel_switch_licht_wasmachine_button_topic" }
                             //{ mqtt=">[mosquitto:cmnd/sonoff_licht_washoek/ButtonTopic:command:*:default], <[mosquitto:stat/sonoff_licht_washoek/STATUS:state:JSONPATH($.Status.ButtonTopic)]" }
 
 String                      switch_licht_wasmachine_button_toggle
                             "Licht wasmachinehok (button toggle) [%s]"
-                            (g_sonoff_licht_washoek, g_maintenance_sonoff_status)
+                            (g_sonoff_licht_washoek, g_maintenance_sonoff_status, g_rule_licht_wasmachine_items)
                             { channel="mqtt:topic:local:sonoff_switch_licht_wasmachine:channel_switch_licht_wasmachine_button_toggle" }
                             //{ mqtt=">[mosquitto:cmnd/sonoff_licht_washoek_button/power:command:*:default], <[mosquitto:cmnd/sonoff_licht_washoek_button/POWER:state:default]" }
 
@@ -188,9 +188,24 @@ Number                      meter_ventilator_rssi
 
 
 // switch ventilator
-Switch		switch_ventilator_net_online							        "Switch ventilator (net) [%s]"						                        <network>			    (g_sonoff_ventilatie)                                                                                                           { channel="network:pingdevice:192_168_1_158:online" }
-Number		switch_ventilator_net_time								        "Switch ventilator (ping) [%.0f ms]"				                        <status>		        (g_sonoff_ventilatie, g_chart, g_elastic_mqtt)                                                                                                  { channel="network:pingdevice:192_168_1_158:latency" }
-DateTime	switch_ventilator_net_lastseen				                    "Switch ventilator (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"		        <calendar>	    	    (g_sonoff_ventilatie, g_restore)                                                                                                { channel="network:pingdevice:192_168_1_158:lastseen" }            
+Switch                      switch_ventilator_net_online
+                            "Switch ventilator (net) [%s]"
+                            <network>
+                            (g_sonoff_ventilatie)
+                            { channel="network:pingdevice:192_168_1_158:online" }
+
+Number                      switch_ventilator_net_time
+                            "Switch ventilator (ping) [%.0f ms]"
+                            <status>
+                            (g_sonoff_ventilatie, g_chart, g_elastic_mqtt)
+                            { channel="network:pingdevice:192_168_1_158:latency" }
+
+DateTime                    switch_ventilator_net_lastseen
+                            "Switch ventilator (lastseen) [%1$td.%1$tm.%1$tY %1$tH:%1$tM]"
+                            <calendar>
+                            (g_sonoff_ventilatie, g_restore)
+                            { channel="network:pingdevice:192_168_1_158:lastseen" }
+
 
 Switch                      switch_ventilator_toggle_1
                             "Switch ventilator (switch 1) [%s]"
@@ -246,7 +261,7 @@ String                      switch_ventilator_fw_version
 Number                      number_ventilator_level_set_manual
                             "Stand ventilator (dashboard control) [%s]"
                             <fan>
-                            (g_sonoff_ventilatie, sf_corridor, g_chart, g_elastic_mqtt)
+                            (g_sonoff_ventilatie, sf_corridor, g_chart, g_elastic_mqtt, g_rule_ventilation_items)
 
 Number                      number_ventilator_level_set
                             "Stand ventilator (device control) [%s]"
@@ -256,7 +271,7 @@ Number                      number_ventilator_level_set
 Switch                      switch_ventilator_level_toggle_auto
                             "Stand ventilator (automatic) [%s]"
                             <fan>
-                            (g_sonoff_ventilatie, sf_corridor, g_chart, g_elastic_mqtt)
+                            (g_sonoff_ventilatie, sf_corridor, g_chart, g_elastic_mqtt, g_rule_ventilation_items)
                             { expire="20m, state=ON" }
 
 Switch                      switch_ventilator_level_set_manual_alexa

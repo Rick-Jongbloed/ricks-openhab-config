@@ -15,21 +15,23 @@ Bridge mqtt:broker:sonoff "MQTT Broker (Sonoff Maddox)" [ host="sonoff.maddox.co
     }
 }
 
+
 Bridge mqtt:broker:local "MQTT Broker (domotica-03)" [ host="192.168.1.203", secure=false, clientID="openhabclient" ]
 {
     // Sonoff switch licht wasmachine (192.168.1.151)
      Thing topic sonoff_switch_licht_wasmachine "Sonoff switch (licht wasmachine)" @ "Zolder" {
-        Channels:
-            Type switch : channel_switch_licht_wasmachine_toggle                        "channel_switch_licht_wasmachine_toggle"                                    [ stateTopic="stat/sonoff_licht_washoek/POWER", commandTopic="cmnd/sonoff_licht_washoek/power" ] 
+        Channels:                                                                                                                                                       // //{ mqtt=">[mosquitto:cmnd/sonoff_licht_washoek/power:command:*:default], <[mosquitto:stat/sonoff_licht_washoek/POWER:state:default]" }
+            Type switch : channel_switch_licht_wasmachine_toggle                        "channel_switch_licht_wasmachine_toggle"                                    [ stateTopic="stat/sonoff_licht_washoek/POWER", commandTopic="cmnd/sonoff_licht_washoek/power" ]
             Type string : channel_switch_licht_wasmachine_toggle_startup_state          "channel_switch_licht_wasmachine_toggle_startup_state"                      [ stateTopic="stat/sonoff_licht_washoek/STATUS11", transformationPattern="JSONPATH:$.StatusSTS.POWER" ] //JSONPATH:($.StatusSTS.POWER)
             Type switch : channel_switch_licht_wasmachine_reachable                     "channel_switch_licht_wasmachine_reachable"                                 [ stateTopic="tele/sonoff_licht_washoek/LWT", transformationPattern="MAP:reachable.map" ] 
             Type number : channel_switch_licht_wasmachine_rssi                          "channel_switch_licht_wasmachine_rssi"                                      [ stateTopic="tele/sonoff_licht_washoek/STATE", transformationPattern="JSONPATH:$.Wifi.RSSI" ]
             Type string : channel_switch_licht_wasmachine_local_fw_version              "channel_switch_licht_wasmachine_local_fw_version"                          [ stateTopic="stat/sonoff_licht_washoek/STATUS2", transformationPattern="JSONPATH:$.StatusFWR.Version" ]        
-            Type switch : channel_switch_licht_wasmachine_ledpower                      "channel_switch_licht_wasmachine_ledpower"                                  [ commandTopic="cmnd/sonoff_licht_washoek/LedPower" ]
-            Type number : channel_switch_licht_wasmachine_led_state                     "channel_switch_licht_wasmachine_led_state"                                 [ commandTopic="cmnd/sonoff_licht_washoek/LedState", stateTopic="stat/sonoff_licht_washoek/STATUS", transformationPattern="JSONPATH:$.Status.LedState" ]      
+            Type switch : channel_switch_licht_wasmachine_ledpower                      "channel_switch_licht_wasmachine_ledpower"                                  [ commandTopic="cmnd/sonoff_licht_washoek/LedPower" ]                    //{ mqtt=">[mosquitto:cmnd/sonoff_licht_washoek/LedPower:command:*:default]" }
+            Type number : channel_switch_licht_wasmachine_led_state                     "channel_switch_licht_wasmachine_led_state"                                 [ commandTopic="cmnd/sonoff_licht_washoek/LedState", stateTopic="stat/sonoff_licht_washoek/STATUS", transformationPattern="JSONPATH:$.Status.LedState" ]//,  stateTopic="stat/sonoff_licht_washoek/RESULT", transformationPattern="JSONPATH:$.LedState"]      
             Type string : channel_switch_licht_wasmachine_button_topic                  "channel_switch_licht_wasmachine_button_topic"                              [ commandTopic="cmnd/sonoff_licht_washoek/ButtonTopic", stateTopic="stat/sonoff_licht_washoek/STATUS", transformationPattern="JSONPATH:$.Status.ButtonTopic" ]
-            Type string : channel_switch_licht_wasmachine_button_toggle                 "channel_switch_licht_wasmachine_button_toggle"                             [ stateTopic="stat/sonoff_licht_washoek_button/POWER", commandTopic="cmnd/sonoff_licht_washoek_button/power" ]
+            Type string : channel_switch_licht_wasmachine_button_toggle                 "channel_switch_licht_wasmachine_button_toggle"                             [ stateTopic="cmnd/sonoff_licht_washoek_button/POWER", allowedStates="TOGGLE" ] //, commandTopic="cmnd/sonoff_licht_washoek_button/power" ]// //{ mqtt=">[mosquitto:cmnd/sonoff_licht_washoek_button/power:command:*:default], <[mosquitto:cmnd/sonoff_licht_washoek_button/POWER:state:default]" }
      }
+
     // Sonoff switch groene TL(192.168.1.152)
     Thing topic sonoff_switch_groene_tl "Sonoff switch (groene tl)" @ "Begane grond" {
         Channels:

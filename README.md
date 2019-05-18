@@ -1,1 +1,0 @@
-# ricks-openhab-config

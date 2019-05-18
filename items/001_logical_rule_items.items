@@ -6,10 +6,22 @@ Switch      s_refresh_on      		                                                
 Switch      rule_whats_on_update_group_timer                                                                                                                { expire="20s,  command=OFF" }
 
 
+
 // motion wasmachinehok
-Switch      timer_rule_motion_wasmachine_light_init_hardware                                                                                                { expire="30s,  command=OFF" }
-Switch      timer_rule_motion_wasmachine_light_detected_motion                          "Licht wasmachinehok (timer-motion) [%s]"                           { expire="5m,   command=OFF" }
-Switch      timer_rule_motion_wasmachine_light_manual_off                               "Licht wasmachinehok (manual off timer) [%s]"                       { expire="1m,   command=OFF" }
+Switch                      timer_rule_motion_wasmachine_light_init_hardware
+                            (g_rule_licht_wasmachine_items, g_rule_initialization_items)
+                            { expire="30s, command=OFF" }
+
+Switch                      timer_rule_motion_wasmachine_light_detected_motion
+                            "Licht wasmachinehok (timer-motion) [%s]"
+                            (g_rule_licht_wasmachine_items)
+                            { expire="5m, command=OFF" }
+
+Switch                      timer_rule_motion_wasmachine_light_manual_off
+                            "Licht wasmachinehok (manual off timer) [%s]"
+                            (g_rule_licht_wasmachine_items)
+                            { expire="1m, command=OFF" }
+
 
 // motion kantoor
 Switch      timer_rule_kantoor_motion_init_hardware                                                                                                         { expire="30s,  command=OFF" }
@@ -21,9 +33,19 @@ Switch      timer_rule_kantoor_motion_override_cooldowm                         
 Switch      timer_rule_kantoor_monitors_init_hardware                                                                                                       { expire="30s,  command=OFF" }
 
 // ventilation
-Switch      timer_rule_automate_ventilation_new_init_hardware                                                                                               { expire="30s,  command=OFF" }
-Switch      status_rule_automate_ventilation_init_counter                                "Ventilation init counter [%s]" 
-Switch      status_rule_automate_ventilation_init_start_date                             "Ventilation init started on [%s]" 
+Switch                      timer_rule_automate_ventilation_new_init_hardware
+                            (g_rule_ventilation_items, g_rule_initialization_items)
+                            { expire="30s,  command=OFF" }
+
+Switch                      status_rule_automate_ventilation_init_counter
+                            "(Todo) Ventilation init counter [%s]"
+                            (g_rule_ventilation_items)
+
+Switch                      status_rule_automate_ventilation_init_start_date
+                            "(todo) Ventilation init started on [%s]"
+                            (g_rule_ventilation_items)
+
+
 
 // scene: woonkamer
 Switch      timer_rule_scene_woonkamer_new_init_hardware                                                                                                    { expire="30s,  command=OFF" }
@@ -37,9 +59,20 @@ Switch      timer_rule_scene_kitchen_new_init_hardware                          
 Switch      rule_xiaomi_switch_slaapkamer_all_off_timer                                                                                                        { expire="60s,  command=OFF" }
 
 // motion licht gang
-Switch		timer_rule_automate_gang_licht_off	    									         (g_testing)                                                { expire="2m,  command=OFF" }
-Switch		timer_rule_automate_gang_licht_init_hardware										                                                            { expire="30s,  command=OFF" }
+Switch                      timer_rule_automate_gang_licht_off
+                            (g_testing)
+                            { expire="2m,  command=OFF" }
+
+Switch                      timer_rule_automate_gang_licht_init_hardware
+                            (g_rule_initialization_items)
+                            { expire="30s,  command=OFF" }
+
 
 // motion licht keuken
-Switch		timer_rule_automate_keuken_licht_off	    									         (g_testing)                                            { expire="5m,  command=OFF" }
-Switch		timer_rule_automate_keuken_licht_init_hardware										                                                            { expire="30s,  command=OFF" }
+Switch                      timer_rule_automate_keuken_licht_off
+                            (g_testing)
+                            { expire="5m,  command=OFF" }
+
+Switch                      timer_rule_automate_keuken_licht_init_hardware
+                            (g_rule_initialization_items)
+                            { expire="30s,  command=OFF" }

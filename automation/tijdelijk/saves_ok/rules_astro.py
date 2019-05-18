@@ -29,9 +29,9 @@ import datetime
 class rule_astro_manage_day_or_night_switch(SimpleRule):
     def __init__(self):
                         self.triggers = [ 
-                            StartupTrigger(),
-                            ChannelEventTrigger(channelUID="astro:sun:home:rise#event", event="START"),
-                            ChannelEventTrigger(channelUID="astro:sun:home:set#event", event="END")
+                            StartupTrigger().trigger,
+                            ChannelEventTrigger(channelUID="astro:sun:home:rise#event", event="START").trigger,
+                            ChannelEventTrigger(channelUID="astro:sun:home:set#event", event="END").trigger
                         ]
     def execute(self, module, input):
         now = datetime.datetime.now()
@@ -41,6 +41,7 @@ class rule_astro_manage_day_or_night_switch(SimpleRule):
         elif str(now) > str(items.sunset_time) or str(now) < str(items.sunrise_time):
             events.sendCommand("day", "OFF")
             events.sendCommand("night", "ON")
-        logging.info("Rule rule_astro_manage_day_or_night_switch started DAY='" + str(items.day) + "' NIGHT='" + str(items.night) + "'...")
+        lotailgging.info("Rule rule_astro_manage_day_or_night_switch started DAY='" + str(items.day) + "' NIGHT='" + str(items.night) + "'...")
 automationManager.addRule(rule_astro_manage_day_or_night_switch())
+
 

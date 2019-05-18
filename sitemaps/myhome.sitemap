@@ -442,9 +442,10 @@ sitemap myhome label="Ons huis"
 			Group item=g_uninitialized
 	  		Group item=g_monitoring
 			Group item=g_lastupdate
+			Group item=g_maintenance_rules
 	  		Group item=g_sonoff
 	  		{
-	  			Group item=g_maintenance_sonoff_status
+		  		Group item=g_maintenance_sonoff_status
 				Group item=g_sonoff_startup_states
 	  			Group item=g_maintenance_sonoff_action
 	  			{
