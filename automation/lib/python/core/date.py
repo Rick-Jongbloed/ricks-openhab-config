@@ -28,10 +28,9 @@ See docs for java.time.temporal.ChronoUnit, if you want more information.
 import datetime
 import sys
 
-if 'org.eclipse.smarthome.automation' in sys.modules:
-    # Workaround for Jython JSR223 bug where
-    # dates and datetimes are converted to java.sql.Date
-    # and java.sql.Timestamp
+if 'org.eclipse.smarthome.automation' in sys.modules or 'org.openhab.core.automation' in sys.modules:
+    # Workaround for Jython JSR223 bug where dates and datetimes are converted
+    # to java.sql.Date and java.sql.Timestamp
     def remove_java_converter(clazz):
         if hasattr(clazz, '__tojava__'):
             del clazz.__tojava__
@@ -59,10 +58,15 @@ def format_date(value, format_string="yyyy-MM-dd'T'HH:mm:ss.SSxx"):
     See java.time.format.DateTimeFormatter docs for format string tokens.'''
     return to_java_zoneddatetime(value).format(DateTimeFormatter.ofPattern(format_string))
 
-def days_between(value_from, value_to):
-    '''Returns number of whole days between value_from and value_to. 
+def days_between(value_from, value_to, calendar_days=False):
+    '''Returns number of whole days between value_from and value_to. Setting 
+    calendar_days=True will provide the number of calendar days, rather than 
+    24 hour intervals.
     Accepts any date type used by this module'''
-    return DAYS.between(to_java_zoneddatetime(value_from), to_java_zoneddatetime(value_to))
+    if calendar_days:
+        return DAYS.between(to_java_zoneddatetime(value_from).toLocalDate().atStartOfDay(), to_java_zoneddatetime(value_to).toLocalDate().atStartOfDay())
+    else:
+        return DAYS.between(to_java_zoneddatetime(value_from), to_java_zoneddatetime(value_to))
 
 def hours_between(value_from, value_to):
     '''Returns number of whole hours between value_from and value_to. 
@@ -178,7 +182,6 @@ class pythonTimezone(datetime.tzinfo):
 
     def dst(self, value):
         return datetime.timedelta(0)
-
 
 # aliases
 toJTime = to_java_zoneddatetime

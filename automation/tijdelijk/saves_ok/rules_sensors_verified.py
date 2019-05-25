@@ -2,7 +2,7 @@
 # from core.triggers import when
 # from core.rules import rule
 # #@item_triggered("temp_badkamer_sensor_raw", event_types=ITEM_UPDATE, result_item_name="temp_badkamer_sensor_cali")
-# NOT REQUIRED ANYMORE - FIXED WITH TRANSFORM
+# NOT REQUIRED ANYMORE - FIXED WITH TRANSFORM, however this is a string, but this shouldn't be an issue
 # @rule("Rule for badkamer humidity updates")
 # @when("Item temp_badkamer_sensor_raw received update")
 # def rule_calibrate_temp_humid_sensor_bathroom():

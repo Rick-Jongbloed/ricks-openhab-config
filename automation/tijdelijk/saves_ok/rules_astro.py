@@ -2,7 +2,7 @@ scriptExtension.importPreset("RuleSimple")
 scriptExtension.importPreset("RuleSupport")
 
 #from openhab.triggers import ChannelEventTrigger,StartupTrigger
-from core.triggers import ChannelEventTrigger, StartupTrigger
+from core.triggers import ChannelEventTrigger #, StartupTrigger
 from core.log import logging
 import datetime
 
@@ -29,11 +29,12 @@ import datetime
 class rule_astro_manage_day_or_night_switch(SimpleRule):
     def __init__(self):
                         self.triggers = [ 
-                            StartupTrigger().trigger,
+                        #    StartupTrigger().trigger,
                             ChannelEventTrigger(channelUID="astro:sun:home:rise#event", event="START").trigger,
                             ChannelEventTrigger(channelUID="astro:sun:home:set#event", event="END").trigger
                         ]
     def execute(self, module, input):
+        logging.info("Rule rule_astro_manage_day_or_night_switch started DAY='" + str(items.day) + "' NIGHT='" + str(items.night) + "'...")
         now = datetime.datetime.now()
         if str(now) > str(items.sunrise_time) and str(now) < str(items.sunset_time):
             events.sendCommand("day" "ON")
@@ -41,7 +42,7 @@ class rule_astro_manage_day_or_night_switch(SimpleRule):
         elif str(now) > str(items.sunset_time) or str(now) < str(items.sunrise_time):
             events.sendCommand("day", "OFF")
             events.sendCommand("night", "ON")
-        lotailgging.info("Rule rule_astro_manage_day_or_night_switch started DAY='" + str(items.day) + "' NIGHT='" + str(items.night) + "'...")
+        logging.info("Rule rule_astro_manage_day_or_night_switch started DAY='" + str(items.day) + "' NIGHT='" + str(items.night) + "'...")
 automationManager.addRule(rule_astro_manage_day_or_night_switch())
 
 
